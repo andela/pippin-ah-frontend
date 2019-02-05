@@ -11,7 +11,7 @@ output: {
 module: {
   rules: [
     {
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: {
         loader: 'babel-loader'
@@ -22,8 +22,11 @@ module: {
 plugins:[
   new HtmlWebpackPlugin(
     {
-      template: './src/index.html'
+      template: './src/public/index.html'
     }
   )
-]
+],
+resolve: {
+  extensions: ['.js', '.jsx'],
+}
 }
