@@ -18,7 +18,6 @@ const LoginComponent = ({ loginUser, loginState, history }) => {
     const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
     const password = e.target.elements.password.value.trim();
     loginUser(usernameOrEmail, password);
-    console.log('#####', loginState);
   };
   if (loginState === constants.LOGIN_SUCCESS) {
     history.push('/');
