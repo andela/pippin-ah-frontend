@@ -11,7 +11,7 @@ import {
   email,
   lock,
   username,
-} from '../../../assets/images/signup';
+} from '../../../assets/images';
 
 const SignupComponent = ({
   signupUser,
@@ -22,9 +22,9 @@ const SignupComponent = ({
   const onFormSubmit = e => {
     e.preventDefault();
     const userEmail = e.target.elements.email.value.trim();
+    const name = e.target.elements.username.value.trim();
     const password = e.target.elements.password.value.trim();
-    const rePassword = e.target.elements.rePassword.value.trim();
-    signupUser(userEmail, password, rePassword);
+    signupUser(userEmail, name, password);
   };
   if (signupState === constants.SIGNUP_SUCCESS) {
     history.push('/');
@@ -74,7 +74,7 @@ const SignupComponent = ({
             />
           </div>
           <div className="input-group">
-            <img src={username} alt="email" />
+            <img src={username} alt="username" />
             <input
               className={
                 !errorMessage.includes('username') ? '' : 'input-error'
