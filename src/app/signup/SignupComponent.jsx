@@ -11,7 +11,7 @@ import {
   email,
   lock,
   username,
-} from '../../../assets/images';
+} from '../../../assets/images/signup';
 
 const SignupComponent = ({
   signupUser,
