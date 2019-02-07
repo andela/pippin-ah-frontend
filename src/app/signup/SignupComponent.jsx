@@ -13,7 +13,7 @@ import {
   username,
 } from '../../../assets/images/signup';
 
-const SignupComponent = ({
+export const SignupComponent = ({
   signupUser,
   signupState,
   errorMessage,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import SignupContainer from './SignupContainer';
+import { SignupComponent } from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
 
 const { setSignupState, setSignupError } = actions;
@@ -11,7 +12,26 @@ describe('SIGNUP TEST SUITE', () => {
       const component = shallow(<SignupContainer />);
       expect(component).toMatchSnapshot();
     });
+
+    test('it should have all expected input fields', () => {
+      const props = {
+        signupUser: () => {},
+        signupState: '',
+        errorMessage: '',
+        history: {},
+      };
+      const component = shallow(<SignupComponent {...props} />);
+      const emailField = component.find('input[name="email"]').props();
+      expect(emailField.name).toBe('email');
+      const usernameField = component.find('input[name="username"]').props();
+      expect(usernameField.name).toBe('username');
+      const passwordField = component.find('input[name="password"]').props();
+      expect(passwordField.name).toBe('password');
+      const rePassword = component.find('input[name="rePassword"]').props();
+      expect(rePassword.name).toBe('rePassword');
+    });
   });
+
   describe('Signup Actions', () => {
     test('it should set the signup state', () => {
       const action = setSignupState(constants.SIGNING_UP);
