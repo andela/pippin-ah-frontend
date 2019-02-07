@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage Component should render the Landing Page 1`] = `
+<div
+  className="footer"
+>
+  <div
+    className="social-media-icon-div"
+  >
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Array [
+          "fab",
+          "facebook-square",
+        ]
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      style={
+        Object {
+          "borderRadius": "50%",
+          "color": "#3B5998",
+          "fontSize": "25px",
+        }
+      }
+      symbol={false}
+      title=""
+      transform={null}
+    />
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Array [
+          "fab",
+          "linkedin",
+        ]
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      style={
+        Object {
+          "borderRadius": "50%",
+          "color": "#65A2D9",
+          "fontSize": "25px",
+        }
+      }
+      symbol={false}
+      title=""
+      transform={null}
+    />
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Array [
+          "fab",
+          "twitter-square",
+        ]
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      style={
+        Object {
+          "borderRadius": "50%",
+          "color": "#0E76A8",
+          "fontSize": "25px",
+        }
+      }
+      symbol={false}
+      title=""
+      transform={null}
+    />
+  </div>
+  <div>
+    <p
+      style={
+        Object {
+          "fontSize": "13px",
+        }
+      }
+    >
+      copyright © LearnGround 2019.
+    </p>
+  </div>
+</div>
+`;
