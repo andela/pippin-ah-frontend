@@ -1,8 +1,8 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import RingLoaderComponent from '../loaders'
-import { constants } from './duck'
-import '../../style/signup.scss'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import RingLoaderComponent from '../loaders';
+import { constants } from './duck';
+import '../../style/signup.scss';
 import {
   cancel,
   facebook,
@@ -10,18 +10,19 @@ import {
   google,
   email,
   lock,
-} from '../../../assets/images/signup'
+  username,
+} from '../../../assets/images/signup';
 
 const SignupComponent = ({ signupUser, signupState, history }) => {
   const onFormSubmit = e => {
-    e.preventDefault()
-    const userEmail = e.target.elements.email.value.trim()
-    const password = e.target.elements.password.value.trim()
-    const rePassword = e.target.elements.rePassword.value.trim()
-    signupUser(userEmail, password, rePassword)
-  }
+    e.preventDefault();
+    const userEmail = e.target.elements.email.value.trim();
+    const password = e.target.elements.password.value.trim();
+    const rePassword = e.target.elements.rePassword.value.trim();
+    signupUser(userEmail, password, rePassword);
+  };
   if (signupState === constants.SIGNUP_SUCCESS) {
-    history.push('/')
+    history.push('/');
   }
 
   return (
@@ -61,7 +62,7 @@ const SignupComponent = ({ signupUser, signupState, history }) => {
             <input type="email" name="email" placeholder="Email" required />
           </div>
           <div className="input-group">
-            <img src={email} alt="email" />
+            <img src={username} alt="email" />
             <input
               type="text"
               name="username"
@@ -104,7 +105,7 @@ const SignupComponent = ({ signupUser, signupState, history }) => {
         {signupState === constants.SIGNING_UP && <RingLoaderComponent />}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withRouter(SignupComponent)
+export default withRouter(SignupComponent);
