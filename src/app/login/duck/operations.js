@@ -10,10 +10,11 @@ const doLogin = (usernameOrEmail, password) => dispatch => {
   return axios
     .post(url, { usernameOrEmail, password })
     .then(({ data }) => {
+      localStorage.setItem('token', data.token);
       dispatch(setLoginState(constants.LOGIN_SUCCESS));
     })
     .catch(error => {
-      dispatch(setLoginState(constants.SIGNUP_ERROR));
+      dispatch(setLoginState(constants.LOGIN_ERROR));
       toast.error(error.response.data.error, {
         hideProgressBar: true,
       });
