@@ -13,7 +13,12 @@ import {
   username,
 } from '../../../assets/images/signup';
 
-const SignupComponent = ({ signupUser, signupState, history }) => {
+const SignupComponent = ({
+  signupUser,
+  signupState,
+  errorMessage,
+  history,
+}) => {
   const onFormSubmit = e => {
     e.preventDefault();
     const userEmail = e.target.elements.email.value.trim();
@@ -23,6 +28,7 @@ const SignupComponent = ({ signupUser, signupState, history }) => {
   };
   if (signupState === constants.SIGNUP_SUCCESS) {
     history.push('/');
+    return null;
   }
 
   return (
@@ -59,11 +65,20 @@ const SignupComponent = ({ signupUser, signupState, history }) => {
         <form onSubmit={onFormSubmit}>
           <div className="input-group">
             <img src={email} alt="email" />
-            <input type="email" name="email" placeholder="Email" required />
+            <input
+              className={!errorMessage.includes('Email') ? '' : 'input-error'}
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+            />
           </div>
           <div className="input-group">
             <img src={username} alt="email" />
             <input
+              className={
+                !errorMessage.includes('username') ? '' : 'input-error'
+              }
               type="text"
               name="username"
               placeholder="Username"
@@ -73,15 +88,21 @@ const SignupComponent = ({ signupUser, signupState, history }) => {
           <div className="input-group">
             <img src={lock} alt="lock" />
             <input
+              className={
+                !errorMessage.includes('password') ? '' : 'input-error'
+              }
               type="password"
               name="password"
               placeholder="Password"
               required
             />
           </div>
-          <div className="input-group">
+          <div>
             <img src={lock} alt="key" />
             <input
+              className={
+                !errorMessage.includes('password') ? '' : 'input-error'
+              }
               type="password"
               name="rePassword"
               placeholder="Confirm Password"

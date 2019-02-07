@@ -1,23 +1,28 @@
-import types from './types'
-import constants from './constants'
+import types from './types';
 
 const INITIAL_STATE = {
-  signupState: constants.SIGNUP_ERROR,
+  signupState: '',
   errorMessage: '',
-}
+};
 const signupReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.SET_SIGNUP_STATE: {
-      const { signupState, errorMessage } = action
+      const { signupState } = action;
       return {
         ...state,
         signupState,
+      };
+    }
+    case types.SET_SIGNUP_ERROR: {
+      const { errorMessage } = action;
+      return {
+        ...state,
         errorMessage,
-      }
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default signupReducer
+export default signupReducer;
