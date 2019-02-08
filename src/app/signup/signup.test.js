@@ -3,20 +3,20 @@ import { shallow } from 'enzyme';
 import SignupContainer from './SignupContainer';
 import { SignupComponent } from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
+import RingLoaderComponent from '../loaders';
 
 const { setSignupState, setSignupError } = actions;
 
 describe('SIGNUP TEST SUITE', () => {
   describe('Signup Component', () => {
-    test('should render the Signup Page', () => {
+    it('should render the Signup Page', () => {
       const component = shallow(<SignupContainer />);
       expect(component).toMatchSnapshot();
     });
 
-    test('it should have all expected input fields', () => {
-      const signupUser = jest.fn();
+    it('it should have all expected input fields', () => {
       const props = {
-        signupUser,
+        signupUser: () => {},
         signupState: '',
         errorMessage: '',
         history: {},
@@ -32,12 +32,12 @@ describe('SIGNUP TEST SUITE', () => {
       expect(rePassword.name).toBe('rePassword');
     });
 
-    test('it should not submit the form if any input field is empty', () => {
+    it('it should not submit the form if any input field is empty', () => {
       const signupUser = jest.fn();
       const props = {
         signupUser,
         signupState: '',
-        errorMessage: '',
+        errorMessage: 'Email password username',
         history: {},
       };
       const component = shallow(<SignupComponent {...props} />);
@@ -55,7 +55,7 @@ describe('SIGNUP TEST SUITE', () => {
       expect(signupUser).not.toHaveBeenCalledWith();
     });
 
-    test('it should submit the form with valid inputs', () => {
+    it('it should submit the form with valid inputs', () => {
       const signupUser = jest.fn();
       const props = {
         signupUser,
@@ -81,10 +81,34 @@ describe('SIGNUP TEST SUITE', () => {
         'johndoe88',
       );
     });
+
+    it('should redirect to home if signup is successful', () => {
+      const history = {};
+      history.push = jest.fn();
+      const props = {
+        signupUser: () => {},
+        signupState: 'SIGNUP_SUCCESS',
+        errorMessage: '',
+        history,
+      };
+      shallow(<SignupComponent {...props} />);
+      expect(history.push).toHaveBeenCalledWith('/');
+    });
+
+    it('it should render the RingLoaderComponent if signing up', () => {
+      const props = {
+        signupUser: () => {},
+        signupState: 'SIGNING_UP',
+        errorMessage: '',
+        history: () => {},
+      };
+      const component = shallow(<SignupComponent {...props} />);
+      expect(component.contains(<RingLoaderComponent />)).toBe(true);
+    });
   });
 
   describe('Signup Actions', () => {
-    test('it should set the signup state', () => {
+    it('it should set the signup state', () => {
       const action = setSignupState(constants.SIGNING_UP);
       expect(action).toEqual({
         type: types.SET_SIGNUP_STATE,
@@ -92,7 +116,7 @@ describe('SIGNUP TEST SUITE', () => {
       });
     });
 
-    test('it should set the signup error message', () => {
+    it('it should set the signup error message', () => {
       const action = setSignupError(constants.SIGNUP_ERROR);
       expect(action).toEqual({
         type: types.SET_SIGNUP_ERROR,
@@ -102,7 +126,7 @@ describe('SIGNUP TEST SUITE', () => {
   });
 
   describe('Signup Reducers', () => {
-    test('should setup default state values', () => {
+    it('should setup default state values', () => {
       const state = signupReducer(undefined, {
         type: '@@INIT',
       });
@@ -112,7 +136,7 @@ describe('SIGNUP TEST SUITE', () => {
       });
     });
 
-    test('it should change the signup state', () => {
+    it('it should change the signup state', () => {
       const action = {
         type: types.SET_SIGNUP_STATE,
         signupState: constants.SIGNING_UP,
@@ -121,7 +145,7 @@ describe('SIGNUP TEST SUITE', () => {
       expect(state.signupState).toEqual(constants.SIGNING_UP);
     });
 
-    test('it should change the signup error message', () => {
+    it('it should change the signup error message', () => {
       const action = {
         type: types.SET_SIGNUP_ERROR,
         errorMessage: 'invalid username',
