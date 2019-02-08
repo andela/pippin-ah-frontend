@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { doLogin } from './duck';
-import LoginComponent from './LoginComponent';
+import { LoginComponent as component } from './LoginComponent';
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +17,6 @@ const mapDispatchToProps = dispatch => {
 const LoginContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginComponent);
+)(component);
 
 export default LoginContainer;
