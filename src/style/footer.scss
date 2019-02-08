@@ -2,6 +2,8 @@
   background-color: white;
   text-align: center;
   margin: 0 auto 30px auto;
+  border-top: 1px solid #eee;
+  padding-top: 30px;
 }
 
 .social-media-icon-div {
@@ -9,4 +11,16 @@
   width: 20%;
   margin: 0 auto 15px auto;
   justify-content: space-between;
+}
+
+.facebook,
+.twitter,
+.linkden {
+  font-size: 25px;
+  border-radius: 50%;
+  color: #3b5998;
+}
+
+.footer-text {
+  font-size: 13px;
 }

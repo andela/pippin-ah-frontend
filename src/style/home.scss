@@ -3,6 +3,10 @@ body {
   padding: 0;
 }
 
+h4 {
+  font-size: 22px;
+}
+
 #landingPage {
   height: 85%;
   width: auto;
@@ -11,6 +15,10 @@ body {
   position: relative;
   background-position: center center;
   color: white;
+}
+
+hr {
+  background-color: #eee;
 }
 
 #landingPage::before {
@@ -24,14 +32,18 @@ body {
 }
 
 .title-div {
-  margin: 15% 19%;
+  margin: 15% 22%;
   position: absolute;
   text-align: center;
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
-  line-height: normal;
   font-size: 26px;
+}
+
+.top-learners-div-container p {
+  width: 40%;
+  margin: 40px auto 0 auto;
 }
 
 .get-started {
@@ -40,11 +52,6 @@ body {
   margin: 6% auto;
   width: 300px;
   border-radius: 5px;
-}
-
-.top-learners-div-container p {
-  width: 40%;
-  margin: 40px auto 0 auto;
 }
 
 .get-started p {
@@ -59,7 +66,7 @@ body {
 
 .about-div {
   padding: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   text-align: center;
   line-height: normal;
 }
@@ -129,4 +136,20 @@ body {
   font-size: 30px;
   margin: 100px auto 0 auto;
   color: #880038;
+}
+
+.fa-users,
+.fa-book-open,
+.fa-pencil-alt {
+  font-size: 30px;
+}
+
+.about-learnground {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.first-line {
+  width: 80%;
+  margin-top: 70px;
 }

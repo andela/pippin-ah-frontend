@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import './footer.css';
+import '../../style/footer.scss';
 
 library.add(fas, fab);
 
@@ -13,19 +13,13 @@ export default function Footer() {
       <div className="social-media-icon-div">
         <FontAwesomeIcon
           icon={['fab', 'facebook-square']}
-          style={{ fontSize: '25px', borderRadius: '50%', color: '#3B5998' }}
+          className="facebook"
         />
-        <FontAwesomeIcon
-          icon={['fab', 'linkedin']}
-          style={{ fontSize: '25px', borderRadius: '50%', color: '#65A2D9' }}
-        />
-        <FontAwesomeIcon
-          icon={['fab', 'twitter-square']}
-          style={{ fontSize: '25px', borderRadius: '50%', color: '#0E76A8' }}
-        />
+        <FontAwesomeIcon icon={['fab', 'linkedin']} className="linkden" />
+        <FontAwesomeIcon icon={['fab', 'twitter-square']} className="twitter" />
       </div>
       <div>
-        <p style={{ fontSize: '13px' }}>copyright &copy; LearnGround 2019.</p>
+        <p className="footer-text">copyright &copy; LearnGround 2019.</p>
       </div>
     </div>
   );
