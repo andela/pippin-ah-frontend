@@ -11,7 +11,7 @@ const NavbarComponent = () => {
                             LearnGround
                         </a>
                     </div>
-                    <div>
+                    <div className="categories">
                         <ul className="right hide-on-med-and-down">
                             <li>
                                 <a href="#!">Science</a>

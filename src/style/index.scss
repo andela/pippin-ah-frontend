@@ -33,7 +33,7 @@ nav {
     position: relative !important;
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 975px) {
     .brand-logo {
         margin-left: 125px !important;
     }
@@ -46,4 +46,8 @@ nav {
 
 nav ul li {
     color: #5ed3f1;
+}
+
+.categories {
+    margin-left: 20%;
 }
