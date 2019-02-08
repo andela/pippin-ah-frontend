@@ -11,16 +11,17 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="social-media-icon-div">
-        <FontAwesomeIcon
-          icon={['fab', 'facebook-square']}
-          className="facebook"
-        />
-        <FontAwesomeIcon icon={['fab', 'linkedin']} className="linkden" />
-        <FontAwesomeIcon icon={['fab', 'twitter-square']} className="twitter" />
+        <div className="social-media-wrapper-facebook">
+          <FontAwesomeIcon icon={['fab', 'facebook-f']} className="facebook" />
+        </div>
+        <div className="social-media-wrapper-twitter">
+          <FontAwesomeIcon icon={['fab', 'twitter']} className="twitter" />
+        </div>
+        <div className="social-media-wrapper-linkden">
+          <FontAwesomeIcon icon={['fab', 'linkedin-in']} className="linkden" />
+        </div>
       </div>
-      <div>
-        <p className="footer-text">copyright &copy; LearnGround 2019.</p>
-      </div>
+      <p className="footer-text">copyright &copy; LearnGround 2019.</p>
     </div>
   );
 }

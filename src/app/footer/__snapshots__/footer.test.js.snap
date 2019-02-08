@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HomePage Component should render the Landing Page 1`] = `
+exports[`Footer Component should render the footer 1`] = `
 <div
   className="footer"
 >
@@ -9,7 +9,7 @@ exports[`HomePage Component should render the Landing Page 1`] = `
   >
     <FontAwesomeIcon
       border={false}
-      className=""
+      className="facebook"
       fixedWidth={false}
       flip={null}
       icon={
@@ -26,20 +26,13 @@ exports[`HomePage Component should render the Landing Page 1`] = `
       rotation={null}
       size={null}
       spin={false}
-      style={
-        Object {
-          "borderRadius": "50%",
-          "color": "#3B5998",
-          "fontSize": "25px",
-        }
-      }
       symbol={false}
       title=""
       transform={null}
     />
     <FontAwesomeIcon
       border={false}
-      className=""
+      className="linkden"
       fixedWidth={false}
       flip={null}
       icon={
@@ -56,20 +49,13 @@ exports[`HomePage Component should render the Landing Page 1`] = `
       rotation={null}
       size={null}
       spin={false}
-      style={
-        Object {
-          "borderRadius": "50%",
-          "color": "#65A2D9",
-          "fontSize": "25px",
-        }
-      }
       symbol={false}
       title=""
       transform={null}
     />
     <FontAwesomeIcon
       border={false}
-      className=""
+      className="twitter"
       fixedWidth={false}
       flip={null}
       icon={
@@ -86,13 +72,6 @@ exports[`HomePage Component should render the Landing Page 1`] = `
       rotation={null}
       size={null}
       spin={false}
-      style={
-        Object {
-          "borderRadius": "50%",
-          "color": "#0E76A8",
-          "fontSize": "25px",
-        }
-      }
       symbol={false}
       title=""
       transform={null}
@@ -100,11 +79,7 @@ exports[`HomePage Component should render the Landing Page 1`] = `
   </div>
   <div>
     <p
-      style={
-        Object {
-          "fontSize": "13px",
-        }
-      }
+      className="footer-text"
     >
       copyright © LearnGround 2019.
     </p>
