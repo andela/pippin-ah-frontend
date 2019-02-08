@@ -14,8 +14,51 @@ describe('SIGNUP TEST SUITE', () => {
     });
 
     test('it should have all expected input fields', () => {
+      const signupUser = jest.fn();
       const props = {
-        signupUser: () => {},
+        signupUser,
+        signupState: '',
+        errorMessage: '',
+        history: {},
+      };
+      const component = shallow(<SignupComponent {...props} />);
+      const emailField = component.find('input[name="email"]').props();
+      expect(emailField.name).toBe('email');
+      const usernameField = component.find('input[name="username"]').props();
+      expect(usernameField.name).toBe('username');
+      const passwordField = component.find('input[name="password"]').props();
+      expect(passwordField.name).toBe('password');
+      const rePassword = component.find('input[name="rePassword"]').props();
+      expect(rePassword.name).toBe('rePassword');
+    });
+
+    test('it should not submit the form if any input field is empty', () => {
+      const signupUser = jest.fn();
+      const props = {
+        signupUser,
+        signupState: '',
+        errorMessage: '',
+        history: {},
+      };
+      const component = shallow(<SignupComponent {...props} />);
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            username: { value: 'johndoe' },
+            email: { value: 'johndoe@joe.com' },
+            password: { value: 'johndoe88' },
+            rePassword: { value: '' },
+          },
+        },
+      });
+      expect(signupUser).not.toHaveBeenCalledWith();
+    });
+
+    test('it should submit the form with valid inputs', () => {
+      const signupUser = jest.fn();
+      const props = {
+        signupUser,
         signupState: '',
         errorMessage: '',
         history: {},
@@ -32,14 +75,11 @@ describe('SIGNUP TEST SUITE', () => {
           },
         },
       });
-      const emailField = component.find('input[name="email"]').props();
-      expect(emailField.name).toBe('email');
-      const usernameField = component.find('input[name="username"]').props();
-      expect(usernameField.name).toBe('username');
-      const passwordField = component.find('input[name="password"]').props();
-      expect(passwordField.name).toBe('password');
-      const rePassword = component.find('input[name="rePassword"]').props();
-      expect(rePassword.name).toBe('rePassword');
+      expect(signupUser).toHaveBeenCalledWith(
+        'johndoe@joe.com',
+        'johndoe',
+        'johndoe88',
+      );
     });
   });
 
