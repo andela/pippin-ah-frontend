@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#landingPage {
+  height: 85%;
+  width: auto;
+  background-image: url('../img/landingPageImage.jpeg');
+  background-size: cover;
+  position: relative;
+  background-position: center center;
+  color: white;
+}
+
+#landingPage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.title-div {
+  margin: 15% 19%;
+  position: absolute;
+  text-align: center;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 26px;
+}
+
+.get-started {
+  font-size: 37px;
+  padding: 0;
+  margin: 6% auto;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.top-learners-div-container p {
+  width: 40%;
+  margin: 40px auto 0 auto;
+}
+
+.get-started p {
+  border: 3px solid #03d6f5;
+  padding: 15px 25px;
+}
+
+.get-started p:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.about-div {
+  padding: 20px;
+  margin-bottom: 100px;
+  text-align: center;
+  line-height: normal;
+}
+
+.about-div h2 {
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 33px;
+  margin: 10px auto 40px auto;
+  color: #880038;
+}
+
+.about-content-div {
+  width: 90%;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-text {
+  margin: 0 50px;
+}
+
+.interested-in-learnground {
+  margin-top: 70px;
+  font-size: 22px;
+  font-family: lato;
+  font-weight: bold;
+}
+
+.out {
+  display: block;
+}
+
+.register {
+  width: 170px;
+  color: white;
+  padding: 13px 30px;
+  font-size: 20px;
+  background-color: black;
+}
+
+.top-learners-div-container {
+  margin-top: 40px;
+}
+
+.top-learners-div-container h3 {
+  font-size: 25px;
+}
+
+.top-learners-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-learners-profile {
+  width: 20%;
+}
+
+.top-learners-profile-pix {
+  margin-top: 50px;
+  width: 90%;
+  border-radius: 50%;
+}
+
+.landingPage-video-div {
+  font-size: 30px;
+  margin: 100px auto 0 auto;
+  color: #880038;
+}
