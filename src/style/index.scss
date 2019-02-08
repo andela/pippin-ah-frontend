@@ -6,9 +6,13 @@ body {
     color: $primary-color;
 }
 
+nav {
+    position: static;
+}
+
 .navbarbg {
     background-color: #880038;
-    height: 55px;
+    height: 50px;
 }
 
 .navbarbg a {
@@ -25,24 +29,17 @@ body {
 }
 
 .Logo {
-    margin-left: 40px;
+    margin-left: 30px;
+    position: relative !important;
 }
 
-nav .brand-logo {
-    font-weight: bolder;
-    font-size: 25px;
+@media only screen and (max-width: 1050px) {
+    .brand-logo {
+        margin-left: 125px !important;
+    }
 }
 
-nav ul li {
-    color: #5ed3f1;
-}
-
-nav ul {
-    font-weight: bolder;
-    font-size: 40px;
-}
-
-.shift {
-    position: fixed;
-    right: 35%;
+.show {
+    list-style: none;
+    margin-left: 100px !important;
 }
