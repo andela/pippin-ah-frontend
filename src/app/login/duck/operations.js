@@ -10,7 +10,6 @@ const doLogin = (usernameOrEmail, password) => dispatch => {
   return axios
     .post(url, { usernameOrEmail, password })
     .then(({ data }) => {
-      console.log(data);
       localStorage.setItem('token', data.token);
       dispatch(setLoginState(constants.LOGIN_SUCCESS));
     })
