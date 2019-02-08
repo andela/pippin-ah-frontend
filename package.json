@@ -35,6 +35,7 @@
         "redux": "^4.0.1",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
+        "stylelint-webpack-plugin": "^0.10.5",
         "terser": "^3.14.1",
         "webpack": "^4.29.0",
         "webpack-cli": "^3.2.1"
@@ -62,7 +63,6 @@
         "pretty-quick": "^1.10.0",
         "stylelint": "^9.10.1",
         "stylelint-config-standard": "^18.2.0",
-        "stylelint-webpack-plugin": "^0.10.5",
         "webpack-dev-server": "^3.1.14"
     },
     "husky": {
