@@ -21,6 +21,17 @@ describe('SIGNUP TEST SUITE', () => {
         history: {},
       };
       const component = shallow(<SignupComponent {...props} />);
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            username: { value: 'johndoe' },
+            email: { value: 'johndoe@joe.com' },
+            password: { value: 'johndoe88' },
+            rePassword: { value: 'johndoe88' },
+          },
+        },
+      });
       const emailField = component.find('input[name="email"]').props();
       expect(emailField.name).toBe('email');
       const usernameField = component.find('input[name="username"]').props();
