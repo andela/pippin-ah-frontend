@@ -12,7 +12,7 @@ import {
   username,
 } from '../../../assets/images';
 
-const LoginComponent = ({ loginUser, loginState, history }) => {
+export const LoginComponent = ({ loginUser, loginState, history }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
@@ -53,10 +53,11 @@ const LoginComponent = ({ loginUser, loginState, history }) => {
             </div>
           </div>
         </div>
-        <form onSubmit={onFormSubmit}>
+        <form className="login" onSubmit={onFormSubmit}>
           <div className="input-group">
             <img src={username} alt="email" />
             <input
+              id="usernameOrEmail"
               type="text"
               name="usernameOrEmail"
               placeholder="Username or Email"
@@ -66,6 +67,7 @@ const LoginComponent = ({ loginUser, loginState, history }) => {
           <div className="input-group">
             <img src={lock} alt="lock" />
             <input
+              id="password"
               type="password"
               name="password"
               placeholder="Password"
