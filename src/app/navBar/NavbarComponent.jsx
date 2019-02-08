@@ -42,7 +42,7 @@ const NavbarComponent = () => {
                             <li>
                                 <a href="#!">SignIn</a>
                             </li>
-                            <li style={{ color: '#5ed3f1' }}>|</li>
+                            <li>|</li>
                             <li>
                                 <a href="#!">SignUp</a>
                             </li>
