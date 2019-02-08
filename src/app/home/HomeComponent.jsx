@@ -17,8 +17,8 @@ const HomeComponent = () => {
         </div>
       </div>
       <div className="about-div">
-        <div style={{ width: '65%', margin: '0 auto' }}>
-          <h2> ABOUT LEARNGROUND </h2>
+        <div className="about-learnground">
+          <h2> ABOUT LEARNGROUD </h2>
           <h3>
             Lorem ipsum dolor sit amet, consectetur adipiscing el ea commodo
             consequat. Duis aute irure dolor in reprehLorem ipsum dolor sit
@@ -74,7 +74,7 @@ const HomeComponent = () => {
           </p>
           <span className="register">REGISTER</span>
         </div>
-        <hr style={{ color: 'red', width: '80%', marginTop: '70px' }} />
+        <hr className="first-line" />
         <div className="top-learners-div-container">
           <div>
             <h3>TOP LEARNERS</h3>
@@ -123,6 +123,7 @@ const HomeComponent = () => {
               allow="accelerometer; autoplay; encrypted-media; gyroscope;
             picture-in-picture"
               allowFullScreen
+              title="learnground"
             />
           </div>
         </div>
