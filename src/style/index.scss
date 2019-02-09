@@ -2,52 +2,52 @@ $font-stack: Helvetica, sans-serif;
 $primary-color: #333;
 
 body {
-    font: 100% $font-stack;
-    color: $primary-color;
+  font: 100% $font-stack;
+  color: $primary-color;
 }
 
 nav {
-    position: static;
+  position: static;
 }
 
 .navbarbg {
-    background-color: #880038;
-    height: 50px;
+  background-color: #880038;
+  height: 50px;
 }
 
 .navbarbg a {
-    margin-top: -0.21em;
+  margin-top: -0.21em;
 }
 
 .fa-play-circle {
-    margin-top: -0.25em;
+  margin-top: -0.25em;
 }
 
 #iconRight {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Logo {
-    margin-left: 30px;
-    position: relative !important;
+  margin-left: 30px;
+  position: relative !important;
 }
 
 @media screen and (max-width: 992px) {
-    .brand-logo {
-        margin-left: 125px !important;
-    }
+  .brand-logo {
+    margin-left: 125px !important;
+  }
 }
 
 .show {
-    list-style: none;
-    margin-left: 100px !important;
+  list-style: none;
+  margin-left: 100px !important;
 }
 
 nav ul li {
-    color: #5ed3f1;
+  color: #5ed3f1;
 }
 
 .categories {
-    margin-left: 20%;
+  margin-left: 20%;
 }
