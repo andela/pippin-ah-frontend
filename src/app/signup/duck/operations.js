@@ -15,9 +15,11 @@ const doSignUp = (email, username, password) => dispatch => {
       password,
     })
     .then(({ data }) => {
+      localStorage.setItem('token', data.token);
       dispatch(setSignupState(constants.SIGNUP_SUCCESS));
     })
     .catch(error => {
+
       dispatch(setSignupState(constants.SIGNUP_ERROR));
       dispatch(setSignupError(error.response.data.error));
       toast.error(error.response.data.error, {
