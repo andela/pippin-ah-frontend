@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
-import '../../style/auth.scss';
+import '../../style/signup.scss';
 import {
   cancel,
   facebook,
