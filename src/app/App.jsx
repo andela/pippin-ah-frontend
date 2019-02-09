@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './home';
 import { Signup } from './signup';
-import Footer from './footer/Footer';
+import Footer from './footer';
 
 const App = () => (
   <Router>
