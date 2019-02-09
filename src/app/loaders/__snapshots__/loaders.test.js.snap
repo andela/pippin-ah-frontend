@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It should render the RingLoader should render the Landing Page 1`] = `
+<div
+  className="lds-ring"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;

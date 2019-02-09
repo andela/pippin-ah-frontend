@@ -33,11 +33,16 @@
   height: 19.36px;
 }
 
-input {
+input,
+.input-error {
   border: none;
   border-bottom: 1px solid #000;
   margin-left: 15px;
   width: 80%;
+}
+
+.input-error {
+  border-bottom: 1px solid #f00 !important;
 }
 
 form button {
