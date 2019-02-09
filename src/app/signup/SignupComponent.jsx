@@ -21,6 +21,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
     const password = e.target.elements.password.value.trim();
     signupUser(userEmail, name, password);
   };
+
   if (signupState === constants.SIGNUP_SUCCESS) {
     return <Redirect to="/" />;
   }
@@ -87,6 +88,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
               }
               type="password"
               name="password"
+              id="password"
               placeholder="Password"
               required
             />

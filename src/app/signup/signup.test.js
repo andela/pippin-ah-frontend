@@ -48,7 +48,7 @@ describe('SIGNUP TEST SUITE', () => {
         history: {},
       };
       const component = shallow(<SignupComponent {...props} />);
-      component.find('form').simulate('submit', {
+      component.find('form').simulate('click', {
         preventDefault: () => {},
         target: {
           elements: {
@@ -59,7 +59,7 @@ describe('SIGNUP TEST SUITE', () => {
           },
         },
       });
-      expect(signupUser).not.toHaveBeenCalledWith();
+      expect(signupUser).not.toHaveBeenCalled();
     });
 
     it('it should submit the form with valid inputs', () => {
@@ -164,7 +164,9 @@ describe('SIGNUP TEST SUITE', () => {
     const store = mockStore(initialState);
     let wrapper;
     beforeEach(() => {
-      const response = { error: 'invalid parameters' };
+      const response = {
+        response: { data: { error: 'invalid parameters' } },
+      };
       axios.post.mockImplementation(() => Promise.reject(response));
       wrapper = mount(
         <Provider store={store}>
