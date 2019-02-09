@@ -1,9 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import SignupContainer from './SignupContainer';
-import { SignupComponent } from './SignupComponent';
+import SignupComponent from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
 import RingLoaderComponent from '../loaders';
+
+jest.mock('axios');
 
 const { setSignupState, setSignupError } = actions;
 
@@ -83,16 +90,15 @@ describe('SIGNUP TEST SUITE', () => {
     });
 
     it('should redirect to home if signup is successful', () => {
-      const history = {};
-      history.push = jest.fn();
       const props = {
         signupUser: () => {},
         signupState: 'SIGNUP_SUCCESS',
         errorMessage: '',
-        history,
       };
-      shallow(<SignupComponent {...props} />);
-      expect(history.push).toHaveBeenCalledWith('/');
+      const component = shallow(<SignupComponent {...props} />);
+      expect(component.containsMatchingElement(<Redirect to="/" />)).toEqual(
+        true,
+      );
     });
 
     it('it should render the RingLoaderComponent if signing up', () => {
@@ -104,6 +110,84 @@ describe('SIGNUP TEST SUITE', () => {
       };
       const component = shallow(<SignupComponent {...props} />);
       expect(component.contains(<RingLoaderComponent />)).toBe(true);
+    });
+  });
+
+  describe('Connected Signup Component Dispatches Signup Success', () => {
+    const initialState = {
+      signup: {
+        signupState: '',
+        errorMessage: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    let wrapper;
+    beforeEach(() => {
+      const response = { data: 'successfully signed up' };
+      axios.post.mockResolvedValue(response);
+      wrapper = mount(
+        <Provider store={store}>
+          <SignupContainer />
+        </Provider>,
+      );
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            username: { value: 'johndoe' },
+            email: { value: 'johndoe@joe.com' },
+            password: { value: 'johndoe88' },
+            rePassword: { value: '' },
+          },
+        },
+      });
+    });
+    it('it should render the connected component', () => {
+      expect(wrapper.find(SignupContainer).length).toEqual(1);
+    });
+
+    it('it should dispatch signup action', () => {
+      const storeActions = store.getActions();
+      expect(storeActions[0].type).toEqual('SET_SIGNUP_STATE');
+    });
+  });
+
+  describe('Connected Signup Component Dispatches Signup Error', () => {
+    const initialState = {
+      signup: {
+        signupState: '',
+        errorMessage: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    let wrapper;
+    beforeEach(() => {
+      const response = { error: 'invalid parameters' };
+      axios.post.mockImplementation(() => Promise.reject(response));
+      wrapper = mount(
+        <Provider store={store}>
+          <SignupContainer />
+        </Provider>,
+      );
+      wrapper.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            username: { value: 'johndoe' },
+            email: { value: 'johndoe@joe.com' },
+            password: { value: 'johndoe88' },
+            rePassword: { value: '' },
+          },
+        },
+      });
+    });
+
+    it('it should dispatch signup error action', () => {
+      const storeActions = store.getActions();
+      expect(storeActions[0].type).toEqual('SET_SIGNUP_STATE');
+      expect(storeActions[1].type).toEqual('SET_SIGNUP_ERROR');
     });
   });
 

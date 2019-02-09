@@ -19,7 +19,6 @@ const doSignUp = (email, username, password) => dispatch => {
       dispatch(setSignupState(constants.SIGNUP_SUCCESS));
     })
     .catch(error => {
-
       dispatch(setSignupState(constants.SIGNUP_ERROR));
       dispatch(setSignupError(error.response.data.error));
       toast.error(error.response.data.error, {
