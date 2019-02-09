@@ -1,0 +1,5 @@
+export default {
+    SIGNING_UP: 'SIGNING_UP',
+    SIGNUP_ERROR: 'SIGNUP_ERROR',
+    SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
+}
