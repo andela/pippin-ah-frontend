@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import '../../style/home.scss';
-import Navbar from '../navBar/NavbarComponent.jsx';
 
 const HomeComponent = () => {
   return (
     <Fragment>
-      <Navbar />
       <div id="landingPage">
         <div className="title-div">
           <div>
