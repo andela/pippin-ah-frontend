@@ -1,0 +1,45 @@
+.footer {
+  background-color: white;
+  text-align: center;
+  margin: 0 auto 30px auto;
+  border-top: 1px solid #eee;
+  padding-top: 30px;
+}
+
+.social-media-icon-div {
+  display: flex;
+  width: 23%;
+  margin: 0 auto 20px auto;
+  justify-content: space-between;
+}
+
+.facebook,
+.twitter,
+.linkden {
+  font-size: 17px;
+  border-radius: 50%;
+  color: white;
+}
+
+.footer-text {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.social-media-wrapper-linkden {
+  background-color: #0e76a8;
+  border-radius: 50%;
+  padding: 13px 15px 10px 15px;
+}
+
+.social-media-wrapper-facebook {
+  background-color: #3b5998;
+  border-radius: 50%;
+  padding: 14px 18px 8px 18px;
+}
+
+.social-media-wrapper-twitter {
+  background-color: #65a2d9;
+  border-radius: 50%;
+  padding: 15px 15px;
+}
