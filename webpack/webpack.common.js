@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|jpeg)$/,
         use: {
           loader: 'file-loader',
         },
@@ -30,10 +30,6 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [{ loader: 'file-loader' }],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
