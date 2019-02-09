@@ -1,8 +1,8 @@
-import React from 'react'
-import NavbarComponent from './NavbarComponent.jsx'
+import React from 'react';
+import NavbarComponent from './NavbarComponent.jsx';
 
 const NavbarContainer = () => {
-    return <NavbarComponent />
-}
+  return <NavbarComponent />;
+};
 
-export default NavbarContainer
+export default NavbarContainer;

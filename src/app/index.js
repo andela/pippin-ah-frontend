@@ -1,1 +1,1 @@
-export { default } from './home/duck'
+export { default } from './home/duck';
