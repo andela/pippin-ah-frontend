@@ -23,7 +23,9 @@ exports[` Component should render the NavBar 1`] = `
           LearnGround
         </a>
       </div>
-      <div>
+      <div
+        className="categories"
+      >
         <ul
           className="right hide-on-med-and-down"
         >
@@ -86,13 +88,7 @@ exports[` Component should render the NavBar 1`] = `
               SignIn
             </a>
           </li>
-          <li
-            style={
-              Object {
-                "color": "#5ed3f1",
-              }
-            }
-          >
+          <li>
             |
           </li>
           <li>
