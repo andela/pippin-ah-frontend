@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
 import '../../style/signup.scss';
@@ -12,7 +12,7 @@ import {
   username,
 } from '../../../assets/images';
 
-export const LoginComponent = ({ loginUser, loginState, history }) => {
+export const LoginComponent = ({ loginUser, loginState }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
@@ -20,7 +20,7 @@ export const LoginComponent = ({ loginUser, loginState, history }) => {
     loginUser(usernameOrEmail, password);
   };
   if (loginState === constants.LOGIN_SUCCESS) {
-    history.push('/');
+    return <Redirect to="/" />;
   }
   return (
     <div className="signup-box">
@@ -94,4 +94,4 @@ export const LoginComponent = ({ loginUser, loginState, history }) => {
   );
 };
 
-export default withRouter(LoginComponent);
+export default LoginComponent;

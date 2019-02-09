@@ -1,21 +1,24 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import setLoginState from './actions';
+import actions from './actions';
 import constants from './constants';
 
+const { setLoginState, setLoginError } = actions;
 const url = 'http://learnground-api-staging.herokuapp.com/api/v1/users/login';
 
 const doLogin = (usernameOrEmail, password) => dispatch => {
   dispatch(setLoginState(constants.LOGGING_IN));
+  dispatch(setLoginError(''));
   return axios
     .post(url, { usernameOrEmail, password })
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
       dispatch(setLoginState(constants.LOGIN_SUCCESS));
     })
-    .catch(error => {
+    .catch(({ response }) => {
       dispatch(setLoginState(constants.LOGIN_ERROR));
-      toast.error(error.response.data.error, {
+      dispatch(setLoginError(response.data.error));
+      toast.error(response.data.error, {
         hideProgressBar: true,
       });
     });

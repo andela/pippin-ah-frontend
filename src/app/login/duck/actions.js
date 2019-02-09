@@ -5,4 +5,9 @@ const setLoginState = loginState => ({
   loginState,
 });
 
-export default setLoginState;
+const setLoginError = errorMessage => ({
+  type: types.SET_LOGIN_ERROR,
+  errorMessage,
+});
+
+export default { setLoginState, setLoginError };

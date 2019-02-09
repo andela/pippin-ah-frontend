@@ -19,4 +19,4 @@ const LoginContainer = connect(
   mapDispatchToProps,
 )(component);
 
-export default LoginContainer;
+export { LoginContainer, mapDispatchToProps, mapStateToProps };

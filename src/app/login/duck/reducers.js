@@ -1,17 +1,22 @@
 import types from './types';
-import constants from './constants';
 
 const INITIAL_STATE = {
-  loginState: constants.LOGIN_ERROR,
+  loginState: '',
   errorMessage: '',
 };
 const loginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.SET_LOGIN_STATE: {
-      const { loginState, errorMessage } = action;
+      const { loginState } = action;
       return {
         ...state,
         loginState,
+      };
+    }
+    case types.SET_LOGIN_ERROR: {
+      const { errorMessage } = action;
+      return {
+        ...state,
         errorMessage,
       };
     }
