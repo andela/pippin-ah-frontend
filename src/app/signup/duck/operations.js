@@ -18,10 +18,10 @@ const doSignUp = (email, username, password) => dispatch => {
       localStorage.setItem('token', data.token);
       dispatch(setSignupState(constants.SIGNUP_SUCCESS));
     })
-    .catch(error => {
+    .catch(({ response }) => {
       dispatch(setSignupState(constants.SIGNUP_ERROR));
-      dispatch(setSignupError(error.response.data.error));
-      toast.error(error.response.data.error, {
+      dispatch(setSignupError(response.data.error));
+      toast.error(response.data.error, {
         hideProgressBar: true,
       });
     });
