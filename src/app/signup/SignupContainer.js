@@ -2,12 +2,10 @@ import { connect } from 'react-redux';
 import { doSignUp } from './duck';
 import SignupComponent from './SignupComponent';
 
-const mapStateToProps = state => {
-  return {
-    signupState: state.signup.signupState,
-    errorMessage: state.signup.errorMessage,
-  };
+const mapStateToProps = ({ signup: { signupState, errorMessage } }) => {
+  return { signupState, errorMessage };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     signupUser: (email, username, password) =>
