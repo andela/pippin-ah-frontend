@@ -18,7 +18,7 @@ exports[` Component should render the NavBar 1`] = `
             
         <a
           className="brand-logo"
-          href="#!"
+          href="/"
         >
           LearnGround
         </a>
@@ -83,7 +83,7 @@ exports[` Component should render the NavBar 1`] = `
         <ul>
           <li>
             <a
-              href="#!"
+              href="/login"
             >
               SignIn
             </a>
@@ -93,7 +93,7 @@ exports[` Component should render the NavBar 1`] = `
           </li>
           <li>
             <a
-              href="#!"
+              href="/signup"
             >
               SignUp
             </a>
