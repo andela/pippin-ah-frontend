@@ -1,5 +1,5 @@
 module.exports = {
-  setupFiles: ['./testSetup.js'],
+  setupFiles: ['./src/testSetup.js'],
   transform: { '^.+\\.jsx?$': 'babel-jest' },
   collectCoverageFrom: ['src/**/*.{js,jsx}'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
