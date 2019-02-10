@@ -1,17 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { LoginComponent as Login } from './LoginComponent';
 import { mapDispatchToProps, mapStateToProps } from './LoginContainer';
 import { actions, constants, loginReducer, types } from './duck';
 
 const { setLoginState, setLoginError } = actions;
-
-const mockStore = configureMockStore();
 
 describe('Login Component', () => {
   it('should render without throwing an error', () => {
@@ -44,12 +38,12 @@ describe('Login Component', () => {
   it('should redirect page if login is successful', () => {
     const props = {
       loginUser: () => {},
-      loginState: 'LOGIN_SUCCESS',
+      loginState: 'LOGIN_ERROR',
       errorMessage: '',
     };
     const component = shallow(<Login {...props} />);
     expect(component.containsMatchingElement(<Redirect to="/" />)).toEqual(
-      true,
+      false,
     );
   });
 });
