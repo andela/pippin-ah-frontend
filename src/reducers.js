@@ -3,8 +3,8 @@ import { signupReducer } from './app/signup';
 import { loginReducer } from './app/login';
 
 const rootReducer = combineReducers({
-  login: loginReducer,
   signup: signupReducer,
+  login: loginReducer,
 });
 
 export default rootReducer;

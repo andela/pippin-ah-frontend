@@ -18,6 +18,12 @@ module.exports = {
         },
       },
       {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        use: {
+          loader: 'file-loader',
+        },
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
@@ -32,10 +38,6 @@ module.exports = {
             loader: 'url-loader',
           },
         ],
-      },
-      {
-        test: /\.(png|jpg|jpeg)$/,
-        loader: 'url-loader',
       },
     ],
   },

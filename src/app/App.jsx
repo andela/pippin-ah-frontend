@@ -4,10 +4,12 @@ import { Home } from './home';
 import { Signup } from './signup';
 import { Login } from './login';
 import Footer from './footer';
+import Navbar from './navBar/NavbarComponent';
 
 const App = () => (
   <Router>
     <Fragment>
+      <Navbar />
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/signup" component={Signup} exact />
