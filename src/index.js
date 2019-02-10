@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import thunk from 'redux-thunk';
 import '../node_modules/materialize-css/dist/js/materialize.min';
-import './style/index.scss';
+import './style/navBar.scss';
 import App from './app/App';
 import rootReducer from './reducers';
 
