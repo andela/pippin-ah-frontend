@@ -1,6 +1,6 @@
-const common = require('./webpack.common.js');
+const common = require('./webpack.common.js')
 
 module.exports = {
-  ...common,
-  mode: 'production',
-};
+    ...common,
+    mode: 'production',
+}

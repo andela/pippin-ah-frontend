@@ -1,2 +1,2 @@
-export { default as Signup } from './SignupContainer'
-export { signupReducer } from './duck'
+export { default as Signup } from './SignupContainer';
+export { signupReducer } from './duck';

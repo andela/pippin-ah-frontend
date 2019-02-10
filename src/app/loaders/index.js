@@ -1,1 +1,1 @@
-export { default } from './RingLoaderComponent'
+export { default } from './RingLoaderComponent';
