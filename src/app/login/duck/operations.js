@@ -4,7 +4,7 @@ import actions from './actions';
 import constants from './constants';
 
 const { setLoginState, setLoginError } = actions;
-const url = 'http://learnground-api-staging.herokuapp.com/api/v1/users/login';
+const url = 'https://learnground-api-staging.herokuapp.com/api/v1/users/login';
 
 const doLogin = (usernameOrEmail, password) => dispatch => {
   dispatch(setLoginState(constants.LOGGING_IN));
