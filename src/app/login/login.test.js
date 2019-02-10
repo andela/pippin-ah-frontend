@@ -38,12 +38,12 @@ describe('Login Component', () => {
   it('should redirect page if login is successful', () => {
     const props = {
       loginUser: () => {},
-      loginState: 'LOGIN_ERROR',
+      loginState: 'LOGIN_SUCCESS',
       errorMessage: '',
     };
     const component = shallow(<Login {...props} />);
     expect(component.containsMatchingElement(<Redirect to="/" />)).toEqual(
-      false,
+      true,
     );
   });
 });
