@@ -2,12 +2,10 @@ import { connect } from 'react-redux';
 import { doLogin } from './duck';
 import { LoginComponent as component } from './LoginComponent';
 
-const mapStateToProps = state => {
-  return {
-    loginState: state.login.loginState,
-    errorMessage: state.login.errorMessage,
-  };
+const mapStateToProps = ({ login: { loginState, errorMessage } }) => {
+  return { loginState, errorMessage };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     loginUser: (usernameOrEmail, password) =>
