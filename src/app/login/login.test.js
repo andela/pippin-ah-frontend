@@ -1,16 +1,33 @@
 import React from 'react';
+import thunk from 'redux-thunk';
+import axios from 'axios';
+import configureStore from 'redux-mock-store';
 import { Redirect } from 'react-router-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import { LoginComponent as Login } from './LoginComponent';
-import { mapDispatchToProps, mapStateToProps } from './LoginContainer';
 import { actions, constants, loginReducer, types } from './duck';
+import RingLoaderComponent from '../loaders';
+import {
+  LoginContainer,
+  mapDispatchToProps,
+  mapStateToProps,
+} from './LoginContainer';
+
+jest.mock('axios');
 
 const { setLoginState, setLoginError } = actions;
 
 describe('Login Component', () => {
   it('should render without throwing an error', () => {
     const loginUser = jest.fn();
-    const wrapper = shallow(<Login loginUser={loginUser} />);
+    const props = {
+      loginUser,
+      loginState: '',
+      errorMessage: 'Invalid credentials',
+      history: {},
+    };
+    const wrapper = shallow(<Login {...props} />);
     wrapper.find('form').simulate('submit', {
       target: {
         elements: {
@@ -45,6 +62,17 @@ describe('Login Component', () => {
     expect(component.containsMatchingElement(<Redirect to="/" />)).toEqual(
       true,
     );
+  });
+
+  it('it should render the RingLoaderComponent if logging in', () => {
+    const props = {
+      loginUser: () => {},
+      loginState: 'LOGGING_IN',
+      errorMessage: '',
+      history: () => {},
+    };
+    const component = shallow(<Login {...props} />);
+    expect(component.contains(<RingLoaderComponent />)).toBe(true);
   });
 });
 
@@ -122,5 +150,81 @@ describe('Login Reducers', () => {
     };
     const state = loginReducer(undefined, action);
     expect(state.errorMessage).toEqual(action.errorMessage);
+  });
+});
+
+describe('Connected Login Component Dispatches Login Success', () => {
+  const initialState = {
+    login: {
+      loginState: '',
+      errorMessage: '',
+    },
+  };
+  const mockStore = configureStore([thunk]);
+  const store = mockStore(initialState);
+  let wrapper;
+  beforeEach(() => {
+    const response = { data: 'Login successful' };
+    axios.post.mockResolvedValue(response);
+    wrapper = mount(
+      <Provider store={store}>
+        <LoginContainer />
+      </Provider>,
+    );
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {},
+      target: {
+        elements: {
+          usernameOrEmail: { value: 'spicy' },
+          password: { value: 'dicy' },
+        },
+      },
+    });
+  });
+  it('it should render the connected component', () => {
+    expect(wrapper.find(Login).length).toEqual(1);
+  });
+
+  it('it should dispatch login action', () => {
+    const storeActions = store.getActions();
+    expect(storeActions[0].type).toEqual('SET_LOGIN_STATE');
+  });
+});
+
+describe('Connected Login Component Dispatches Login Error', () => {
+  const initialState = {
+    login: {
+      loginState: '',
+      errorMessage: '',
+    },
+  };
+  const mockStore = configureStore([thunk]);
+  const store = mockStore(initialState);
+  let wrapper;
+  beforeEach(() => {
+    const response = {
+      response: { data: { error: 'invalid credentials' } },
+    };
+    axios.post.mockImplementation(() => Promise.reject(response));
+    wrapper = mount(
+      <Provider store={store}>
+        <LoginContainer />
+      </Provider>,
+    );
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {},
+      target: {
+        elements: {
+          usernameOrEmail: { value: 'bugsburney' },
+          password: { value: 'bugsbugs' },
+        },
+      },
+    });
+  });
+
+  it('it should dispatch login error action', () => {
+    const storeActions = store.getActions();
+    expect(storeActions[0].type).toEqual('SET_LOGIN_STATE');
+    expect(storeActions[1].type).toEqual('SET_LOGIN_ERROR');
   });
 });
