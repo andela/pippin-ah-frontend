@@ -7,10 +7,10 @@ const ProfileComponent = () => {
     <div>
       <div className="row">
         <div className="container">
-          <h3 className="center-align headlines"> Profile</h3>
+          <h4 className="center-align headlines"> Profile</h4>
         </div>
         <div className="col s12 m6 l5">
-          <div className="card large">
+          <div className="card medium">
             <div className="card-image waves-effect waves-block waves-light">
               <img
                 src={profilepicture}
@@ -53,7 +53,8 @@ const ProfileComponent = () => {
         <div className="col s12 m6 l5">
           <div className="card small z-depth-0">
             <div className="card-content">
-              <h5 className="headlines">BIOGRAPHY</h5>
+              <span className="headlines">BIOGRAPHY</span>
+              <br />
               <span id="bio">
                 Lorem ipsum dolor sit amet, consectetur adipiscing el ea commodo
                 consequat. Duis aute irure dolor in reprehLorem ipsum dolor sit
@@ -61,28 +62,59 @@ const ProfileComponent = () => {
                 irure dolor in repreh
               </span>
             </div>
-            <a className="btn modal-trigger btncolor" href="#modal1">
+            <a className="btn modal-trigger btncolor" href="#modal1" id="shift">
               Update Profile
             </a>
+            <div className="row">
+              <div className="col s12 m8 l11 ">
+                <div className="card small z-depth-0">
+                  <div className="card-content">
+                    <h5 className="headlines">Top five Articles</h5>
+                    <div id="topArticles">
+                      <p>
+                        <a href="#!">
+                          The Importance of Educating The girl Child Adults
+                        </a>
+                      </p>
+                      <p>
+                        <a href="#!">Apples And its many many Benefits</a>
+                      </p>
+                      <p>
+                        <a href="#!">The story of a young black girl</a>
+                      </p>
+                      <p>
+                        <a href="#!">This is Africa And we are not afriad</a>
+                      </p>
+                      <p>
+                        <a href="#!">
+                          The courage that makes Lion the king of the jungle
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col s12 m2 l1" />
+            </div>
 
             <div id="modal1" className="modal modal-fixed-footer">
               <div className="modal-content">
                 <div className="row">
                   <div className="col s4">
                     <div className="card small">
-                      <div className="card-image waves-effect waves-block waves-light">
+                      <div className="card-image waves-effect waves-block waves-light removespace">
                         <img src={profilepicture} alt="profilepicture" />
                       </div>
-                      <div className="card-tabs">
-                        <form action="#">
-                          <div className="file-field input-field">
-                            <div className="btn btncolor">
-                              <span>Edit Photo</span>
-                              <input type="file" multiple />
-                            </div>
+                    </div>
+                    <div className="card-tabs">
+                      <form action="#">
+                        <div className="file-field input-field">
+                          <div className="btn btncolor" id="centralize">
+                            <span>Edit Photo</span>
+                            <input type="file" multiple />
                           </div>
-                        </form>
-                      </div>
+                        </div>
+                      </form>
                     </div>
                   </div>
                   <form className="col s8">
@@ -126,6 +158,7 @@ const ProfileComponent = () => {
                         className="btn waves-effect waves-light btncolor"
                         type="submit"
                         name="action"
+                        id="shiftupdate"
                       >
                         Update
                         <i className="material-icons right">send</i>
@@ -137,32 +170,6 @@ const ProfileComponent = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col s12 m2 l3" />
-        <div className="col s12 m8 l6  center-align ">
-          <h5 className="headlines">Top five (5) Articles</h5>
-          <div id="topArticles">
-            <p>
-              <a href="#!">The Importance of Educating The girl Child Adults</a>
-            </p>
-            <p>
-              <a href="#!">Apples And its many many Benefits</a>
-            </p>
-            <p>
-              <a href="#!">The story of a young black girl</a>
-            </p>
-            <p>
-              <a href="#!">This is Africa And we are not afriad</a>
-            </p>
-            <p>
-              <a href="#!">
-                The courage that makes Lion the king of the jungle
-              </a>
-            </p>
-          </div>
-        </div>
-        <div className="col s12 m2 l3" />
       </div>
     </div>
   );

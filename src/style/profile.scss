@@ -16,9 +16,10 @@
 .headlines {
   color: #4e443c;
   text-transform: none;
-  font-weight: 100;
+  font-weight: bolder;
   margin-bottom: 0;
   text-shadow: 1px 1px 1px #000;
+  letter-spacing: 5px;
 }
 
 #topArticles {
@@ -27,6 +28,21 @@
   margin-top: 0.5em;
   letter-spacing: 2px;
 }
+
 #topArticles a {
   color: #666;
+}
+
+#shift {
+  margin-left: 4.7%;
+}
+
+#shiftupdate {
+  width: 30%;
+  margin-left: 11%;
+}
+
+#centralize {
+  width: 100%;
+  margin-left: 20%;
 }
