@@ -1,1 +1,1 @@
-export { default } from './ArticleComponent';
+export { default } from './ArticleContainer';
