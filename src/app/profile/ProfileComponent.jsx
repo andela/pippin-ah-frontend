@@ -7,7 +7,7 @@ const ProfileComponent = () => {
     <div>
       <div className="row">
         <div className="container">
-          <h3 className="center-align headlines"> Profile page</h3>
+          <h3 className="center-align headlines"> Profile</h3>
         </div>
         <div className="col s12 m6 l5">
           <div className="card large">
@@ -53,7 +53,7 @@ const ProfileComponent = () => {
         <div className="col s12 m6 l5">
           <div className="card small z-depth-0">
             <div className="card-content">
-              <h6 className="headlines">BIOGRAPHY</h6>
+              <h5 className="headlines">BIOGRAPHY</h5>
               <span id="bio">
                 Lorem ipsum dolor sit amet, consectetur adipiscing el ea commodo
                 consequat. Duis aute irure dolor in reprehLorem ipsum dolor sit
@@ -142,13 +142,25 @@ const ProfileComponent = () => {
         <div className="col s12 m2 l3" />
         <div className="col s12 m8 l6  center-align ">
           <h5 className="headlines">Top five (5) Articles</h5>
-          <p>
-            <a href="#!">The Importance of Educating The girl Child Adults</a>
-          </p>
-          <p>Apples And its many many Benefits</p>
-          <p>The story of a young black girl</p>
-          <p>This is Africa And we are not afriad</p>
-          <p>The courage that makes Lion the king of the jungle</p>
+          <div id="topArticles">
+            <p>
+              <a href="#!">The Importance of Educating The girl Child Adults</a>
+            </p>
+            <p>
+              <a href="#!">Apples And its many many Benefits</a>
+            </p>
+            <p>
+              <a href="#!">The story of a young black girl</a>
+            </p>
+            <p>
+              <a href="#!">This is Africa And we are not afriad</a>
+            </p>
+            <p>
+              <a href="#!">
+                The courage that makes Lion the king of the jungle
+              </a>
+            </p>
+          </div>
         </div>
         <div className="col s12 m2 l3" />
       </div>
