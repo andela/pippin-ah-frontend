@@ -148,11 +148,12 @@ const ProfileComponent = () => {
         <div col s12 m6 l1 />
       </div>
       <div>
-        {' '}
         <div className="row move-top2">
           <div className="col s12 m6 l4" />
           <div className="col s12 m6 l8">
-            <span className="headlines">TOP FIVE ARTICLES</span>
+            <span className="headlines" id="topic">
+              TOP FIVE ARTICLES
+            </span>
             <div id="topArticles">
               <p>
                 <a href="#!">
