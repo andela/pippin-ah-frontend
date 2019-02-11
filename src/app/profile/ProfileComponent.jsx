@@ -10,7 +10,7 @@ const ProfileComponent = () => {
           <h2 className="center-align headlinesProfile"> PROFILE</h2>
         </div>
         <div className="col s12 m6 l3">
-          <div className="card medium">
+          <div className="card small ">
             <div className="card-image waves-effect waves-block waves-light">
               <img
                 src={profilepicture}
@@ -33,18 +33,14 @@ const ProfileComponent = () => {
             <div className="card-content">
               Interest : &nbsp;Mathematics <br />
               <br />
-              <br />
               Articles : &nbsp;25 <br />
-              <br /> <br />
-              Following : &nbsp;100 <br />
               <br />
+              Following : &nbsp;100 <br />
               <br />
               Followers : &nbsp;25 <br />
               <br />
-              <br />
               Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <i className="material-icons prefix">check_box</i>
-              <br />
               <br />
               <br />
             </div>
