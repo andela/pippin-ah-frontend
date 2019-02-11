@@ -5,12 +5,13 @@ import profilepicture from '../../img/students.jpeg';
 const ProfileComponent = () => {
   return (
     <div>
-      <div className="row">
-        <div className="container">
-          <h2 className="center-align headlinesProfile"> PROFILE</h2>
-        </div>
+      <div className="container">
+        <h2 className="center-align headlinesProfile"> PROFILE </h2>
+      </div>
+      <div className="row from-top">
+        <div className="col s12 m6 l1" />
         <div className="col s12 m6 l3">
-          <div className="card small ">
+          <div className="card large z-depth-0">
             <div className="card-image waves-effect waves-block waves-light">
               <img
                 src={profilepicture}
@@ -28,25 +29,26 @@ const ProfileComponent = () => {
           </div>
         </div>
 
-        <div className="col s12 m6 l3">
+        <div className="col s12 m6 l2 move-top">
           <div className="card small z-depth-0">
             <div className="card-content">
               Interest : &nbsp;Mathematics <br />
-              <br />
+              <br /> <br />
               Articles : &nbsp;25 <br />
-              <br />
+              <br /> <br />
               Following : &nbsp;100 <br />
-              <br />
+              <br /> <br />
               Followers : &nbsp;25 <br />
-              <br />
+              <br /> <br />
               Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <i className="material-icons prefix">check_box</i>
+              <br />
               <br />
               <br />
             </div>
           </div>
         </div>
-        <div className="col s12 m6 l6">
+        <div className="col s12 m6 l5 move-top">
           <div className="card small z-depth-0">
             <div className="card-content">
               <span className="headlines">BIOGRAPHY</span>
@@ -61,38 +63,6 @@ const ProfileComponent = () => {
             <a className="btn modal-trigger btncolor" href="#modal1" id="shift">
               Update Profile
             </a>
-            <div className="row">
-              <div className="col s12 m8 l11 ">
-                <div className="card small z-depth-0">
-                  <div className="card-content">
-                    <span className="headlines">TOP FIVE ARTICLES</span>
-                    <div id="topArticles">
-                      <p>
-                        <a href="#!">
-                          The Importance of Educating The girl Child Adults
-                        </a>
-                      </p>
-                      <p>
-                        <a href="#!">Apples And its many many Benefits</a>
-                      </p>
-                      <p>
-                        <a href="#!">The story of a young black girl</a>
-                      </p>
-                      <p>
-                        <a href="#!">This is Africa And we are not afriad</a>
-                      </p>
-                      <p>
-                        <a href="#!">
-                          The courage that makes Lion the king of the jungle
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col s12 m2 l1" />
-            </div>
-
             <div id="modal1" className="modal modal-fixed-footer">
               <div className="modal-content" id="cardpad">
                 <div className="row">
@@ -171,6 +141,38 @@ const ProfileComponent = () => {
                   </form>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div col s12 m6 l1 />
+      </div>
+      <div>
+        {' '}
+        <div className="row move-top2">
+          <div className="col s12 m6 l4" />
+          <div className="col s12 m6 l8">
+            <span className="headlines">TOP FIVE ARTICLES</span>
+            <div id="topArticles">
+              <p>
+                <a href="#!">
+                  The Importance of Educating The girl Child Adults
+                </a>
+              </p>
+              <p>
+                <a href="#!">Apples And its many many Benefits</a>
+              </p>
+              <p>
+                <a href="#!">The story of a young black girl</a>
+              </p>
+              <p>
+                <a href="#!">This is Africa And we are not afriad</a>
+              </p>
+              <p>
+                <a href="#!">
+                  The courage that makes Lion the king of the jungle
+                </a>
+              </p>
             </div>
           </div>
         </div>
