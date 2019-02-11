@@ -1,8 +1,8 @@
-import React from 'react'
-import HomeComponent from './ProfileComponent'
+import React from 'react';
+import ProfileComponent from './ProfileComponent';
 
 const ProfileContainer = () => {
-    return <HomeComponent />
-}
+  return <ProfileComponent />;
+};
 
-export default ProfileContainer
+export default ProfileContainer;

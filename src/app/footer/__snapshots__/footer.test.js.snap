@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Component should render the footer 1`] = `
+<div
+  className="footer"
+>
+  <div
+    className="social-media-icon-div"
+  >
+    <div
+      className="social-media-wrapper-facebook"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="facebook"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fab",
+            "facebook-f",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+    </div>
+    <div
+      className="social-media-wrapper-twitter"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="twitter"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fab",
+            "twitter",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+    </div>
+    <div
+      className="social-media-wrapper-linkden"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="linkden"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fab",
+            "linkedin-in",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+    </div>
+  </div>
+  <p
+    className="footer-text"
+  >
+    copyright © LearnGround 2019.
+  </p>
+</div>
+`;
