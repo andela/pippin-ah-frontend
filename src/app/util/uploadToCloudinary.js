@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary';
 
-const uploadToCloudinary = async imageParam => {
+const uploadToCloudinary = async imageFilePath => {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -9,7 +9,7 @@ const uploadToCloudinary = async imageParam => {
 
   let response = '';
   await cloudinary.v2.uploader
-    .upload(imageParam, (error, result) => {
+    .upload(imageFilePath, (error, result) => {
       if (error) response = error;
       response = result.url;
     })
