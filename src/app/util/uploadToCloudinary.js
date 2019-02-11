@@ -20,5 +20,5 @@ const uploadToCloudinary = async imageParam => {
 
 export default uploadToCloudinary;
 
-/* This should be called inside an await function */
+/* This should be called inside an async function */
 /* const response = await uploadToCloudinary(coverImageUrl); */
