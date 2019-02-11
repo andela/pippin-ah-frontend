@@ -7,7 +7,7 @@ const ProfileComponent = () => {
     <div>
       <div className="row">
         <div className="container">
-          <h4 className="center-align headlines"> Profile</h4>
+          <h3 className="center-align headlines"> Profile</h3>
         </div>
         <div className="col s12 m6 l5">
           <div className="card medium">
@@ -69,7 +69,7 @@ const ProfileComponent = () => {
               <div className="col s12 m8 l11 ">
                 <div className="card small z-depth-0">
                   <div className="card-content">
-                    <h5 className="headlines">Top five Articles</h5>
+                    <span className="headlines">TOP FIVE ARTICLES</span>
                     <div id="topArticles">
                       <p>
                         <a href="#!">
@@ -138,7 +138,7 @@ const ProfileComponent = () => {
                         <label htmlFor="icon_telephone">Last Name</label>
                       </div>
                       <div className="input-field col s12">
-                        <i className="material-icons prefix">account_circle</i>
+                        <i className="material-icons prefix">favorite</i>
                         <input
                           id="icon_telephone"
                           type="tel"
