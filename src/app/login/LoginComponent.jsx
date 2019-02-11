@@ -2,15 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
-import '../../style/signup.scss';
-import {
-  cancel,
-  facebook,
-  twitter,
-  google,
-  lock,
-  username,
-} from '../../../assets/images';
+import './signin.scss';
+import { cancel, facebook, twitter, google, lock, username } from '../../img';
 
 export const LoginComponent = ({ loginUser, loginState }) => {
   const onFormSubmit = e => {

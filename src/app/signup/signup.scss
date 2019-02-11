@@ -1,0 +1,168 @@
+.signup-box {
+  background: #fff;
+  height: 392px;
+  width: 780px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.signup-text {
+  font-family: Rosario;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 16px;
+  color: #880038;
+  clear: both;
+}
+
+.up {
+  color: #03d6f5;
+}
+
+.input-group {
+  display: flex;
+}
+
+.input-group img {
+  width: 30px;
+  height: 19.36px;
+}
+
+input,
+.input-error {
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-left: 15px;
+  width: 80%;
+}
+
+.input-error {
+  border-bottom: 1px solid #f00 !important;
+}
+
+form button {
+  background: #03d6f5;
+  border: 1px solid #03d6f5;
+  box-sizing: border-box;
+  text-align: center;
+  margin-left: 48px;
+  width: 80%;
+  margin-top: -10px;
+}
+
+.submit-text {
+  font-family: Sansita;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.social-auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 40px;
+  height: 40%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 65%;
+  width: 70%;
+}
+
+.signup-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.social-icon {
+  width: 33px;
+  height: 31px;
+  z-index: 10;
+}
+
+.btn-facebook,
+.btn-twitter,
+.btn-google {
+  display: flex;
+  width: 136px;
+  height: 31px;
+}
+
+.fb-text-wrapper {
+  background: rgba(58, 85, 159, 0.8);
+  margin-left: -3px;
+  height: 31px;
+}
+
+.twitter-text-wrapper {
+  background: rgba(80, 171, 241, 0.8);
+  margin-left: -3px;
+  height: 31px;
+}
+
+.google-text-wrapper {
+  background: rgba(136, 0, 56, 0.75);
+  margin-left: -3px;
+}
+
+.google-icon {
+  background: rgba(136, 0, 56, 0.75);
+}
+
+.social-text {
+  display: block;
+  font-family: Sansita;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 0.9em;
+  text-align: center;
+  color: #fff;
+  margin: auto;
+}
+
+.signin-option {
+  text-align: right;
+  width: 87%;
+  margin-top: 10px;
+  font-family: Rosario;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 13px;
+}
+
+.signin {
+  color: #880038;
+  margin-left: 5px;
+}
+
+.btn-close {
+  width: 18px;
+  height: 19.8px;
+  float: right;
+  margin-right: 30px;
+  color: #880038;
+}
+
+.ring-loader {
+  text-align: center;
+  margin-left: 200px;
+  margin-top: -40px;
+  transform: scale(0.7);
+}

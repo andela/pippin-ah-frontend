@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
-import '../../style/signup.scss';
+import './signup.scss';
 import {
   cancel,
   facebook,
@@ -11,7 +11,7 @@ import {
   email,
   lock,
   username,
-} from '../../../assets/images/signup';
+} from '../../img';
 
 const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
   const onFormSubmit = e => {

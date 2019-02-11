@@ -1,4 +1,5 @@
 import React from 'react';
+import './navBar.scss';
 
 const NavbarComponent = () => {
   return (
@@ -75,4 +76,5 @@ const NavbarComponent = () => {
     </nav>
   );
 };
+
 export default NavbarComponent;
