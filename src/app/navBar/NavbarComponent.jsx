@@ -1,4 +1,5 @@
 import React from 'react';
+import './navBar.scss';
 
 const NavbarComponent = () => {
   return (
@@ -7,7 +8,7 @@ const NavbarComponent = () => {
         <div className="nav-wrapper" id="iconRight">
           <div className="Logo">
             <i className="far fa-play-circle" /> &nbsp;&nbsp;&nbsp;
-            <a href="#!" className="brand-logo">
+            <a href="/" className="brand-logo">
               LearnGround
             </a>
           </div>
@@ -36,11 +37,11 @@ const NavbarComponent = () => {
           <div className="hide-on-med-and-down show">
             <ul>
               <li>
-                <a href="#!">SignIn</a>
+                <a href="/login">SignIn</a>
               </li>
               <li>|</li>
               <li>
-                <a href="#!">SignUp</a>
+                <a href="/signup">SignUp</a>
               </li>
             </ul>
           </div>
@@ -75,4 +76,5 @@ const NavbarComponent = () => {
     </nav>
   );
 };
+
 export default NavbarComponent;
