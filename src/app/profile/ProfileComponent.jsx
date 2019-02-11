@@ -98,7 +98,7 @@ const ProfileComponent = () => {
             </div>
 
             <div id="modal1" className="modal modal-fixed-footer">
-              <div className="modal-content">
+              <div className="modal-content" id="cardpad">
                 <div className="row">
                   <div className="col s4">
                     <div className="card small">
