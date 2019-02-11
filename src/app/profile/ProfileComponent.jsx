@@ -105,22 +105,24 @@ const ProfileComponent = () => {
                       <div className="card-image waves-effect waves-block waves-light removespace">
                         <img src={profilepicture} alt="profilepicture" />
                       </div>
-                    </div>
-                    <div className="card-tabs">
-                      <form action="#">
-                        <div className="file-field input-field">
-                          <div className="btn btncolor" id="centralize">
-                            <span>Edit Photo</span>
-                            <input type="file" multiple />
+                      <div className="card-tabs">
+                        <form action="#">
+                          <div className="file-field input-field">
+                            <div className="btn btncolor" id="centralize">
+                              <span>Edit Photo</span>
+                              <input type="file" multiple />
+                            </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </div>
                   </div>
                   <form className="col s8">
                     <div className="row">
                       <div className="input-field col s12">
-                        <i className="material-icons prefix">account_circle</i>
+                        <i className="material-icons prefix color-ions">
+                          account_circle
+                        </i>
                         <input
                           id="icon_prefix"
                           type="text"
@@ -129,7 +131,9 @@ const ProfileComponent = () => {
                         <label htmlFor="icon_prefix">First Name</label>
                       </div>
                       <div className="input-field col s12">
-                        <i className="material-icons prefix">account_circle</i>
+                        <i className="material-icons prefix color-ions">
+                          account_circle
+                        </i>
                         <input
                           id="icon_telephone"
                           type="tel"
@@ -138,7 +142,9 @@ const ProfileComponent = () => {
                         <label htmlFor="icon_telephone">Last Name</label>
                       </div>
                       <div className="input-field col s12">
-                        <i className="material-icons prefix">favorite</i>
+                        <i className="material-icons prefix color-ions">
+                          favorite
+                        </i>
                         <input
                           id="icon_telephone"
                           type="tel"
@@ -147,7 +153,9 @@ const ProfileComponent = () => {
                         <label htmlFor="icon_telephone">Interest</label>
                       </div>
                       <div className="input-field col s12">
-                        <i className="material-icons prefix">mode_edit</i>
+                        <i className="material-icons prefix color-ions">
+                          mode_edit
+                        </i>
                         <textarea
                           id="textarea1"
                           className="materialize-textarea"
