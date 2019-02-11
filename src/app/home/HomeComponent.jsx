@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import '../../style/home.scss';
+import './home.scss';
 
 const HomeComponent = () => {
   return (
