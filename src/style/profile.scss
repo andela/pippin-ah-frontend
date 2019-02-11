@@ -10,16 +10,25 @@
   color: #666;
   line-height: 25px;
   margin-top: 0.5em;
-  letter-spacing: 2px;
 }
 
 .headlines {
   color: black;
   text-transform: none;
-  font-weight: bolder;
   margin-bottom: 0;
+  letter-spacing: 1px;
+  font-family: Lato;
+  font-style: normal;
+  font-size: 22px;
+}
+
+.headlinesProfile {
   text-shadow: 1px 1px 1px #000;
-  letter-spacing: 5px;
+  color: black;
+  font-weight: bolder;
+  text-transform: none;
+  margin-bottom: 0;
+  letter-spacing: 2px;
   font-family: Lato;
   font-style: normal;
   font-size: 22px;

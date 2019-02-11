@@ -7,7 +7,7 @@ const ProfileComponent = () => {
     <div>
       <div className="row">
         <div className="container">
-          <h3 className="center-align headlines"> Profile</h3>
+          <h2 className="center-align headlinesProfile"> Profile</h2>
         </div>
         <div className="col s12 m6 l5">
           <div className="card medium">
