@@ -1,0 +1,156 @@
+.btncolor {
+  background-color: #5ed3f1;
+}
+
+.btncolor:hover {
+  background-color: #880038;
+}
+
+#bio {
+  color: #666;
+  line-height: 25px;
+  margin-top: 0.5em;
+}
+
+.headlines {
+  color: black;
+  text-transform: none;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+  font-family: Lato;
+  font-style: normal;
+  font-size: 22px;
+}
+
+.headlinesProfile {
+  text-shadow: 1px 1px 1px #000;
+  color: black;
+  font-weight: bolder;
+  text-transform: none;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-family: Lato;
+  font-style: normal;
+  font-size: 22px;
+}
+
+#topic {
+  margin-left: 22px;
+}
+
+#topArticles {
+  color: #666;
+  line-height: 25px;
+  margin-top: 0.5em;
+  letter-spacing: 2px;
+  margin-left: 22px;
+}
+
+#topArticles a {
+  color: #666;
+}
+
+#shift {
+  margin-left: 4.7%;
+  margin-top: 10%;
+}
+
+#shiftupdate {
+  width: 40%;
+  margin-left: 13%;
+}
+
+#centralize {
+  width: 100%;
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+.color-ions {
+  color: #880038;
+}
+
+.modal .modal-content {
+  margin: 10% auto;
+}
+
+form {
+  margin-top: -15px;
+}
+
+.from-top {
+  margin-top: 5%;
+}
+
+.move-top2 {
+  margin-top: 1%;
+}
+
+.move-top {
+  margin-top: -23px;
+}
+
+.horizontalrule {
+  margin-top: -30%;
+  margin-left: 22px;
+}
+
+@media only screen and (max-width: 990px) {
+  .horizontalrule {
+    display: none;
+  }
+
+  #details {
+    text-align: center;
+  }
+
+  .move-top2 {
+    text-align: center;
+  }
+
+  #shift {
+    margin-left: 41%;
+    margin-top: 1%;
+  }
+
+  #shiftupdate {
+    width: 40%;
+    margin-left: 20%;
+  }
+
+  #centralize {
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 30%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .card .card-image {
+    height: 500px;
+  }
+
+  #bio {
+    margin-top: 10em;
+  }
+
+  #details {
+    text-align: center;
+  }
+
+  #shift {
+    margin-left: 32%;
+    margin-top: 1%;
+  }
+
+  #shiftupdate {
+    width: 40%;
+    margin-left: 18%;
+  }
+
+  #centralize {
+    width: 100%;
+    margin-left: 20%;
+    margin-top: 15%;
+  }
+}
