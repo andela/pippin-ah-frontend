@@ -60,7 +60,7 @@ exports[` Component should render the NavBar 1`] = `
             </i>
           </span>
           <p>
-            SARAH GOBLIN  PROFILE
+            SARAH GOBLIN PROFILE
           </p>
         </div>
       </div>
