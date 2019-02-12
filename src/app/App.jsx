@@ -5,6 +5,7 @@ import { Signup } from './signup';
 import { Login } from './login';
 import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
+import { Subject } from './subject';
 
 const App = () => (
   <Router>
@@ -14,6 +15,7 @@ const App = () => (
         <Route path="/" component={Home} exact />
         <Route path="/signup" component={Signup} exact />
         <Route path="/login" component={Login} exact />
+        <Route path="/subject" component={Subject} exact />
       </Switch>
       <Footer />
     </Fragment>
