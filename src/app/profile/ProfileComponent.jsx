@@ -12,7 +12,7 @@ const ProfileComponent = () => {
         <div className="col s12 m1 l1" />
         <div className="col s12 m6 l3">
           <div className="card small">
-            <div className="card-image waves-effect waves-block waves-light">
+            <div className="card-image">
               <img
                 src={profilepicture}
                 alt="profilepicture"
@@ -73,7 +73,7 @@ const ProfileComponent = () => {
                 <div className="row">
                   <div className="col s12 m6 l6">
                     <div className="card small">
-                      <div className="card-image waves-effect waves-block waves-light removespace">
+                      <div className="card-image removespace">
                         <img src={profilepicture} alt="profilepicture" />
                       </div>
                       <div className="card-tabs">
