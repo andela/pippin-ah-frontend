@@ -225,7 +225,7 @@ form {
   }
 
   .signup-text {
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .fa-google,
@@ -268,5 +268,6 @@ form {
 @media screen and (max-width: 479px) {
   .signup-div {
     height: 50%;
+    width: 90%;
   }
 }
