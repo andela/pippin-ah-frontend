@@ -149,9 +149,9 @@ const ProfileComponent = () => {
       </div>
 
       <div>
-        <div className="row move-top2">
+        <div className="row horizontalrule">
           <div className="col s12 m6 l4" />
-          <div className="col s12 m6 l7 horizontalrule">
+          <div className="col s12 m6 l7">
             <hr />
           </div>
           <div className="col s12 m6 l1" />
@@ -162,9 +162,6 @@ const ProfileComponent = () => {
         <div className="row move-top2">
           <div className="col s12 m6 l4" />
           <div className="col s12 m6 l8">
-            <span className="horizontalrule">
-              <hr />
-            </span>
             <span className="headlines" id="topic">
               TOP FIVE ARTICLES
             </span>
