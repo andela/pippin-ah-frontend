@@ -6,6 +6,7 @@ import { Login } from './login';
 import Article from './article';
 import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
+import { Subject } from './subject';
 import ProfileComponent from './profile';
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
         <Route path="/signup" component={Signup} exact />
         <Route path="/profile" component={ProfileComponent} exact />
         <Route path="/login" component={Login} exact />
+        <Route path="/subject" component={Subject} exact />
         <Route path="/articles" component={Article} exact />
       </Switch>
       <Footer />

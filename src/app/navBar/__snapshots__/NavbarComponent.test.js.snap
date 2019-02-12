@@ -30,39 +30,44 @@ exports[` Component should render the NavBar 1`] = `
           className="right hide-on-med-and-down"
         >
           <li>
-            <a
-              href="#!"
+            <Link
+              replace={false}
+              to="/subject"
             >
               Science
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#!"
+            <Link
+              replace={false}
+              to="/subject"
             >
               Technology
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#!"
+            <Link
+              replace={false}
+              to="/subject"
             >
               Engineering
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#!"
+            <Link
+              replace={false}
+              to="/subject"
             >
               Arts
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#!"
+            <Link
+              replace={false}
+              to="/subject"
             >
               Mathematics
-            </a>
+            </Link>
           </li>
         </ul>
         <a
@@ -82,21 +87,23 @@ exports[` Component should render the NavBar 1`] = `
       >
         <ul>
           <li>
-            <a
-              href="/login"
+            <Link
+              replace={false}
+              to="/login"
             >
               SignIn
-            </a>
+            </Link>
           </li>
           <li>
             |
           </li>
           <li>
-            <a
-              href="/signup"
+            <Link
+              replace={false}
+              to="/signup"
             >
               SignUp
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
