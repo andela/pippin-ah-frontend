@@ -28,7 +28,6 @@ const ProfileComponent = () => {
             </div>
           </div>
         </div>
-
         <div className="col s12 m6 l2 move-top">
           <div className="card small z-depth-0">
             <div className="card-content">
@@ -48,6 +47,7 @@ const ProfileComponent = () => {
             </div>
           </div>
         </div>
+
         <div className="col s12 m6 l5 move-top">
           <div className="card small z-depth-0">
             <div className="card-content">
@@ -63,6 +63,7 @@ const ProfileComponent = () => {
             <a className="btn modal-trigger btncolor" href="#modal1" id="shift">
               Update Profile
             </a>
+
             <div id="modal1" className="modal modal-fixed-footer">
               <div className="modal-content" id="cardpad">
                 <div className="row">
@@ -144,13 +145,26 @@ const ProfileComponent = () => {
             </div>
           </div>
         </div>
-
         <div col s12 m6 l1 />
       </div>
+
+      <div>
+        <div className="row move-top2">
+          <div className="col s12 m6 l4" />
+          <div className="col s12 m6 l7 horizontalrule">
+            <hr />
+          </div>
+          <div className="col s12 m6 l1" />
+        </div>
+      </div>
+
       <div>
         <div className="row move-top2">
           <div className="col s12 m6 l4" />
           <div className="col s12 m6 l8">
+            <span className="horizontalrule">
+              <hr />
+            </span>
             <span className="headlines" id="topic">
               TOP FIVE ARTICLES
             </span>
