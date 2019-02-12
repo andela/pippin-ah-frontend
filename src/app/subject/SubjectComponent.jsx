@@ -12,7 +12,7 @@ const SubjectComponent = () => {
         <div className="row">
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
@@ -45,7 +45,7 @@ const SubjectComponent = () => {
           </div>
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
@@ -78,7 +78,7 @@ const SubjectComponent = () => {
           </div>
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
@@ -111,7 +111,7 @@ const SubjectComponent = () => {
           </div>
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
@@ -144,7 +144,7 @@ const SubjectComponent = () => {
           </div>
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
@@ -177,7 +177,7 @@ const SubjectComponent = () => {
           </div>
           <div className="col s12 m6 l4">
             <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
+              <div className="card-image">
                 <img
                   className="activator"
                   alt="Cover"
