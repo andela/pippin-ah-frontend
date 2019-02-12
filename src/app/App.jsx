@@ -5,7 +5,7 @@ import { Signup } from './signup';
 import { Login } from './login';
 import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
-import ProfileContainer from './profile';
+import ProfileComponent from './profile';
 
 const App = () => (
   <Router>
@@ -14,7 +14,7 @@ const App = () => (
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/signup" component={Signup} exact />
-        <Route path="/profile" component={ProfileContainer} exact />
+        <Route path="/profile" component={ProfileComponent} exact />
         <Route path="/login" component={Login} exact />
       </Switch>
       <Footer />

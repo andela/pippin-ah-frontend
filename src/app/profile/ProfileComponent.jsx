@@ -9,9 +9,9 @@ const ProfileComponent = () => {
         <h2 className="center-align headlinesProfile"> PROFILE </h2>
       </div>
       <div className="row from-top">
-        <div className="col s12 m6 l1" />
+        <div className="col s12 m1 l1" />
         <div className="col s12 m6 l3">
-          <div className="card large z-depth-0">
+          <div className="card small">
             <div className="card-image waves-effect waves-block waves-light">
               <img
                 src={profilepicture}
@@ -19,16 +19,20 @@ const ProfileComponent = () => {
                 className="activator"
               />
             </div>
-            <div className="card-tabs">
-              <ul className="tabs tabs-fixed-width">
-                <li className="tab">
-                  <h6 className="headlines">SARAH GOBLIN</h6>
-                </li>
-              </ul>
+            <div className="card-content">
+              <span className="card-title activator grey-text text-darken-4">
+                SARAH GOBLIN<i className="material-icons right">more_vert</i>
+              </span>
+            </div>
+            <div className="card-reveal">
+              <span className="card-title grey-text text-darken-4">
+                You Are Viewing<i className="material-icons right">close</i>
+              </span>
+              <p>SARAH GOBLIN PROFILE</p>
             </div>
           </div>
         </div>
-        <div className="col s12 m6 l2 move-top">
+        <div className="col s12 m5 l2 move-top" id="details">
           <div className="card small z-depth-0">
             <div className="card-content">
               Interest : &nbsp;Mathematics <br />
@@ -48,7 +52,7 @@ const ProfileComponent = () => {
           </div>
         </div>
 
-        <div className="col s12 m6 l5 move-top">
+        <div className="col s12 m12 l5 move-top">
           <div className="card small z-depth-0">
             <div className="card-content">
               <span className="headlines">BIOGRAPHY</span>
@@ -67,7 +71,7 @@ const ProfileComponent = () => {
             <div id="modal1" className="modal modal-fixed-footer">
               <div className="modal-content" id="cardpad">
                 <div className="row">
-                  <div className="col s4">
+                  <div className="col s12 m6 l6">
                     <div className="card small">
                       <div className="card-image waves-effect waves-block waves-light removespace">
                         <img src={profilepicture} alt="profilepicture" />
@@ -84,7 +88,7 @@ const ProfileComponent = () => {
                       </div>
                     </div>
                   </div>
-                  <form className="col s8">
+                  <form className="col s12 m6 l6">
                     <div className="row">
                       <div className="input-field col s12">
                         <i className="material-icons prefix color-ions">
@@ -160,8 +164,8 @@ const ProfileComponent = () => {
 
       <div>
         <div className="row move-top2">
-          <div className="col s12 m6 l4" />
-          <div className="col s12 m6 l8">
+          <div className="col l4" />
+          <div className="col s12 m12 l8">
             <span className="headlines" id="topic">
               TOP FIVE ARTICLES
             </span>
