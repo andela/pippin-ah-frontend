@@ -55,7 +55,30 @@ describe('SIGNUP TEST SUITE', () => {
             username: { value: 'johndoe' },
             email: { value: 'johndoe@joe.com' },
             password: { value: 'johndoe88' },
-            rePassword: { value: '' },
+            rePassword: { value: '', setCustomValidity: () => {} },
+          },
+        },
+      });
+      expect(signupUser).not.toHaveBeenCalled();
+    });
+
+    it('it should not submit the form if passwords do not match', () => {
+      const signupUser = jest.fn();
+      const props = {
+        signupUser,
+        signupState: '',
+        errorMessage: 'Email password username',
+        history: {},
+      };
+      const component = shallow(<SignupComponent {...props} />);
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            username: { value: 'johndoe' },
+            email: { value: 'johndoe@joe.com' },
+            password: { value: 'johndoe88' },
+            rePassword: { value: 'john8doe', setCustomValidity: () => {} },
           },
         },
       });
@@ -78,7 +101,7 @@ describe('SIGNUP TEST SUITE', () => {
             username: { value: 'johndoe' },
             email: { value: 'johndoe@joe.com' },
             password: { value: 'johndoe88' },
-            rePassword: { value: 'johndoe88' },
+            rePassword: { value: 'johndoe88', setCustomValidity: () => {} },
           },
         },
       });
@@ -138,7 +161,7 @@ describe('SIGNUP TEST SUITE', () => {
             username: { value: 'johndoe' },
             email: { value: 'johndoe@joe.com' },
             password: { value: 'johndoe88' },
-            rePassword: { value: '' },
+            rePassword: { value: 'johndoe88', setCustomValidity: () => {} },
           },
         },
       });
@@ -180,7 +203,7 @@ describe('SIGNUP TEST SUITE', () => {
             username: { value: 'johndoe' },
             email: { value: 'johndoe@joe.com' },
             password: { value: 'johndoe88' },
-            rePassword: { value: '' },
+            rePassword: { value: 'johndoe88', setCustomValidity: () => {} },
           },
         },
       });
