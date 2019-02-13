@@ -1,9 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import './resetPassword.scss';
-import { ellipsisLoader } from '../../img';
 
 export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
   const onFormSubmit = e => {
@@ -21,7 +19,7 @@ export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
   const resetForm = (
     <>
       <div className="reset-page-title">
-        <h2>{"Let's help you get back your account"}</h2>
+        <h2>{"Let's"} help you get back your account</h2>
       </div>
       <div>
         <p className="reset-text">Enter your email address here.</p>
@@ -42,10 +40,15 @@ export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
       </div>
       <div>
         <p className="reset-text">
+          An <b>email</b> has been sent to your account. Click the <b>link</b>{' '}
+          in the email to reset your password. <br />
           If you {"don't"} see the email, check other places it might be, like
-          your junk or spam folders.
+          your <b>junk</b> or <b>spam</b> folders.
         </p>
       </div>
+      <a href="/resetpassword" className="reset-text">
+        {"Didn't"} recieve a mail?
+      </a>
     </>
   );
 
