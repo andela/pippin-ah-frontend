@@ -1,8 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import RingLoaderComponent from '../loaders';
+import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import './resetPassword.scss';
+import { ellipsisLoader } from '../../img';
 
 export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
   const onFormSubmit = e => {
@@ -13,6 +14,11 @@ export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
   /* if (resetState === constants.RESET_SUCCESS) {
     return <Redirect to="/" />;
   } */
+  const resetButton = (
+    <button type="submit" className="btn reset-button">
+      Submit
+    </button>
+  );
   return (
     <div className="reset-password-container">
       <div className="reset-password">
@@ -24,9 +30,9 @@ export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
           <p className="reset-text">Enter your email address here.</p>
           <form id="reset" onSubmit={onFormSubmit}>
             <input id="resetEmail" type="email" required />
-            <button type="submit" className="btn reset-button">
-              <span>Submit</span>
-            </button>
+            {resetState === '' && resetButton}
+            {resetState === constants.RESET_ERROR && resetButton}
+            {resetState === constants.RESETTING && <EllipsisLoaderComponent />}
           </form>
         </div>
       </div>
