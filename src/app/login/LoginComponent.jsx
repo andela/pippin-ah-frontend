@@ -17,7 +17,7 @@ export const LoginComponent = ({ loginUser, loginState }) => {
   return (
     <Fragment>
       <div className="signup-div-wrapper">
-        <div className="signup-div">
+        <div className="signup-container">
           <div className="close-button-div">
             <p className="close-button close"> X </p>
           </div>

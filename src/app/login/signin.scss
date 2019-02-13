@@ -2,10 +2,11 @@
   background-image: url('../../img/landingPageImage.jpeg');
   background-position: center center;
   background-size: cover;
-  color: white;
+  position: absolute;
   height: 83%;
-  width: auto;
+  width: 100%;
   padding-top: 8%;
+  color: black;
 }
 
 .signup-div-wrapper::before {
@@ -13,25 +14,26 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 6%;
+  top: 0;
   bottom: 0;
-  height: 83%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.2);
 }
 
-.signup-div {
+.signup-container {
   background-color: white;
   width: 50%;
   margin: 0 auto 12% auto;
   position: relative;
   padding: 0 1%;
-  height: 50%;
+  height: 55%;
 }
 
 .signup-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: auto;
 }
 
 .signup-text {
@@ -67,10 +69,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 3% 0 0;
+  padding: 0 1% 0 0;
   border-right: 1px solid #eee;
   margin-bottom: 6%;
   width: 25%;
+  color: white;
 }
 
 .up {
@@ -167,11 +170,22 @@ form {
 .twitter-text-wrapper,
 .google-text-wrapper {
   width: 100%;
-  color: white;
   font-size: 12px;
   text-align: center;
   padding: 5% 2%;
   height: auto;
+}
+
+.fb-text-wrapper {
+  background-color: #3b5997;
+}
+
+.google-text-wrapper {
+  background-color: #880038;
+}
+
+.twitter-text-wrapper {
+  background-color: #50abf1;
 }
 
 .social-textt {
@@ -200,12 +214,10 @@ form {
     padding-top: 18%;
   }
 
-  .signup-div {
+  .signup-container {
     width: 70%;
     margin: 0 auto 12% auto;
-    position: relative;
     padding: 0 1%;
-    height: 70%;
   }
 
   .signup-wrapper {
@@ -215,7 +227,11 @@ form {
   .social-media-icons {
     padding: 0 2% auto auto;
     width: 13%;
-    height: 50%;
+  }
+
+  .facebook-icon-div {
+    padding: 7px;
+    background-color: #3b5997;
   }
 
   .fb-text-wrapper,
@@ -260,14 +276,35 @@ form {
 }
 
 @media screen and (max-width: 767px) {
-  .signup-div {
+  .signup-container {
     background-color: white;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .signup-div {
-    height: 50%;
+  .signup-container {
     width: 90%;
+  }
+}
+
+//  RESPONSIVE HEIGHT
+@media screen and (max-height: 650px) {
+  .signup-container {
+    position: relative;
+    padding: 0 1%;
+    height: 70%;
+  }
+}
+
+@media screen and (max-height: 690px) {
+  .signup-container {
+    height: 70%;
+  }
+
+  @media screen and (max-height: 550px) {
+    .signup-container {
+      margin-top: -5%;
+      height: auto;
+    }
   }
 }
