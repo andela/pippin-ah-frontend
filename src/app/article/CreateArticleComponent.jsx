@@ -16,8 +16,13 @@ const CreateArticleComponent = () => {
           <div className="create-form">
             <form className="article-form">
               <input type="text" placeholder="Title" />
-              <select name="category" className="browser-default" required>
-                <option value="" disabled selected>
+              <select
+                name="category"
+                defaultValue=""
+                className="browser-default"
+                required
+              >
+                <option value="" disabled>
                   Select Category
                 </option>
                 <option value="mathematics">Mathematics</option>
