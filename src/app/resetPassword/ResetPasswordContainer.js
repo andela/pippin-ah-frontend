@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { doReset } from './duck';
-import { ResetPasswordComponent } from './resetPasswordComponent';
+import { ResetPasswordComponent } from './ResetPasswordComponent';
 
 const mapStateToProps = ({ resetPassword: { resetState, errorMessage } }) => {
   return { resetState, errorMessage };

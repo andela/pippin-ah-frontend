@@ -17,7 +17,6 @@ const doReset = email => dispatch => {
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         dispatch(setResetState(constants.RESET_SUCCESS));
-        console.log('@@@@@@', data);
       })
       .catch(({ response }) => {
         dispatch(setResetState(constants.RESET_ERROR));
