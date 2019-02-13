@@ -121,8 +121,6 @@ const ArticleComponent = () => {
             <p>Understanding Politics</p>
             <p>In the Mystery of Life</p>
             <p>Communication Made Easy</p>
-            <p>In the Days of Mr X</p>
-            <p>Knowing your True Value</p>
           </div>
         </div>
       </div>
@@ -136,8 +134,6 @@ const ArticleComponent = () => {
             <p>Understanding Politics</p>
             <p>In the Mystery of Life</p>
             <p>Communication Made Easy</p>
-            <p>In the Days of Mr X</p>
-            <p>Knowing your True Value</p>
           </div>
         </div>
       </div>
