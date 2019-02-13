@@ -4,13 +4,13 @@ import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
 import './resetPassword.scss';
 
-const resetPasswordComponent = ({ resetPassword, resetPasswordState }) => {
+export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
   const onFormSubmit = e => {
     e.preventDefault();
-    const email = e.target.elements.email.value.trim();
-    resetPassword(usernameOrEmail, password);
+    const email = e.target.elements.resetEmail.value.trim();
+    resetPassword(email);
   };
-  /* if (resetPasswordState === constants.RESET_SUCCESS) {
+  /* if (resetState === constants.RESET_SUCCESS) {
     return <Redirect to="/" />;
   } */
   return (
@@ -22,8 +22,8 @@ const resetPasswordComponent = ({ resetPassword, resetPasswordState }) => {
 
         <div>
           <p className="reset-text">Enter your email address here.</p>
-          <form id="reset">
-            <input id="resetEmail" type="email" />
+          <form id="reset" onSubmit={onFormSubmit}>
+            <input id="resetEmail" type="email" required />
             <button type="submit" className="btn reset-button">
               <span>Submit</span>
             </button>
@@ -34,4 +34,4 @@ const resetPasswordComponent = ({ resetPassword, resetPasswordState }) => {
   );
 };
 
-export default resetPasswordComponent;
+export default ResetPasswordComponent;
