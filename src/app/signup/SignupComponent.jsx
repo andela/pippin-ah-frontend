@@ -25,7 +25,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
   return (
     <Fragment>
       <div className="signup-div-wrapper">
-        <div className="signup-container">
+        <div className="signup-div">
           <div className="close-button-div">
             <p className="close-button close"> X </p>
           </div>
@@ -33,8 +33,8 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
             Sign <span className="up">Up</span>
           </div>
           <div className="signup-wrapper">
-            <div className="social-auth">
-              <div className="btn-facebook">
+            <div className="social-media-icons">
+              <div className="btn-facebookk">
                 <div className="facebook-icon-div">
                   <i className="fab fa-facebook-f" />
                 </div>
@@ -42,7 +42,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                   <span className="social-text">Sign up with Facebook</span>
                 </div>
               </div>
-              <div className="btn-twitter">
+              <div className="btn-twitterr">
                 <div className="twitter-icon-div">
                   <i className="fab fa-twitter" />
                 </div>
@@ -50,7 +50,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                   <span className="social-text">Sign up with Twitter</span>
                 </div>
               </div>
-              <div className="btn-google">
+              <div className="btn-googlee">
                 <div className="google-icon-div">
                   <i className="fab fa-google" />
                 </div>
@@ -76,7 +76,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
               </div>
               <div className="input-groups">
                 <div className="form-icon-div">
-                  <i className="fas fa-key form-input-icons" />
+                  <i className="fas fa-user form-input-icons" />
                 </div>
                 <input
                   className={

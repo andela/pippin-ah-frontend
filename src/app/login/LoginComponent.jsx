@@ -25,7 +25,7 @@ export const LoginComponent = ({ loginUser, loginState }) => {
             Sign <span className="up">In</span>
           </div>
           <div className="signup-wrapper">
-            <div className="social-auth">
+            <div className="social-media-icons">
               <div className="btn-facebookk">
                 <div className="facebook-icon-div">
                   <i className="fab fa-facebook-f" />
