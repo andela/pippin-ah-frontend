@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SIGNUP TEST SUITE Signup Component should render the Signup Page 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
-`;
