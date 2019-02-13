@@ -11,30 +11,49 @@ export const ResetPasswordComponent = ({ resetPassword, resetState }) => {
     const email = e.target.elements.resetEmail.value.trim();
     resetPassword(email);
   };
-  /* if (resetState === constants.RESET_SUCCESS) {
-    return <Redirect to="/" />;
-  } */
+
   const resetButton = (
     <button type="submit" className="btn reset-button">
       Submit
     </button>
   );
+
+  const resetForm = (
+    <>
+      <div className="reset-page-title">
+        <h2>{"Let's help you get back your account"}</h2>
+      </div>
+      <div>
+        <p className="reset-text">Enter your email address here.</p>
+        <form id="reset" onSubmit={onFormSubmit}>
+          <input id="resetEmail" type="email" required />
+          {resetState === '' && resetButton}
+          {resetState === constants.RESET_ERROR && resetButton}
+          {resetState === constants.RESETTING && <EllipsisLoaderComponent />}
+        </form>
+      </div>
+    </>
+  );
+
+  const successMessage = (
+    <>
+      <div className="reset-page-title">
+        <h2>We just sent you a mail</h2>
+      </div>
+      <div>
+        <p className="reset-text">
+          If you {"don't"} see the email, check other places it might be, like
+          your junk or spam folders.
+        </p>
+      </div>
+    </>
+  );
+
   return (
     <div className="reset-password-container">
       <div className="reset-password">
-        <div className="reset-page-title">
-          <h2>Let's help you get back your account</h2>
-        </div>
-
-        <div>
-          <p className="reset-text">Enter your email address here.</p>
-          <form id="reset" onSubmit={onFormSubmit}>
-            <input id="resetEmail" type="email" required />
-            {resetState === '' && resetButton}
-            {resetState === constants.RESET_ERROR && resetButton}
-            {resetState === constants.RESETTING && <EllipsisLoaderComponent />}
-          </form>
-        </div>
+        {resetState !== constants.RESET_SUCCESS && resetForm}
+        {resetState === constants.RESET_SUCCESS && successMessage}
       </div>
     </div>
   );
