@@ -15,7 +15,7 @@
       "except": ["first-nested"],
       "ignore": ["after-comment"],
     } ],
-    "unit-whitelist": ["em", "rem", "%", "px", "s", "deg"],
+    "unit-whitelist": ["em", "rem", "%", "px", "s", "deg", "fr"],
      "font-family-no-missing-generic-family-keyword": null
   }
 }

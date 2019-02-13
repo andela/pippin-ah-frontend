@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './navBar.scss';
 
 const NavbarComponent = () => {
@@ -15,19 +16,19 @@ const NavbarComponent = () => {
           <div className="categories">
             <ul className="right hide-on-med-and-down">
               <li>
-                <a href="#!">Science</a>
+                <Link to="/subject">Science</Link>
               </li>
               <li>
-                <a href="#!">Technology</a>
+                <Link to="/subject">Technology</Link>
               </li>
               <li>
-                <a href="#!">Engineering</a>
+                <Link to="/subject">Engineering</Link>
               </li>
               <li>
-                <a href="#!">Arts</a>
+                <Link to="/subject">Arts</Link>
               </li>
               <li>
-                <a href="#!">Mathematics</a>
+                <Link to="/subject">Mathematics</Link>
               </li>
             </ul>
             <a href="#!" data-target="mobile-demo" className="sidenav-trigger">
@@ -37,11 +38,11 @@ const NavbarComponent = () => {
           <div className="hide-on-med-and-down show">
             <ul>
               <li>
-                <a href="/login">SignIn</a>
+                <Link to="/login">SignIn</Link>
               </li>
               <li>|</li>
               <li>
-                <a href="/signup">SignUp</a>
+                <Link to="/signup">SignUp</Link>
               </li>
             </ul>
           </div>

@@ -24,7 +24,7 @@ exports[` Component should render the NavBar 1`] = `
         className="card small"
       >
         <div
-          className="card-image waves-effect waves-block waves-light"
+          className="card-image"
         >
           <img
             alt="profilepicture"
@@ -153,7 +153,7 @@ exports[` Component should render the NavBar 1`] = `
                   className="card small"
                 >
                   <div
-                    className="card-image waves-effect waves-block waves-light removespace"
+                    className="card-image removespace"
                   >
                     <img
                       alt="profilepicture"

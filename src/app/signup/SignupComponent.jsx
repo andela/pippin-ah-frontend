@@ -19,6 +19,11 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
     const userEmail = e.target.elements.email.value.trim();
     const name = e.target.elements.username.value.trim();
     const password = e.target.elements.password.value.trim();
+    const rePassword = e.target.elements.rePassword.value.trim();
+    if (password !== rePassword) {
+      e.target.elements.rePassword.setCustomValidity('Passwords must match');
+      return;
+    }
     signupUser(userEmail, name, password);
   };
 
@@ -77,6 +82,8 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
               type="text"
               name="username"
               placeholder="Username"
+              pattern=".{6,}"
+              title="Username must be at least 6 characters"
               required
             />
           </div>
@@ -90,6 +97,8 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
               name="password"
               id="password"
               placeholder="Password"
+              pattern=".{6,}"
+              title="Password must be at least 8 characters"
               required
             />
           </div>
