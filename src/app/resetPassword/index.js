@@ -1,2 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as ResetPassword } from './resetPasswordComponent';
+// eslint-disable-next-line max-len
+export {
+  ResetPasswordContainer as ResetPassword,
+} from './resetPasswordContainer';
+export { resetPasswordReducer } from './duck';
