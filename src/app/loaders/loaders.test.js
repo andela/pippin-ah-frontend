@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import RingLoaderComponent from '.';
+import RingLoaderComponent from './RingLoaderComponent';
 
 describe('It should render the RingLoader', () => {
   it('should render the Landing Page', () => {
