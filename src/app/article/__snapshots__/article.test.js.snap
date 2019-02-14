@@ -250,12 +250,6 @@ exports[`Article Container should render the Article Page 1`] = `
             <p>
               Communication Made Easy
             </p>
-            <p>
-              In the Days of Mr X
-            </p>
-            <p>
-              Knowing your True Value
-            </p>
           </div>
         </div>
       </div>
@@ -293,16 +287,126 @@ exports[`Article Container should render the Article Page 1`] = `
             <p>
               Communication Made Easy
             </p>
-            <p>
-              In the Days of Mr X
-            </p>
-            <p>
-              Knowing your True Value
-            </p>
           </div>
         </div>
       </div>
     </div>
   </ArticleComponent>
 </ArticleContainer>
+`;
+
+exports[`CreateArticle should render the CreateArticleComponent 1`] = `
+<div
+  className="create-wrapper"
+>
+  <div
+    className="create-container"
+  >
+    <div
+      className="content-container"
+    >
+      <div
+        className="create-author-details"
+      >
+        <div
+          className="author-photo"
+        />
+        <div
+          className="create-author-name"
+        >
+          <div
+            className="create-auth-name"
+          >
+            Tom Henkins
+          </div>
+        </div>
+      </div>
+      <div
+        className="create-form"
+      >
+        <form
+          className="article-form"
+        >
+          <input
+            placeholder="Title"
+            type="text"
+          />
+          <select
+            className="browser-default"
+            defaultValue=""
+            name="category"
+            required={true}
+          >
+            <option
+              disabled={true}
+              value=""
+            >
+              Select Category
+            </option>
+            <option
+              value="mathematics"
+            >
+              Mathematics
+            </option>
+            <option
+              value="arts"
+            >
+              Arts
+            </option>
+            <option
+              value="science"
+            >
+              Science
+            </option>
+            <option
+              value="engineering"
+            >
+              Engineering
+            </option>
+            <option
+              value="technology"
+            >
+              Technology
+            </option>
+          </select>
+          <input
+            placeholder="Description"
+            type="text"
+          />
+          <div
+            className="create-article-text"
+          >
+            <Editor />
+          </div>
+          <div
+            className="create-article-button"
+          >
+            <button
+              type="submit"
+            >
+              POST
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`CreateArticle should render the CreateArticleContainer 1`] = `<CreateArticleComponent />`;
+
+exports[`CreateArticle should render the EditorComponent 1`] = `
+<TinyMCE
+  config={
+    Object {
+      "height": "30%",
+      "plugins": "autolink link image lists print preview",
+      "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+      "width": "100%",
+    }
+  }
+  content=""
+  placeholder="<p>This is the initial content of the editor</p>"
+/>
 `;
