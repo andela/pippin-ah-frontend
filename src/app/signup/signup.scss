@@ -47,6 +47,7 @@
   text-align: center;
   color: #880038;
   clear: both;
+  margin-bottom: 4%;
 }
 
 .close-button-div {
@@ -76,9 +77,10 @@
   justify-content: space-between !important;
   padding: 0 1% 0 0;
   border-right: 1px solid #eee;
-  margin-bottom: 6%;
+  margin: 2% 2% 6% 0%;
   width: 25%;
   color: white;
+  height: 50%;
 }
 
 .up {
@@ -204,6 +206,10 @@ form {
   text-align: right;
 }
 
+.sign-up-alternative-text {
+  color: #880038;
+}
+
 .sign-up-alternative-text:hover {
   cursor: pointer;
 }
@@ -289,8 +295,8 @@ form {
     margin-left: 12%;
   }
 
-  .sign-up-alternative-text {
-    color: black;
+  .sign-up-alternative-textt {
+    color: #880038;
     font-size: 11px;
   }
 }

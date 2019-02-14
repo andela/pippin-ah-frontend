@@ -129,7 +129,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                   <div className="sign-up-alternative-div">
                     <p className="account">
                       Have an account?
-                      <span className="sign-up-alternative-text">Sign In</span>
+                      <span className="sign-up-alternative-text"> Sign In</span>
                     </p>
                   </div>
                 </div>
