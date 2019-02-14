@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import RingLoaderComponent from '../loaders';
 import { constants } from './duck';
 import './signin.scss';
-import { cancel, facebook, twitter, google, lock, username } from '../../img';
 
 export const LoginComponent = ({ loginUser, loginState }) => {
   const onFormSubmit = e => {
@@ -16,74 +15,92 @@ export const LoginComponent = ({ loginUser, loginState }) => {
     return <Redirect to="/" />;
   }
   return (
-    <div className="signup-box">
-      <img className="btn-close" src={cancel} alt="close" />
-      <div className="signup-text">
-        Sign <span className="up">In</span>
-      </div>
-      <div className="signup-wrapper">
-        <div className="social-auth">
-          <div className="btn-facebook">
-            <img className="social-icon" src={facebook} alt="facebook" />
-            <div className="fb-text-wrapper">
-              <span className="social-text">Sign in with Facebook</span>
+    <Fragment>
+      <div className="relative-div-signIn">
+        <div className="signIn-div-wrapper">
+          <div className="signIn-container">
+            <div className="close-button-div-signIn">
+              <p className="close-button-sign close"> X </p>
             </div>
-          </div>
-          <div className="btn-twitter">
-            <img className="social-icon" src={twitter} alt="twitter" />
-            <div className="twitter-text-wrapper">
-              <span className="social-text">Sign in with Twitter</span>
+            <div className="signIn-text">
+              Sign <span className="up">In</span>
             </div>
-          </div>
-          <div className="btn-google">
-            <img
-              className="social-icon google-icon"
-              src={google}
-              alt="google"
-            />
-            <div className="google-text-wrapper">
-              <span className="social-text">Sign in with Google</span>
+            <div className="signIn-wrapper">
+              <div className="social-media-icons-signIn">
+                <div className="btn-facebookk">
+                  <div className="facebook-icon-div-signIn">
+                    <i className="fab fa-facebook-f" />
+                  </div>
+                  <div className="fb-text-wrapper-signIn">
+                    <span className="social-text-signIn">
+                      Sign in with Facebook
+                    </span>
+                  </div>
+                </div>
+                <div className="btn-twitterr">
+                  <div className="twitter-icon-div-signIn">
+                    <i className="fab fa-twitter" />
+                  </div>
+                  <div className="twitter-text-wrapper-signIn">
+                    <span className="social-text-signIn">
+                      Sign in with Twitter
+                    </span>
+                  </div>
+                </div>
+                <div className="btn-googlee">
+                  <div className="google-icon-div-signIn">
+                    <i className="fab fa-google" />
+                  </div>
+                  <div className="google-text-wrapper-signIn">
+                    <span className="social-text-signIn">
+                      Sign in with Google
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <form className="login" onSubmit={onFormSubmit}>
+                <div className="input-groups-signIn">
+                  <div className="form-icon-div-signIn">
+                    <i className="fas fa-envelope form-input-icons-signIn" />
+                  </div>
+                  <input
+                    id="usernameOrEmail"
+                    type="text"
+                    name="usernameOrEmail"
+                    placeholder="Username or Email"
+                    required
+                  />
+                </div>
+                <div className="input-groups-signIn">
+                  <div className="form-icon-div-signIn">
+                    <i className="fas fa-key form-input-icons-signIn" />
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+                <button className="btn-submit-signIn" type="submit">
+                  SIGN IN
+                </button>
+                <div className="sign-up-alternative-div-signIn">
+                  <p className="sign-up-alternative-text-signIn">
+                    {' '}
+                    Forgort Password?
+                  </p>
+                </div>
+              </form>
+            </div>
+            <div className="ring-loader">
+              {loginState === constants.LOGGING_IN && <RingLoaderComponent />}
             </div>
           </div>
         </div>
-        <form className="login" onSubmit={onFormSubmit}>
-          <div className="input-group">
-            <img src={username} alt="email" />
-            <input
-              id="usernameOrEmail"
-              type="text"
-              name="usernameOrEmail"
-              placeholder="Username or Email"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <img src={lock} alt="lock" />
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div>
-            <button type="submit">
-              <span className="submit-text">SIGN IN</span>
-            </button>
-            <div className="signin-option">
-              <span className="account">
-                Have an account?
-                <span className="signin">Sign In</span>
-              </span>
-            </div>
-          </div>
-        </form>
       </div>
-      <div className="ring-loader">
-        {loginState === constants.LOGGING_IN && <RingLoaderComponent />}
-      </div>
-    </div>
+    </Fragment>
   );
 };
 
