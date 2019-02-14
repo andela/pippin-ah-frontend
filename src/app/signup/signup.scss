@@ -1,9 +1,14 @@
+.relative-div {
+  position: relative;
+  height: 83%;
+}
+
 .signup-div-wrapper {
   background-image: url('../../img/landingPageImage.jpeg');
   background-position: center center;
   background-size: cover;
   position: absolute;
-  height: 83%;
+  height: 100%;
   width: 100%;
   padding-top: 8%;
   color: black;
@@ -312,12 +317,6 @@ form {
     color: black;
   }
 }
-
-// @media screen and (max-height: 800px) {
-//   .signup-divs {
-//     height: 88%;
-//   }
-// }
 
 @media screen and (max-height: 700px) {
   .signup-divs {

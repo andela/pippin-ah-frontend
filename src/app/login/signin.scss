@@ -1,9 +1,14 @@
+.relative-div-signIn {
+  position: relative;
+  height: 83%;
+}
+
 .signIn-div-wrapper {
   background-image: url('../../img/landingPageImage.jpeg');
   background-position: center center;
   background-size: cover;
   position: absolute;
-  height: 83%;
+  height: 100%;
   width: 100%;
   padding-top: 8%;
   color: black;
