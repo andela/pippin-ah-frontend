@@ -1,4 +1,4 @@
-.cover {
+.main-cover {
   display: flex;
 }
 
@@ -12,7 +12,7 @@
   margin-bottom: auto;
   width: 10%;
   position: fixed;
-  height: 100%;
+  height: 70%;
 }
 
 .left-sidebar {
@@ -31,7 +31,7 @@
 }
 
 .right-sidebar-cover {
-  height: 100%;
+  height: 70%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@
   position: fixed;
   right: 0;
   width: 10%;
+  margin-bottom: 10%;
 }
 
 .right-sidebar {
@@ -81,13 +82,15 @@
   margin-bottom: 42px;
 }
 
-.container {
+.main-cover .container {
   border: 1px solid #03d6f5;
   border-top: none;
   border-bottom: none;
   box-sizing: border-box;
   margin-left: 10%;
+  margin-right: 10%;
   width: 80%;
+  max-width: none;
 }
 
 .wrapper {
@@ -517,8 +520,8 @@ textarea::-webkit-input-placeholder {
     display: none;
   }
 
-  .container {
-    width: auto;
+  .main-cover .container {
+    width: 100%;
     margin-left: 0;
     margin-right: 0;
   }

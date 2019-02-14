@@ -250,12 +250,6 @@ exports[`Article Container should render the Article Page 1`] = `
             <p>
               Communication Made Easy
             </p>
-            <p>
-              In the Days of Mr X
-            </p>
-            <p>
-              Knowing your True Value
-            </p>
           </div>
         </div>
       </div>
@@ -292,12 +286,6 @@ exports[`Article Container should render the Article Page 1`] = `
             </p>
             <p>
               Communication Made Easy
-            </p>
-            <p>
-              In the Days of Mr X
-            </p>
-            <p>
-              Knowing your True Value
             </p>
           </div>
         </div>
