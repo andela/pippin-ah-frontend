@@ -9,6 +9,7 @@ const Editor = () => {
         plugins: 'autolink link image lists print preview',
         toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
         width: '100%',
+        height: '30%',
       }}
     />
   );
