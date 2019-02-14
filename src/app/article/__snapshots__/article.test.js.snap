@@ -4,7 +4,7 @@ exports[`Article Container should render the Article Page 1`] = `
 <ArticleContainer>
   <ArticleComponent>
     <div
-      className="cover"
+      className="main-cover"
     >
       <div
         className="left-sidebar-cover"
