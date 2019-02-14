@@ -1,4 +1,4 @@
-.cover {
+.main-cover {
   display: flex;
 }
 
@@ -82,7 +82,7 @@
   margin-bottom: 42px;
 }
 
-.container {
+.main-cover .container {
   border: 1px solid #03d6f5;
   border-top: none;
   border-bottom: none;
@@ -520,7 +520,7 @@ textarea::-webkit-input-placeholder {
     display: none;
   }
 
-  .container {
+  .main-cover .container {
     width: 100% !important;
     margin-left: 0;
     margin-right: 0;

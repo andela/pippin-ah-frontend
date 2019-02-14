@@ -3,7 +3,7 @@ import './article.scss';
 
 const ArticleComponent = () => {
   return (
-    <div className="cover">
+    <div className="main-cover">
       <div className="left-sidebar-cover">
         <div className="left-sidebar">
           <div className="side-bookmark" />
