@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
-import RingLoaderComponent from '../loaders';
+import { RingLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import './signin.scss';
 

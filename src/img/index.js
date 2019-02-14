@@ -5,3 +5,4 @@ export { default as google } from './google.svg';
 export { default as email } from './email.svg';
 export { default as lock } from './lock.svg';
 export { default as username } from './username.svg';
+export { default as ellipsisLoader } from './EllipsisLoader.svg';

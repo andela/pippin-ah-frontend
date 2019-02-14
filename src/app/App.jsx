@@ -8,6 +8,7 @@ import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
 import { Subject } from './subject';
 import ProfileComponent from './profile';
+import { ResetPassword } from './resetPassword';
 
 const App = () => (
   <Router>
@@ -20,6 +21,7 @@ const App = () => (
         <Route path="/login" component={Login} exact />
         <Route path="/subject" component={Subject} exact />
         <Route path="/articles" component={Article} exact />
+        <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/create-article" component={CreateArticle} exact />
       </Switch>
       <Footer />

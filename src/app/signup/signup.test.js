@@ -8,7 +8,7 @@ import axios from 'axios';
 import SignupContainer from './SignupContainer';
 import SignupComponent from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
-import RingLoaderComponent from '../loaders';
+import { RingLoaderComponent } from '../loaders';
 
 jest.mock('axios');
 

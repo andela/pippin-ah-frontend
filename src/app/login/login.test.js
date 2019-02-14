@@ -7,7 +7,7 @@ import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { LoginComponent as Login } from './LoginComponent';
 import { actions, constants, loginReducer, types } from './duck';
-import RingLoaderComponent from '../loaders';
+import { RingLoaderComponent } from '../loaders';
 import {
   LoginContainer,
   mapDispatchToProps,
