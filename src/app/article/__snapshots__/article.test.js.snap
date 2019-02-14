@@ -412,6 +412,7 @@ exports[`CreateArticle should render the EditorComponent 1`] = `
 <TinyMCE
   config={
     Object {
+      "height": "30%",
       "plugins": "autolink link image lists print preview",
       "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
       "width": "100%",
