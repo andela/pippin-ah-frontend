@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ProfileComponent from './ProfileComponent';
-import { viewProfile } from './duck';
+import { viewProfile, updateUserProfile } from './duck';
 
 const mapStateToProps = ({ profile: { viewData, profileData } }) => {
   return { viewData, profileData };
@@ -9,6 +9,8 @@ const mapStateToProps = ({ profile: { viewData, profileData } }) => {
 const mapDispatchToProps = dispatch => {
   return {
     viewProfile: () => dispatch(viewProfile()),
+    updateUserProfile: (firstName, lastName, interest, bio) =>
+      dispatch(updateUserProfile(firstName, lastName, interest, bio)),
   };
 };
 

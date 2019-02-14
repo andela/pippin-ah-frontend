@@ -4,15 +4,22 @@ import '../../style/profile.scss';
 import profilepicture from '../../img/students.jpeg';
 
 class ProfileComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { viewProfile } = this.props;
 
     viewProfile();
   }
+
+  handleSubmit = event => {
+    const { updateUserProfile } = this.props;
+    event.preventDefault();
+    const firstName = event.target.elements.firstName.value.trim();
+    const lastName = event.target.elements.lastName.value.trim();
+    const interest = event.target.elements.interest.value.trim();
+    const bio = event.target.elements.bio.value.trim();
+
+    updateUserProfile(firstName, lastName, interest, bio);
+  };
 
   render() {
     return (
@@ -134,7 +141,10 @@ class ProfileComponent extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <form className="col s12 m6 l6">
+                    <form
+                      onSubmit={this.handleSubmit}
+                      className="col s12 m6 l6"
+                    >
                       <div className="row">
                         <div className="input-field col s12">
                           <i className="material-icons prefix color-ions">
@@ -153,7 +163,7 @@ class ProfileComponent extends React.Component {
                           </i>
                           <input
                             id="icon_telephone"
-                            type="tel"
+                            type="text"
                             className="validate"
                           />
                           <label htmlFor="icon_telephone">Last Name</label>
@@ -164,7 +174,7 @@ class ProfileComponent extends React.Component {
                           </i>
                           <input
                             id="icon_telephone"
-                            type="tel"
+                            type="text"
                             className="validate"
                           />
                           <label htmlFor="icon_telephone">Interest</label>
