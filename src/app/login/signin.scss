@@ -1,4 +1,4 @@
-.signup-div-wrapper {
+.signIn-div-wrapper {
   background-image: url('../../img/landingPageImage.jpeg');
   background-position: center center;
   background-size: cover;
@@ -9,7 +9,7 @@
   color: black;
 }
 
-.signup-div-wrapper::before {
+.signIn-div-wrapper::before {
   content: '';
   position: absolute;
   left: 0;
@@ -20,23 +20,23 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-.signup-container {
+.signIn-container {
   background-color: white;
   width: 50%;
   margin: 0 auto 12% auto;
   position: relative;
-  padding: 0 1%;
-  height: 50%;
+  padding: 1% 1%;
+  height: 55%;
 }
 
-.signup-wrapper {
+.signIn-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   height: auto;
 }
 
-.signup-text {
+.signIn-text {
   font-family: Rosario;
   font-size: 30px;
   text-align: center;
@@ -44,7 +44,7 @@
   clear: both;
 }
 
-.close-button-div {
+.close-button-div-signIn {
   text-align: right;
   margin-bottom: -5%;
   padding-right: 2%;
@@ -52,7 +52,7 @@
   color: #880038;
 }
 
-.close-button {
+.close-button-sign {
   font-size: 18px;
   margin-left: 90%;
 }
@@ -65,11 +65,11 @@
   cursor: pointer;
 }
 
-.social-media-icons {
+.social-media-icons-signIn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 3% 0 0;
+  padding: 0 1% 0 0;
   border-right: 1px solid #eee;
   margin-bottom: 6%;
   width: 25%;
@@ -80,18 +80,18 @@
   color: #03d6f5;
 }
 
-.form-icon-div {
+.form-icon-div-signIn {
   text-align: center;
   padding: 10px 15px 0 0;
 }
 
-.input-groups {
+.input-groups-signIn {
   display: flex;
   justify-content: space-between;
   margin: 0;
 }
 
-.form-input-icons {
+.form-input-icons-signIn {
   color: #b3b3b3;
   font-size: 25px;
 }
@@ -111,13 +111,13 @@ form button {
   width: 92%;
 }
 
-.btn-submit {
+.btn-submit-signIn {
   font-size: 24px;
   text-align: center;
   color: #fff;
 }
 
-.btn-submit:hover {
+.btn-submit-signIn:hover {
   cursor: pointer;
 }
 
@@ -151,24 +151,24 @@ form {
   color: white;
 }
 
-.facebook-icon-div {
+.facebook-icon-div-signIn {
   padding: 5px;
   background-color: #3b5997;
 }
 
-.twitter-icon-div {
+.twitter-icon-div-signIn {
   padding: 5px;
   background-color: #50abf1;
 }
 
-.google-icon-div {
+.google-icon-div-signIn {
   background-color: #880038;
   padding: 5px;
 }
 
-.fb-text-wrapper,
-.twitter-text-wrapper,
-.google-text-wrapper {
+.fb-text-wrapper-signIn,
+.twitter-text-wrapper-signIn,
+.google-text-wrapper-signIn {
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -176,29 +176,29 @@ form {
   height: auto;
 }
 
-.fb-text-wrapper {
+.fb-text-wrapper-signIn {
   background-color: #3b5997;
 }
 
-.google-text-wrapper {
+.google-text-wrapper-signIn {
   background-color: #880038;
 }
 
-.twitter-text-wrapper {
+.twitter-text-wrapper-signIn {
   background-color: #50abf1;
 }
 
-.social-textt {
+.social-text-signIn {
   margin: auto 0 !important;
 }
 
-.sign-up-alternative-div {
+.sign-up-alternative-div-signIn {
   font-size: 13px;
   margin-top: -2%;
   text-align: right;
 }
 
-.sign-up-alternative-text:hover {
+.sign-up-alternative-text-signIn:hover {
   cursor: pointer;
 }
 
@@ -210,41 +210,42 @@ form {
 }
 
 @media screen and (max-width: 991px) {
-  .signup-div-wrapper {
+  .signIn-div-wrapper {
     padding-top: 18%;
   }
 
-  .signup-container {
+  .signIn-container {
     width: 70%;
-    margin: 0 auto 12% auto;
+    margin: 0 15% 9% auto;
     padding: 0 1%;
+    height: 70%;
   }
 
-  .signup-wrapper {
+  .signIn-wrapper {
     margin: 10% auto 0 auto;
   }
 
-  .social-media-icons {
+  .social-media-icons-signIn {
     padding: 0 2% auto auto;
     width: 13%;
   }
 
-  .facebook-icon-div {
+  .facebook-icon-div-signIn {
     padding: 7px;
     background-color: #3b5997;
   }
 
-  .twitter-icon-div {
+  .twitter-icon-div-signIn {
     padding-top: 9px;
   }
 
-  .fb-text-wrapper,
-  .twitter-text-wrapper,
-  .google-text-wrapper {
+  .fb-text-wrapper-signIn,
+  .twitter-text-wrapper-signIn,
+  .google-text-wrapper-signIn {
     display: none;
   }
 
-  .signup-text {
+  .signIn-text {
     font-size: 25px;
   }
 
@@ -258,7 +259,7 @@ form {
     width: 80%;
   }
 
-  .form-input-icons {
+  .form-input-icons-signIn {
     font-size: 15px;
     margin-top: 50%;
   }
@@ -267,33 +268,34 @@ form {
     font-size: 15px;
   }
 
-  .btn-submit {
+  .btn-submit-signIn {
     font-size: 16px;
     width: 87%;
     margin-left: 12%;
   }
 
-  .sign-up-alternative-text {
+  .sign-up-alternative-text-signIn {
     color: black;
     font-size: 11px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .signup-container {
+  .signIn-container {
     background-color: white;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .signup-container {
+  .signIn-container {
     width: 90%;
+    margin-left: 5%;
   }
 }
 
 //  RESPONSIVE HEIGHT
 @media screen and (max-height: 650px) {
-  .signup-container {
+  .signIn-container {
     position: relative;
     padding: 0 1%;
     height: 70%;
@@ -301,12 +303,12 @@ form {
 }
 
 @media screen and (max-height: 690px) {
-  .signup-container {
+  .signIn-container {
     height: 70%;
   }
 
   @media screen and (max-height: 550px) {
-    .signup-container {
+    .signIn-container {
       margin-top: -5%;
       height: auto;
     }

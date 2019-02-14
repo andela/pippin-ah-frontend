@@ -16,45 +16,51 @@ export const LoginComponent = ({ loginUser, loginState }) => {
   }
   return (
     <Fragment>
-      <div className="signup-div-wrapper">
-        <div className="signup-container">
-          <div className="close-button-div">
-            <p className="close-button close"> X </p>
+      <div className="signIn-div-wrapper">
+        <div className="signIn-container">
+          <div className="close-button-div-signIn">
+            <p className="close-button-sign close"> X </p>
           </div>
-          <div className="signup-text">
+          <div className="signIn-text">
             Sign <span className="up">In</span>
           </div>
-          <div className="signup-wrapper">
-            <div className="social-media-icons">
+          <div className="signIn-wrapper">
+            <div className="social-media-icons-signIn">
               <div className="btn-facebookk">
-                <div className="facebook-icon-div">
+                <div className="facebook-icon-div-signIn">
                   <i className="fab fa-facebook-f" />
                 </div>
-                <div className="fb-text-wrapper">
-                  <span className="social-textt">Sign in with Facebook</span>
+                <div className="fb-text-wrapper-signIn">
+                  <span className="social-text-signIn">
+                    Sign in with Facebook
+                  </span>
                 </div>
               </div>
               <div className="btn-twitterr">
-                <div className="twitter-icon-div">
+                <div className="twitter-icon-div-signIn">
                   <i className="fab fa-twitter" />
                 </div>
-                <div className="twitter-text-wrapper">
-                  <span className="social-textt">Sign in with Twitter</span>
+                <div className="twitter-text-wrapper-signIn">
+                  <span className="social-text-signIn">
+                    Sign in with Twitter
+                  </span>
                 </div>
               </div>
               <div className="btn-googlee">
-                <div className="google-icon-div">
+                <div className="google-icon-div-signIn">
                   <i className="fab fa-google" />
                 </div>
-                <div className="google-text-wrapper">
-                  <span className="social-textt">Sign in with Google</span>
+                <div className="google-text-wrapper-signIn">
+                  <span className="social-text-signIn">
+                    Sign in with Google
+                  </span>
                 </div>
               </div>
             </div>
             <form className="login" onSubmit={onFormSubmit}>
-              <div className="input-groups">
-                <div className="form-icon-div">
-                  <i className="fas fa-envelope form-input-icons" />
+              <div className="input-groups-signIn">
+                <div className="form-icon-div-signIn">
+                  <i className="fas fa-envelope form-input-icons-signIn" />
                 </div>
                 <input
                   id="usernameOrEmail"
@@ -64,9 +70,9 @@ export const LoginComponent = ({ loginUser, loginState }) => {
                   required
                 />
               </div>
-              <div className="input-groups">
-                <div className="form-icon-div">
-                  <i className="fas fa-key form-input-icons" />
+              <div className="input-groups-signIn">
+                <div className="form-icon-div-signIn">
+                  <i className="fas fa-key form-input-icons-signIn" />
                 </div>
                 <input
                   id="password"
@@ -76,11 +82,14 @@ export const LoginComponent = ({ loginUser, loginState }) => {
                   required
                 />
               </div>
-              <button className="btn-submit" type="submit">
+              <button className="btn-submit-signIn" type="submit">
                 SIGN IN
               </button>
-              <div className="sign-up-alternative-div">
-                <p className="sign-up-alternative-text"> Forgort Password?</p>
+              <div className="sign-up-alternative-div-signIn">
+                <p className="sign-up-alternative-text-signIn">
+                  {' '}
+                  Forgort Password?
+                </p>
               </div>
             </form>
           </div>

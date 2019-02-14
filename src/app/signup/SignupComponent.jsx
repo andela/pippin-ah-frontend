@@ -25,7 +25,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
   return (
     <Fragment>
       <div className="signup-div-wrapper">
-        <div className="signup-div">
+        <div className="signup-divs">
           <div className="close-button-div">
             <p className="close-button close"> X </p>
           </div>

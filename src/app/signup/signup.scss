@@ -20,7 +20,7 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-.signup-div {
+.signup-divs {
   background-color: white;
   width: 50%;
   margin: 0 auto 12% auto;
@@ -210,16 +210,25 @@ form {
   transform: scale(0.7);
 }
 
+@media screen and (max-width: 1200px) {
+  .signup-divs {
+    width: 60%;
+    margin: -2% auto 12% auto;
+    padding: 0 1%;
+    height: 70%;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .signup-div-wrapper {
     padding-top: 18%;
   }
 
-  .signup-div {
+  .signup-divs {
     width: 70%;
-    margin: 0 auto 12% auto;
+    margin: -12% auto 12% auto;
     padding: 0 1%;
-    height: 82%;
+    height: 88%;
   }
 
   .signup-wrapper {
@@ -281,56 +290,44 @@ form {
   }
 }
 
-@media screen and (max-width: 850px) {
-  .signup-div {
+@media screen and (max-width: 800px) {
+  .signup-divs {
     width: 85%;
-    height: 73%;
+    height: 85% !important;
+    margin: -8% auto 2% auto;
   }
 }
 
-@media screen and (max-width: 750px) {
-  .signup-div {
+@media screen and (max-width: 730px) {
+  .signup-divs {
     width: 85%;
-    height: 72%;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .signup-div {
-    width: 85%;
-    height: 70%;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .signup-div {
-    width: 85%;
-    height: 62%;
+    margin: -8% auto 2% auto;
+    height: 79% !important;
+    background-color: red;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .signup-div {
+  .signup-divs {
     width: 90%;
     color: black;
   }
 }
 
-@media screen and (max-height: 800px) {
-  .signup-div {
-    margin: 0 auto 2% auto;
-    height: 73%;
-  }
-}
+// @media screen and (max-height: 800px) {
+//   .signup-divs {
+//     height: 88%;
+//   }
+// }
 
 @media screen and (max-height: 700px) {
-  .signup-div {
+  .signup-divs {
     height: 79%;
   }
 }
 
 @media screen and (max-height: 600px) {
-  .signup-div {
+  .signup-divs {
     margin-top: -5%;
     height: 92%;
   }
