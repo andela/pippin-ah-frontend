@@ -2,11 +2,16 @@
 import React from 'react';
 import '../../style/profile.scss';
 import profilepicture from '../../img/students.jpeg';
+import upload from '../util/cloud';
 
 class ProfileComponent extends React.Component {
+  state = {
+    imageSelected: '',
+    imageUrl: '',
+  };
+
   componentDidMount() {
     const { viewProfile } = this.props;
-
     viewProfile();
   }
 
@@ -21,6 +26,38 @@ class ProfileComponent extends React.Component {
     updateUserProfile(firstName, lastName, interest, bio);
   };
 
+  uploadPicture = event => {
+    event.preventDefault();
+    const { imageUrl } = this.state;
+    if (imageUrl !== undefined) {
+      const imageData = new FormData();
+      imageData.append('file', imageUrl);
+      imageData.append('tags', 'profileImage');
+      imageData.append('upload_preset', 'u5wlpktm');
+      imageData.append('api_key', '957426565997323');
+      imageData.append('cloud_name', 'hba821');
+      imageData.append('timestamp', Date.now() / 1000);
+
+      upload(imageData);
+    }
+    console.log('After Upload Picture', this.imageUrl);
+  };
+
+  displayImage = event => {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      this.state.imageSelected = event.target.files[0];
+      reader.onload = e => {
+        this.setState({ imageSelected: e.target.result });
+      };
+      const imagefilepath = event.target.files[0];
+      this.setState({
+        imageUrl: imagefilepath,
+      });
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
+
   render() {
     return (
       <div>
@@ -32,16 +69,25 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m6 l3">
             <div className="card small">
               <div className="card-image">
-                <img
-                  src={profilepicture}
-                  alt="profilepicture"
-                  className="activator"
-                />
+                {this.props.viewData ? (
+                  <img
+                    src={this.props.viewData.imageUrl}
+                    alt="profilepicture"
+                    className="activator"
+                  />
+                ) : (
+                  <h6>loading...</h6>
+                )}{' '}
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
                   {this.props.viewData ? (
                     this.props.viewData.firstName
+                  ) : (
+                    <h6>loading...</h6>
+                  )}{' '}
+                  {this.props.viewData ? (
+                    this.props.viewData.lastName
                   ) : (
                     <h6>loading...</h6>
                   )}
@@ -85,7 +131,6 @@ class ProfileComponent extends React.Component {
                 )}{' '}
                 <br />
                 <br /> <br />
-                {false && 'Mentor'}
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
                 {this.props.viewData ? (
                   this.props.viewData.isMentor
@@ -109,7 +154,7 @@ class ProfileComponent extends React.Component {
                   {this.props.viewData ? (
                     this.props.viewData.bio
                   ) : (
-                    <h6>loading product please wait...</h6>
+                    <h6>loading ...</h6>
                   )}
                 </span>
               </div>
@@ -127,14 +172,28 @@ class ProfileComponent extends React.Component {
                     <div className="col s12 m6 l6">
                       <div className="card small">
                         <div className="card-image removespace">
-                          <img src={profilepicture} alt="profilepicture" />
+                          <img
+                            src={
+                              this.state.imageSelected
+                                ? this.state.imageSelected
+                                : profilepicture
+                            }
+                            alt="profilepicture"
+                          />
                         </div>
                         <div className="card-tabs">
-                          <form action="#">
+                          <form onSubmit={this.uploadPicture}>
                             <div className="file-field input-field">
                               <div className="btn btncolor" id="centralize">
                                 <span>Edit Photo</span>
-                                <input type="file" multiple />
+                                <input
+                                  type="file"
+                                  name="profilepix"
+                                  id="img"
+                                  onChange={this.displayImage}
+                                />
+                                <br />
+                                <button type="submit">Upload</button>
                               </div>
                             </div>
                           </form>
@@ -154,6 +213,7 @@ class ProfileComponent extends React.Component {
                             id="icon_prefix"
                             type="text"
                             className="validate"
+                            name="firstName"
                           />
                           <label htmlFor="icon_prefix">First Name</label>
                         </div>
@@ -165,6 +225,7 @@ class ProfileComponent extends React.Component {
                             id="icon_telephone"
                             type="text"
                             className="validate"
+                            name="lastName"
                           />
                           <label htmlFor="icon_telephone">Last Name</label>
                         </div>
@@ -176,6 +237,7 @@ class ProfileComponent extends React.Component {
                             id="icon_telephone"
                             type="text"
                             className="validate"
+                            name="interest"
                           />
                           <label htmlFor="icon_telephone">Interest</label>
                         </div>
@@ -186,6 +248,7 @@ class ProfileComponent extends React.Component {
                           <textarea
                             id="textarea1"
                             className="materialize-textarea"
+                            name="bio"
                           />
                           <label htmlFor="textarea1">Biography</label>
                         </div>
@@ -229,7 +292,7 @@ class ProfileComponent extends React.Component {
                 {this.props.viewData ? (
                   this.props.viewData.articles.top.map(articles => {
                     return (
-                      <p>
+                      <p key={articles.slug}>
                         <a href="#!">{articles.title}</a>
                       </p>
                     );

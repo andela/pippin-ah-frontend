@@ -56,7 +56,14 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  node: {
+    fs: 'empty',
+  },
   devServer: {
     historyApiFallback: true,
+  },
+  externals: {
+    React: 'react',
+    cloudinary: 'cloudinary-core',
   },
 };

@@ -1,14 +1,18 @@
-import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
+import cloudinary from 'cloudinary-core';
 
-const uploadToCloudinary = async imageFilePath => {
+dotenv.config();
+console.log('*****', process.env.CLOUDINARY_CLOUD_NAME);
+
+const uploadToCloudinary = imageFilePath => {
   cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: 'learnground',
+    api_key: '164924858245978',
+    api_secret: 'RBwhdIbjYY_4unXZItlvT6k1cWc',
   });
 
   let response = '';
-  await cloudinary.v2.uploader
+  cloudinary.v2.uploader
     .upload(imageFilePath, (error, result) => {
       if (error) response = error;
       response = result.url;
