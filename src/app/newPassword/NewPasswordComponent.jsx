@@ -1,4 +1,4 @@
-/* eslint-disable-max-len */
+/* eslint-disable max-len */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -69,6 +69,17 @@ export const NewPasswordComponent = ({
         </p>
       </div>
     </>
+  );
+
+  return (
+    <div className="new-password-container">
+      <div className="new-password">
+        {updatePasswordState !== constants.UPDATE_PASSWORD_SUCCESS &&
+          newPasswordForm}
+        {updatePasswordState === constants.UPDATE_PASSWORD_SUCCESS &&
+          successMessage}
+      </div>
+    </div>
   );
 };
 
