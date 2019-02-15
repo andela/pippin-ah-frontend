@@ -1,7 +1,6 @@
 import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-import { JSDOM } from 'jsdom';
 import configureStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
