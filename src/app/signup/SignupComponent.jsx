@@ -12,7 +12,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
     const password = e.target.elements.password.value.trim();
     const rePassword = e.target.elements.rePassword.value.trim();
     if (password !== rePassword) {
-      e.target.elements.rePassword.setCustomValidity('Passwords must match');
+      e.target.elements.rePassword.setCustomValidity('passwords must match');
       return;
     }
     signupUser(userEmail, name, password);
