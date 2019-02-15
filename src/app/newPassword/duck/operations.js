@@ -5,7 +5,6 @@ import constants from './constants';
 
 const { setUpdatePasswordState, setUpdatePasswordError } = actions;
 const resetToken = window.location.search.substring(1);
-console.log('*****', resetToken);
 // eslint-disable-next-line max-len
 const url = `https://learnground-api-staging.herokuapp.com/api/v1/users/resetpassword/${resetToken}`;
 
