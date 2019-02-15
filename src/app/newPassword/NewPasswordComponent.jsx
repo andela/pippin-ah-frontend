@@ -57,6 +57,19 @@ export const NewPasswordComponent = ({
       </div>
     </>
   );
+
+  const successMessage = (
+    <>
+      <div className="new-password-page-title">
+        <h2>{"You've"} succefully reset your password!</h2>
+      </div>
+      <div>
+        <p id="succesText">
+          Click <Link to="/login">here </Link>to login
+        </p>
+      </div>
+    </>
+  );
 };
 
 export default NewPasswordComponent;
