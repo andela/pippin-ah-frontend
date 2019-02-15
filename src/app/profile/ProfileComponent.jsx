@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import '../../style/profile.scss';
-import profilepicture from '../../img/students.jpeg';
+import profilepicture from '../../img/avatar.jpeg';
 import upload from '../util/cloud';
 
 class ProfileComponent extends React.Component {
@@ -37,19 +37,18 @@ class ProfileComponent extends React.Component {
       imageData.append('api_key', '957426565997323');
       imageData.append('cloud_name', 'hba821');
       imageData.append('timestamp', Date.now() / 1000);
-
       upload(imageData);
     }
-    console.log('After Upload Picture', this.imageUrl);
   };
 
   displayImage = event => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      this.state.imageSelected = event.target.files[0];
+
       reader.onload = e => {
         this.setState({ imageSelected: e.target.result });
       };
+
       const imagefilepath = event.target.files[0];
       this.setState({
         imageUrl: imagefilepath,
@@ -59,6 +58,8 @@ class ProfileComponent extends React.Component {
   };
 
   render() {
+    const { viewData } = this.props;
+    const { imageSelected } = this.state;
     return (
       <div>
         <div className="container">
@@ -69,9 +70,9 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m6 l3">
             <div className="card small">
               <div className="card-image">
-                {this.props.viewData ? (
+                {viewData ? (
                   <img
-                    src={this.props.viewData.imageUrl}
+                    src={viewData.imageUrl}
                     alt="profilepicture"
                     className="activator"
                   />
@@ -81,16 +82,8 @@ class ProfileComponent extends React.Component {
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
-                  {this.props.viewData ? (
-                    this.props.viewData.firstName
-                  ) : (
-                    <h6>loading...</h6>
-                  )}{' '}
-                  {this.props.viewData ? (
-                    this.props.viewData.lastName
-                  ) : (
-                    <h6>loading...</h6>
-                  )}
+                  {viewData ? viewData.firstName : <h6>loading...</h6>}{' '}
+                  {viewData ? viewData.lastName : <h6>loading...</h6>}
                   <i className="material-icons right">more_vert</i>
                 </span>
               </div>
@@ -105,38 +98,18 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m5 l2 move-top" id="details">
             <div className="card small z-depth-0">
               <div className="card-content">
-                Interest : &nbsp; Mathematics <br />
-                <br /> <br />
                 Articles : &nbsp;&nbsp; &nbsp;{' '}
-                {this.props.viewData ? (
-                  this.props.viewData.articles.total
-                ) : (
-                  <h6>loading...</h6>
-                )}{' '}
+                {viewData ? viewData.articles.total : <h6>loading...</h6>}{' '}
                 <br />
                 <br /> <br />
                 Following : &nbsp;{' '}
-                {this.props.viewData ? (
-                  this.props.viewData.following
-                ) : (
-                  <h6>loading...</h6>
-                )}{' '}
-                <br />
+                {viewData ? viewData.following : <h6>loading...</h6>} <br />
                 <br /> <br />
                 Followers : &nbsp;{' '}
-                {this.props.viewData ? (
-                  this.props.viewData.followers
-                ) : (
-                  <h6>loading...</h6>
-                )}{' '}
-                <br />
+                {viewData ? viewData.followers : <h6>loading...</h6>} <br />
                 <br /> <br />
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {this.props.viewData ? (
-                  this.props.viewData.isMentor
-                ) : (
-                  <h6>loading...</h6>
-                )}
+                {viewData ? viewData.isMentor : <h6>loading...</h6>}
                 {/* <i className="material-icons prefix">check_box</i> */}
                 <br />
                 <br />
@@ -151,11 +124,7 @@ class ProfileComponent extends React.Component {
                 <span className="headlines">BIOGRAPHY</span>
                 <br />
                 <span id="bio">
-                  {this.props.viewData ? (
-                    this.props.viewData.bio
-                  ) : (
-                    <h6>loading ...</h6>
-                  )}
+                  {viewData ? viewData.bio : <h6>loading ...</h6>}
                 </span>
               </div>
               <a
@@ -173,11 +142,7 @@ class ProfileComponent extends React.Component {
                       <div className="card small">
                         <div className="card-image removespace">
                           <img
-                            src={
-                              this.state.imageSelected
-                                ? this.state.imageSelected
-                                : profilepicture
-                            }
+                            src={imageSelected || profilepicture}
                             alt="profilepicture"
                           />
                         </div>
@@ -185,7 +150,7 @@ class ProfileComponent extends React.Component {
                           <form onSubmit={this.uploadPicture}>
                             <div className="file-field input-field">
                               <div className="btn btncolor" id="centralize">
-                                <span>Edit Photo</span>
+                                <span>Change Photo</span>
                                 <input
                                   type="file"
                                   name="profilepix"
@@ -193,9 +158,15 @@ class ProfileComponent extends React.Component {
                                   onChange={this.displayImage}
                                 />
                                 <br />
-                                <button type="submit">Upload</button>
                               </div>
                             </div>
+                            <button
+                              type="submit"
+                              className="btn btncolor"
+                              id="centralize"
+                            >
+                              Upload
+                            </button>
                           </form>
                         </div>
                       </div>
@@ -289,8 +260,8 @@ class ProfileComponent extends React.Component {
                 TOP FIVE ARTICLES
               </span>
               <div id="topArticles">
-                {this.props.viewData ? (
-                  this.props.viewData.articles.top.map(articles => {
+                {viewData ? (
+                  viewData.articles.top.map(articles => {
                     return (
                       <p key={articles.slug}>
                         <a href="#!">{articles.title}</a>

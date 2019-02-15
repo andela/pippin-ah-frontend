@@ -1,18 +1,23 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import actions from './actions';
 
 const { viewUserProfile, setUserProfile } = actions;
-const url =
-  'https://learnground-api-staging.herokuapp.com/api/v1/user/audu9habib';
 
 export const viewProfile = () => dispatch => {
   const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const url = `https://learnground-api-staging.herokuapp.com/api/v1/user/${
+    decoded.username
+  }`;
+
   const defaultOptions = {
     headers: {
       Authorization: token,
     },
   };
+
   return axios
     .get(url, defaultOptions)
     .then(({ data }) => {
