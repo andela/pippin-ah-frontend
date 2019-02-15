@@ -1,8 +1,18 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import { doCreateArticle } from './duck';
 import CreateArticleComponent from './CreateArticleComponent';
 
-const CreateArticleContainer = () => {
-  return <CreateArticleComponent />;
+const mapStateToProps = ({ createArticle: { createStatus } }) => {
+  return { createStatus };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    signupUser: articleDetails => dispatch(doCreateArticle(articleDetails)),
+  };
+};
+const ArticleContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateArticleComponent);
 
-export default CreateArticleContainer;
+export default ArticleContainer;

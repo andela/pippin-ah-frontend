@@ -1,0 +1,3 @@
+const SET_CREATE_STATUS = 'SET_CREATE_STATUS';
+
+export default { SET_CREATE_STATUS };
