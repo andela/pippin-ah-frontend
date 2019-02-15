@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './navBar.scss';
 
 const NavbarComponent = () => {
-  const isSignedIn = localStorage.getItem('token') !== null;
+  const isSignedIn = !!localStorage.getItem('token');
   return (
     <nav className="navbarbg">
       <div>
