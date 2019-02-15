@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -13,7 +12,9 @@ export const NewPasswordComponent = ({
     e.preventDefault();
     const newPassword = e.target.elements.newPassword.value.trim();
     const rePassword = e.target.elements.rePassword.value.trim();
-    const passwordMismatchText = `<p class="passwordMismatchText">The passwords don't match. Can you check and try again?</p>`;
+    const passwordMismatchText = `
+      <p class="passwordMismatchText">The passwords don't match.
+      Can you check and try again?</p>`;
     if (newPassword === rePassword) updatePassword(newPassword);
     else {
       document.getElementById(
