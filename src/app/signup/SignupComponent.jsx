@@ -119,6 +119,9 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     type="password"
                     name="rePassword"
                     placeholder="Confirm Password"
+                    onChange={e => {
+                      e.target.setCustomValidity('');
+                    }}
                     required
                   />
                 </div>

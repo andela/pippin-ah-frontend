@@ -86,6 +86,7 @@ exports[` Component should render the NavBar 1`] = `
         className="hide-on-med-and-down show"
       >
         <ul>
+          <li />
           <li>
             <Link
               replace={false}

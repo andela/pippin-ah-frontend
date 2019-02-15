@@ -35,10 +35,12 @@ describe('SIGNUP TEST SUITE', () => {
       expect(usernameField.name).toBe('username');
       const passwordField = component.find('input[name="password"]').props();
       expect(passwordField.name).toBe('password');
-
-      component
-        .find('input[name="rePassword"]')
-        .simulate('change', { target: { value: 'Your new Value' } });
+      component.find('input[name="rePassword"]').simulate('change', {
+        target: {
+          value: 'newPassword',
+          setCustomValidity: () => {},
+        },
+      });
       const rePassword = component.find('input[name="rePassword"]').props();
       expect(rePassword.name).toBe('rePassword');
     });
