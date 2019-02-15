@@ -15,10 +15,11 @@ export const NewPasswordComponent = ({
     const rePassword = e.target.elements.rePassword.value.trim();
     const passwordMismatchText = `<p class="passwordMismatchText">The passwords don't match. Can you check and try again?</p>`;
     if (newPassword === rePassword) updatePassword(newPassword);
-    else
+    else {
       document.getElementById(
         'passwordMismatchDiv',
       ).innerHTML = passwordMismatchText;
+    }
   };
 
   const updatePasswordButton = (
