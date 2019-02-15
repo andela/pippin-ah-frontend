@@ -18,10 +18,6 @@ jest.mock('axios');
 const { setUpdatePasswordState, setUpdatePasswordError } = actions;
 
 describe('newPasswordComponent', () => {
-  const dom = new JSDOM();
-  global.document = dom.window.document;
-  global.window = dom.window;
-
   it('should render without throwing an error', () => {
     const updatePassword = jest.fn();
     const props = {
