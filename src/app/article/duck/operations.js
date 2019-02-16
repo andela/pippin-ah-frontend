@@ -18,7 +18,6 @@ const doCreateArticle = articleDetails => dispatch => {
           data: data.slug,
         }),
       );
-      // console.log(data);
     })
     .catch(({ response }) => {
       dispatch(
@@ -29,5 +28,7 @@ const doCreateArticle = articleDetails => dispatch => {
       );
     });
 };
+
+// const fetchAuthor
 
 export default doCreateArticle;
