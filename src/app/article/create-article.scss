@@ -67,7 +67,6 @@
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   background-size: cover;
-  background-image: url('../../img/student.jpeg');
   background-repeat: no-repeat;
 }
 
@@ -153,6 +152,33 @@
   height: 40px;
   color: white;
   margin-top: -10px;
+}
+
+.error-message-container {
+  box-shadow: 0 0 0 1px #e0b4b4 inset, 0 0 0 0 transparent;
+  background: #f8f8f9;
+  background-color: #fff6f6;
+  color: #9f3a38;
+  text-align: center;
+  font-size: 1em;
+  position: relative;
+  min-height: 1em;
+  margin: 1em 0;
+  padding: 1em 1.5em;
+  line-height: 1.4285em;
+}
+
+.error-message-container .header {
+  color: #912d2b;
+  display: block;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  margin: -0.14285714em 0 0 0;
+}
+
+.error-message-container .content {
+  list-style-position: inside;
+  list-style-type: disc;
 }
 
 @media screen and (max-width: 600px) {

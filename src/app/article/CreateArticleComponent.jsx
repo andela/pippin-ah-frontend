@@ -11,6 +11,7 @@ class CreateArticleComponent extends React.Component {
     super(props);
     this.state = {
       body: '',
+      canScrollToTop: false,
     };
   }
 
@@ -19,10 +20,10 @@ class CreateArticleComponent extends React.Component {
   };
 
   uploadArticle = e => {
+    e.preventDefault();
     const { createArticle } = this.props;
     const { body } = this.state;
-
-    e.preventDefault();
+    this.setState({ canScrollToTop: true });
     const title = e.target.elements.title.value.trim();
     const description = e.target.elements.description.value.trim();
     const category = e.target.elements.category.value;
@@ -31,17 +32,12 @@ class CreateArticleComponent extends React.Component {
 
   render() {
     const { createStatus } = this.props;
-    switch (createStatus.status) {
-      case constants.CREATE_ERROR:
-        window.scrollTo(0, 0);
-        break;
-      case constants.CREATE_SUCCESS:
-        return <Redirect to={`/articles/${createStatus.data}`} />;
-      default:
-        break;
-    }
-    if (createStatus.status === constants.CREATE_ERROR) {
+    const { canScrollToTop } = this.state;
+    if (createStatus.status === constants.CREATE_ERROR && canScrollToTop) {
       window.scrollTo(0, 0);
+      this.setState({ canScrollToTop: false });
+    } else if (createStatus.status === constants.CREATE_SUCCESS) {
+      return <Redirect to={`/articles/${createStatus.data}`} />;
     }
     return (
       <Fragment>
@@ -54,7 +50,11 @@ class CreateArticleComponent extends React.Component {
           <div className="create-container">
             <div className="content-container">
               <div className="create-author-details">
-                <div className="author-photo" />
+                <img
+                  alt="user"
+                  src={require('../../img/student.jpeg')}
+                  className="author-photo"
+                />
                 <div className="create-author-name">
                   <div className="create-auth-name">Tom Henkins</div>
                 </div>
@@ -62,12 +62,12 @@ class CreateArticleComponent extends React.Component {
               <div className="create-form">
                 <form className="article-form" onSubmit={this.uploadArticle}>
                   {createStatus.status === constants.CREATE_ERROR && (
-                    <div className="ui error message">
+                    <div className="error-message-container">
                       <div className="content">
                         <div className="header">
                           There was some error creating your article
                         </div>
-                        <ul className="list">
+                        <ul className="error-list">
                           <li className="content">{createStatus.data}</li>
                         </ul>
                       </div>
