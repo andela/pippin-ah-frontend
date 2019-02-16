@@ -5,4 +5,4 @@ const setCreateStatus = createStatus => ({
   createStatus,
 });
 
-export default { setCreateStatus };
+export default setCreateStatus;

@@ -3,7 +3,7 @@ import types from './types';
 const INITIAL_STATE = {
   createStatus: {
     status: '',
-    message: '',
+    data: '',
   },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
