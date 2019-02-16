@@ -7,12 +7,12 @@ const mapStateToProps = ({ createArticle: { createStatus } }) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    signupUser: articleDetails => dispatch(doCreateArticle(articleDetails)),
+    createArticle: articleDetails => dispatch(doCreateArticle(articleDetails)),
   };
 };
-const ArticleContainer = connect(
+const CreateArticleContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(CreateArticleComponent);
 
-export default ArticleContainer;
+export default CreateArticleContainer;
