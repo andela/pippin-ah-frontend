@@ -88,8 +88,7 @@ export const LoginComponent = ({ loginUser, loginState }) => {
                 </button>
                 <div className="sign-up-alternative-div-signIn">
                   <p className="sign-up-alternative-text-signIn">
-                    {' '}
-                    Forgort Password?
+                    <a href="/resetpassword">Forgot Password?</a>
                   </p>
                 </div>
               </form>

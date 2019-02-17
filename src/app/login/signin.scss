@@ -204,8 +204,8 @@ form {
   text-align: right;
 }
 
-.sign-up-alternative-text-signIn:hover {
-  cursor: pointer;
+.sign-up-alternative-text-signIn a {
+  color: red;
 }
 
 .ring-loader {

@@ -9,6 +9,7 @@ import Navbar from './navBar/NavbarComponent';
 import { Subject } from './subject';
 import ProfileComponent from './profile';
 import { ResetPassword } from './resetPassword';
+import { NewPassword } from './newPassword';
 
 const App = () => (
   <Router>
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="/subject/:category" component={Subject} exact />
         <Route path="/articles" component={Article} exact />
         <Route path="/resetpassword" component={ResetPassword} exact />
+        <Route path="/newpassword" component={NewPassword} exact />
         <Route path="/create-article" component={CreateArticle} exact />
       </Switch>
       <Footer />
