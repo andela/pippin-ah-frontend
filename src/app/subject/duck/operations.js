@@ -7,7 +7,7 @@ const { setFetchArticleState, setFetchArticleError } = actions;
 const category = window.location.pathname.split('/')[2];
 const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
 
-const doFetch = email => dispatch => {
+const doFetch = () => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   dispatch(setFetchArticleError(''));
   return (
