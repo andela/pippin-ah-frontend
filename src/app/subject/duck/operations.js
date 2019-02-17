@@ -4,16 +4,17 @@ import actions from './actions';
 import constants from './constants';
 
 const { setFetchArticleState, setFetchArticleError } = actions;
-// eslint-disable-next-line max-len
-const url =
-  'https://learnground-api-staging.herokuapp.com/api/v1/users/resetpassword';
+const category = window.location.pathname.split('/')[2];
+const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
 
 const doFetch = email => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   dispatch(setFetchArticleError(''));
   return (
     axios
-      .post(url, { email })
+      .get(url, {
+        params: { category },
+      })
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
