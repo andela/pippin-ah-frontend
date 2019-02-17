@@ -70,7 +70,7 @@ describe('ARTICLE TEST SUITE', () => {
         ).toEqual(true);
       });
 
-      it('should call the change handler when editor is modified', () => {
+      it('should call editor change handler when editor is modified', () => {
         localStorage.setItem('token', 'token');
         const handleEditorChange = jest.fn();
         const component = mount(
