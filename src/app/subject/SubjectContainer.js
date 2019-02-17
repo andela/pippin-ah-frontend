@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { doFetch } from './duck';
-import { SubjectComponent } from './SubjectComponent';
+import SubjectComponent from './SubjectComponent';
 
 const mapStateToProps = ({
   fetchArticle: { fetchArticleState, errorMessage },
@@ -10,7 +10,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: category => dispatch(doFetch(category)),
+    fetchArticle: () => dispatch(doFetch()),
   };
 };
 const SubjectContainer = connect(
