@@ -10,4 +10,9 @@ const setFetchArticleError = errorMessage => ({
   errorMessage,
 });
 
-export default { setFetchArticleState, setFetchArticleError };
+const addArticleData = articleData => ({
+  type: types.ADD_ARTICLE_DATA,
+  articleData,
+});
+
+export default { setFetchArticleState, setFetchArticleError, addArticleData };
