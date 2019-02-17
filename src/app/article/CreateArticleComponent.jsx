@@ -31,6 +31,9 @@ class CreateArticleComponent extends React.Component {
   };
 
   render() {
+    if (!localStorage.getItem('token')) {
+      return <Redirect to="/login" />;
+    }
     const { createStatus } = this.props;
     const { canScrollToTop } = this.state;
     if (createStatus.status === constants.CREATE_ERROR && canScrollToTop) {
@@ -105,7 +108,11 @@ class CreateArticleComponent extends React.Component {
                     required
                   />
                   <div className="create-article-text">
-                    <Editor handleEditorChange={this.handleEditorChange} />
+                    <Editor
+                      handleEditorChange={content => {
+                        this.handleEditorChange(content);
+                      }}
+                    />
                   </div>
                   <div className="create-article-button">
                     <button
