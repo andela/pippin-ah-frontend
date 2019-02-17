@@ -1,9 +1,9 @@
 import axios from 'axios';
-import setCreateStatus from './actions';
+import actions from './actions';
 import constants from './constants';
 
 const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
-
+const { setCreateStatus } = actions;
 const doCreateArticle = articleDetails => dispatch => {
   dispatch(setCreateStatus({ status: constants.CREATING }));
   const headers = {
@@ -28,7 +28,5 @@ const doCreateArticle = articleDetails => dispatch => {
       );
     });
 };
-
-// const fetchAuthor
 
 export default doCreateArticle;
