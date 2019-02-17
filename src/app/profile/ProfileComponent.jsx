@@ -1,8 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import dotenv from 'dotenv';
 import '../../style/profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
 import upload from '../util/cloud';
+
+dotenv.config();
 
 class ProfileComponent extends React.Component {
   state = {
@@ -33,9 +36,9 @@ class ProfileComponent extends React.Component {
       const imageData = new FormData();
       imageData.append('file', imageUrl);
       imageData.append('tags', 'profileImage');
-      imageData.append('upload_preset', 'u5wlpktm');
-      imageData.append('api_key', '957426565997323');
-      imageData.append('cloud_name', 'hba821');
+      imageData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
+      imageData.append('api_key', process.env.CLOUDINARY_API_KEY);
+      imageData.append('cloud_name', process.env.CLOUDINARY_CLOUD_NAME);
       imageData.append('timestamp', Date.now() / 1000);
       upload(imageData);
     }

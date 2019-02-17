@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` Component should render the NavBar 1`] = `
+exports[` PROFILE TEST SUITE  Profile Component should render Profile container component 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb component 1`] = `
 <div>
   <div
     className="container"
@@ -29,8 +35,8 @@ exports[` Component should render the NavBar 1`] = `
           <img
             alt="profilepicture"
             className="activator"
-            src={Object {}}
           />
+           
         </div>
         <div
           className="card-content"
@@ -38,7 +44,7 @@ exports[` Component should render the NavBar 1`] = `
           <span
             className="card-title activator grey-text text-darken-4"
           >
-            SARAH GOBLIN
+             
             <i
               className="material-icons right"
             >
@@ -75,32 +81,30 @@ exports[` Component should render the NavBar 1`] = `
         <div
           className="card-content"
         >
-          Interest :  Mathematics 
+          Articles :     
+           
+          3
+           
           <br />
           <br />
            
           <br />
-          Articles :  25 
+          Following :  
+           
+           
           <br />
           <br />
            
           <br />
-          Following :  100 
-          <br />
-          <br />
+          Followers :  
            
-          <br />
-          Followers :  25 
+           
           <br />
           <br />
            
           <br />
           Mentor       
-          <i
-            className="material-icons prefix"
-          >
-            check_box
-          </i>
+           
           <br />
           <br />
           <br />
@@ -124,9 +128,7 @@ exports[` Component should render the NavBar 1`] = `
           <br />
           <span
             id="bio"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing el ea commodo consequat. Duis aute irure dolor in reprehLorem ipsum dolor sit amet, consectetur adipiscing el ea commodo consequat. Duis aute irure dolor in repreh
-          </span>
+          />
         </div>
         <a
           className="btn modal-trigger btncolor"
@@ -164,7 +166,7 @@ exports[` Component should render the NavBar 1`] = `
                     className="card-tabs"
                   >
                     <form
-                      action="#"
+                      onSubmit={[Function]}
                     >
                       <div
                         className="file-field input-field"
@@ -174,20 +176,31 @@ exports[` Component should render the NavBar 1`] = `
                           id="centralize"
                         >
                           <span>
-                            Edit Photo
+                            Change Photo
                           </span>
                           <input
-                            multiple={true}
+                            id="img"
+                            name="profilepix"
+                            onChange={[Function]}
                             type="file"
                           />
+                          <br />
                         </div>
                       </div>
+                      <button
+                        className="btn btncolor"
+                        id="centralize"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
                     </form>
                   </div>
                 </div>
               </div>
               <form
                 className="col s12 m6 l6"
+                onSubmit={[Function]}
               >
                 <div
                   className="row"
@@ -203,6 +216,7 @@ exports[` Component should render the NavBar 1`] = `
                     <input
                       className="validate"
                       id="icon_prefix"
+                      name="firstName"
                       type="text"
                     />
                     <label
@@ -222,7 +236,8 @@ exports[` Component should render the NavBar 1`] = `
                     <input
                       className="validate"
                       id="icon_telephone"
-                      type="tel"
+                      name="lastName"
+                      type="text"
                     />
                     <label
                       htmlFor="icon_telephone"
@@ -241,7 +256,8 @@ exports[` Component should render the NavBar 1`] = `
                     <input
                       className="validate"
                       id="icon_telephone"
-                      type="tel"
+                      name="interest"
+                      type="text"
                     />
                     <label
                       htmlFor="icon_telephone"
@@ -260,6 +276,7 @@ exports[` Component should render the NavBar 1`] = `
                     <textarea
                       className="materialize-textarea"
                       id="textarea1"
+                      name="bio"
                     />
                     <label
                       htmlFor="textarea1"
@@ -333,37 +350,7 @@ exports[` Component should render the NavBar 1`] = `
           <p>
             <a
               href="#!"
-            >
-              The Importance of Educating The girl Child Adults
-            </a>
-          </p>
-          <p>
-            <a
-              href="#!"
-            >
-              Apples And its many many Benefits
-            </a>
-          </p>
-          <p>
-            <a
-              href="#!"
-            >
-              The story of a young black girl
-            </a>
-          </p>
-          <p>
-            <a
-              href="#!"
-            >
-              This is Africa And we are not afriad
-            </a>
-          </p>
-          <p>
-            <a
-              href="#!"
-            >
-              The courage that makes Lion the king of the jungle
-            </a>
+            />
           </p>
         </div>
       </div>
