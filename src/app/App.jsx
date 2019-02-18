@@ -20,7 +20,7 @@ const App = () => (
         <Route path="/profile" component={ProfileComponent} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/articles" component={Article} exact />
-        <Route path="/subject" component={ListArticle} exact />
+        <Route path="/articles/:category" component={ListArticle} exact />
         <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/newpassword" component={NewPassword} exact />
         <Route path="/create-article" component={CreateArticle} exact />
