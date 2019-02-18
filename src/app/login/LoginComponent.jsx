@@ -3,14 +3,19 @@ import { Redirect, Link } from 'react-router-dom';
 import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import { facebook, twitter, googleplus } from '../../img';
+import { googleUrl } from './duck/operations';
 import './signin.scss';
 
-export const LoginComponent = ({ loginUser, loginState }) => {
+export const LoginComponent = ({ loginUser, loginState, googleLogin }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
     const password = e.target.elements.password.value.trim();
     loginUser(usernameOrEmail, password);
+  };
+  const loginGoogle = e => {
+    e.preventDefault();
+    googleLogin();
   };
   if (loginState === constants.LOGIN_SUCCESS) {
     return <Redirect to="/" />;
