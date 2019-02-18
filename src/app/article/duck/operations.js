@@ -4,7 +4,6 @@ import actions from './actions';
 import constants from './constants';
 
 const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
-const category = window.location.pathname.split('/')[2];
 const {
   setCreateStatus,
   setFetchArticleState,
@@ -40,9 +39,7 @@ const doFetchArticle = () => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   dispatch(setFetchArticleError(''));
   return axios
-    .get(url, {
-      params: { category },
-    })
+    .get(url)
     .then(({ data }) => {
       dispatch(addArticleData(data));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
