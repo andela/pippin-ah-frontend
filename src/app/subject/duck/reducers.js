@@ -2,6 +2,7 @@ import types from './types';
 
 const INITIAL_STATE = {
   fetchArticleState: '',
+  articleData: '',
   errorMessage: '',
 };
 const fetchArticleReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,13 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         errorMessage,
+      };
+    }
+    case types.ADD_ARTICLE_DATA: {
+      const { articleData } = action;
+      return {
+        ...state,
+        articleData,
       };
     }
     default:
