@@ -12,6 +12,7 @@ const {
 } = actions;
 
 const category = window.location.pathname.split('/')[2];
+const titleCasedCategory = category.replace(/^[a-z]/, x => x.toUpperCase());
 
 const doCreateArticle = articleDetails => dispatch => {
   dispatch(setCreateStatus({ status: constants.CREATING }));
@@ -45,7 +46,7 @@ const doFetchArticle = () => dispatch => {
     .get(url)
     .then(({ data }) => {
       const articleByCategory = data.articles.filter(
-        article => article.category === category,
+        article => article.category === titleCasedCategory,
       );
       console.log('+++++', articleByCategory);
 
