@@ -8,6 +8,16 @@ exports[`It should render the EllipsisLoader should render the EllipsisLoaderCom
 />
 `;
 
+exports[`It should render the PreloaderComponent should render the PreloaderComponent 1`] = `
+<div
+  className="progress"
+>
+  <div
+    className="indeterminate"
+  />
+</div>
+`;
+
 exports[`It should render the RingLoader should render the RingLoaderComponent 1`] = `
 <div
   className="lds-ring"
