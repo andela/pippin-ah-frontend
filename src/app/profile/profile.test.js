@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { shallow, mount } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { promises } from 'fs';
 import ProfileComponent from './ProfileComponent';
 import {
@@ -16,14 +18,15 @@ import RingLoaderComponent from '../loaders';
 import ProfileContainer from './ProfileContainer';
 import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
 
-const mockStore = configureMockStore();
-
 jest.mock('axios');
 global.FileReader = () => ({
   readAsDataURL: () => {},
 });
 
 const { viewUserProfile, setUserProfile } = actions;
+
+const mockStore = configureStore([thunk]);
+const store = mockStore();
 
 describe(' PROFILE TEST SUITE', () => {
   describe(' Profile Component', () => {
@@ -56,6 +59,12 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should ensures mapDispatchToProps dispatches the specified actions', () => {
+      // const wrapper = mount(
+      //   <Provider store={store}>
+      //     <ProfileContainer />
+      //   </Provider>,
+      // );
+      // const component = shallow(<ProfileContainer />);
       const dispatch = jest.fn();
       expect(mapDispatchToProps(dispatch).viewProfile).toBeTruthy();
       expect(mapDispatchToProps(dispatch).updateUserProfile).toBeTruthy();
@@ -109,10 +118,21 @@ describe(' PROFILE TEST SUITE', () => {
         target: {
           elements: {
             name: 'profilepix',
-            files: [{ data: 'image', type: 'image/jpg' }],
           },
+          files: [{ data: 'image', type: 'image/jpg' }],
+          result: 'image',
         },
       };
+      const readAsDataURL = jest.fn();
+      const addEventListener = jest.fn((_, evtHandler) => {
+        evtHandler();
+      });
+      const dummyReader = {
+        addEventListener,
+        readAsDataURL,
+        result: event.target.result,
+      };
+      window.FileReader = jest.fn(() => dummyReader);
       const props = {
         viewData: {
           articles: {
@@ -130,10 +150,6 @@ describe(' PROFILE TEST SUITE', () => {
         updateUserProfile: jest.fn(),
       };
 
-      global.FileReader = () => ({
-        readAsDataURL: () => {},
-      });
-
       const wrapper = shallow(<ProfileComponent {...props} />);
 
       const instance = wrapper.instance();
@@ -143,7 +159,7 @@ describe(' PROFILE TEST SUITE', () => {
 
   describe(' select profile picture to upload', () => {
     beforeEach(() => {
-      const response = {};
+      const response = '';
       axios.post.mockResolvedValue(response);
     });
     it('should handle form submit for picture', () => {

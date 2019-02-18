@@ -45,9 +45,9 @@ class ProfileComponent extends React.Component {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
 
-      reader.onload = e => {
-        this.setState({ imageSelected: e.target.result });
-      };
+      reader.addEventListener('load', () => {
+        this.setState({ imageSelected: reader.result });
+      });
 
       const imagefilepath = event.target.files[0];
       this.setState({
