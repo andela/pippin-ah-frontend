@@ -1,9 +1,16 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import actions from './actions';
 import constants from './constants';
 
 const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
-const { setCreateStatus } = actions;
+const category = window.location.pathname.split('/')[2];
+const {
+  setCreateStatus,
+  setFetchArticleState,
+  setFetchArticleError,
+  addArticleData,
+} = actions;
 const doCreateArticle = articleDetails => dispatch => {
   dispatch(setCreateStatus({ status: constants.CREATING }));
   const headers = {
@@ -29,4 +36,24 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-export default doCreateArticle;
+const doFetchArticle = () => dispatch => {
+  dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  dispatch(setFetchArticleError(''));
+  return axios
+    .get(url, {
+      params: { category },
+    })
+    .then(({ data }) => {
+      dispatch(addArticleData(data));
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
+    })
+    .catch(({ response }) => {
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
+      dispatch(setFetchArticleError(response.data.error));
+      toast.error(response.data.error, {
+        hideProgressBar: true,
+      });
+    });
+};
+
+export { doCreateArticle, doFetchArticle };
