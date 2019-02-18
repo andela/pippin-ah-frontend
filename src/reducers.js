@@ -3,16 +3,15 @@ import { signupReducer } from './app/signup';
 import { loginReducer } from './app/login';
 import { resetPasswordReducer } from './app/resetPassword';
 import { newPasswordReducer } from './app/newPassword';
-import { fetchArticleReducer } from './app/subject';
-import { createArticleReducer } from './app/article';
+import { createArticleReducer, fetchArticleReducer } from './app/article';
 
 const rootReducer = combineReducers({
   signup: signupReducer,
   login: loginReducer,
   resetPassword: resetPasswordReducer,
   updatePassword: newPasswordReducer,
-  fetchArticle: fetchArticleReducer,
   createArticle: createArticleReducer,
+  fetchArticle: fetchArticleReducer,
 });
 
 export default rootReducer;
