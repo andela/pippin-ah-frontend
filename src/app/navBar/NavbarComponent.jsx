@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './navBar.scss';
 
 const NavbarComponent = () => {
+  const isSignedIn = !!localStorage.getItem('token');
   return (
     <nav className="navbarbg">
       <div>
@@ -38,12 +39,28 @@ const NavbarComponent = () => {
           <div className="hide-on-med-and-down show">
             <ul>
               <li>
-                <Link to="/login">SignIn</Link>
+                {isSignedIn && (
+                  <Link to="/profile">
+                    <i className="material-icons">account_circle</i>
+                  </Link>
+                )}
               </li>
-              <li>|</li>
               <li>
-                <Link to="/signup">SignUp</Link>
+                {isSignedIn ? (
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      localStorage.removeItem('token');
+                    }}
+                  >
+                    Logout
+                  </Link>
+                ) : (
+                  <Link to="/login">SignIn</Link>
+                )}
               </li>
+              {!isSignedIn && <li>|</li>}
+              <li>{!isSignedIn && <Link to="/signup">SignUp</Link>}</li>
             </ul>
           </div>
         </div>

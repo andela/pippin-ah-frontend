@@ -3,7 +3,7 @@ import './article.scss';
 
 const ArticleComponent = () => {
   return (
-    <div className="cover">
+    <div className="main-cover">
       <div className="left-sidebar-cover">
         <div className="left-sidebar">
           <div className="side-bookmark" />
@@ -121,8 +121,6 @@ const ArticleComponent = () => {
             <p>Understanding Politics</p>
             <p>In the Mystery of Life</p>
             <p>Communication Made Easy</p>
-            <p>In the Days of Mr X</p>
-            <p>Knowing your True Value</p>
           </div>
         </div>
       </div>
@@ -136,8 +134,6 @@ const ArticleComponent = () => {
             <p>Understanding Politics</p>
             <p>In the Mystery of Life</p>
             <p>Communication Made Easy</p>
-            <p>In the Days of Mr X</p>
-            <p>Knowing your True Value</p>
           </div>
         </div>
       </div>

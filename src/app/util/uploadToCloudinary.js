@@ -1,28 +1,44 @@
+import axios from 'axios';
 import dotenv from 'dotenv';
-import cloudinary from 'cloudinary-core';
 
 dotenv.config();
-console.log('*****', process.env.CLOUDINARY_CLOUD_NAME);
 
-const uploadToCloudinary = imageFilePath => {
-  cloudinary.config({
-    cloud_name: 'learnground',
-    api_key: '164924858245978',
-    api_secret: 'RBwhdIbjYY_4unXZItlvT6k1cWc',
-  });
+const { CLOUDINARY_URL, API_URL } = process.env;
 
-  let response = '';
-  cloudinary.v2.uploader
-    .upload(imageFilePath, (error, result) => {
-      if (error) response = error;
-      response = result.url;
+export const saveImage = (page, imageUrl) => {
+  const token = localStorage.getItem('token');
+  const defaultOptions = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  return axios
+    .patch(
+      `${API_URL}${page}`,
+      {
+        imageUrl,
+      },
+      defaultOptions,
+    )
+    .then(({ data }) => {
+      return data;
     })
-    .catch(error => error);
-
-  return response;
+    .catch(({ response }) => {
+      return response;
+    });
 };
 
-export default uploadToCloudinary;
-
-/* This should be called inside an async function */
-/* const response = await uploadToCloudinary(coverImageUrl); */
+const uploadImage = (page, imageData) => {
+  axios
+    .post(CLOUDINARY_URL, imageData, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    })
+    .then(response => {
+      const {
+        data: { secure_url: fileUrl },
+      } = response;
+      saveImage(page, fileUrl);
+    })
+    .catch(err => err);
+};
+export default uploadImage;

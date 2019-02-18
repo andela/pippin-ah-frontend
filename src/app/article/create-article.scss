@@ -1,0 +1,154 @@
+.create-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #f8f8fa;
+}
+
+.create-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.content-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.create-author-details {
+  margin-right: auto;
+  display: flex;
+  margin-top: 30px;
+}
+
+.create-author-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-auth-name {
+  margin-top: auto;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  font-size: 14px;
+  text-align: center;
+  color: #000;
+}
+
+.author-photo {
+  width: 70px;
+  height: 70px;
+  align-self: center;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-size: cover;
+  background-image: url('../../img/student.jpeg');
+  background-repeat: no-repeat;
+}
+
+.create-form {
+  margin-right: auto;
+  width: 100%;
+}
+
+.article-form {
+  width: 100%;
+  margin-top: 30px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.article-form input::-webkit-input-placeholder {
+  font-family: Rosario;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.article-form textarea {
+  background: #fff;
+}
+
+.article-form textarea::-webkit-input-placeholder {
+  font-family: Rosario;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.article-form input[type='text'] {
+  background: #fff;
+  border: none;
+  text-align: center;
+}
+
+.article-form .create-article-text {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.article-form select {
+  margin-bottom: 8px;
+  text-align-last: center;
+}
+
+.article-form select:invalid {
+  font-family: Rosario;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.article-form .create-article-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.create-article-button button {
+  margin-right: auto;
+  margin-left: 0;
+  width: 80px;
+  height: 40px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .create-container {
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}

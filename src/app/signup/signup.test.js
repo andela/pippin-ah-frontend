@@ -8,7 +8,7 @@ import axios from 'axios';
 import SignupContainer from './SignupContainer';
 import SignupComponent from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
-import RingLoaderComponent from '../loaders';
+import { RingLoaderComponent } from '../loaders';
 
 jest.mock('axios');
 
@@ -35,6 +35,12 @@ describe('SIGNUP TEST SUITE', () => {
       expect(usernameField.name).toBe('username');
       const passwordField = component.find('input[name="password"]').props();
       expect(passwordField.name).toBe('password');
+      component.find('input[name="rePassword"]').simulate('change', {
+        target: {
+          value: 'newPassword',
+          setCustomValidity: () => {},
+        },
+      });
       const rePassword = component.find('input[name="rePassword"]').props();
       expect(rePassword.name).toBe('rePassword');
     });
