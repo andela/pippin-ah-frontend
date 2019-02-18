@@ -14,10 +14,13 @@ import {
 import RingLoaderComponent from '../loaders';
 import ProfileContainer from './ProfileContainer';
 import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
-// const token = JSON.parse(localStorage.token).value;
+
 const mockStore = configureMockStore();
 
 jest.mock('axios');
+global.FileReader = () => ({
+  readAsDataURL: () => {},
+});
 
 const { viewUserProfile, setUserProfile } = actions;
 
@@ -125,9 +128,57 @@ describe(' PROFILE TEST SUITE', () => {
         viewProfile: jest.fn(),
         updateUserProfile: jest.fn(),
       };
+
+      global.FileReader = () => ({
+        readAsDataURL: () => {},
+      });
+
       const wrapper = shallow(<ProfileComponent {...props} />);
+
       const instance = wrapper.instance();
       instance.displayImage(event);
+
+      // const reader = new FileReader();
+      // reader.onload = e =>{
+      //   wrapper.setState({
+      //     imageSelected: event
+
+      //   });
+      // }
+      // expect(wrapper.state().imageSelected).toBe(event);
+    });
+
+    it('should handle form submit for picture', () => {
+      const props = {
+        viewData: {
+          articles: {
+            total: 3,
+            top: ['mockData'],
+          },
+        },
+        profileData: {
+          firstName: 'Habib',
+          lastName: 'moses',
+          bio: 'Software developer at andela',
+          interest: 'Arts',
+        },
+        viewProfile: jest.fn(),
+        updateUserProfile: jest.fn(),
+      };
+      const wrapper = shallow(<ProfileComponent {...props} />);
+      const event = {
+        preventDefault: jest.fn(),
+
+        target: {
+          elements: {
+            name: 'profilepix',
+            files: [{ data: 'image', type: 'image/jpg' }],
+          },
+        },
+      };
+      const instance = wrapper.instance();
+      instance.uploadPicture(event);
+      const pictureForm = wrapper.find('form').at(2);
     });
   });
 });
@@ -135,7 +186,14 @@ describe(' PROFILE TEST SUITE', () => {
 describe('Profile Reducers', () => {
   it('should setup default state values', () => {
     const state = profileReducer(undefined, {
-      type: '@@INIT',
+      type: 'SET_USER_PROFILE',
+    });
+    expect(state).toEqual({});
+  });
+
+  it('should setup default state values', () => {
+    const state = profileReducer(undefined, {
+      type: 'VIEW_USER_PROFILE',
     });
     expect(state).toEqual({});
   });

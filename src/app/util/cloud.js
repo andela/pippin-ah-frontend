@@ -31,7 +31,7 @@ export const saveImage = pictureurl => {
 };
 
 const uploadImage = imageData => {
-  return axios
+  axios
     .post(CLOUDINARY_URL, imageData, {
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
     })

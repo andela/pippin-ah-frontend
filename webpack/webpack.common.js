@@ -1,7 +1,11 @@
 const path = require('path');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -42,6 +46,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.EnvironmentPlugin(['CLOUDINARY_URL', 'API_URL']),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
