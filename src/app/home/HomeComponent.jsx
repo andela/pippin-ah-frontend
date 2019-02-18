@@ -2,6 +2,11 @@ import React, { Fragment } from 'react';
 import './home.scss';
 
 const HomeComponent = () => {
+  if (window.location.search) {
+    const token = window.location.search.substr(7);
+    localStorage.setItem('token', token);
+  }
+
   return (
     <Fragment>
       <div id="landingPage">

@@ -2,14 +2,19 @@ import React, { Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { RingLoaderComponent } from '../loaders';
 import { constants } from './duck';
+import { googleUrl } from './duck/operations';
 import './signin.scss';
 
-export const LoginComponent = ({ loginUser, loginState }) => {
+export const LoginComponent = ({ loginUser, loginState, googleLogin }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
     const password = e.target.elements.password.value.trim();
     loginUser(usernameOrEmail, password);
+  };
+  const loginGoogle = e => {
+    e.preventDefault();
+    googleLogin();
   };
   if (loginState === constants.LOGIN_SUCCESS) {
     return <Redirect to="/" />;
@@ -47,16 +52,20 @@ export const LoginComponent = ({ loginUser, loginState }) => {
                     </span>
                   </div>
                 </div>
-                <div className="btn-googlee">
-                  <div className="google-icon-div-signIn">
-                    <i className="fab fa-google" />
+                <a href={googleUrl}>
+                  <div className="btn-googlee">
+                    <div className="google-icon-div-signIn">
+                      <i className="fab fa-google" />
+                    </div>
+                    <a href={googleUrl}>
+                      <div className="google-text-wrapper-signIn">
+                        <span className="social-text-signIn">
+                          Sign in with Google
+                        </span>
+                      </div>
+                    </a>
                   </div>
-                  <div className="google-text-wrapper-signIn">
-                    <span className="social-text-signIn">
-                      Sign in with Google
-                    </span>
-                  </div>
-                </div>
+                </a>
               </div>
               <form className="login" onSubmit={onFormSubmit}>
                 <div className="input-groups-signIn">
