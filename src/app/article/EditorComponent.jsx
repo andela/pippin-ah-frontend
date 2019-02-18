@@ -1,18 +1,20 @@
 import React from 'react';
-import TinyMCE from 'react-tinymce';
+import { Editor } from '@tinymce/tinymce-react';
 
-const Editor = () => {
+const EditorComponent = ({ handleEditorChange }) => {
   return (
-    <TinyMCE
-      placeholder="<p>This is the initial content of the editor</p>"
-      config={{
+    <Editor
+      init={{
         plugins: 'autolink link image lists print preview',
         toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
         width: '100%',
-        height: '30%',
+        height: '40%',
+      }}
+      onEditorChange={content => {
+        handleEditorChange(content);
       }}
     />
   );
 };
 
-export default Editor;
+export default EditorComponent;
