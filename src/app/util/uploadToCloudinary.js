@@ -1,9 +1,7 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-const { CLOUDINARY_URL, API_URL } = process.env;
+const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
+const API_URL = process.env.API_URL;
 
 export const saveImage = (page, imageUrl) => {
   const token = localStorage.getItem('token');
@@ -34,10 +32,10 @@ const uploadImage = (page, imageData) => {
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
     })
     .then(response => {
-      const {
-        data: { secure_url: fileUrl },
-      } = response;
-      saveImage(page, fileUrl);
+      const data = response.data;
+      const fileURL = data.secure_url;
+
+      saveImage(page, fileURL);
     })
     .catch(err => err);
 };
