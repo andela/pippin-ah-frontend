@@ -10,6 +10,9 @@ const {
   setFetchArticleError,
   addArticleData,
 } = actions;
+
+const category = window.location.pathname.split('/')[2];
+
 const doCreateArticle = articleDetails => dispatch => {
   dispatch(setCreateStatus({ status: constants.CREATING }));
   const headers = {
@@ -41,7 +44,12 @@ const doFetchArticle = () => dispatch => {
   return axios
     .get(url)
     .then(({ data }) => {
-      dispatch(addArticleData(data));
+      const articleByCategory = data.articles.filter(
+        article => article.category === category,
+      );
+      console.log('+++++', articleByCategory);
+
+      dispatch(addArticleData(articleByCategory));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
     .catch(({ response }) => {
