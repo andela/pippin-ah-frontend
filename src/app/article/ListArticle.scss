@@ -4,5 +4,8 @@
 
 .card-image img {
   cursor: pointer;
-  height: 13em;
+  height: 14em;
+  width: auto !important;
+  display: block;
+  margin: 0 auto;
 }
