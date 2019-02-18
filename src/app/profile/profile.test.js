@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { shallow, mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import { promises } from 'fs';
@@ -137,17 +138,14 @@ describe(' PROFILE TEST SUITE', () => {
 
       const instance = wrapper.instance();
       instance.displayImage(event);
-
-      // const reader = new FileReader();
-      // reader.onload = e =>{
-      //   wrapper.setState({
-      //     imageSelected: event
-
-      //   });
-      // }
-      // expect(wrapper.state().imageSelected).toBe(event);
     });
+  });
 
+  describe(' select profile picture to upload', () => {
+    beforeEach(() => {
+      const response = {};
+      axios.post.mockResolvedValue(response);
+    });
     it('should handle form submit for picture', () => {
       const props = {
         viewData: {
@@ -181,20 +179,20 @@ describe(' PROFILE TEST SUITE', () => {
       const pictureForm = wrapper.find('form').at(2);
     });
   });
-});
 
-describe('Profile Reducers', () => {
-  it('should setup default state values', () => {
-    const state = profileReducer(undefined, {
-      type: 'SET_USER_PROFILE',
+  describe('Profile Reducers', () => {
+    it('should setup default state values', () => {
+      const state = profileReducer(undefined, {
+        type: 'SET_USER_PROFILE',
+      });
+      expect(state).toEqual({});
     });
-    expect(state).toEqual({});
-  });
 
-  it('should setup default state values', () => {
-    const state = profileReducer(undefined, {
-      type: 'VIEW_USER_PROFILE',
+    it('should setup default state values', () => {
+      const state = profileReducer(undefined, {
+        type: 'VIEW_USER_PROFILE',
+      });
+      expect(state).toEqual({});
     });
-    expect(state).toEqual({});
   });
 });
