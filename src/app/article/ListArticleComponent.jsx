@@ -19,14 +19,14 @@ const ListArticleComponent = ({ fetchArticleState, articleData }) => {
         </div>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
-            articleData.articles.map(article => (
+            articleData.map(article => (
               <div className="col s12 m6 l4" key={article.slug}>
                 <div className="card">
                   <div className="card-image">
                     <img
                       className="activator"
                       alt="Cover"
-                      src="https://i.pinimg.com/564x/b2/69/9d/b2699de28deffa0883978ffecfd977a1.jpg?b=t"
+                      src="http://www.catbreedslist.com/cat-wallpapers/Kitten-cute-lying-claws-900x506.jpg"
                     />
                   </div>
                   <div className="card-content right-align">
