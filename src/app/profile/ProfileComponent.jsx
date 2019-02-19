@@ -116,7 +116,7 @@ class ProfileComponent extends React.Component {
                 {viewData ? viewData.followers : <h6>loading...</h6>} <br />
                 <br /> <br />
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {viewData.isMentor === false ? 'True' : 'False'}
+                {viewData ? viewData.isMentor : <h6>loading...</h6>}
                 {/* <i className="material-icons prefix">check_box</i> */}
                 <br />
                 <br />
@@ -223,16 +223,24 @@ class ProfileComponent extends React.Component {
                           <label htmlFor="icon_telephone">Last Name</label>
                         </div>
                         <div className="input-field col s12">
+                          <select
+                            name="category"
+                            defaultValue=""
+                            className="browser-default"
+                            required
+                          >
+                            <option value="" disabled>
+                              Select Category
+                            </option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Science">Science</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Technology">Technology</option>
+                          </select>
                           <i className="material-icons prefix color-ions">
                             favorite
                           </i>
-                          <input
-                            id="icon_telephone"
-                            type="text"
-                            className="validate"
-                            name="interest"
-                          />
-                          <label htmlFor="icon_telephone">Interest</label>
                         </div>
                         <div className="input-field col s12">
                           <i className="material-icons prefix color-ions">
