@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { RingLoaderComponent } from '../loaders';
 import { constants } from './duck';
-import { googleUrl } from './duck/operations';
+import { googleUrl, twitterUrl, facebookUrl } from './duck/operations';
 import './signin.scss';
 
 export const LoginComponent = ({ loginUser, loginState, googleLogin }) => {
@@ -32,26 +32,30 @@ export const LoginComponent = ({ loginUser, loginState, googleLogin }) => {
             </div>
             <div className="signIn-wrapper">
               <div className="social-media-icons-signIn">
-                <div className="btn-facebookk">
-                  <div className="facebook-icon-div-signIn">
-                    <i className="fab fa-facebook-f" />
+                <a href={facebookUrl}>
+                  <div className="btn-facebookk">
+                    <div className="facebook-icon-div-signIn">
+                      <i className="fab fa-facebook-f" />
+                    </div>
+                    <div className="fb-text-wrapper-signIn">
+                      <span className="social-text-signIn">
+                        Sign in with Facebook
+                      </span>
+                    </div>
                   </div>
-                  <div className="fb-text-wrapper-signIn">
-                    <span className="social-text-signIn">
-                      Sign in with Facebook
-                    </span>
+                </a>
+                <a href={twitterUrl}>
+                  <div className="btn-twitterr">
+                    <div className="twitter-icon-div-signIn">
+                      <i className="fab fa-twitter" />
+                    </div>
+                    <div className="twitter-text-wrapper-signIn">
+                      <span className="social-text-signIn">
+                        Sign in with Twitter
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="btn-twitterr">
-                  <div className="twitter-icon-div-signIn">
-                    <i className="fab fa-twitter" />
-                  </div>
-                  <div className="twitter-text-wrapper-signIn">
-                    <span className="social-text-signIn">
-                      Sign in with Twitter
-                    </span>
-                  </div>
-                </div>
+                </a>
                 <a href={googleUrl}>
                   <div className="btn-googlee">
                     <div className="google-icon-div-signIn">
