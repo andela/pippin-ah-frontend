@@ -36,18 +36,19 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         errorMessage,
       };
     }
-    case types.SET_ARTICLE_CATEGORY: {
-      const { articleCategory } = action;
-      return {
-        ...state,
-        articleCategory,
-      };
-    }
+    // case types.SET_ARTICLE_CATEGORY: {
+    //   const { articleCategory } = action;
+    //   return {
+    //     ...state,
+    //     [articleCategory]: {}
+    //   };
+    // }
     case types.ADD_ARTICLE_DATA: {
-      const { articleData } = action;
+      const { articleData, articleCategory } = action;
+      console.log(articleData, articleCategory);
       return {
         ...state,
-        articleData,
+        [articleCategory]: articleData,
       };
     }
     default:

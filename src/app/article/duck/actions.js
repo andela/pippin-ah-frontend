@@ -15,20 +15,21 @@ const setFetchArticleError = errorMessage => ({
   errorMessage,
 });
 
-const setArticleCategory = articleCategory => ({
-  type: types.SET_ARTICLE_CATEGORY,
-  articleCategory,
-});
+// const setArticleCategory = articleCategory => ({
+//   type: types.SET_ARTICLE_CATEGORY,
+//   articleCategory,
+// });
 
-const addArticleData = articleData => ({
+const addArticleData = (articleData, articleCategory) => ({
   type: types.ADD_ARTICLE_DATA,
   articleData,
+  articleCategory,
 });
 
 export default {
   setFetchArticleState,
   setFetchArticleError,
-  setArticleCategory,
+  // setArticleCategory,
   addArticleData,
   setCreateStatus,
 };
