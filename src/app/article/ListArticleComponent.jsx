@@ -4,13 +4,26 @@ import lifecycle from 'react-pure-lifecycle';
 import { constants } from './duck';
 import './ListArticle.scss';
 
+const category = window.location.pathname.split('/')[2];
+const titleCasedCategory = category.replace(/^[a-z]/, x => x.toUpperCase());
+
 const methods = {
   componentDidMount({ fetchArticle }) {
     fetchArticle();
   },
+  shouldComponentUpdate({ fetchArticle, articleCategory }) {
+    console.log('~~~~~~~', articleCategory);
+    console.log('+++~~~~~~~', category);
+  },
 };
 
-const ListArticleComponent = ({ fetchArticleState, articleData }) => {
+const ListArticleComponent = ({
+  fetchArticleState,
+  articleData,
+  articleCategory,
+}) => {
+  console.log('!!!!!', articleCategory);
+
   return (
     <Fragment>
       <div className="container">

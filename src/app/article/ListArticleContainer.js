@@ -3,9 +3,14 @@ import { doFetchArticle } from './duck';
 import ListArticleComponent from './ListArticleComponent';
 
 const mapStateToProps = ({
-  fetchArticle: { fetchArticleState, articleData, errorMessage },
+  fetchArticle: {
+    fetchArticleState,
+    articleCategory,
+    articleData,
+    errorMessage,
+  },
 }) => {
-  return { fetchArticleState, articleData, errorMessage };
+  return { fetchArticleState, articleCategory, articleData, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => {
