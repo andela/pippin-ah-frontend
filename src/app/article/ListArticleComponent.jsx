@@ -2,24 +2,31 @@
 import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
 import { constants } from './duck';
-import getArticleCategory from './util/getArticleCategory';
 import './ListArticle.scss';
 
-const category = getArticleCategory();
+const category = window.location.pathname.split('/')[2];
+const titleCasedCategory = category.replace(/^[a-z]/, x => x.toUpperCase());
 
 const methods = {
-  componentDidMount({ fetchArticle }) {
-    fetchArticle(category);
+  componentDidMount({ fetchArticle, location }) {
+    fetchArticle(titleCasedCategory);
   },
-  componentDidUpdate({ articleCategory, fetchArticle }) {
-    const newCategory = getArticleCategory();
-    if (articleCategory !== newCategory) {
-      fetchArticle(newCategory);
+  componentDidUpdate({ articleCategory, location, fetchArticle }) {
+    const guy = location.pathname.split('/')[2];
+    const titleCasedGuy = guy.replace(/^[a-z]/, x => x.toUpperCase());
+    console.log('+++~~~~~~~', articleCategory);
+    console.log('-------', titleCasedGuy);
+    if (articleCategory !== titleCasedGuy) {
+      fetchArticle(titleCasedGuy);
     }
   },
 };
 
-const ListArticleComponent = ({ fetchArticleState, articleD, Science }) => {
+const ListArticleComponent = ({
+  fetchArticleState,
+  articleData,
+  articleCategory,
+}) => {
   return (
     <Fragment>
       <div className="container">
