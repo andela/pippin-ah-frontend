@@ -370,7 +370,9 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         <div
           id="topArticles"
         >
-          <p>
+          <p
+            key="mockData"
+          >
             <a
               href="#!"
             />

@@ -290,7 +290,7 @@ class ProfileComponent extends React.Component {
                 {viewData ? (
                   viewData.articles.top.map(articles => {
                     return (
-                      <p key={articles.slug}>
+                      <p key={articles}>
                         <a href="#!">{articles.title}</a>
                       </p>
                     );
