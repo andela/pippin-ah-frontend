@@ -17,19 +17,19 @@ const NavbarComponent = () => {
           <div className="categories">
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link to="/subject">Science</Link>
+                <Link to="/articles/science">Science</Link>
               </li>
               <li>
-                <Link to="/subject">Technology</Link>
+                <Link to="/articles/technology">Technology</Link>
               </li>
               <li>
-                <Link to="/subject">Engineering</Link>
+                <Link to="/articles/engineering">Engineering</Link>
               </li>
               <li>
-                <Link to="/subject">Arts</Link>
+                <Link to="/articles/arts">Arts</Link>
               </li>
               <li>
-                <Link to="/subject">Mathematics</Link>
+                <Link to="/articles/mathematics">Mathematics</Link>
               </li>
             </ul>
             <a href="#!" data-target="mobile-demo" className="sidenav-trigger">
