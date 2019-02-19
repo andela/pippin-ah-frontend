@@ -45,9 +45,10 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
     }
     case types.ADD_ARTICLE_DATA: {
       const { articleData } = action;
+      const oldArticleData = state.articleData;
       return {
         ...state,
-        articleData,
+        articleData: { ...oldArticleData, ...articleData },
       };
     }
     default:
