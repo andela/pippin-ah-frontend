@@ -38,18 +38,13 @@ const doCreateArticle = articleDetails => dispatch => {
 };
 
 const doFetchArticle = articleCategory => dispatch => {
-  dispatch(setArticleCategory(articleCategory));
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
-  dispatch(setFetchArticleError(''));
   return axios
     .get(url)
     .then(({ data }) => {
       const articleByCategory = data.articles.filter(
         article => article.category === articleCategory,
       );
-      console.log('+++++', articleByCategory);
-
-      dispatch(setArticleCategory(articleCategory));
       dispatch(addArticleData({ [articleCategory]: articleByCategory }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
@@ -62,4 +57,8 @@ const doFetchArticle = articleCategory => dispatch => {
     });
 };
 
-export { doCreateArticle, doFetchArticle };
+const doSetCategory = articleCategory => dispatch => {
+  dispatch(setArticleCategory(articleCategory));
+};
+
+export { doCreateArticle, doFetchArticle, doSetCategory };
