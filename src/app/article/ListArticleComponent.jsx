@@ -22,11 +22,7 @@ const methods = {
   },
 };
 
-const ListArticleComponent = ({
-  fetchArticleState,
-  articleData,
-  articleCategory,
-}) => {
+const ListArticleComponent = ({ fetchArticleState, articleData }) => {
   return (
     <Fragment>
       <div className="container">
@@ -35,7 +31,7 @@ const ListArticleComponent = ({
         </div>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
-            Science.articleData.map(article => (
+            articleData.map(article => (
               <div className="col s12 m6 l4" key={article.slug}>
                 <div className="card">
                   <div className="card-image">

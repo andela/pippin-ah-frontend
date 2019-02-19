@@ -8,7 +8,7 @@ const {
   setCreateStatus,
   setFetchArticleState,
   setFetchArticleError,
-  // setArticleCategory,
+  setArticleCategory,
   addArticleData,
 } = actions;
 
@@ -38,9 +38,9 @@ const doCreateArticle = articleDetails => dispatch => {
 };
 
 const doFetchArticle = articleCategory => dispatch => {
-  // dispatch(setArticleCategory(articleCategory));
-  // dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
-  // dispatch(setFetchArticleError(''));
+  dispatch(setArticleCategory(articleCategory));
+  dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  dispatch(setFetchArticleError(''));
   return axios
     .get(url)
     .then(({ data }) => {
@@ -49,8 +49,8 @@ const doFetchArticle = articleCategory => dispatch => {
       );
       console.log('+++++', articleByCategory);
 
-      // dispatch(setArticleCategory(articleCategory));
-      dispatch(addArticleData(articleByCategory, articleCategory));
+      dispatch(setArticleCategory(articleCategory));
+      dispatch(addArticleData(articleByCategory));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
     .catch(({ response }) => {
