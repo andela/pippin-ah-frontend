@@ -12,6 +12,9 @@ class CreateArticleComponent extends React.Component {
     this.state = {
       body: '',
       canScrollToTop: false,
+      coverImageUrl:
+        'https://res.cloudinary.com/hba821/image/upload/v1550580103/iit15w9cb3jvbohazwke.png',
+      uploadCoverUrl: '',
     };
   }
 
@@ -22,12 +25,18 @@ class CreateArticleComponent extends React.Component {
   uploadArticle = e => {
     e.preventDefault();
     const { createArticle } = this.props;
-    const { body } = this.state;
     this.setState({ canScrollToTop: true });
     const title = e.target.elements.title.value.trim();
     const description = e.target.elements.description.value.trim();
     const category = e.target.elements.category.value;
-    createArticle({ title, category, description, body });
+    const { body, uploadCoverUrl } = this.state;
+    createArticle({
+      title,
+      category,
+      description,
+      body,
+      uploadCoverUrl,
+    });
   };
 
   render() {
@@ -35,7 +44,7 @@ class CreateArticleComponent extends React.Component {
       return <Redirect to="/login" />;
     }
     const { createStatus } = this.props;
-    const { canScrollToTop } = this.state;
+    const { canScrollToTop, coverImageUrl, uploadCoverUrl } = this.state;
     if (createStatus.status === constants.CREATE_ERROR && canScrollToTop) {
       window.scrollTo(0, 0);
       this.setState({ canScrollToTop: false });
@@ -52,14 +61,37 @@ class CreateArticleComponent extends React.Component {
         <div className="create-wrapper">
           <div className="create-container">
             <div className="content-container">
-              <div className="create-author-details">
-                <img
-                  alt="user"
-                  src={require('../../img/student.jpeg')}
-                  className="author-photo"
-                />
-                <div className="create-author-name">
-                  <div className="create-auth-name">Tom Henkins</div>
+              <div className="author-cover">
+                <div
+                  className="card-image"
+                  onClick={() => {
+                    document.getElementById('file-picker').click();
+                  }}
+                >
+                  {uploadCoverUrl ? (
+                    <Fragment>
+                      <img src={coverImageUrl} alt="article cover" />
+                      <span className="cover-image-text">Article Cover</span>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <i className="fas fa-upload" />
+                      <span className="cover-image-text">
+                        Click on icon to add cover
+                      </span>
+                    </Fragment>
+                  )}
+                  <input
+                    type="file"
+                    id="file-picker"
+                    accept="image/*"
+                    onChange={e => {
+                      this.setState({
+                        coverImageUrl: URL.createObjectURL(e.target.files[0]),
+                        uploadCoverUrl: e.target.files[0],
+                      });
+                    }}
+                  />
                 </div>
               </div>
               <div className="create-form">
