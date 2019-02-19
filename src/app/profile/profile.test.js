@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { shallow } from 'enzyme';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import ProfileComponent from './ProfileComponent';
 import {
   actions,
@@ -77,25 +74,6 @@ describe(' PROFILE TEST SUITE', () => {
       mapDispatchToProps(dispatch).updateUserProfile();
       mapDispatchToProps(dispatch).pictureUtils();
     });
-
-    // it('should ensures mapStateToProps pass props Down', () => {
-    //  const props = {
-    //     viewData :{
-    //       articles: {
-    //         total: 3,
-    //         top: ['mockData'],
-    //       },
-    //     },
-    //     profileData : {
-    //       firstName: 'Habib',
-    //       lastName: 'moses',
-    //       bio: 'Software developer at andela',
-    //       interest: 'Arts',
-    //     },
-
-    //   }
-
-    // });
 
     it('should handle form submit', () => {
       const props = {
