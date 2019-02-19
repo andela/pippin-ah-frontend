@@ -8,12 +8,17 @@ const category = window.location.pathname.split('/')[2];
 const titleCasedCategory = category.replace(/^[a-z]/, x => x.toUpperCase());
 
 const methods = {
-  componentDidMount({ fetchArticle }) {
-    fetchArticle();
+  componentDidMount({ fetchArticle, location }) {
+    fetchArticle(titleCasedCategory);
   },
-  shouldComponentUpdate({ fetchArticle, articleCategory }) {
-    console.log('~~~~~~~', articleCategory);
-    console.log('+++~~~~~~~', category);
+  componentDidUpdate({ articleCategory, location, fetchArticle }) {
+    const guy = location.pathname.split('/')[2];
+    const titleCasedGuy = guy.replace(/^[a-z]/, x => x.toUpperCase());
+    console.log('+++~~~~~~~', articleCategory);
+    console.log('-------', titleCasedGuy);
+    if (articleCategory !== titleCasedGuy) {
+      fetchArticle(titleCasedGuy);
+    }
   },
 };
 
@@ -22,8 +27,6 @@ const ListArticleComponent = ({
   articleData,
   articleCategory,
 }) => {
-  console.log('!!!!!', articleCategory);
-
   return (
     <Fragment>
       <div className="container">
