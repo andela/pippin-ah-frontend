@@ -8,14 +8,27 @@ import constants from './constants';
 const { viewUserProfile, setUserProfile, setPictureUploadStatus } = actions;
 
 export const pictureUtils = imageUrl => dispatch => {
-  dispatch(setPictureUploadStatus(constants.PICTURE_UPDATING));
+  dispatch(
+    setPictureUploadStatus({
+      status: constants.PICTURE_UPDATING,
+    }),
+  );
 
   upload('profile', imageUrl)
-    .then(() => {
-      dispatch(setPictureUploadStatus(constants.UPDATE_SUCCESS));
+    .then(newProfileUrl => {
+      dispatch(
+        setPictureUploadStatus({
+          status: constants.UPDATE_SUCCESS,
+          newProfileUrl,
+        }),
+      );
     })
     .catch(() => {
-      dispatch(setPictureUploadStatus(constants.UPDATE_ERROR));
+      dispatch(
+        setPictureUploadStatus({
+          status: constants.UPDATE_ERROR,
+        }),
+      );
     });
 };
 

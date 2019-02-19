@@ -60,7 +60,7 @@ class ProfileComponent extends React.Component {
   render() {
     const { viewData, uploadStatus } = this.props;
     const { imageSelected } = this.state;
-
+    const { newProfileUrl } = uploadStatus;
     return (
       <div>
         <div className="container">
@@ -73,7 +73,7 @@ class ProfileComponent extends React.Component {
               <div className="card-image">
                 {viewData ? (
                   <img
-                    src={viewData.imageUrl}
+                    src={newProfileUrl || viewData.imageUrl}
                     alt="profilepicture"
                     className="activator"
                   />
@@ -173,15 +173,17 @@ class ProfileComponent extends React.Component {
                               Upload
                             </button>
 
-                            {uploadStatus === constants.PICTURE_UPDATING && (
+                            {uploadStatus.status ===
+                              constants.PICTURE_UPDATING && (
                               <EllipsisLoaderComponent />
                             )}
-                            {uploadStatus === constants.UPDATE_SUCCESS && (
+                            {uploadStatus.status ===
+                              constants.UPDATE_SUCCESS && (
                               <span className="sucessMessage">
                                 Picture Uploaded Sucessfully.
                               </span>
                             )}
-                            {uploadStatus === constants.UPDATE_ERROR && (
+                            {uploadStatus.status === constants.UPDATE_ERROR && (
                               <span className="centralize">
                                 An Error Occured
                               </span>

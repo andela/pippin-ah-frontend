@@ -41,7 +41,7 @@ const uploadImage = (page, imageUrl) => {
       const fileURL = data.secure_url;
 
       saveImage(page, fileURL);
-      return data;
+      return fileURL;
     })
     .catch(err => err);
 };

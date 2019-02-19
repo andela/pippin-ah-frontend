@@ -1,6 +1,10 @@
 import types from './types';
 
-const profileReducer = (state = {}, action) => {
+const defaultState = {
+  uploadStatus: '',
+};
+
+const profileReducer = (state = defaultState, action) => {
   switch (action.type) {
     case types.SET_USER_PROFILE: {
       const { profileData } = action;
