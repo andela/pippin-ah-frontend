@@ -50,7 +50,7 @@ const doFetchArticle = articleCategory => dispatch => {
       console.log('+++++', articleByCategory);
 
       dispatch(setArticleCategory(articleCategory));
-      dispatch(addArticleData(articleByCategory));
+      dispatch(addArticleData({ [articleCategory]: articleByCategory }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
     .catch(({ response }) => {
