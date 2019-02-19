@@ -1,4 +1,4 @@
-export { doCreateArticle, doFetchArticle } from './operations';
+export { doCreateArticle, doFetchArticle, doSetCategory } from './operations';
 export { createArticleReducer, fetchArticleReducer } from './reducers';
 export { default as constants } from './constants';
 export { default as types } from './types';
