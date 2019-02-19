@@ -11,11 +11,18 @@ const methods = {
   componentDidMount({ fetchArticle }) {
     fetchArticle(category);
   },
-  componentDidUpdate({ articleCategory, location, fetchArticle }) {
+  componentDidUpdate({
+    articleCategory,
+    articleData,
+    fetchArticle,
+    setCategory,
+  }) {
     const newCategory = getArticleCatigory();
-    if (articleCategory !== newCategory) {
+    const storeData = articleData && articleData[newCategory];
+    if (articleCategory !== newCategory && !storeData) {
       fetchArticle(newCategory);
     }
+    return setCategory(newCategory);
   },
 };
 
@@ -28,7 +35,7 @@ const ListArticleComponent = ({
     <Fragment>
       <div className="container">
         <div className="col s12 center-align">
-          <h3>Arts</h3>
+          <h3>{articleCategory}</h3>
         </div>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
