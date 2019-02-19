@@ -4,6 +4,7 @@ import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import { facebook, twitter, googleplus } from '../../img';
 import { googleUrl } from './duck/operations';
+import { googleUrl, twitterUrl, facebookUrl } from './duck/operations';
 import './signin.scss';
 
 export const LoginComponent = ({ loginUser, loginState, googleLogin }) => {

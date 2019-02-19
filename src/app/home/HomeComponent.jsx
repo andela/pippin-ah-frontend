@@ -5,6 +5,7 @@ const HomeComponent = () => {
   if (window.location.search) {
     const token = window.location.search.substr(7);
     localStorage.setItem('token', token);
+    window.location.replace('http://localhost:8080');
   }
 
   return (
