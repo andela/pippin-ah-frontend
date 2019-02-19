@@ -9,6 +9,7 @@ const profileReducer = (state = {}, action) => {
         profileData,
       };
     }
+
     case types.VIEW_USER_PROFILE: {
       const { viewData } = action;
       return {
@@ -16,6 +17,15 @@ const profileReducer = (state = {}, action) => {
         viewData,
       };
     }
+
+    case types.SET_UPLOADING_STATUS: {
+      const { uploadStatus } = action;
+      return {
+        ...state,
+        uploadStatus,
+      };
+    }
+
     default:
       return state;
   }

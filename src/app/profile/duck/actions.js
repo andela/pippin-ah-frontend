@@ -10,4 +10,13 @@ const viewUserProfile = viewData => ({
   viewData,
 });
 
-export default { setUserProfile, viewUserProfile };
+const setPictureUploadStatus = uploadStatus => ({
+  type: types.SET_UPLOADING_STATUS,
+  uploadStatus,
+});
+
+export default {
+  setUserProfile,
+  viewUserProfile,
+  setPictureUploadStatus,
+};

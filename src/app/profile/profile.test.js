@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { promises } from 'fs';
 import ProfileComponent from './ProfileComponent';
 import {
   actions,
@@ -14,16 +13,15 @@ import {
   viewProfile,
   updateUserProfile,
 } from './duck';
-import RingLoaderComponent from '../loaders';
 import ProfileContainer from './ProfileContainer';
 import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
+
+const { setUserProfile, viewUserProfile, setPictureUploadStatus } = actions;
 
 jest.mock('axios');
 global.FileReader = () => ({
   readAsDataURL: () => {},
 });
-
-const { viewUserProfile, setUserProfile } = actions;
 
 const mockStore = configureStore([thunk]);
 const store = mockStore();
@@ -59,12 +57,7 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should ensures mapDispatchToProps dispatches the specified actions', () => {
-      // const wrapper = mount(
-      //   <Provider store={store}>
-      //     <ProfileContainer />
-      //   </Provider>,
-      // );
-      // const component = shallow(<ProfileContainer />);
+      const component = shallow(<ProfileContainer />);
       const dispatch = jest.fn();
       expect(mapDispatchToProps(dispatch).viewProfile).toBeTruthy();
       expect(mapDispatchToProps(dispatch).updateUserProfile).toBeTruthy();
@@ -178,6 +171,7 @@ describe(' PROFILE TEST SUITE', () => {
         },
         viewProfile: jest.fn(),
         updateUserProfile: jest.fn(),
+        pictureUtils: jest.fn(),
       };
       const wrapper = shallow(<ProfileComponent {...props} />);
       const event = {
@@ -197,18 +191,51 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe('Profile Reducers', () => {
-    it('should setup default state values', () => {
+    it('should return an empty object for SET_USER_PROFILE', () => {
       const state = profileReducer(undefined, {
         type: 'SET_USER_PROFILE',
       });
       expect(state).toEqual({});
     });
 
-    it('should setup default state values', () => {
+    it('should return an empty object for VIEW_USER_PROFILE', () => {
       const state = profileReducer(undefined, {
         type: 'VIEW_USER_PROFILE',
       });
       expect(state).toEqual({});
+    });
+
+    it('should return an empty object for SET_UPLOADING_STATUS', () => {
+      const state = profileReducer(undefined, {
+        type: 'SET_UPLOADING_STATUS',
+      });
+      expect(state).toEqual({});
+    });
+  });
+
+  describe('Profile Actions', () => {
+    it('it should update the profile state', () => {
+      const action = setUserProfile(constants.SET_USER_PROFILE);
+      expect(action).toEqual({
+        type: types.SET_USER_PROFILE,
+        profileData: constants.SET_USER_PROFILE,
+      });
+    });
+
+    it('it should set view profile state', () => {
+      const action = viewUserProfile(constants.VIEW_USER_PROFILE);
+      expect(action).toEqual({
+        type: types.VIEW_USER_PROFILE,
+        viewData: constants.VIEW_USER_PROFILE,
+      });
+    });
+
+    it('it should set update profile status', () => {
+      const action = setPictureUploadStatus(constants.UPDATE_SUCCESS);
+      expect(action).toEqual({
+        type: types.SET_UPLOADING_STATUS,
+        uploadStatus: constants.UPDATE_SUCCESS,
+      });
     });
   });
 });

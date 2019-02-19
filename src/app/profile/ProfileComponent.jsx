@@ -1,8 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import '../../style/profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
-import upload from '../util/uploadToCloudinary';
+import constants from './duck/constants';
+import { EllipsisLoaderComponent } from '../loaders';
 
 class ProfileComponent extends React.Component {
   state = {
@@ -16,12 +18,15 @@ class ProfileComponent extends React.Component {
   }
 
   handleSubmit = event => {
-    const { updateUserProfile } = this.props;
+    const { updateUserProfile, viewData } = this.props;
     event.preventDefault();
-    const firstName = event.target.elements.firstName.value.trim();
-    const lastName = event.target.elements.lastName.value.trim();
-    const interest = event.target.elements.interest.value.trim();
-    const bio = event.target.elements.bio.value.trim();
+    const firstName =
+      event.target.elements.firstName.value.trim() || viewData.firstName;
+    const lastName =
+      event.target.elements.lastName.value.trim() || viewData.lastName;
+    const interest =
+      event.target.elements.interest.value.trim() || viewData.interest;
+    const bio = event.target.elements.bio.value.trim() || viewData.bio;
 
     updateUserProfile(firstName, lastName, interest, bio);
   };
@@ -30,14 +35,9 @@ class ProfileComponent extends React.Component {
     event.preventDefault();
     const { imageUrl } = this.state;
     if (imageUrl !== undefined) {
-      const imageData = new FormData();
-      imageData.append('file', imageUrl);
-      imageData.append('tags', 'profileImage');
-      imageData.append('upload_preset', 'u5wlpktm');
-      imageData.append('api_key', '957426565997323');
-      imageData.append('cloud_name', 'hba821');
-      imageData.append('timestamp', Date.now() / 1000);
-      upload('profile', imageData);
+      const { pictureUtils } = this.props;
+
+      pictureUtils(imageUrl);
     }
   };
 
@@ -58,8 +58,12 @@ class ProfileComponent extends React.Component {
   };
 
   render() {
-    const { viewData } = this.props;
+    const { viewData, uploadStatus } = this.props;
     const { imageSelected } = this.state;
+
+    if (uploadStatus === constants.UPDATE_SUCCESS) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <div className="container">
@@ -91,7 +95,10 @@ class ProfileComponent extends React.Component {
                 <span className="card-title grey-text text-darken-4">
                   You Are Viewing<i className="material-icons right">close</i>
                 </span>
-                <p>SARAH GOBLIN PROFILE</p>
+                <p>
+                  {viewData ? viewData.firstName : <h6>loading...</h6>}{' '}
+                  {viewData ? viewData.lastName : <h6>loading...</h6>}
+                </p>
               </div>
             </div>
           </div>
@@ -157,6 +164,7 @@ class ProfileComponent extends React.Component {
                                   id="img"
                                   onChange={this.displayImage}
                                 />
+
                                 <br />
                               </div>
                             </div>
@@ -167,6 +175,20 @@ class ProfileComponent extends React.Component {
                             >
                               Upload
                             </button>
+
+                            {uploadStatus === constants.PICTURE_UPDATING && (
+                              <EllipsisLoaderComponent />
+                            )}
+                            {uploadStatus === constants.UPDATE_SUCCESS && (
+                              <span className="sucessMessage">
+                                Picture Uploaded Sucessfully.
+                              </span>
+                            )}
+                            {uploadStatus === constants.UPDATE_ERROR && (
+                              <span className="centralize">
+                                An Error Occured
+                              </span>
+                            )}
                           </form>
                         </div>
                       </div>

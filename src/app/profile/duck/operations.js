@@ -2,8 +2,22 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import actions from './actions';
+import upload from '../../util/uploadToCloudinary';
+import constants from './constants';
 
-const { viewUserProfile, setUserProfile } = actions;
+const { viewUserProfile, setUserProfile, setPictureUploadStatus } = actions;
+
+export const pictureUtils = imageUrl => dispatch => {
+  dispatch(setPictureUploadStatus(constants.PICTURE_UPDATING));
+
+  upload('profile', imageUrl)
+    .then(() => {
+      dispatch(setPictureUploadStatus(constants.UPDATE_SUCCESS));
+    })
+    .catch(() => {
+      dispatch(setPictureUploadStatus(constants.UPDATE_ERROR));
+    });
+};
 
 export const viewProfile = () => dispatch => {
   const token = localStorage.getItem('token');
