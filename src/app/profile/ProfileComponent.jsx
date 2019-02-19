@@ -61,9 +61,6 @@ class ProfileComponent extends React.Component {
     const { viewData, uploadStatus } = this.props;
     const { imageSelected } = this.state;
 
-    if (uploadStatus === constants.UPDATE_SUCCESS) {
-      return <Redirect to="/" />;
-    }
     return (
       <div>
         <div className="container">
@@ -196,6 +193,7 @@ class ProfileComponent extends React.Component {
                     <form
                       onSubmit={this.handleSubmit}
                       className="col s12 m6 l6"
+                      id="update_profile"
                     >
                       <div className="row">
                         <div className="input-field col s12">
@@ -224,7 +222,7 @@ class ProfileComponent extends React.Component {
                         </div>
                         <div className="input-field col s12">
                           <select
-                            name="category"
+                            name="interest"
                             defaultValue=""
                             className="browser-default"
                             required
@@ -238,9 +236,6 @@ class ProfileComponent extends React.Component {
                             <option value="Engineering">Engineering</option>
                             <option value="Technology">Technology</option>
                           </select>
-                          <i className="material-icons prefix color-ions">
-                            favorite
-                          </i>
                         </div>
                         <div className="input-field col s12">
                           <i className="material-icons prefix color-ions">

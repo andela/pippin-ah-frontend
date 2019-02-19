@@ -66,7 +66,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
             </i>
           </span>
           <p>
-            SARAH GOBLIN PROFILE
+             
           </p>
         </div>
       </div>
@@ -200,6 +200,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
               </div>
               <form
                 className="col s12 m6 l6"
+                id="update_profile"
                 onSubmit={[Function]}
               >
                 <div
@@ -248,22 +249,44 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                   <div
                     className="input-field col s12"
                   >
-                    <i
-                      className="material-icons prefix color-ions"
-                    >
-                      favorite
-                    </i>
-                    <input
-                      className="validate"
-                      id="icon_telephone"
+                    <select
+                      className="browser-default"
+                      defaultValue=""
                       name="interest"
-                      type="text"
-                    />
-                    <label
-                      htmlFor="icon_telephone"
+                      required={true}
                     >
-                      Interest
-                    </label>
+                      <option
+                        disabled={true}
+                        value=""
+                      >
+                        Select Category
+                      </option>
+                      <option
+                        value="Mathematics"
+                      >
+                        Mathematics
+                      </option>
+                      <option
+                        value="Arts"
+                      >
+                        Arts
+                      </option>
+                      <option
+                        value="Science"
+                      >
+                        Science
+                      </option>
+                      <option
+                        value="Engineering"
+                      >
+                        Engineering
+                      </option>
+                      <option
+                        value="Technology"
+                      >
+                        Technology
+                      </option>
+                    </select>
                   </div>
                   <div
                     className="input-field col s12"

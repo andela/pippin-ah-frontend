@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -22,9 +22,6 @@ jest.mock('axios');
 global.FileReader = () => ({
   readAsDataURL: () => {},
 });
-
-const mockStore = configureStore([thunk]);
-const store = mockStore();
 
 describe(' PROFILE TEST SUITE', () => {
   describe(' Profile Component', () => {
@@ -57,10 +54,30 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should ensures mapDispatchToProps dispatches the specified actions', () => {
-      const component = shallow(<ProfileContainer />);
+      const props = {
+        viewData: {
+          articles: {
+            total: 3,
+            top: ['mockData'],
+          },
+        },
+        profileData: {
+          firstName: 'Habib',
+          lastName: 'moses',
+          bio: 'Software developer at andela',
+          interest: 'Arts',
+        },
+        viewProfile: jest.fn(),
+        updateUserProfile: Promise.resolve(),
+        pictureUtils: jest.fn(),
+      };
+
+      const component = shallow(<ProfileContainer {...props} />);
       const dispatch = jest.fn();
-      expect(mapDispatchToProps(dispatch).viewProfile).toBeTruthy();
-      expect(mapDispatchToProps(dispatch).updateUserProfile).toBeTruthy();
+
+      mapDispatchToProps(dispatch).viewProfile();
+      mapDispatchToProps(dispatch).updateUserProfile();
+      mapDispatchToProps(dispatch).pictureUtils();
     });
 
     it('should handle form submit', () => {
@@ -212,6 +229,45 @@ describe(' PROFILE TEST SUITE', () => {
       expect(state).toEqual({});
     });
   });
+
+  // describe('Connected  Component Dispatches update Success', () => {
+  //   const initialState = {
+  //     viewData: '',
+  //     profileData:'',
+
+  //   };
+  //   const mockStore = configureStore([thunk]);
+  //   const store = mockStore(initialState);
+  //   let wrapper;
+  //   beforeEach(() => {
+  //     const response = { data: 'successfully Updated' };
+  //     axios.post.mockResolvedValue(response);
+  //     wrapper = shallow(
+  //         <ProfileContainer  store= {store}/>
+  //     );
+  //     wrapper.find('update_profile').simulate('submit', {
+  //       preventDefault: () => {},
+  //       target: {
+  //         elements: {
+  //           firstName: { value: 'johndoe' },
+  //           lastName: { value: 'johndoe@joe.com' },
+  //           interest: { value: 'johndoe88' },
+  //           bio: { value: 'johndoe88'},
+  //         },
+  //       },
+  //     });
+  //   });
+
+  //   it('it should render the connected component', () => {
+  //     expect(wrapper.find(ProfileContainer).length).toEqual(1);
+
+  //   });
+
+  //   it('it should dispatch signup action', () => {
+  //     const storeActions = store.getActions();
+  //     expect(storeActions[0].types).toEqual('SET_USER_PROFILE');
+  //   });
+  // });
 
   describe('Profile Actions', () => {
     it('it should update the profile state', () => {
