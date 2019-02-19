@@ -15,7 +15,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: () => dispatch(doFetchArticle()),
+    fetchArticle: articleCategory => dispatch(doFetchArticle(articleCategory)),
   };
 };
 const ListArticleContainer = connect(
