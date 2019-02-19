@@ -12,9 +12,6 @@ const {
   addArticleData,
 } = actions;
 
-const category = window.location.pathname.split('/')[2];
-const titleCasedCategory = category.replace(/^[a-z]/, x => x.toUpperCase());
-
 const doCreateArticle = articleDetails => dispatch => {
   dispatch(setCreateStatus({ status: constants.CREATING }));
   const headers = {
@@ -40,19 +37,19 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-const doFetchArticle = () => dispatch => {
-  dispatch(setArticleCategory(titleCasedCategory));
+const doFetchArticle = articleCategory => dispatch => {
+  dispatch(setArticleCategory(articleCategory));
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   dispatch(setFetchArticleError(''));
   return axios
     .get(url)
     .then(({ data }) => {
       const articleByCategory = data.articles.filter(
-        article => article.category === titleCasedCategory,
+        article => article.category === articleCategory,
       );
       console.log('+++++', articleByCategory);
 
-      dispatch(setArticleCategory(titleCasedCategory));
+      dispatch(setArticleCategory(articleCategory));
       dispatch(addArticleData(articleByCategory));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
