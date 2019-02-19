@@ -116,7 +116,7 @@ class ProfileComponent extends React.Component {
                 {viewData ? viewData.followers : <h6>loading...</h6>} <br />
                 <br /> <br />
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {viewData ? viewData.isMentor : <h6>loading...</h6>}
+                {viewData.isMentor === false ? 'True' : 'False'}
                 {/* <i className="material-icons prefix">check_box</i> */}
                 <br />
                 <br />
