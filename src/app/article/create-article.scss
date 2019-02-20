@@ -57,14 +57,14 @@
 
 .card-image img {
   display: block;
-  max-height: 100px;
-  max-width: 100px;
+  max-height: 150px;
+  max-width: 150px;
   height: auto;
   width: auto;
 }
 
 .card-image .fa-upload {
-  font-size: 20px;
+  font-size: 30px;
   cursor: pointer;
 }
 
@@ -150,8 +150,8 @@
 .author-cover {
   margin-top: 30px;
   display: flex;
-  justify-content: space-between;
-  align-content: space-between;
+  justify-content: center;
+  align-content: center;
   width: 100%;
 }
 
