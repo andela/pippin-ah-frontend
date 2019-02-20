@@ -18,6 +18,10 @@ class CreateArticleComponent extends React.Component {
     };
   }
 
+  handleFilePick = () => {
+    document.getElementById('file-picker').click();
+  }
+
   handleEditorChange = content => {
     this.setState({ body: content });
   };
@@ -37,6 +41,7 @@ class CreateArticleComponent extends React.Component {
       body,
       uploadCoverUrl,
     });
+
   };
 
   render() {
@@ -65,7 +70,7 @@ class CreateArticleComponent extends React.Component {
                 <div
                   className="card-image"
                   onClick={() => {
-                    document.getElementById('file-picker').click();
+                    this.handleFilePick();
                   }}
                 >
                   {uploadCoverUrl ? (
