@@ -2,11 +2,11 @@
 import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
 import { constants } from './duck';
-import getArticleCatigory from './util/getArticleCategory';
+import getArticleCategory from './util/getArticleCategory';
 import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
-const category = getArticleCatigory();
+const category = getArticleCategory();
 
 const methods = {
   componentDidMount({ fetchArticle }) {
@@ -18,7 +18,7 @@ const methods = {
     fetchArticle,
     setCategory,
   }) {
-    const newCategory = getArticleCatigory();
+    const newCategory = getArticleCategory();
     const storeData = articleData && articleData[newCategory];
     if (articleCategory !== newCategory && !storeData) {
       fetchArticle(newCategory);
