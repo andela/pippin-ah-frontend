@@ -5,4 +5,9 @@ const setCreateStatus = createStatus => ({
   createStatus,
 });
 
-export default { setCreateStatus };
+const setSingleFetchStatus = singleFetchStatus => ({
+  type: types.SET_SINGLE_FETCH_STATUS,
+  singleFetchStatus,
+});
+
+export default { setCreateStatus, setSingleFetchStatus };
