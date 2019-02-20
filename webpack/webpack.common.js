@@ -12,6 +12,7 @@ module.exports = {
   output: {
     filename: 'index_bundle.js',
     path: path.join(__dirname, '/dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
