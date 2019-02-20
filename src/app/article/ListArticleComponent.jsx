@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
 import { constants } from './duck';
 import getArticleCatigory from './util/getArticleCategory';
+import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
 const category = getArticleCatigory();
@@ -26,6 +27,14 @@ const methods = {
   },
 };
 
+const elipsisLoader = (
+  <>
+    <div className="li-loader">
+      <EllipsisLoaderComponent />
+    </div>
+  </>
+);
+
 const ListArticleComponent = ({
   fetchArticleState,
   articleData,
@@ -34,6 +43,7 @@ const ListArticleComponent = ({
   return (
     <Fragment>
       <div className="container">
+        {fetchArticleState === 'FETCHING_ARTICLE' && elipsisLoader}
         <div className="col s12 center-align">
           <h3>{articleCategory}</h3>
         </div>
