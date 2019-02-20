@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
+import moxios from 'moxios';
+import configureStore from 'redux-mock-store';
 import ProfileComponent from './ProfileComponent';
+
 import {
   actions,
   types,
@@ -15,9 +19,34 @@ import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
 
 const { setUserProfile, viewUserProfile, setPictureUploadStatus } = actions;
 
-jest.mock('axios');
+// jest.mock('axios');
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const store = mockStore({});
+
+const props = {
+  viewData: {
+    articles: {
+      total: 3,
+      top: ['mockData'],
+    },
+  },
+  profileData: {
+    firstName: 'Habib',
+    lastName: 'moses',
+    bio: 'Software developer at andela',
+    interest: 'Arts',
+  },
+  uploadStatus: {},
+  viewProfile: jest.fn(),
+  updateUserProfile: jest.fn(),
+  pictureUtils: jest.fn(),
+};
 
 describe(' PROFILE TEST SUITE', () => {
+  beforeEach(() => moxios.install(axios));
+  afterEach(() => moxios.uninstall(axios));
+
   describe(' Profile Component', () => {
     it('should render Profile container component', () => {
       const component = shallow(<ProfileContainer />);
@@ -26,47 +55,12 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should render Profile dumb component', () => {
-      const props = {
-        viewData: {
-          articles: {
-            total: 3,
-            top: ['mockData'],
-          },
-        },
-        uploadStatus: {},
-        profileData: {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        },
-        viewProfile: jest.fn(),
-        updateUserProfile: Promise.resolve(),
-      };
       const component = shallow(<ProfileComponent {...props} />);
       expect(component.exists()).toBe(true);
       expect(component).toMatchSnapshot();
     });
 
     it('should ensures mapDispatchToProps dispatches the specified actions', () => {
-      const props = {
-        viewData: {
-          articles: {
-            total: 3,
-            top: ['mockData'],
-          },
-        },
-        profileData: {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        },
-        viewProfile: jest.fn(),
-        updateUserProfile: Promise.resolve(),
-        pictureUtils: jest.fn(),
-      };
-
       const component = shallow(<ProfileContainer {...props} />);
       const dispatch = jest.fn();
 
@@ -76,23 +70,6 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should handle form submit', () => {
-      const props = {
-        viewData: {
-          articles: {
-            total: 3,
-            top: ['mockData'],
-          },
-        },
-        profileData: {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        },
-        uploadStatus: {},
-        viewProfile: jest.fn(),
-        updateUserProfile: jest.fn(),
-      };
       const wrapper = shallow(<ProfileComponent {...props} />);
       const event = {
         preventDefault: jest.fn(),
@@ -139,23 +116,6 @@ describe(' PROFILE TEST SUITE', () => {
         result: event.target.result,
       };
       window.FileReader = jest.fn(() => dummyReader);
-      const props = {
-        viewData: {
-          articles: {
-            total: 3,
-            top: ['mockData'],
-          },
-        },
-        uploadStatus: {},
-        profileData: {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        },
-        viewProfile: jest.fn(),
-        updateUserProfile: jest.fn(),
-      };
 
       const wrapper = shallow(<ProfileComponent {...props} />);
 
@@ -165,29 +125,11 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe(' select profile picture to upload', () => {
-    beforeEach(() => {
+    /*    beforeEach(() => {
       const response = '';
       axios.post.mockResolvedValue(response);
-    });
+    }); */
     it('should handle form submit for picture', () => {
-      const props = {
-        viewData: {
-          articles: {
-            total: 3,
-            top: ['mockData'],
-          },
-        },
-        profileData: {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        },
-        uploadStatus: {},
-        viewProfile: jest.fn(),
-        updateUserProfile: jest.fn(),
-        pictureUtils: jest.fn(),
-      };
       const wrapper = shallow(<ProfileComponent {...props} />);
       const event = {
         preventDefault: jest.fn(),
@@ -202,6 +144,61 @@ describe(' PROFILE TEST SUITE', () => {
       const instance = wrapper.instance();
       instance.uploadPicture(event);
       const pictureForm = wrapper.find('form').at(2);
+    });
+  });
+
+  describe('Test for Functions In Operations', () => {
+    /*   beforeEach(() => {
+      moxios.install();
+      const response = '';
+      axios.post.mockResolvedValue(response);
+    });
+    afterEach(() => {
+      moxios.uninstall();
+    });
+    */
+    it('Should test for update profile: success', done => {
+      const profileData = {
+        firstName: 'Wisdom',
+        lastName: 'Dowda',
+        bio: 'lives in lagos',
+        interests: 'Science',
+      };
+
+      const viewData = {
+        firstName: 'Wisdom',
+        lastName: 'Dowda',
+        bio: 'lives in lagos',
+        interests: 'Science',
+        articles: {
+          total: 3,
+          top: ['mockData'],
+        },
+      };
+      const url =
+        'https://learnground-api-staging.herokuapp.com/api/v1/profile';
+      moxios.stubRequest(url, {
+        status: 200,
+        profileData,
+      });
+
+      const expectedActions = [
+        {
+          type: types.SET_USER_PROFILE,
+          profileData,
+        },
+        {
+          type: types.VIEW_USER_PROFILE,
+          viewData,
+        },
+      ];
+
+      store.dispatch(updateUserProfile(profileData)).then(() => {
+        expect(store.getActions()).toEqual([
+          { profileData: undefined, type: 'SET_USER_PROFILE' },
+        ]);
+        done();
+      });
     });
   });
 

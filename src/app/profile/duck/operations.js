@@ -65,6 +65,7 @@ export const updateUserProfile = (
   interest,
   bio,
 ) => dispatch => {
+  console.log('here my test failed');
   const token = localStorage.getItem('token');
   const defaultOptions = {
     headers: {
