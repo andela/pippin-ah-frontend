@@ -26,17 +26,27 @@ export const saveImage = (page, imageUrl) => {
     });
 };
 
-const uploadImage = (page, imageData) => {
-  axios
-    .post(CLOUDINARY_URL, imageData, {
+export const uploadImage = (page, imageUrl, uploadFormData) => {
+  let formData = new FormData();
+  formData.append('file', imageUrl);
+  if (uploadFormData) {
+    formData = uploadFormData;
+  }
+  formData.append('tags', page);
+  formData.append('upload_preset', 'u5wlpktm');
+  formData.append('timestamp', Date.now() / 1000);
+  return axios
+    .post(CLOUDINARY_URL, formData, {
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
     })
     .then(response => {
       const data = response.data;
       const fileURL = data.secure_url;
-
       saveImage(page, fileURL);
+      return data.secure_url;
     })
-    .catch(err => err);
+    .catch(err => {
+      return err;
+    });
 };
 export default uploadImage;
