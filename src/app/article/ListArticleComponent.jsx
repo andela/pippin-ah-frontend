@@ -49,6 +49,7 @@ const ListArticleComponent = ({
         </div>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
+            articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
               <div className="col s12 m6 l4" key={article.slug}>
                 <div className="card">
