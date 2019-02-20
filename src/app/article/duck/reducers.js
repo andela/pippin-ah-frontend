@@ -5,6 +5,10 @@ const INITIAL_STATE = {
     status: '',
     data: '',
   },
+  fetchArticleStatus: {
+    fetchArticleState: '',
+    errorMessage: '',
+  },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
