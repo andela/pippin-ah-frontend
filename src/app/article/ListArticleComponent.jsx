@@ -33,7 +33,7 @@ const ListArticleComponent = ({
   fetchArticleState,
   articleData,
   articleCategory,
-  appendArticleData,
+  fetchArticle,
 }) => {
   window.onscroll = () => {
     const { scrollHeight } = document.body;
@@ -41,7 +41,7 @@ const ListArticleComponent = ({
 
     if (totalHeight >= scrollHeight) {
       pageNumber += 1;
-      appendArticleData(articleCategory, pageNumber);
+      fetchArticle(articleCategory, pageNumber);
     }
   };
   return (
@@ -52,6 +52,7 @@ const ListArticleComponent = ({
         </div>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
+            articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
               <div className="col s12 m6 l4" key={article.slug}>
                 <div className="card">
