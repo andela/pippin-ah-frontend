@@ -56,6 +56,11 @@ describe('ARTICLE TEST SUITE', () => {
     });
 
     describe('Create Article Simulate Changes', () => {
+      beforeAll(() => {
+        const div = document.createElement('div');
+        window.domNode = div;
+        document.body.appendChild(div);
+      });
       it('should redirect to login if user is not authenticated', () => {
         localStorage.removeItem('token');
         const component = shallow(
@@ -89,6 +94,34 @@ describe('ARTICLE TEST SUITE', () => {
         expect(spy).toHaveBeenCalledWith('new value');
       });
 
+      it('should call handleFilePick option when the file picker is clicked', () => {
+        localStorage.setItem('token', 'token');
+        const handleFilePick = jest.fn();
+        const component = mount(
+          <CreateArticleComponent
+            createStatus=""
+            handleFilePick={handleFilePick}
+          />,
+          { attachTo: window.domNode },
+        );
+        const spy = jest.spyOn(component.instance(), 'handleFilePick');
+        component
+          .find('div.card-image')
+          .first()
+          .childAt(0)
+          .simulate('click', { target: { name: 0 } });
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it('should update the state when new file is selected', () => {
+        global.URL.createObjectURL = jest.fn(() => 'details');
+        const component = mount(<CreateArticleComponent createStatus="" />);
+        component
+          .find('input[type="file"]')
+          .simulate('change', { target: { files: ['http://file'] } });
+        expect(component.state().uploadCoverUrl).toEqual('http://file');
+      });
+
       it('should call createArticle function when form is submitted', () => {
         const createArticle = jest.fn();
         const component = shallow(
@@ -112,6 +145,7 @@ describe('ARTICLE TEST SUITE', () => {
           description: 'description',
           category: 'category',
           body: '',
+          uploadCoverUrl: '',
         });
       });
 
@@ -161,6 +195,54 @@ describe('ARTICLE TEST SUITE', () => {
     });
   });
 
+  describe('Editor Helper Functions', () => {
+    it('should not call the failure callback if image is successfully uploaded', () => {
+      const response = { data: { secure_url: 'https://secure' } };
+      axios.post.mockImplementation(() => Promise.resolve(response));
+      axios.patch.mockImplementation(() => Promise.resolve(response));
+      const blobInfo = {
+        blob: () => {
+          return new Blob(['foo'], { type: 'text/plain' });
+        },
+        filename: () => {},
+      };
+      const component = shallow(<EditorComponent />);
+      const success = jest.fn();
+      const failure = jest.fn();
+      component
+        .find('Editor')
+        .props()
+        .init.images_upload_handler(blobInfo, success, failure);
+      expect(failure).not.toHaveBeenCalled();
+    });
+
+    it('should not call the success callback if image upload failed', () => {
+      const response = { data: 'successfully signed up' };
+      axios.post.mockImplementation(() => Promise.reject(response));
+      const blobInfo = {
+        blob: () => {
+          return new Blob(['foo'], { type: 'text/plain' });
+        },
+        filename: () => {},
+      };
+      const component = shallow(<EditorComponent />);
+      const success = jest.fn();
+      const failure = jest.fn();
+      component
+        .find('Editor')
+        .props()
+        .init.images_upload_handler(blobInfo, success, failure);
+      expect(success).not.toHaveBeenCalled();
+    });
+
+    it('should call the file picker callback when file is selected', () => {
+      const component = shallow(<EditorComponent />);
+      const cb = jest.fn();
+      // console.log(component.find('Editor').props().init.file_picker_callback());
+      // const spy = jest.spyOn(editorFilePicker.prototype(), '');
+    });
+  });
+
   describe('Create Article Actions', () => {
     it('it should set the create status', () => {
       const { setCreateStatus } = actions;
@@ -196,7 +278,7 @@ describe('ARTICLE TEST SUITE', () => {
     });
   });
 
-  describe('Connected Create Article Component Dispatches Create Success', () => {
+  describe('Connected create article component', () => {
     const initialState = {
       createArticle: {
         createStatus: {
@@ -206,21 +288,19 @@ describe('ARTICLE TEST SUITE', () => {
       },
     };
     const mockStore = configureStore([thunk]);
-    const store = mockStore(initialState);
+    const store = mockStore(() => initialState);
     let wrapper;
     beforeEach(() => {
-      const response = {
-        data: {
-          slug: 'new article 001',
-        },
-      };
-      axios.post.mockResolvedValue(response);
       wrapper = mount(
         <Provider store={store}>
           <CreateArticleContainer />
         </Provider>,
       );
-      wrapper.find('form').simulate('submit', {
+    });
+
+    it('should dispatch an action with CREATE_ERROR when cover image url is not set ', () => {
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.find('form').simulate('submit', {
         preventDefault: () => {},
         target: {
           elements: {
@@ -230,31 +310,13 @@ describe('ARTICLE TEST SUITE', () => {
           },
         },
       });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[0].createStatus.data).toEqual(
+        'You must select a cover image',
+      );
     });
 
-    it('should render the connected Create Article component', () => {
-      expect(wrapper.find(CreateArticleContainer).length).toEqual(1);
-    });
-
-    it('should dispatch create action for successfull article creation', () => {
-      const storeActions = store.getActions();
-      expect(storeActions[0].type).toEqual('SET_CREATE_STATUS');
-    });
-  });
-
-  describe('Connected Create Article Component Dispatches Create Error', () => {
-    const initialState = {
-      createArticle: {
-        createStatus: {
-          status: '',
-          data: '',
-        },
-      },
-    };
-    const mockStore = configureStore([thunk]);
-    const store = mockStore(initialState);
-    let wrapper;
-    beforeEach(() => {
+    it('should dispatch an action with status CREATING when article is being created', () => {
       const response = {
         response: {
           data: {
@@ -262,13 +324,12 @@ describe('ARTICLE TEST SUITE', () => {
           },
         },
       };
-      axios.post.mockImplementation(() => Promise.reject(response));
-      wrapper = mount(
-        <Provider store={store}>
-          <CreateArticleContainer />
-        </Provider>,
-      );
-      wrapper.find('form').simulate('submit', {
+      axios.post.mockImplementation(() => Promise.resolve(response));
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
         preventDefault: () => {},
         target: {
           elements: {
@@ -278,13 +339,8 @@ describe('ARTICLE TEST SUITE', () => {
           },
         },
       });
-    });
-
-    it('should dispatch create error for failed article creation', () => {
-      const storeActions = store.getActions();
-      expect(storeActions[1].createStatus.status).toEqual(
-        constants.CREATE_ERROR,
-      );
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
     });
   });
 });
