@@ -10,6 +10,7 @@ const {
   setFetchArticleError,
   setArticleCategory,
   addArticleData,
+  appendArticleData,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -37,15 +38,18 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-const doFetchArticle = articleCategory => dispatch => {
+const doFetchArticle = (articleCategory, page) => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   return axios
-    .get(url)
+    .get(url, {
+      params: {
+        category: articleCategory,
+        limit: 12,
+        page,
+      },
+    })
     .then(({ data }) => {
-      const articleByCategory = data.articles.filter(
-        article => article.category === articleCategory,
-      );
-      dispatch(addArticleData({ [articleCategory]: articleByCategory }));
+      dispatch(addArticleData({ [articleCategory]: data.articles }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
     .catch(({ response }) => {
@@ -60,5 +64,22 @@ const doFetchArticle = articleCategory => dispatch => {
 const doSetCategory = articleCategory => dispatch => {
   dispatch(setArticleCategory(articleCategory));
 };
+const doAppendArticleData = (articleCategory, page) => dispatch => {
+  return axios
+    .get(url, {
+      params: {
+        category: articleCategory,
+        limit: 12,
+        page,
+      },
+    })
+    .then(({ data }) => {
+      console.log('+-+-+==+-+-+', data);
+      dispatch(appendArticleData(data.articles));
+    })
+    .catch(({ data }) => {
+      console.log('----**->', data);
+    });
+};
 
-export { doCreateArticle, doFetchArticle, doSetCategory };
+export { doCreateArticle, doFetchArticle, doSetCategory, doAppendArticleData };
