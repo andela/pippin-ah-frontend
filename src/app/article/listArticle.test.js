@@ -15,7 +15,12 @@ import {
 
 jest.mock('axios');
 
-const { setFetchArticleState, setFetchArticleError } = actions;
+const {
+  setFetchArticleState,
+  setFetchArticleError,
+  setArticleCategory,
+  addArticleData,
+} = actions;
 
 describe('ListArticleComponentAction', () => {
   it('it should set fetchArticle state', () => {
@@ -31,6 +36,22 @@ describe('ListArticleComponentAction', () => {
     expect(action).toEqual({
       type: types.SET_FETCH_ARTICLE_ERROR,
       errorMessage: constants.FETCH_ARTICLE_ERROR,
+    });
+  });
+
+  it('it should set article category', () => {
+    const action = setArticleCategory('Arts');
+    expect(action).toEqual({
+      type: types.SET_ARTICLE_CATEGORY,
+      articleCategory: 'Arts',
+    });
+  });
+
+  it('it should add article data', () => {
+    const action = addArticleData('Data');
+    expect(action).toEqual({
+      type: types.ADD_ARTICLE_DATA,
+      articleData: 'Data',
     });
   });
 
@@ -92,6 +113,24 @@ describe('fetchArticleReducers', () => {
     const state = fetchArticleReducer(undefined, action);
     expect(state.errorMessage).toEqual(action.errorMessage);
   });
+
+  it('it should change the fetch article error message', () => {
+    const action = {
+      type: types.SET_ARTICLE_CATEGORY,
+      articleCategory: 'Arts',
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.articleCategory).toEqual(action.articleCategory);
+  });
+
+  it('it should add article data', () => {
+    const action = {
+      type: types.ADD_ARTICLE_DATA,
+      articleData: { Arts: [1, 2, 3] },
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.articleData).toEqual(action.articleData);
+  });
 });
 
 describe('Connected ListArticleComponent Component Dispatches Success', () => {
@@ -100,6 +139,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
       fetchArticleState: '',
       errorMessage: '',
     },
+    articleData: 'Data',
   };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
@@ -120,7 +160,9 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
+    const storeState = store.getState();
     expect(storeActions[0].type).toEqual('SET_FETCH_ARTICLE_STATE');
+    expect(storeState.articleData).toEqual('Data');
   });
 });
 
@@ -151,7 +193,7 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
   });
 });
 
-describe('it should render the EllipsisLoaderComponent if making request', () => {
+describe('Loader Component', () => {
   const state = {
     fetchArticle: {
       fetchArticleState: 'FETCHING_ARTICLE',

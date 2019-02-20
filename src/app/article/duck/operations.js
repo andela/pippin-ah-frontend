@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import actions from './actions';
 import constants from './constants';
 
@@ -51,9 +50,6 @@ const doFetchArticle = articleCategory => dispatch => {
     .catch(({ response }) => {
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
       dispatch(setFetchArticleError(response.data.error));
-      toast.error(response.data.error, {
-        hideProgressBar: true,
-      });
     });
 };
 
