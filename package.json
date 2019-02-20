@@ -7,8 +7,8 @@
     "start:dev": "webpack-dev-server --config webpack/webpack.dev.js --open --hot",
     "build": "webpack --config webpack/webpack.prod.js",
     "serve": "node server.js",
-    "start": "npm run build && npm run serve",
-    "heroku-postbuild": "bower install && grunt build",
+    "start": "npm run build",
+    "heroku-postbuild": "npm install && npm build",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test:dev": "jest --coverage",
     "update:snapshot": "jest --updateSnapshot"
