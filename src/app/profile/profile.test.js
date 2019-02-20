@@ -285,7 +285,7 @@ describe(' PROFILE TEST SUITE', () => {
       expect(state).toEqual(data);
     });
 
-    it('should return an empty object for VIEW_USER_PROFILE', () => {
+    it('should return an Array of object for VIEW_USER_PROFILE', () => {
       const state = profileReducer(undefined, {
         type: 'VIEW_USER_PROFILE',
       });
@@ -298,13 +298,24 @@ describe(' PROFILE TEST SUITE', () => {
       expect(state).toEqual(data);
     });
 
-    it('should return an empty object for SET_UPLOADING_STATUS', () => {
+    it('should return an  Array of object for SET_UPLOADING_STATUS', () => {
       const data = {
         updateStatus: '',
         uploadStatus: undefined,
       };
       const state = profileReducer(undefined, {
         type: 'SET_UPLOADING_STATUS',
+      });
+      expect(state).toEqual(data);
+    });
+
+    it('should return an  Array of object for SET_PROFILE_UPDATE', () => {
+      const data = {
+        updateStatus: undefined,
+        uploadStatus: '',
+      };
+      const state = profileReducer(undefined, {
+        type: 'SET_PROFILE_UPDATE',
       });
       expect(state).toEqual(data);
     });
