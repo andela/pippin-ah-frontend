@@ -45,6 +45,8 @@ export const uploadImage = (page, imageUrl, uploadFormData) => {
       saveImage(page, fileURL);
       return data.secure_url;
     })
-    .catch(err => err);
+    .catch(err => {
+      return err;
+    });
 };
 export default uploadImage;
