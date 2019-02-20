@@ -6,7 +6,6 @@ import { uploadImage } from '../../util/uploadToCloudinary';
 const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
 const { setCreateStatus } = actions;
 const doCreateArticle = articleDetails => dispatch => {
-
   if (!articleDetails.uploadCoverUrl) {
     return dispatch(
       setCreateStatus({
