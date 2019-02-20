@@ -32,7 +32,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/science"
             >
               Science
             </Link>
@@ -40,7 +40,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/technology"
             >
               Technology
             </Link>
@@ -48,7 +48,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/engineering"
             >
               Engineering
             </Link>
@@ -56,7 +56,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/arts"
             >
               Arts
             </Link>
@@ -64,7 +64,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/mathematics"
             >
               Mathematics
             </Link>
