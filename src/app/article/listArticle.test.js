@@ -2,10 +2,11 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import configureStore from 'redux-mock-store';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import ListArticleComponent from './ListArticleComponent';
 import { actions, constants, fetchArticleReducer, types } from './duck';
+import getArticleCategory from './util/getArticleCategory';
 import { EllipsisLoaderComponent } from '../loaders';
 import {
   ListArticleContainer,
@@ -140,6 +141,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
       errorMessage: '',
     },
     articleData: 'Data',
+    articleCategory: 'Arts',
   };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
@@ -161,6 +163,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
     const storeState = store.getState();
+    console.log('---++-->*<--++---', storeActions);
     expect(storeActions[0].type).toEqual('SET_FETCH_ARTICLE_STATE');
     expect(storeState.articleData).toEqual('Data');
   });
@@ -217,3 +220,28 @@ describe('Loader Component', () => {
     expect(component.contains(<EllipsisLoaderComponent />)).toEqual(true);
   });
 });
+
+/* describe('Get article category function', () => {
+  const { pathname } = window.location;
+  beforeAll(() => {
+    Object.defineProperty(window.location, 'pathname', {
+      writable: true,
+    });
+    window.location.pathname = jest.fn();
+  });
+  afterAll(() => {
+    window.location.pathname = pathname;
+  });
+  it('should get article category', () => {
+    window.location.pathname = '/articles/science';
+    const result = getArticleCategory();
+    console.log('---result', result);
+    expect(result).toEqual('Science');
+  })
+  it('should return empty string', () => {
+    window.location.pathname = '/';
+    const result = getArticleCategory();
+    console.log('result', result);
+    expect(result).toEqual('');
+  })
+}) */
