@@ -53,7 +53,15 @@ const ListArticleComponent = ({
                     <span className="card-title activator flow-text truncate center-align">
                       {article.title}
                     </span>
-                    <strong>by: {article.author}</strong>
+                    <span className="list-read-time">
+                      <strong>
+                        <span className="li-nav-color">Readtime:</span>{' '}
+                        {article.readTime} minute
+                      </strong>
+                    </span>
+                    <strong>
+                      <span className="li-nav-color">by:</span> {article.author}
+                    </strong>
                     <div>
                       <a href="/#">Read more</a>
                     </div>
