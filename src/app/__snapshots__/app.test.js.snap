@@ -27,12 +27,12 @@ exports[`App should render App 1`] = `
     <Route
       component={[Function]}
       exact={true}
-      path="/subject/:category"
+      path="/articles"
     />
     <Route
       component={[Function]}
       exact={true}
-      path="/articles"
+      path="/articles/:category"
     />
     <Route
       component={[Function]}
