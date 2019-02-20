@@ -234,13 +234,6 @@ describe('ARTICLE TEST SUITE', () => {
         .init.images_upload_handler(blobInfo, success, failure);
       expect(success).not.toHaveBeenCalled();
     });
-
-    it('should call the file picker callback when file is selected', () => {
-      const component = shallow(<EditorComponent />);
-      const cb = jest.fn();
-      // console.log(component.find('Editor').props().init.file_picker_callback());
-      // const spy = jest.spyOn(editorFilePicker.prototype(), '');
-    });
   });
 
   describe('Create Article Actions', () => {

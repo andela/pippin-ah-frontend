@@ -12,8 +12,7 @@ class CreateArticleComponent extends React.Component {
     this.state = {
       body: '',
       canScrollToTop: false,
-      coverImageUrl:
-        'https://res.cloudinary.com/hba821/image/upload/v1550580103/iit15w9cb3jvbohazwke.png',
+      coverImageUrl: '',
       uploadCoverUrl: '',
     };
   }
