@@ -57,7 +57,7 @@ const ListArticleComponent = ({
                     <img
                       className="activator"
                       alt="Cover"
-                      src="http://www.catbreedslist.com/cat-wallpapers/Kitten-cute-lying-claws-900x506.jpg"
+                      src={article.imageUrl}
                     />
                   </div>
                   <div className="card-content right-align">
