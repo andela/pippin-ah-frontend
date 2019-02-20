@@ -2,7 +2,7 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import configureStore from 'redux-mock-store';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
 import ListArticleComponent from './ListArticleComponent';
 import { actions, constants, fetchArticleReducer, types } from './duck';
@@ -245,3 +245,19 @@ describe('Loader Component', () => {
     expect(result).toEqual('');
   })
 }) */
+
+/* describe('componentDidUpdate', () => {
+  const mock = jest.fn();
+  const props = {
+    fetchArticle: () => {},
+    articleData: {Arts: 'random stuff'},
+    articleCategory: 'Arts',
+    setCategory: mock
+  };
+  it('sets category', () => {
+      const wrapper = shallow(<ListArticleContainer  {...props} />);
+      wrapper.setProps({ articleData: { Arts: "something else" }, articleCategory: 'Science', setCategory: mock });
+      expect(wrapper.instance().props.setCategory).toBeCalled();
+  })
+})
+ */
