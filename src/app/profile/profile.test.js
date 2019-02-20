@@ -3,6 +3,7 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import moxios from 'moxios';
+import jwtDecode from 'jwt-decode';
 import configureStore from 'redux-mock-store';
 import ProfileComponent from './ProfileComponent';
 
@@ -19,10 +20,21 @@ import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
 
 const { setUserProfile, viewUserProfile, setPictureUploadStatus } = actions;
 
-// jest.mock('axios');
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
-const store = mockStore({});
+jest.mock('jwt-decode');
+
+global.localStorage = {
+  getItem: key => {
+    return this.store[key] || null;
+  },
+  setItem: (key, value) => {
+    this.store[key] = value.toString();
+  },
+  removeItem(key) {
+    delete this.store[key];
+  },
+};
 
 const props = {
   viewData: {
@@ -125,10 +137,6 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe(' select profile picture to upload', () => {
-    /*    beforeEach(() => {
-      const response = '';
-      axios.post.mockResolvedValue(response);
-    }); */
     it('should handle form submit for picture', () => {
       const wrapper = shallow(<ProfileComponent {...props} />);
       const event = {
@@ -158,6 +166,7 @@ describe(' PROFILE TEST SUITE', () => {
     });
     */
     it('Should test for update profile: success', done => {
+      const store = mockStore({});
       const profileData = {
         firstName: 'Wisdom',
         lastName: 'Dowda',
@@ -182,20 +191,42 @@ describe(' PROFILE TEST SUITE', () => {
         profileData,
       });
 
-      const expectedActions = [
-        {
-          type: types.SET_USER_PROFILE,
-          profileData,
-        },
-        {
-          type: types.VIEW_USER_PROFILE,
-          viewData,
-        },
-      ];
-
       store.dispatch(updateUserProfile(profileData)).then(() => {
         expect(store.getActions()).toEqual([
           { profileData: undefined, type: 'SET_USER_PROFILE' },
+        ]);
+        done();
+      });
+    });
+
+    it('Should test for view profile: success', done => {
+      const store = mockStore({});
+      const viewData = {
+        firstName: 'Wisdom',
+        lastName: 'Dowda',
+        bio: 'lives in lagos',
+        interests: 'Science',
+        articles: {
+          total: 3,
+          top: ['mockData'],
+        },
+      };
+
+      const result = {
+        username: 'hba821',
+      };
+      jwtDecode.mockImplementation(() => result);
+
+      const url =
+        'https://learnground-api-staging.herokuapp.com/api/v1/user/hba821';
+      moxios.stubRequest(url, {
+        status: 200,
+        response: viewData,
+      });
+
+      store.dispatch(viewProfile()).then(() => {
+        expect(store.getActions()).toEqual([
+          { viewData, type: 'VIEW_USER_PROFILE' },
         ]);
         done();
       });
