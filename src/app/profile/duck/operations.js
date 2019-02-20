@@ -40,9 +40,8 @@ export const pictureUtils = imageUrl => dispatch => {
 export const viewProfile = () => dispatch => {
   const token = localStorage.getItem('token');
   const decoded = jwtDecode(token);
-  const url = `https://learnground-api-staging.herokuapp.com/api/v1/user/${
-    decoded.username
-  }`;
+
+  const getCurrentUserUrl = `${process.env.API_URL}user/${decoded.username}`;
 
   const defaultOptions = {
     headers: {
@@ -51,7 +50,7 @@ export const viewProfile = () => dispatch => {
   };
 
   return axios
-    .get(url, defaultOptions)
+    .get(getCurrentUserUrl, defaultOptions)
     .then(({ data }) => {
       dispatch(viewUserProfile(data));
     })
@@ -62,7 +61,7 @@ export const viewProfile = () => dispatch => {
     });
 };
 
-const url2 = 'https://learnground-api-staging.herokuapp.com/api/v1/profile';
+const updateProfileUrl = `${process.env.API_URL}profile`;
 
 export const updateUserProfile = (
   firstName,
@@ -79,7 +78,7 @@ export const updateUserProfile = (
   };
   return axios
     .patch(
-      url2,
+      updateProfileUrl,
       {
         firstName,
         lastName,

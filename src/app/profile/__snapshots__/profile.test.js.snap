@@ -12,13 +12,13 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
     className="container"
   >
     <h2
-      className="center-align headlinesProfile"
+      className="center-align profile-headlinesProfile"
     >
        PROFILE 
     </h2>
   </div>
   <div
-    className="row from-top"
+    className="row profile-from-top"
   >
     <div
       className="col s12 m1 l1"
@@ -72,8 +72,8 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
       </div>
     </div>
     <div
-      className="col s12 m5 l2 move-top"
-      id="details"
+      className="col s12 m5 l2 profile-move-top"
+      id="profile-details"
     >
       <div
         className="card small z-depth-0"
@@ -112,7 +112,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
       </div>
     </div>
     <div
-      className="col s12 m12 l5 move-top"
+      className="col s12 m12 l5 profile-move-top"
     >
       <div
         className="card small z-depth-0"
@@ -121,19 +121,19 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           className="card-content"
         >
           <span
-            className="headlines"
+            className="profile-headlines"
           >
             BIOGRAPHY
           </span>
           <br />
           <span
-            id="bio"
+            id="profile-bio"
           />
         </div>
         <a
-          className="btn modal-trigger btncolor"
+          className="btn modal-trigger profile-btncolor"
           href="#modal1"
-          id="shift"
+          id="profile-shift"
         >
           Update Profile
         </a>
@@ -155,7 +155,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                   className="card small"
                 >
                   <div
-                    className="card-image removespace"
+                    className="card-image profile-removespace"
                   >
                     <img
                       alt="profilepicture"
@@ -172,11 +172,11 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                         className="file-field input-field"
                       >
                         <div
-                          className="button-container"
+                          className="profile-button-container"
                         >
                           <div
-                            className="btn btncolor"
-                            id="buttondiv"
+                            className="btn profile-btncolor"
+                            id="profile-buttondiv"
                           >
                             <input
                               id="img"
@@ -185,16 +185,16 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                               type="file"
                             />
                             <span
-                              className="btnalign"
+                              className="profile-btnalign"
                             >
                               change Photo
                             </span>
                           </div>
                           <div
-                            id="submitDiv"
+                            id="profile-submitDiv"
                           >
                             <button
-                              className="btn btncolor"
+                              className="btn profile-btncolor"
                               id=""
                               onClick={[Function]}
                               type="submit"
@@ -210,7 +210,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
               </div>
               <form
                 className="col s12 m6 l8"
-                id="update_profile"
+                id="profile-update_profile"
                 onSubmit={[Function]}
               >
                 <div
@@ -220,7 +220,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     className="input-field col s12"
                   >
                     <i
-                      className="material-icons prefix color-ions"
+                      className="material-icons prefix profile-color-ions"
                     >
                       account_circle
                     </i>
@@ -240,7 +240,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     className="input-field col s12"
                   >
                     <i
-                      className="material-icons prefix color-ions"
+                      className="material-icons prefix profile-color-ions"
                     >
                       account_circle
                     </i>
@@ -260,7 +260,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     className="input-field col s12"
                   >
                     <i
-                      className="material-icons prefix color-ions"
+                      className="material-icons prefix profile-color-ions"
                     >
                       favorite
                     </i>
@@ -307,7 +307,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     className="input-field col s12"
                   >
                     <i
-                      className="material-icons prefix color-ions"
+                      className="material-icons prefix profile-color-ions"
                     >
                       mode_edit
                     </i>
@@ -338,7 +338,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
   </div>
   <div>
     <div
-      className="row horizontalrule"
+      className="row profile-horizontalrule"
     >
       <div
         className="col s12 m6 l4"
@@ -355,7 +355,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
   </div>
   <div>
     <div
-      className="row move-top2"
+      className="row profile-move-top2"
     >
       <div
         className="col l4"
@@ -364,13 +364,13 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         className="col s12 m12 l8"
       >
         <span
-          className="headlines"
-          id="topic"
+          className="profile-headlines"
+          id="profile-topic"
         >
           TOP FIVE ARTICLES
         </span>
         <div
-          id="topArticles"
+          id="profile-topArticles"
         >
           <p
             key="mockData"
