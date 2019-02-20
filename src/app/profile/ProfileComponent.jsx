@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import '../../style/profile.scss';
+import './profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
 import constants from './duck/constants';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -58,9 +57,10 @@ class ProfileComponent extends React.Component {
   };
 
   render() {
-    const { viewData, uploadStatus } = this.props;
+    const { viewData, uploadStatus, updateStatus } = this.props;
     const { imageSelected } = this.state;
     const { newProfileUrl } = uploadStatus;
+
     return (
       <div>
         <div className="container">
@@ -142,7 +142,7 @@ class ProfileComponent extends React.Component {
               <div id="modal1" className="modal modal-fixed-footer">
                 <div className="modal-content" id="cardpad">
                   <div className="row">
-                    <div className="col s12 m6 l6">
+                    <div className="col s12 m6 l4">
                       <div className="card small">
                         <div className="card-image removespace">
                           <img
@@ -153,26 +153,37 @@ class ProfileComponent extends React.Component {
                         <div className="card-tabs">
                           <form onSubmit={this.uploadPicture}>
                             <div className="file-field input-field">
-                              <div className="btn btncolor" id="centralize">
-                                <span>Change Photo</span>
-                                <input
-                                  type="file"
-                                  name="profilepix"
-                                  id="img"
-                                  onChange={this.displayImage}
-                                />
+                              {uploadStatus.status ===
+                                constants.PICTURE_UPDATING && (
+                                <EllipsisLoaderComponent />
+                              )}
 
-                                <br />
-                              </div>
+                              {uploadStatus.status === undefined && (
+                                <div className="button-container">
+                                  <div className="btn btncolor" id="buttondiv">
+                                    <input
+                                      type="file"
+                                      name="profilepix"
+                                      id="img"
+                                      onChange={this.displayImage}
+                                    />
+                                    <span className="btnalign">
+                                      change Photo
+                                    </span>
+                                  </div>
+                                  <div id="submitDiv">
+                                    <button
+                                      type="submit"
+                                      className="btn btncolor"
+                                      id=""
+                                      onClick={this.uploadPicture}
+                                    >
+                                      Upload photo
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                            <button
-                              type="submit"
-                              className="btn btncolor"
-                              id="centralize"
-                            >
-                              Upload
-                            </button>
-
                             {uploadStatus.status ===
                               constants.PICTURE_UPDATING && (
                               <EllipsisLoaderComponent />
@@ -194,7 +205,7 @@ class ProfileComponent extends React.Component {
                     </div>
                     <form
                       onSubmit={this.handleSubmit}
-                      className="col s12 m6 l6"
+                      className="col s12 m6 l8"
                       id="update_profile"
                     >
                       <div className="row">
@@ -223,14 +234,17 @@ class ProfileComponent extends React.Component {
                           <label htmlFor="icon_telephone">Last Name</label>
                         </div>
                         <div className="input-field col s12">
+                          <i className="material-icons prefix color-ions">
+                            favorite
+                          </i>
                           <select
                             name="interest"
                             defaultValue=""
-                            className="browser-default"
+                            className="input-field"
                             required
                           >
                             <option value="" disabled>
-                              Select Category
+                              Select Interest
                             </option>
                             <option value="Mathematics">Mathematics</option>
                             <option value="Arts">Arts</option>
@@ -250,15 +264,35 @@ class ProfileComponent extends React.Component {
                           />
                           <label htmlFor="textarea1">Biography</label>
                         </div>
-                        <button
-                          className="btn waves-effect waves-light btncolor"
-                          type="submit"
-                          name="action"
-                          id="shiftupdate"
-                        >
-                          Update
-                          <i className="material-icons right">send</i>
-                        </button>
+                        {updateStatus === constants.PROFILE_UPDATING && (
+                          <EllipsisLoaderComponent />
+                        )}
+                        {updateStatus === '' && (
+                          <button
+                            className="btn btncolor"
+                            type="submit"
+                            name="action"
+                            id="shiftupdate"
+                          >
+                            Update
+                            <i className="material-icons right">send</i>
+                          </button>
+                        )}
+                        {updateStatus === constants.PROFILE_UPDATING && (
+                          <EllipsisLoaderComponent />
+                        )}
+
+                        {updateStatus === constants.PROFILE_UPDATE_SUCCESS && (
+                          <span className="sucessMessage2">
+                            Profile Updated Sucessfully.
+                          </span>
+                        )}
+
+                        {updateStatus === constants.PROFILE_UPDATE_ERROR && (
+                          <span className="centralize">
+                            Profile Updated Sucessfully.
+                          </span>
+                        )}
                       </div>
                     </form>
                   </div>

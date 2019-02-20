@@ -156,15 +156,6 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe('Test for Functions In Operations', () => {
-    /*   beforeEach(() => {
-      moxios.install();
-      const response = '';
-      axios.post.mockResolvedValue(response);
-    });
-    afterEach(() => {
-      moxios.uninstall();
-    });
-    */
     it('Should test for update profile: success', done => {
       const store = mockStore({});
       const profileData = {
@@ -191,10 +182,25 @@ describe(' PROFILE TEST SUITE', () => {
         profileData,
       });
 
+      const data = [
+        {
+          type: 'SET_PROFILE_UPDATE',
+
+          updateStatus: 'PROFILE_UPDATING',
+        },
+        {
+          type: 'SET_PROFILE_UPDATE',
+
+          updateStatus: 'PROFILE_SUCCESS',
+        },
+        {
+          profileData: undefined,
+          type: 'SET_USER_PROFILE',
+        },
+      ];
+
       store.dispatch(updateUserProfile(profileData)).then(() => {
-        expect(store.getActions()).toEqual([
-          { profileData: undefined, type: 'SET_USER_PROFILE' },
-        ]);
+        expect(store.getActions()).toEqual(data);
         done();
       });
     });
@@ -231,14 +237,48 @@ describe(' PROFILE TEST SUITE', () => {
         done();
       });
     });
+
+    it('Should test for view picture upload test: success', done => {
+      const store = mockStore({});
+      const viewData = {
+        firstName: 'Wisdom',
+        lastName: 'Dowda',
+        bio: 'lives in lagos',
+        interests: 'Science',
+        articles: {
+          total: 3,
+          top: ['mockData'],
+        },
+      };
+
+      const result = {
+        username: 'hba821',
+      };
+      jwtDecode.mockImplementation(() => result);
+
+      const url =
+        'https://learnground-api-staging.herokuapp.com/api/v1/user/hba821';
+      moxios.stubRequest(url, {
+        status: 200,
+        response: viewData,
+      });
+
+      store.dispatch(viewProfile()).then(() => {
+        expect(store.getActions()).toEqual([
+          { viewData, type: 'VIEW_USER_PROFILE' },
+        ]);
+        done();
+      });
+    });
   });
 
   describe('Profile Reducers', () => {
-    it('should return an empty object for SET_USER_PROFILE', () => {
+    it('should return an store data for SET_USER_PROFILE', () => {
       const state = profileReducer(undefined, {
         type: 'SET_USER_PROFILE',
       });
       const data = {
+        updateStatus: '',
         uploadStatus: '',
         viewData: undefined,
       };
@@ -251,6 +291,7 @@ describe(' PROFILE TEST SUITE', () => {
       });
 
       const data = {
+        updateStatus: '',
         uploadStatus: '',
         viewData: undefined,
       };
@@ -258,10 +299,14 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should return an empty object for SET_UPLOADING_STATUS', () => {
+      const data = {
+        updateStatus: '',
+        uploadStatus: undefined,
+      };
       const state = profileReducer(undefined, {
         type: 'SET_UPLOADING_STATUS',
       });
-      expect(state).toEqual({});
+      expect(state).toEqual(data);
     });
   });
 

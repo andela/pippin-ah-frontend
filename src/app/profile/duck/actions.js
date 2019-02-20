@@ -15,8 +15,14 @@ const setPictureUploadStatus = uploadStatus => ({
   uploadStatus,
 });
 
+const setProfileUpdateStatus = updateStatus => ({
+  type: types.SET_PROFILE_UPDATE,
+  updateStatus,
+});
+
 export default {
   setUserProfile,
   viewUserProfile,
   setPictureUploadStatus,
+  setProfileUpdateStatus,
 };

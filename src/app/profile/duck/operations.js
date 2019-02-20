@@ -5,7 +5,12 @@ import actions from './actions';
 import upload from '../../util/uploadToCloudinary';
 import constants from './constants';
 
-const { viewUserProfile, setUserProfile, setPictureUploadStatus } = actions;
+const {
+  viewUserProfile,
+  setUserProfile,
+  setPictureUploadStatus,
+  setProfileUpdateStatus,
+} = actions;
 
 export const pictureUtils = imageUrl => dispatch => {
   dispatch(
@@ -66,6 +71,7 @@ export const updateUserProfile = (
   bio,
 ) => dispatch => {
   const token = localStorage.getItem('token');
+  dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATING));
   const defaultOptions = {
     headers: {
       Authorization: token,
@@ -83,9 +89,11 @@ export const updateUserProfile = (
       defaultOptions,
     )
     .then(({ data }) => {
+      dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_SUCCESS));
       dispatch(setUserProfile(data));
     })
     .catch(({ response }) => {
+      dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_ERROR));
       toast.error(response.data.error, {
         hideProgressBar: true,
       });

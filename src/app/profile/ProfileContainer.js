@@ -3,12 +3,13 @@ import ProfileComponent from './ProfileComponent';
 import { viewProfile, updateUserProfile, pictureUtils } from './duck';
 
 export const mapStateToProps = ({
-  profile: { viewData, profileData, uploadStatus },
+  profile: { viewData, profileData, uploadStatus, updateStatus },
 }) => {
   return {
     viewData,
     profileData,
     uploadStatus,
+    updateStatus,
   };
 };
 

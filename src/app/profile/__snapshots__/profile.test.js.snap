@@ -149,7 +149,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
               className="row"
             >
               <div
-                className="col s12 m6 l6"
+                className="col s12 m6 l4"
               >
                 <div
                   className="card small"
@@ -172,34 +172,44 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                         className="file-field input-field"
                       >
                         <div
-                          className="btn btncolor"
-                          id="centralize"
+                          className="button-container"
                         >
-                          <span>
-                            Change Photo
-                          </span>
-                          <input
-                            id="img"
-                            name="profilepix"
-                            onChange={[Function]}
-                            type="file"
-                          />
-                          <br />
+                          <div
+                            className="btn btncolor"
+                            id="buttondiv"
+                          >
+                            <input
+                              id="img"
+                              name="profilepix"
+                              onChange={[Function]}
+                              type="file"
+                            />
+                            <span
+                              className="btnalign"
+                            >
+                              change Photo
+                            </span>
+                          </div>
+                          <div
+                            id="submitDiv"
+                          >
+                            <button
+                              className="btn btncolor"
+                              id=""
+                              onClick={[Function]}
+                              type="submit"
+                            >
+                              Upload photo
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <button
-                        className="btn btncolor"
-                        id="centralize"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </form>
                   </div>
                 </div>
               </div>
               <form
-                className="col s12 m6 l6"
+                className="col s12 m6 l8"
                 id="update_profile"
                 onSubmit={[Function]}
               >
@@ -249,8 +259,13 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                   <div
                     className="input-field col s12"
                   >
+                    <i
+                      className="material-icons prefix color-ions"
+                    >
+                      favorite
+                    </i>
                     <select
-                      className="browser-default"
+                      className="input-field"
                       defaultValue=""
                       name="interest"
                       required={true}
@@ -259,7 +274,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                         disabled={true}
                         value=""
                       >
-                        Select Category
+                        Select Interest
                       </option>
                       <option
                         value="Mathematics"
@@ -307,19 +322,6 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                       Biography
                     </label>
                   </div>
-                  <button
-                    className="btn waves-effect waves-light btncolor"
-                    id="shiftupdate"
-                    name="action"
-                    type="submit"
-                  >
-                    Update
-                    <i
-                      className="material-icons right"
-                    >
-                      send
-                    </i>
-                  </button>
                 </div>
               </form>
             </div>

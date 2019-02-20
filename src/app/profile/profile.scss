@@ -2,6 +2,44 @@
   background-color: #5ed3f1;
 }
 
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#buttondiv {
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 22px;
+  margin-left: 10px;
+}
+
+.sucessMessage2 {
+  margin-left: 20%;
+}
+
+#submitDiv {
+  padding: 6px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.btnalign {
+  margin-top: -100%;
+}
+
+#img {
+  width: 50%;
+  padding-top: 10%;
+}
+
+form,
+.file-field {
+  width: 100%;
+}
+
 .btncolor:hover {
   background-color: #880038;
 }
@@ -10,12 +48,6 @@
   color: #666;
   line-height: 25px;
   margin-top: 0.5em;
-}
-
-.sucessMessage {
-  color: #666;
-  margin-left: 15%;
-  margin-top: 15%;
 }
 
 .headlines {

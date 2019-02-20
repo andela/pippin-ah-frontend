@@ -2,6 +2,7 @@ import types from './types';
 
 const defaultState = {
   uploadStatus: '',
+  updateStatus: '',
 };
 
 const profileReducer = (state = defaultState, action) => {
@@ -27,6 +28,14 @@ const profileReducer = (state = defaultState, action) => {
       return {
         ...state,
         uploadStatus,
+      };
+    }
+
+    case types.SET_PROFILE_UPDATE: {
+      const { updateStatus } = action;
+      return {
+        ...state,
+        updateStatus,
       };
     }
 
