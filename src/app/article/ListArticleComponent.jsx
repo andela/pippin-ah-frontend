@@ -7,13 +7,10 @@ import './ListArticle.scss';
 
 const category = getArticleCatigory();
 
-let pageNumber = 1;
-
 const methods = {
   componentDidMount({ fetchArticle }) {
-    fetchArticle(category, pageNumber);
+    fetchArticle(category);
   },
-
   componentDidUpdate({
     articleCategory,
     articleData,
@@ -23,7 +20,7 @@ const methods = {
     const newCategory = getArticleCatigory();
     const storeData = articleData && articleData[newCategory];
     if (articleCategory !== newCategory && !storeData) {
-      fetchArticle(newCategory, pageNumber);
+      fetchArticle(newCategory);
     }
     return setCategory(newCategory);
   },
@@ -33,17 +30,7 @@ const ListArticleComponent = ({
   fetchArticleState,
   articleData,
   articleCategory,
-  appendArticleData,
 }) => {
-  window.onscroll = () => {
-    const { scrollHeight } = document.body;
-    const totalHeight = window.scrollY + window.innerHeight;
-
-    if (totalHeight >= scrollHeight) {
-      pageNumber += 1;
-      appendArticleData(articleCategory, pageNumber);
-    }
-  };
   return (
     <Fragment>
       <div className="container">

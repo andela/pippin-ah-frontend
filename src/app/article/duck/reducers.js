@@ -51,15 +51,6 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         articleData: { ...oldArticleData, ...articleData },
       };
     }
-    case types.APPEND_ARTICLE_DATA: {
-      const { newCategoryData } = action;
-      const category = state.articleCategory;
-      const { articleData } = state;
-      const oldCategoryData = state.articleData[category];
-      return state.merge({
-        articleData: [...state.articleData[category], newCategoryData],
-      });
-    }
     default:
       return state;
   }
