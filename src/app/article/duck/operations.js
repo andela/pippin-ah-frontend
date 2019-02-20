@@ -18,6 +18,14 @@ const doCreateArticle = articleDetails => dispatch => {
   const { uploadCoverUrl } = articleDetails;
   uploadImage('article', uploadCoverUrl)
     .then(imageLink => {
+      if (typeof imageLink !== 'string') {
+        return dispatch(
+          setCreateStatus({
+            status: constants.CREATE_ERROR,
+            data: 'error uploading cover image',
+          }),
+        );
+      }
       articleDetails.coverImageUrl = imageLink;
       const headers = {
         headers: { Authorization: localStorage.getItem('token') },
