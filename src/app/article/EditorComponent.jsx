@@ -38,10 +38,10 @@ const EditorComponent = ({ handleEditorChange }) => {
           formData.append('file', blobInfo.blob(), blobInfo.filename());
           uploadImage('article', 'data', formData)
             .then(imageLink => {
-              success(imageLink);
+              return success(imageLink);
             })
             .catch(e => {
-              failure(`error uploading imgage: ${e}`);
+              return failure(`error uploading imgage: ${e}`);
             });
         },
       }}
