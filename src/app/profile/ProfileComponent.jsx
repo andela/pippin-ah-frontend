@@ -64,9 +64,9 @@ class ProfileComponent extends React.Component {
     return (
       <div>
         <div className="container">
-          <h2 className="center-align headlinesProfile"> PROFILE </h2>
+          <h2 className="center-align profile-headlinesProfile"> PROFILE </h2>
         </div>
-        <div className="row from-top">
+        <div className="row profile-from-top">
           <div className="col s12 m1 l1" />
           <div className="col s12 m6 l3">
             <div className="card small">
@@ -99,7 +99,7 @@ class ProfileComponent extends React.Component {
               </div>
             </div>
           </div>
-          <div className="col s12 m5 l2 move-top" id="details">
+          <div className="col s12 m5 l2 profile-move-top" id="profile-details">
             <div className="card small z-depth-0">
               <div className="card-content">
                 Articles : &nbsp;&nbsp; &nbsp;{' '}
@@ -122,19 +122,19 @@ class ProfileComponent extends React.Component {
             </div>
           </div>
 
-          <div className="col s12 m12 l5 move-top">
+          <div className="col s12 m12 l5 profile-move-top">
             <div className="card small z-depth-0">
               <div className="card-content">
-                <span className="headlines">BIOGRAPHY</span>
+                <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
-                <span id="bio">
+                <span id="profile-bio">
                   {viewData ? viewData.bio : <h6>loading ...</h6>}
                 </span>
               </div>
               <a
-                className="btn modal-trigger btncolor"
+                className="btn modal-trigger profile-btncolor"
                 href="#modal1"
-                id="shift"
+                id="profile-shift"
               >
                 Update Profile
               </a>
@@ -144,7 +144,7 @@ class ProfileComponent extends React.Component {
                   <div className="row">
                     <div className="col s12 m6 l4">
                       <div className="card small">
-                        <div className="card-image removespace">
+                        <div className="card-image profile-removespace">
                           <img
                             src={imageSelected || profilepicture}
                             alt="profilepicture"
@@ -159,22 +159,25 @@ class ProfileComponent extends React.Component {
                               )}
 
                               {uploadStatus.status === undefined && (
-                                <div className="button-container">
-                                  <div className="btn btncolor" id="buttondiv">
+                                <div className="profile-button-container">
+                                  <div
+                                    className="btn profile-btncolor"
+                                    id="profile-buttondiv"
+                                  >
                                     <input
                                       type="file"
                                       name="profilepix"
                                       id="img"
                                       onChange={this.displayImage}
                                     />
-                                    <span className="btnalign">
+                                    <span className="profile-btnalign">
                                       change Photo
                                     </span>
                                   </div>
-                                  <div id="submitDiv">
+                                  <div id="profile-submitDiv">
                                     <button
                                       type="submit"
-                                      className="btn btncolor"
+                                      className="btn profile-btncolor"
                                       id=""
                                       onClick={this.uploadPicture}
                                     >
@@ -190,12 +193,12 @@ class ProfileComponent extends React.Component {
                             )}
                             {uploadStatus.status ===
                               constants.UPDATE_SUCCESS && (
-                              <span className="sucessMessage">
+                              <span className="profile-sucessMessage">
                                 Picture Uploaded Sucessfully.
                               </span>
                             )}
                             {uploadStatus.status === constants.UPDATE_ERROR && (
-                              <span className="centralize">
+                              <span className="profile-centralize">
                                 An Error Occured
                               </span>
                             )}
@@ -206,11 +209,11 @@ class ProfileComponent extends React.Component {
                     <form
                       onSubmit={this.handleSubmit}
                       className="col s12 m6 l8"
-                      id="update_profile"
+                      id="profile-update_profile"
                     >
                       <div className="row">
                         <div className="input-field col s12">
-                          <i className="material-icons prefix color-ions">
+                          <i className="material-icons prefix profile-color-ions">
                             account_circle
                           </i>
                           <input
@@ -222,7 +225,7 @@ class ProfileComponent extends React.Component {
                           <label htmlFor="icon_prefix">First Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <i className="material-icons prefix color-ions">
+                          <i className="material-icons prefix profile-color-ions">
                             account_circle
                           </i>
                           <input
@@ -234,7 +237,7 @@ class ProfileComponent extends React.Component {
                           <label htmlFor="icon_telephone">Last Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <i className="material-icons prefix color-ions">
+                          <i className="material-icons prefix profile-color-ions">
                             favorite
                           </i>
                           <select
@@ -254,7 +257,7 @@ class ProfileComponent extends React.Component {
                           </select>
                         </div>
                         <div className="input-field col s12">
-                          <i className="material-icons prefix color-ions">
+                          <i className="material-icons prefix profile-color-ions">
                             mode_edit
                           </i>
                           <textarea
@@ -269,10 +272,10 @@ class ProfileComponent extends React.Component {
                         )}
                         {updateStatus === '' && (
                           <button
-                            className="btn btncolor"
+                            className="btn profile-btncolor"
                             type="submit"
                             name="action"
-                            id="shiftupdate"
+                            id="profile-shiftupdate"
                           >
                             Update
                             <i className="material-icons right">send</i>
@@ -283,13 +286,13 @@ class ProfileComponent extends React.Component {
                         )}
 
                         {updateStatus === constants.PROFILE_UPDATE_SUCCESS && (
-                          <span className="sucessMessage2">
+                          <span className="profile-sucessMessage2">
                             Profile Updated Sucessfully.
                           </span>
                         )}
 
                         {updateStatus === constants.PROFILE_UPDATE_ERROR && (
-                          <span className="centralize">
+                          <span className="profile-centralize">
                             Profile Updated Sucessfully.
                           </span>
                         )}
@@ -304,7 +307,7 @@ class ProfileComponent extends React.Component {
         </div>
 
         <div>
-          <div className="row horizontalrule">
+          <div className="row profile-horizontalrule">
             <div className="col s12 m6 l4" />
             <div className="col s12 m6 l7">
               <hr />
@@ -314,13 +317,13 @@ class ProfileComponent extends React.Component {
         </div>
 
         <div>
-          <div className="row move-top2">
+          <div className="row profile-move-top2">
             <div className="col l4" />
             <div className="col s12 m12 l8">
-              <span className="headlines" id="topic">
+              <span className="profile-headlines" id="profile-topic">
                 TOP FIVE ARTICLES
               </span>
-              <div id="topArticles">
+              <div id="profile-topArticles">
                 {viewData ? (
                   viewData.articles.top.map(articles => {
                     return (
