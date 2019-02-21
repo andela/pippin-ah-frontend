@@ -149,9 +149,12 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   beforeEach(() => {
     const response = { data: 'fetchArticle successful' };
     axios.get.mockResolvedValue(response);
+    const articleData = {
+      Science: [{ title: 'first article' }],
+    };
     wrapper = mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <ListArticleContainer articleData={articleData} />
       </Provider>,
     );
   });
@@ -242,18 +245,21 @@ describe('Test for not receiving article category', () => {
   });
 });
 
-/* describe('componentDidUpdate', () => {
+describe('componentDidUpdate', () => {
   const mock = jest.fn();
   const props = {
     fetchArticle: () => {},
-    articleData: {Arts: 'random stuff'},
+    articleData: { Arts: 'random stuff' },
     articleCategory: 'Arts',
-    setCategory: mock
+    setCategory: mock,
   };
   it('sets category', () => {
-      const wrapper = shallow(<ListArticleContainer  {...props} />);
-      wrapper.setProps({ articleData: { Arts: "something else" }, articleCategory: 'Science', setCategory: mock });
-      expect(wrapper.instance().props.setCategory).toBeCalled();
-  })
-})
- */
+    const wrapper = shallow(<ListArticleContainer {...props} />);
+    wrapper.setProps({
+      articleData: { Arts: 'something else' },
+      articleCategory: 'Science',
+      setCategory: mock,
+    });
+    expect(wrapper.instance().props.setCategory).toBeCalled();
+  });
+});
