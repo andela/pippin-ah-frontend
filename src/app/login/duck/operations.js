@@ -8,8 +8,7 @@ const baseUrl = 'http://localhost:3000/api/v1';
 const url = `${baseUrl}/users/login`;
 
 export const googleUrl = `${baseUrl}/users/google`;
-export const twitterUrl = `${baseUrl}/users
-|/twitter`;
+export const twitterUrl = `${baseUrl}/users/twitter`;
 export const facebookUrl = `${baseUrl}/users/facebook`;
 
 export const doLogin = (usernameOrEmail, password) => dispatch => {
