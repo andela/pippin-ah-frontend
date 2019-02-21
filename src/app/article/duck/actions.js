@@ -25,9 +25,9 @@ const addArticleData = articleData => ({
   articleData,
 });
 
-const appendArticleData = newCategoryData => ({
-  type: types.APPEND_ARTICLE_DATA,
-  newCategoryData,
+const updateCategoryData = appendedCategoryData => ({
+  type: types.UPDATE_CATEGORY_DATA,
+  appendedCategoryData,
 });
 
 export default {
@@ -35,6 +35,6 @@ export default {
   setFetchArticleError,
   setArticleCategory,
   addArticleData,
-  appendArticleData,
+  updateCategoryData,
   setCreateStatus,
 };
