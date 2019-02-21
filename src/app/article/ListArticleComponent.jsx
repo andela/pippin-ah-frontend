@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
+import { Link } from 'react-router-dom';
 import { constants } from './duck';
 import getArticleCategory from './util/getArticleCategory';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -9,8 +10,13 @@ import './ListArticle.scss';
 const category = getArticleCategory();
 
 const methods = {
-  componentDidMount({ fetchArticle }) {
-    fetchArticle(category);
+  componentDidMount({ fetchArticle, articleData, setCategory }) {
+    if (!articleData) {
+      fetchArticle(category);
+    }
+    if (articleData && articleData[category]) {
+      return setCategory(category);
+    }
   },
   componentDidUpdate({
     articleCategory,
@@ -74,7 +80,7 @@ const ListArticleComponent = ({
                     </span>
                     <strong>by: {article.author}</strong>
                     <div id="liAuthorNameXz">
-                      <a href="/#">Read more</a>
+                      <Link to={`/article/${article.slug}`}>Read more</Link>
                     </div>
                   </div>
                   <div className="card-reveal">
@@ -84,7 +90,9 @@ const ListArticleComponent = ({
                     </span>
                     <p>{article.description}</p>
                     <div>
-                      <a href="/#">Click here to read</a>
+                      <Link to={`/article/${article.slug}`}>
+                        Click here to read
+                      </Link>
                     </div>
                   </div>
                 </div>
