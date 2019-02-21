@@ -10,7 +10,7 @@ const {
   setFetchArticleError,
   setArticleCategory,
   addArticleData,
-  appendArticleData,
+  updateCategoryData,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -64,7 +64,11 @@ const doFetchArticle = (articleCategory, page) => dispatch => {
 const doSetCategory = articleCategory => dispatch => {
   dispatch(setArticleCategory(articleCategory));
 };
-const doAppendArticleData = (articleCategory, page) => dispatch => {
+const doUpdateCategoryData = (
+  articleCategory,
+  page,
+  currentData,
+) => dispatch => {
   return axios
     .get(url, {
       params: {
@@ -74,12 +78,13 @@ const doAppendArticleData = (articleCategory, page) => dispatch => {
       },
     })
     .then(({ data }) => {
-      console.log('+-+-+==+-+-+', data);
-      dispatch(appendArticleData(data.articles));
+      const appendedCategoryData = currentData.concat(data.articles);
+      console.log('+-+-+==+-+-+', appendedCategoryData);
+      dispatch(updateCategoryData({ [articleCategory]: appendedCategoryData }));
     })
     .catch(({ data }) => {
       console.log('----**->', data);
     });
 };
 
-export { doCreateArticle, doFetchArticle, doSetCategory, doAppendArticleData };
+export { doCreateArticle, doFetchArticle, doSetCategory, doUpdateCategoryData };
