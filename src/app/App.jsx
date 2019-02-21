@@ -9,6 +9,7 @@ import Navbar from './navBar/NavbarComponent';
 import ProfileContainer from './profile';
 import { ResetPassword } from './resetPassword';
 import { NewPassword } from './newPassword';
+import SocialAuth from './login/SocialAuth';
 
 const App = () => (
   <Router>
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/newpassword" component={NewPassword} exact />
         <Route path="/create-article" component={CreateArticle} exact />
+        <Route path="/auth" component={SocialAuth} exact />
       </Switch>
       <Footer />
     </Fragment>
