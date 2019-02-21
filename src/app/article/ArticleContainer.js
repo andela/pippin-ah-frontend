@@ -7,7 +7,7 @@ const mapStateToProps = ({ createArticle: { singleFetchStatus } }) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    createArticle: () => dispatch(doFetchArticle()),
+    fetchSingleArticle: slug => dispatch(doFetchArticle(slug)),
   };
 };
 
