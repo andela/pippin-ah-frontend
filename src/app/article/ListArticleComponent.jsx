@@ -42,7 +42,7 @@ const ListArticleComponent = ({
 }) => {
   return (
     <Fragment>
-      <div className="container">
+      <div className="container li-article">
         {fetchArticleState === 'FETCHING_ARTICLE' && elipsisLoader}
         <div className="col s12 center-align">
           <h3>{articleCategory}</h3>
@@ -53,11 +53,11 @@ const ListArticleComponent = ({
             articleData[articleCategory].map(article => (
               <div className="col s12 m6 l4" key={article.slug}>
                 <div className="card">
-                  <div className="card-image">
+                  <div id="article-li-image" className="card-image">
                     <img
                       className="activator"
                       alt="Cover"
-                      src={article.imageUrl}
+                      src={article.coverImageUrl}
                     />
                   </div>
                   <div className="card-content right-align">

@@ -1,13 +1,14 @@
-.container {
+.li-article .container {
   width: 90%;
 }
 
-.card-image img {
+#article-li-image img {
   cursor: pointer;
   height: 14em;
-  width: auto !important;
+  width: auto;
   display: block;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 .li-loader .ellipsis {
