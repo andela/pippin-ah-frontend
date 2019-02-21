@@ -221,30 +221,26 @@ describe('Loader Component', () => {
   });
 });
 
-/* describe('Get article category function', () => {
-  const { pathname } = window.location;
-  beforeAll(() => {
-    Object.defineProperty(window.location, 'pathname', {
-      writable: true,
-    });
-    window.location.pathname = jest.fn();
-  });
-  afterAll(() => {
-    window.location.pathname = pathname;
+describe('Test for receiving article category', () => {
+  beforeEach(() => {
+    window.history.pushState({}, 'Test Title', '/articles/science');
   });
   it('should get article category', () => {
-    window.location.pathname = '/articles/science';
     const result = getArticleCategory();
     console.log('---result', result);
     expect(result).toEqual('Science');
-  })
+  });
+});
+
+describe('Test for not receiving article category', () => {
+  beforeEach(() => {
+    window.history.pushState({}, 'Test Title', '/');
+  });
   it('should return empty string', () => {
-    window.location.pathname = '/';
     const result = getArticleCategory();
-    console.log('result', result);
     expect(result).toEqual('');
-  })
-}) */
+  });
+});
 
 /* describe('componentDidUpdate', () => {
   const mock = jest.fn();
