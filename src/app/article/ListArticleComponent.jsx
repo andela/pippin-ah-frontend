@@ -33,7 +33,7 @@ const ListArticleComponent = ({
   fetchArticleState,
   articleData,
   articleCategory,
-  fetchArticle,
+  appendArticleData,
 }) => {
   window.onscroll = () => {
     const { scrollHeight } = document.body;
@@ -41,7 +41,13 @@ const ListArticleComponent = ({
 
     if (totalHeight >= scrollHeight) {
       pageNumber += 1;
-      fetchArticle(articleCategory, pageNumber);
+      console.log('^*^^**^^^***-', articleData[articleCategory]);
+      console.log('&&&^*^^**^^^***-&&', appendArticleData);
+      appendArticleData(
+        articleCategory,
+        pageNumber,
+        articleData[articleCategory],
+      );
     }
   };
   return (
