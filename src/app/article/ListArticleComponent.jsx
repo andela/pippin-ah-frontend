@@ -42,7 +42,7 @@ const ListArticleComponent = ({
 }) => {
   return (
     <Fragment>
-      <div className="container li-article">
+      <div id="liArticleContainer" className="container">
         {fetchArticleState === 'FETCHING_ARTICLE' && elipsisLoader}
         <div className="col s12 center-align">
           <h3>{articleCategory}</h3>
@@ -51,21 +51,29 @@ const ListArticleComponent = ({
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
             articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
-              <div className="col s12 m6 l4" key={article.slug}>
-                <div className="card">
-                  <div id="article-li-image" className="card-image">
+              <div
+                id="liMainDivXz"
+                className="col s12 m6 l4"
+                key={article.slug}
+              >
+                <div className="card" id="liCardDivXz">
+                  <div id="articleImageDivXz">
                     <img
+                      id="articleImageXz"
                       className="activator"
                       alt="Cover"
                       src={article.coverImageUrl}
                     />
                   </div>
-                  <div className="card-content right-align">
-                    <span className="card-title activator flow-text truncate center-align">
+                  <div id="listTitleDivXz" className="card-content right-align">
+                    <span
+                      id="listTitleXz"
+                      className="card-title activator flow-text truncate center-align"
+                    >
                       {article.title}
                     </span>
                     <strong>by: {article.author}</strong>
-                    <div>
+                    <div id="liAuthorNameXz">
                       <a href="/#">Read more</a>
                     </div>
                   </div>
