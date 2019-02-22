@@ -100,6 +100,7 @@
   height: auto;
   max-height: 100%;
   grid-gap: 10px;
+  margin-top: 20px;
 }
 
 .description-box {
@@ -113,11 +114,12 @@
 .article-header {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 10px;
+  padding-left: 30px;
+  padding-top: 40px;
 }
 
 .article-title {
@@ -127,7 +129,7 @@
   font-weight: bold;
   line-height: normal;
   font-size: 37px;
-  text-align: center;
+  text-align: left;
 }
 
 .article-description .author-heading {
@@ -140,9 +142,8 @@
 }
 
 .article-description p {
-  padding-left: 10%;
-  padding-right: 10%;
-  font-size: 28px;
+  font-size: 22px;
+  text-align: left;
 }
 
 .author-description .author-heading {
@@ -151,13 +152,6 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-}
-
-.author-description .fa-user-alt {
-  font-size: 30px;
-  align-self: center;
-  border-radius: 50%;
-  margin-right: 10px;
 }
 
 .comment-owner .fa-user-circle {
@@ -183,10 +177,32 @@
   margin-top: 10px;
 }
 
+.author-description .default-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #512da8;
+  font: normal;
+  font-size: 35px;
+  padding-top: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.author-info {
+  padding: 0;
+  text-align: left;
+}
+
 .author-info,
 .article-details,
 .article-likes {
-  margin: 10px;
+  margin: 5px;
+}
+
+.article-details {
+  display: flex;
+  margin-left: 10px;
 }
 
 .author-name {
@@ -196,7 +212,7 @@
   font-weight: normal;
   line-height: normal;
   font-size: 16px;
-  text-align: center;
+  text-align: left;
   color: rgba(0, 0, 0, 0.7);
   width: 50px;
   word-wrap: break-word;
@@ -209,7 +225,7 @@
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   color: rgba(0, 0, 0, 0.7);
   margin-left: 10px;
@@ -217,18 +233,12 @@
 
 .article-date,
 .article-read-time {
-  padding: 5px;
   font-family: Rosario;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
   font-size: 16px;
-  text-align: center;
   color: rgba(0, 0, 0, 0.4);
-}
-
-.article-date {
-  margin-left: -14px;
 }
 
 .article-likes {
@@ -255,9 +265,9 @@
 }
 
 .description-text {
+  display: flex;
+  flex-direction: column;
   height: auto;
-  max-height: 80px;
-  margin-top: auto;
 }
 
 .article-category {
@@ -526,7 +536,17 @@ textarea::-webkit-input-placeholder {
   font-size: 16px;
 }
 
-@media screen and (max-width: 1000px) {
+.center-in-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
   .wrapper {
     grid-template-columns: 1fr;
     max-height: none;
@@ -541,11 +561,15 @@ textarea::-webkit-input-placeholder {
   }
 
   .article-content {
-    margin-top: 100px;
+    margin-top: 60px;
   }
 
   .article-header {
     margin-top: 20px;
+  }
+
+  .article-description p {
+    padding-right: 10%;
   }
 }
 
@@ -574,18 +598,3 @@ textarea::-webkit-input-placeholder {
     margin-right: 0;
   }
 }
-
-// @media screen and (max-width: 500px) {
-//   .profile-photo-container {
-//     height: 140px;
-//     width: 140px;
-//   }
-
-//   .author-description {
-//     flex-wrap: wrap;
-//   }
-
-//   .article-category {
-//     row-gap: -20px;
-//   }
-// }
