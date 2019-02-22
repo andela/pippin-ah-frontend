@@ -52,7 +52,6 @@ class ProfileComponent extends React.Component {
     const { uploadStatus, updateStatus, data, loginData } = this.props;
     const { imageSelected } = this.state;
     const { newProfileUrl } = uploadStatus;
-    const { newProfileUrl } = updateStatus;
     const firstName = localStorage.getItem('firstName');
     const lastName = localStorage.getItem('lastName');
     const bio = localStorage.getItem('bio');
@@ -62,6 +61,14 @@ class ProfileComponent extends React.Component {
     const interests = localStorage.getItem('interests');
     const topArticles = localStorage.getItem('topArticles');
     const totalArticles = localStorage.getItem('totalArticles');
+    const { newProfileDetails } = updateStatus;
+
+    // if(newProfileDetails) {
+
+    // }
+
+    console.log(newProfileDetails);
+    console.log(newProfileUrl);
 
     return (
       <div>
@@ -81,8 +88,12 @@ class ProfileComponent extends React.Component {
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
-                  {data ? data.username : firstName}{' '}
-                  {data ? data.username : lastName}
+                  {newProfileDetails
+                    ? newProfileDetails.data.firstName
+                    : firstName}{' '}
+                  {newProfileDetails
+                    ? newProfileDetails.data.lastName
+                    : lastName}
                   <i className="material-icons right">more_vert</i>
                 </span>
               </div>
@@ -91,8 +102,12 @@ class ProfileComponent extends React.Component {
                   You Are Viewing<i className="material-icons right">close</i>
                 </span>
                 <p>
-                  {data ? data.username : firstName}{' '}
-                  {data ? data.username : lastName}
+                  {newProfileDetails
+                    ? newProfileDetails.data.firstName
+                    : firstName}{' '}
+                  {newProfileDetails
+                    ? newProfileDetails.data.lastName
+                    : lastName}
                 </p>
               </div>
             </div>
@@ -122,7 +137,9 @@ class ProfileComponent extends React.Component {
               <div className="card-content">
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
-                <span id="profile-bio">{data ? data.bio : bio}</span>
+                <span id="profile-bio">
+                  {newProfileDetails ? newProfileDetails.data.bio : bio}
+                </span>
               </div>
               <a
                 className="btn modal-trigger profile-btncolor"
@@ -274,17 +291,19 @@ class ProfileComponent extends React.Component {
                             <i className="material-icons right">send</i>
                           </button>
                         )}
-                        {updateStatus === constants.PROFILE_UPDATING && (
+                        {updateStatus.status === constants.PROFILE_UPDATING && (
                           <EllipsisLoaderComponent />
                         )}
 
-                        {updateStatus === constants.PROFILE_UPDATE_SUCCESS && (
+                        {updateStatus.status ===
+                          constants.PROFILE_UPDATE_SUCCESS && (
                           <span className="profile-sucessMessage2">
                             Profile Updated Sucessfully.
                           </span>
                         )}
 
-                        {updateStatus === constants.PROFILE_UPDATE_ERROR && (
+                        {updateStatus.status ===
+                          constants.PROFILE_UPDATE_ERROR && (
                           <span className="profile-centralize">
                             Profile Updated Sucessfully.
                           </span>

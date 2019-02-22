@@ -16,7 +16,6 @@ const store = createStore(
   rootReducer,
   /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)),
 );
-// const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

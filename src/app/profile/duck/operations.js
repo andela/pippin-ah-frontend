@@ -61,9 +61,14 @@ export const updateUserProfile = (
       },
       defaultOptions,
     )
-    .then(({ data }) => {
-      dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_SUCCESS));
-      dispatch(setUserProfile(data));
+    .then(newProfileDetails => {
+      dispatch(
+        setProfileUpdateStatus({
+          status: constants.PROFILE_UPDATE_SUCCESS,
+          newProfileDetails,
+        }),
+      );
+      dispatch(setUserProfile(newProfileDetails));
     })
     .catch(({ response }) => {
       dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_ERROR));
