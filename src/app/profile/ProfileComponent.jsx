@@ -159,7 +159,7 @@ class ProfileComponent extends React.Component {
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
                 <span id="profile-bio">
-                  {newProfileDetails ? newProfileDetails.data.bio : bio}
+                  {mentor ? newProfileDetails.data.bio : bio}
                 </span>
               </div>
               <a
@@ -367,7 +367,7 @@ class ProfileComponent extends React.Component {
                         </p>
                       );
                     })
-                  : 'No Articles Yet'}
+                  : 'You Have No Articles Yet'}
               </div>
             </div>
           </div>
