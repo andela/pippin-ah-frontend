@@ -12,7 +12,6 @@ import {
   types,
   constants,
   profileReducer,
-  viewProfile,
   updateUserProfile,
 } from './duck';
 import ProfileContainer from './ProfileContainer';
@@ -50,9 +49,15 @@ const props = {
     interest: 'Arts',
   },
   uploadStatus: {},
-  viewProfile: jest.fn(),
+  updateStatus: {},
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
+  newProfileDetails: {
+    firstName: 'Habib',
+    lastName: 'moses',
+    bio: 'Software developer at andela',
+    interest: 'Arts',
+  },
 };
 
 describe(' PROFILE TEST SUITE', () => {
@@ -67,6 +72,11 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should render Profile dumb component', () => {
+      const result = {
+        isMentor: false,
+      };
+      jwtDecode.mockImplementation(() => result);
+
       const component = shallow(<ProfileComponent {...props} />);
       expect(component.exists()).toBe(true);
       expect(component).toMatchSnapshot();
@@ -76,7 +86,6 @@ describe(' PROFILE TEST SUITE', () => {
       const component = shallow(<ProfileContainer {...props} />);
       const dispatch = jest.fn();
 
-      mapDispatchToProps(dispatch).viewProfile();
       mapDispatchToProps(dispatch).updateUserProfile();
       mapDispatchToProps(dispatch).pictureUtils();
     });
@@ -156,7 +165,7 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe('Test for Functions In Operations', () => {
-    it('Should test for update profile: success', done => {
+    it('Should test for update profile: success', () => {
       const store = mockStore({});
       const profileData = {
         firstName: 'Wisdom',
@@ -165,21 +174,19 @@ describe(' PROFILE TEST SUITE', () => {
         interests: 'Science',
       };
 
-      const viewData = {
-        firstName: 'Wisdom',
-        lastName: 'Dowda',
-        bio: 'lives in lagos',
-        interests: 'Science',
-        articles: {
-          total: 3,
-          top: ['mockData'],
-        },
+      const newProfileDetails = {
+        firstName: 'Habib',
+        lastName: 'moses',
+        bio: 'Software developer at andela',
+        interest: 'Arts',
       };
+
       const url =
         'https://learnground-api-staging.herokuapp.com/api/v1/profile';
       moxios.stubRequest(url, {
         status: 200,
         profileData,
+        newProfileDetails,
       });
 
       const data = [
@@ -192,6 +199,7 @@ describe(' PROFILE TEST SUITE', () => {
           type: 'SET_PROFILE_UPDATE',
 
           updateStatus: 'PROFILE_SUCCESS',
+          newProfileDetails,
         },
         {
           profileData: undefined,
@@ -200,149 +208,61 @@ describe(' PROFILE TEST SUITE', () => {
       ];
 
       store.dispatch(updateUserProfile(profileData)).then(() => {
-        expect(store.getActions()).toEqual(data);
-        done();
+        expect(store.getActions()).resolves.toEqual(data);
       });
     });
 
-    it('Should test for view profile: success', done => {
-      const store = mockStore({});
-      const viewData = {
-        firstName: 'Wisdom',
-        lastName: 'Dowda',
-        bio: 'lives in lagos',
-        interests: 'Science',
-        articles: {
-          total: 3,
-          top: ['mockData'],
-        },
-      };
-
-      const result = {
-        username: 'hba821',
-      };
-      jwtDecode.mockImplementation(() => result);
-
-      const url =
-        'https://learnground-api-staging.herokuapp.com/api/v1/user/hba821';
-      moxios.stubRequest(url, {
-        status: 200,
-        response: viewData,
+    describe('Profile Reducers', () => {
+      it('should return an store data for SET_USER_PROFILE', () => {
+        const state = profileReducer(undefined, {
+          type: 'SET_USER_PROFILE',
+        });
+        const data = {
+          updateStatus: '',
+          uploadStatus: '',
+          viewData: undefined,
+        };
+        expect(state).toEqual(data);
       });
 
-      store.dispatch(viewProfile()).then(() => {
-        expect(store.getActions()).toEqual([
-          { viewData, type: 'VIEW_USER_PROFILE' },
-        ]);
-        done();
-      });
-    });
-
-    it('Should test for view picture upload test: success', done => {
-      const store = mockStore({});
-      const viewData = {
-        firstName: 'Wisdom',
-        lastName: 'Dowda',
-        bio: 'lives in lagos',
-        interests: 'Science',
-        articles: {
-          total: 3,
-          top: ['mockData'],
-        },
-      };
-
-      const result = {
-        username: 'hba821',
-      };
-      jwtDecode.mockImplementation(() => result);
-
-      const url =
-        'https://learnground-api-staging.herokuapp.com/api/v1/user/hba821';
-      moxios.stubRequest(url, {
-        status: 200,
-        response: viewData,
+      it('should return an  Array of object for SET_UPLOADING_STATUS', () => {
+        const data = {
+          updateStatus: '',
+          uploadStatus: undefined,
+        };
+        const state = profileReducer(undefined, {
+          type: 'SET_UPLOADING_STATUS',
+        });
+        expect(state).toEqual(data);
       });
 
-      store.dispatch(viewProfile()).then(() => {
-        expect(store.getActions()).toEqual([
-          { viewData, type: 'VIEW_USER_PROFILE' },
-        ]);
-        done();
-      });
-    });
-  });
-
-  describe('Profile Reducers', () => {
-    it('should return an store data for SET_USER_PROFILE', () => {
-      const state = profileReducer(undefined, {
-        type: 'SET_USER_PROFILE',
-      });
-      const data = {
-        updateStatus: '',
-        uploadStatus: '',
-        viewData: undefined,
-      };
-      expect(state).toEqual(data);
-    });
-
-    it('should return an Array of object for VIEW_USER_PROFILE', () => {
-      const state = profileReducer(undefined, {
-        type: 'VIEW_USER_PROFILE',
-      });
-
-      const data = {
-        updateStatus: '',
-        uploadStatus: '',
-        viewData: undefined,
-      };
-      expect(state).toEqual(data);
-    });
-
-    it('should return an  Array of object for SET_UPLOADING_STATUS', () => {
-      const data = {
-        updateStatus: '',
-        uploadStatus: undefined,
-      };
-      const state = profileReducer(undefined, {
-        type: 'SET_UPLOADING_STATUS',
-      });
-      expect(state).toEqual(data);
-    });
-
-    it('should return an  Array of object for SET_PROFILE_UPDATE', () => {
-      const data = {
-        updateStatus: undefined,
-        uploadStatus: '',
-      };
-      const state = profileReducer(undefined, {
-        type: 'SET_PROFILE_UPDATE',
-      });
-      expect(state).toEqual(data);
-    });
-  });
-
-  describe('Profile Actions', () => {
-    it('it should update the profile state', () => {
-      const action = setUserProfile(constants.SET_USER_PROFILE);
-      expect(action).toEqual({
-        type: types.SET_USER_PROFILE,
-        profileData: constants.SET_USER_PROFILE,
+      it('should return an  Array of object for SET_PROFILE_UPDATE', () => {
+        const data = {
+          updateStatus: undefined,
+          uploadStatus: '',
+        };
+        const state = profileReducer(undefined, {
+          type: 'SET_PROFILE_UPDATE',
+        });
+        expect(state).toEqual(data);
       });
     });
 
-    it('it should set view profile state', () => {
-      const action = viewUserProfile(constants.VIEW_USER_PROFILE);
-      expect(action).toEqual({
-        type: types.VIEW_USER_PROFILE,
-        viewData: constants.VIEW_USER_PROFILE,
+    describe('Profile Actions', () => {
+      it('it should update the profile state', () => {
+        const action = setUserProfile(constants.SET_USER_PROFILE);
+        expect(action).toEqual({
+          type: types.SET_USER_PROFILE,
+          profileData: constants.SET_USER_PROFILE,
+        });
       });
-    });
 
-    it('it should set update profile status', () => {
-      const action = setPictureUploadStatus(constants.UPDATE_SUCCESS);
-      expect(action).toEqual({
-        type: types.SET_UPLOADING_STATUS,
-        uploadStatus: constants.UPDATE_SUCCESS,
+      it('it should set update profile status', () => {
+        const action = setPictureUploadStatus(constants.UPDATE_SUCCESS);
+        expect(action).toEqual({
+          type: types.SET_UPLOADING_STATUS,
+          uploadStatus: constants.UPDATE_SUCCESS,
+        });
       });
     });
   });
