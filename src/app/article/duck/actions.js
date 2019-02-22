@@ -20,6 +20,11 @@ const setArticleCategory = articleCategory => ({
   articleCategory,
 });
 
+const setCurrentPage = currentPage => ({
+  type: types.SET_CURRENT_PAGE,
+  currentPage,
+});
+
 const addArticleData = articleData => ({
   type: types.ADD_ARTICLE_DATA,
   articleData,
@@ -36,5 +41,6 @@ export default {
   setArticleCategory,
   addArticleData,
   updateCategoryData,
+  setCurrentPage,
   setCreateStatus,
 };
