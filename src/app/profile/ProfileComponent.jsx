@@ -63,12 +63,15 @@ class ProfileComponent extends React.Component {
     const totalArticles = localStorage.getItem('totalArticles');
     const { newProfileDetails } = updateStatus;
 
-    // if(newProfileDetails) {
-
-    // }
-
-    console.log(newProfileDetails);
-    console.log(newProfileUrl);
+    if (newProfileDetails) {
+      localStorage.setItem('firstName', newProfileDetails.data.firstName);
+      localStorage.setItem('lastName', newProfileDetails.data.lastName);
+      localStorage.setItem('bio', newProfileDetails.data.bio);
+      localStorage.setItem('interests', newProfileDetails.data.interests);
+    }
+    if (newProfileUrl) {
+      localStorage.setItem('imageUrl', newProfileUrl);
+    }
 
     return (
       <div>
