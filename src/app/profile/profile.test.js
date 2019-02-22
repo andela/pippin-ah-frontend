@@ -15,9 +15,9 @@ import {
   updateUserProfile,
 } from './duck';
 import ProfileContainer from './ProfileContainer';
-import { mapDispatchToProps, mapStateToProps } from './ProfileContainer';
+import { mapDispatchToProps } from './ProfileContainer';
 
-const { setUserProfile, viewUserProfile, setPictureUploadStatus } = actions;
+const { setUserProfile, setPictureUploadStatus } = actions;
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
