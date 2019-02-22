@@ -59,12 +59,12 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-const doFetchArticle = () => dispatch => {
+const doFetchArticle = slug => dispatch => {
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
   };
   return axios
-    .get(`${baseUrl}articles`, headers)
+    .get(`${baseUrl}articles/${slug}`, headers)
     .then(({ data }) => {
       dispatch(
         setSingleFetchStatus({
