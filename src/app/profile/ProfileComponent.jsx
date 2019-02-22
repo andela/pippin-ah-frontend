@@ -179,7 +179,9 @@ class ProfileComponent extends React.Component {
                             <div className="file-field input-field">
                               {uploadStatus.status ===
                                 constants.PICTURE_UPDATING && (
-                                <EllipsisLoaderComponent />
+                                <div className="profile-Eclipsloader">
+                                  <EllipsisLoaderComponent />
+                                </div>
                               )}
 
                               {uploadStatus.status === undefined && (
@@ -211,10 +213,7 @@ class ProfileComponent extends React.Component {
                                 </div>
                               )}
                             </div>
-                            {uploadStatus.status ===
-                              constants.PICTURE_UPDATING && (
-                              <EllipsisLoaderComponent />
-                            )}
+
                             {uploadStatus.status ===
                               constants.UPDATE_SUCCESS && (
                               <span className="profile-sucessMessage">
@@ -266,11 +265,11 @@ class ProfileComponent extends React.Component {
                           </i>
                           <select
                             name="interest"
-                            defaultValue=""
+                            defaultValue={interests}
                             className="input-field"
                             required
                           >
-                            <option selected="selected">{interests}</option>
+                            <option>{interests}</option>
                             <option value="Mathematics">Mathematics</option>
                             <option value="Arts">Arts</option>
                             <option value="Science">Science</option>
@@ -289,6 +288,7 @@ class ProfileComponent extends React.Component {
                             defaultValue={bio || 'Biography'}
                           />
                         </div>
+
                         {updateStatus === constants.PROFILE_UPDATING && (
                           <EllipsisLoaderComponent />
                         )}
