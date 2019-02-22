@@ -184,7 +184,9 @@ class ProfileComponent extends React.Component {
                                 </div>
                               )}
 
-                              {uploadStatus.status === undefined && (
+                              {(uploadStatus.status === undefined ||
+                                uploadStatus.status ===
+                                  constants.UPDATE_SUCCESS) && (
                                 <div className="profile-button-container">
                                   <div
                                     className="btn profile-btncolor"
@@ -216,7 +218,7 @@ class ProfileComponent extends React.Component {
 
                             {uploadStatus.status ===
                               constants.UPDATE_SUCCESS && (
-                              <span className="profile-sucessMessage">
+                              <span className="profile-sucessMessage2">
                                 Picture Uploaded Sucessfully.
                               </span>
                             )}
@@ -292,24 +294,25 @@ class ProfileComponent extends React.Component {
                         {updateStatus === constants.PROFILE_UPDATING && (
                           <EllipsisLoaderComponent />
                         )}
-                        {updateStatus === '' && (
-                          <button
-                            className="btn profile-btncolor"
-                            type="submit"
-                            name="action"
-                            id="profile-shiftupdate"
-                          >
-                            Update
-                            <i className="material-icons right">send</i>
-                          </button>
-                        )}
-                        {updateStatus.status === constants.PROFILE_UPDATING && (
-                          <EllipsisLoaderComponent />
+                        {(updateStatus === '' ||
+                          updateStatus.status ===
+                            constants.PROFILE_UPDATE_SUCCESS) && (
+                          <div id="learnground">
+                            <button
+                              className="btn profile-btncolor"
+                              type="submit"
+                              name="action"
+                              id="profile-shiftupdate"
+                            >
+                              Update
+                              <i className="material-icons right">send</i>
+                            </button>
+                          </div>
                         )}
 
                         {updateStatus.status ===
                           constants.PROFILE_UPDATE_SUCCESS && (
-                          <span className="profile-sucessMessage2">
+                          <span className="profile-sucessMessage3">
                             Profile Updated Sucessfully.
                           </span>
                         )}
@@ -317,7 +320,7 @@ class ProfileComponent extends React.Component {
                         {updateStatus.status ===
                           constants.PROFILE_UPDATE_ERROR && (
                           <span className="profile-centralize">
-                            Profile Updated Sucessfully.
+                            An error Ocuured while updating....
                           </span>
                         )}
                       </div>
