@@ -297,10 +297,11 @@ class ProfileComponent extends React.Component {
                             defaultValue={bio || 'Biography'}
                           />
                         </div>
-
-                        {updateStatus === constants.PROFILE_UPDATING && (
-                          <EllipsisLoaderComponent />
-                        )}
+                        <div className="profile-Eclipsloader2">
+                          {updateStatus === constants.PROFILE_UPDATING && (
+                            <EllipsisLoaderComponent />
+                          )}
+                        </div>
                         {(updateStatus === '' ||
                           updateStatus.status ===
                             constants.PROFILE_UPDATE_SUCCESS) && (
@@ -366,7 +367,7 @@ class ProfileComponent extends React.Component {
                         </p>
                       );
                     })
-                  : topArticles}
+                  : 'No Articles Yet'}
               </div>
             </div>
           </div>
