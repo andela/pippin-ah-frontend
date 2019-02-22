@@ -13,7 +13,18 @@ const doLogin = (usernameOrEmail, password) => dispatch => {
     .post(url, { usernameOrEmail, password })
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
-      dispatch(setLoginState(constants.LOGIN_SUCCESS));
+
+      localStorage.setItem('firstName', data.firstName);
+      localStorage.setItem('lastName', data.lastName);
+      localStorage.setItem('bio', data.bio);
+      localStorage.setItem('interest', data.interests);
+      localStorage.setItem('followers', data.followers);
+      localStorage.setItem('following', data.following);
+      localStorage.setItem('imageUrl', data.imageUrl);
+      localStorage.setItem('topArticles', data.articles.top);
+      localStorage.setItem('totalArticles', data.articles.total);
+
+      dispatch(setLoginState(constants.LOGIN_SUCCESS, data));
     })
     .catch(({ response }) => {
       dispatch(setLoginState(constants.LOGIN_ERROR));

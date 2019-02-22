@@ -15,14 +15,6 @@ const profileReducer = (state = defaultState, action) => {
       };
     }
 
-    case types.VIEW_USER_PROFILE: {
-      const { viewData } = action;
-      return {
-        ...state,
-        viewData,
-      };
-    }
-
     case types.SET_UPLOADING_STATUS: {
       const { uploadStatus } = action;
       return {

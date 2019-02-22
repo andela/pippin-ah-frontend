@@ -11,21 +11,13 @@ class ProfileComponent extends React.Component {
     imageUrl: '',
   };
 
-  componentDidMount() {
-    const { viewProfile } = this.props;
-    viewProfile();
-  }
-
   handleSubmit = event => {
-    const { updateUserProfile, viewData } = this.props;
+    const { updateUserProfile } = this.props;
     event.preventDefault();
-    const firstName =
-      event.target.elements.firstName.value.trim() || viewData.firstName;
-    const lastName =
-      event.target.elements.lastName.value.trim() || viewData.lastName;
-    const interest =
-      event.target.elements.interest.value.trim() || viewData.interest;
-    const bio = event.target.elements.bio.value.trim() || viewData.bio;
+    const firstName = event.target.elements.firstName.value.trim();
+    const lastName = event.target.elements.lastName.value.trim();
+    const interest = event.target.elements.interest.value.trim();
+    const bio = event.target.elements.bio.value.trim();
 
     updateUserProfile(firstName, lastName, interest, bio);
   };
@@ -57,9 +49,19 @@ class ProfileComponent extends React.Component {
   };
 
   render() {
-    const { viewData, uploadStatus, updateStatus } = this.props;
+    const { uploadStatus, updateStatus, data, loginData } = this.props;
     const { imageSelected } = this.state;
     const { newProfileUrl } = uploadStatus;
+    const { newProfileUrl } = updateStatus;
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const bio = localStorage.getItem('bio');
+    const imageUrl = localStorage.getItem('imageUrl');
+    const followers = localStorage.getItem('followers');
+    const following = localStorage.getItem('following');
+    const interests = localStorage.getItem('interests');
+    const topArticles = localStorage.getItem('topArticles');
+    const totalArticles = localStorage.getItem('totalArticles');
 
     return (
       <div>
@@ -71,20 +73,16 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m6 l3">
             <div className="card small">
               <div className="card-image">
-                {viewData ? (
-                  <img
-                    src={newProfileUrl || viewData.imageUrl}
-                    alt="profilepicture"
-                    className="activator"
-                  />
-                ) : (
-                  <h6>loading...</h6>
-                )}{' '}
+                <img
+                  src={newProfileUrl || imageUrl}
+                  alt="profilepicture"
+                  className="activator"
+                />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
-                  {viewData ? viewData.firstName : <h6>loading...</h6>}{' '}
-                  {viewData ? viewData.lastName : <h6>loading...</h6>}
+                  {data ? data.username : firstName}{' '}
+                  {data ? data.username : lastName}
                   <i className="material-icons right">more_vert</i>
                 </span>
               </div>
@@ -93,8 +91,8 @@ class ProfileComponent extends React.Component {
                   You Are Viewing<i className="material-icons right">close</i>
                 </span>
                 <p>
-                  {viewData ? viewData.firstName : <h6>loading...</h6>}{' '}
-                  {viewData ? viewData.lastName : <h6>loading...</h6>}
+                  {data ? data.username : firstName}{' '}
+                  {data ? data.username : lastName}
                 </p>
               </div>
             </div>
@@ -103,17 +101,14 @@ class ProfileComponent extends React.Component {
             <div className="card small z-depth-0">
               <div className="card-content">
                 Articles : &nbsp;&nbsp; &nbsp;{' '}
-                {viewData ? viewData.articles.total : <h6>loading...</h6>}{' '}
-                <br />
+                {data ? data.articles.total : totalArticles} <br />
                 <br /> <br />
-                Following : &nbsp;{' '}
-                {viewData ? viewData.following : <h6>loading...</h6>} <br />
+                Following : &nbsp; {data ? data.following : following} <br />
                 <br /> <br />
-                Followers : &nbsp;{' '}
-                {viewData ? viewData.followers : <h6>loading...</h6>} <br />
+                Followers : &nbsp; {data ? data.followers : followers} <br />
                 <br /> <br />
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {viewData ? viewData.isMentor : <h6>loading...</h6>}
+                {data ? data.isMentor : <h6>loading...</h6>}
                 {/* <i className="material-icons prefix">check_box</i> */}
                 <br />
                 <br />
@@ -127,9 +122,7 @@ class ProfileComponent extends React.Component {
               <div className="card-content">
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
-                <span id="profile-bio">
-                  {viewData ? viewData.bio : <h6>loading ...</h6>}
-                </span>
+                <span id="profile-bio">{data ? data.bio : bio}</span>
               </div>
               <a
                 className="btn modal-trigger profile-btncolor"
@@ -324,17 +317,15 @@ class ProfileComponent extends React.Component {
                 TOP FIVE ARTICLES
               </span>
               <div id="profile-topArticles">
-                {viewData ? (
-                  viewData.articles.top.map(articles => {
-                    return (
-                      <p key={articles}>
-                        <a href="#!">{articles.title}</a>
-                      </p>
-                    );
-                  })
-                ) : (
-                  <h3>loading top articles wait...</h3>
-                )}
+                {data
+                  ? data.articles.top.map(articles => {
+                      return (
+                        <p key={articles}>
+                          <a href="#!">{articles.title}</a>
+                        </p>
+                      );
+                    })
+                  : topArticles}
               </div>
             </div>
           </div>

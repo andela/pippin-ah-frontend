@@ -1,12 +1,10 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import actions from './actions';
 import upload from '../../util/uploadToCloudinary';
 import constants from './constants';
 
 const {
-  viewUserProfile,
   setUserProfile,
   setPictureUploadStatus,
   setProfileUpdateStatus,
@@ -34,30 +32,6 @@ export const pictureUtils = imageUrl => dispatch => {
           status: constants.UPDATE_ERROR,
         }),
       );
-    });
-};
-
-export const viewProfile = () => dispatch => {
-  const token = localStorage.getItem('token');
-  const decoded = jwtDecode(token);
-
-  const getCurrentUserUrl = `${process.env.API_URL}user/${decoded.username}`;
-
-  const defaultOptions = {
-    headers: {
-      Authorization: token,
-    },
-  };
-
-  return axios
-    .get(getCurrentUserUrl, defaultOptions)
-    .then(({ data }) => {
-      dispatch(viewUserProfile(data));
-    })
-    .catch(({ response }) => {
-      toast.error(response.data.error, {
-        hideProgressBar: true,
-      });
     });
 };
 
@@ -99,4 +73,4 @@ export const updateUserProfile = (
     });
 };
 
-export default { viewProfile, updateUserProfile };
+export default { updateUserProfile };

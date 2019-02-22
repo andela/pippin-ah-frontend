@@ -5,11 +5,6 @@ const setUserProfile = profileData => ({
   profileData,
 });
 
-const viewUserProfile = viewData => ({
-  type: types.VIEW_USER_PROFILE,
-  viewData,
-});
-
 const setPictureUploadStatus = uploadStatus => ({
   type: types.SET_UPLOADING_STATUS,
   uploadStatus,
@@ -22,7 +17,6 @@ const setProfileUpdateStatus = updateStatus => ({
 
 export default {
   setUserProfile,
-  viewUserProfile,
   setPictureUploadStatus,
   setProfileUpdateStatus,
 };

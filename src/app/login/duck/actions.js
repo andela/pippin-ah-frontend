@@ -1,8 +1,9 @@
 import types from './types';
 
-const setLoginState = loginState => ({
+const setLoginState = (loginState, loginData) => ({
   type: types.SET_LOGIN_STATE,
   loginState,
+  loginData,
 });
 
 const setLoginError = errorMessage => ({

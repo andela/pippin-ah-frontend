@@ -7,10 +7,11 @@ const INITIAL_STATE = {
 const loginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.SET_LOGIN_STATE: {
-      const { loginState } = action;
+      const { loginState, loginData } = action;
       return {
         ...state,
         loginState,
+        loginData,
       };
     }
     case types.SET_LOGIN_ERROR: {
