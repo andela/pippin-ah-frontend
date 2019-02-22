@@ -7,7 +7,7 @@ import './ListArticle.scss';
 
 const category = getArticleCatigory();
 
-let pageNumber = 1;
+const pageNumber = 1;
 
 const methods = {
   componentDidMount({ fetchArticle }) {
@@ -33,19 +33,18 @@ const ListArticleComponent = ({
   fetchArticleState,
   articleData,
   articleCategory,
+  currentPage,
   appendArticleData,
 }) => {
+  currentPage += 1;
   window.onscroll = () => {
     const { scrollHeight } = document.body;
     const totalHeight = window.scrollY + window.innerHeight;
 
     if (totalHeight >= scrollHeight) {
-      pageNumber += 1;
-      console.log('^*^^**^^^***-', articleData[articleCategory]);
-      console.log('&&&^*^^**^^^***-&&', appendArticleData);
       appendArticleData(
         articleCategory,
-        pageNumber,
+        currentPage,
         articleData[articleCategory],
       );
     }
@@ -66,7 +65,7 @@ const ListArticleComponent = ({
                     <img
                       className="activator"
                       alt="Cover"
-                      src="http://www.catbreedslist.com/cat-wallpapers/Kitten-cute-lying-claws-900x506.jpg"
+                      src={article.coverImageUrl}
                     />
                   </div>
                   <div className="card-content right-align">

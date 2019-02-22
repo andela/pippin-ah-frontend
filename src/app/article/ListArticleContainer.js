@@ -6,11 +6,18 @@ const mapStateToProps = ({
   fetchArticle: {
     fetchArticleState,
     articleCategory,
+    currentPage,
     articleData,
     errorMessage,
   },
 }) => {
-  return { fetchArticleState, articleCategory, articleData, errorMessage };
+  return {
+    fetchArticleState,
+    articleCategory,
+    articleData,
+    currentPage,
+    errorMessage,
+  };
 };
 
 const mapDispatchToProps = dispatch => {

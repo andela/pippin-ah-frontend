@@ -9,6 +9,7 @@ const {
   setFetchArticleState,
   setFetchArticleError,
   setArticleCategory,
+  setCurrentPage,
   addArticleData,
   updateCategoryData,
 } = actions;
@@ -49,6 +50,7 @@ const doFetchArticle = (articleCategory, page) => dispatch => {
       },
     })
     .then(({ data }) => {
+      dispatch(setCurrentPage(data.page));
       dispatch(addArticleData({ [articleCategory]: data.articles }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
@@ -79,7 +81,7 @@ const doUpdateCategoryData = (
     })
     .then(({ data }) => {
       const appendedCategoryData = currentData.concat(data.articles);
-      console.log('+-+-+==+-+-+', appendedCategoryData);
+      dispatch(setCurrentPage(data.page));
       dispatch(updateCategoryData({ [articleCategory]: appendedCategoryData }));
     })
     .catch(({ data }) => {

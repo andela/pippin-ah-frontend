@@ -29,6 +29,7 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         fetchArticleState,
       };
     }
+
     case types.SET_FETCH_ARTICLE_ERROR: {
       const { errorMessage } = action;
       return {
@@ -36,6 +37,7 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         errorMessage,
       };
     }
+
     case types.SET_ARTICLE_CATEGORY: {
       const { articleCategory } = action;
       return {
@@ -43,6 +45,12 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         articleCategory,
       };
     }
+
+    case types.SET_CURRENT_PAGE: {
+      const { currentPage } = action;
+      return { ...state, currentPage };
+    }
+
     case types.ADD_ARTICLE_DATA: {
       const { articleData } = action;
       const oldArticleData = state.articleData;
@@ -51,15 +59,16 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
         articleData: { ...oldArticleData, ...articleData },
       };
     }
+
     case types.UPDATE_CATEGORY_DATA: {
       const { appendedCategoryData } = action;
       const oldArticleData = state.articleData;
-      console.log('Hey, I`m Ebenezer!');
       return {
         ...state,
         articleData: { ...oldArticleData, ...appendedCategoryData },
       };
     }
+
     default:
       return state;
   }
