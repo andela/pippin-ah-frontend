@@ -8,11 +8,8 @@ import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
 const category = getArticleCategory();
-// const calling = () => {}
+
 const methods = {
-  calling() {
-    console.log('here');
-  },
   componentDidMount({ fetchArticle, articleData, setCategory }) {
     if (!articleData) {
       fetchArticle(category);
@@ -20,9 +17,6 @@ const methods = {
     if (articleData && articleData[category]) {
       return setCategory(category);
     }
-  },
-  componentWillReceiveProps({ articleData }) {
-    calling();
   },
   componentDidUpdate({
     articleCategory,

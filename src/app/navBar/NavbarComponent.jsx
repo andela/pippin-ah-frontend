@@ -10,9 +10,9 @@ const NavbarComponent = () => {
         <div className="nav-wrapper" id="iconRight">
           <div className="Logo">
             <i className="far fa-play-circle" /> &nbsp;&nbsp;&nbsp;
-            <a href="/" className="brand-logo">
+            <Link to="/" className="brand-logo">
               LearnGround
-            </a>
+            </Link>
           </div>
           <div className="categories">
             <ul className="right hide-on-med-and-down">
