@@ -245,8 +245,8 @@ class ProfileComponent extends React.Component {
                             type="text"
                             className="validate"
                             name="firstName"
+                            defaultValue={firstName || 'Enter first Name'}
                           />
-                          <label htmlFor="icon_prefix">First Name</label>
                         </div>
                         <div className="input-field col s12">
                           <i className="material-icons prefix profile-color-ions">
@@ -257,8 +257,8 @@ class ProfileComponent extends React.Component {
                             type="text"
                             className="validate"
                             name="lastName"
+                            defaultValue={lastName || 'Enter last Name'}
                           />
-                          <label htmlFor="icon_telephone">Last Name</label>
                         </div>
                         <div className="input-field col s12">
                           <i className="material-icons prefix profile-color-ions">
@@ -270,9 +270,7 @@ class ProfileComponent extends React.Component {
                             className="input-field"
                             required
                           >
-                            <option value="" disabled>
-                              Select Interest
-                            </option>
+                            <option selected="selected">{interests}</option>
                             <option value="Mathematics">Mathematics</option>
                             <option value="Arts">Arts</option>
                             <option value="Science">Science</option>
@@ -288,8 +286,8 @@ class ProfileComponent extends React.Component {
                             id="textarea1"
                             className="materialize-textarea"
                             name="bio"
+                            defaultValue={bio || 'Biography'}
                           />
-                          <label htmlFor="textarea1">Biography</label>
                         </div>
                         {updateStatus === constants.PROFILE_UPDATING && (
                           <EllipsisLoaderComponent />
