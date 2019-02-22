@@ -16,7 +16,15 @@ const doSignUp = (email, username, password) => dispatch => {
     })
     .then(data => {
       localStorage.setItem('token', data.token);
-      localStorage.setItem('profileData', data);
+      localStorage.setItem('firstName', data.firstName);
+      localStorage.setItem('lastName', data.lastName);
+      localStorage.setItem('bio', data.bio);
+      localStorage.setItem('interests', data.interests);
+      localStorage.setItem('followers', data.followers);
+      localStorage.setItem('following', data.following);
+      localStorage.setItem('imageUrl', data.imageUrl);
+      localStorage.setItem('topArticles', data.articles.top);
+      localStorage.setItem('totalArticles', data.articles.total);
       dispatch(setSignupState(constants.SIGNUP_SUCCESS, data));
     })
     .catch(({ response }) => {

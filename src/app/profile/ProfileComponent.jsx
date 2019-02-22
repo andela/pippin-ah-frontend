@@ -63,6 +63,8 @@ class ProfileComponent extends React.Component {
     const totalArticles = localStorage.getItem('totalArticles');
     const { newProfileDetails } = updateStatus;
 
+    let profileData;
+
     if (newProfileDetails) {
       localStorage.setItem('firstName', newProfileDetails.data.firstName);
       localStorage.setItem('lastName', newProfileDetails.data.lastName);
@@ -71,6 +73,12 @@ class ProfileComponent extends React.Component {
     }
     if (newProfileUrl) {
       localStorage.setItem('imageUrl', newProfileUrl);
+    }
+
+    if (data) {
+      profileData = data;
+    } else {
+      profileData = loginData;
     }
 
     return (
@@ -119,14 +127,17 @@ class ProfileComponent extends React.Component {
             <div className="card small z-depth-0">
               <div className="card-content">
                 Articles : &nbsp;&nbsp; &nbsp;{' '}
-                {data ? data.articles.total : totalArticles} <br />
+                {profileData ? profileData.articles.total : totalArticles}{' '}
+                <br />
                 <br /> <br />
-                Following : &nbsp; {data ? data.following : following} <br />
+                Following : &nbsp;{' '}
+                {profileData ? profileData.following : following} <br />
                 <br /> <br />
-                Followers : &nbsp; {data ? data.followers : followers} <br />
+                Followers : &nbsp;{' '}
+                {profileData ? profileData.followers : followers} <br />
                 <br /> <br />
                 Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {data ? data.isMentor : <h6>loading...</h6>}
+                {profileData ? profileData.isMentor : <h6>loading...</h6>}
                 {/* <i className="material-icons prefix">check_box</i> */}
                 <br />
                 <br />
@@ -339,8 +350,8 @@ class ProfileComponent extends React.Component {
                 TOP FIVE ARTICLES
               </span>
               <div id="profile-topArticles">
-                {data
-                  ? data.articles.top.map(articles => {
+                {profileData
+                  ? profileData.articles.top.map(articles => {
                       return (
                         <p key={articles}>
                           <a href="#!">{articles.title}</a>

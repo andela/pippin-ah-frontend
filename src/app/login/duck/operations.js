@@ -17,7 +17,7 @@ const doLogin = (usernameOrEmail, password) => dispatch => {
       localStorage.setItem('firstName', data.firstName);
       localStorage.setItem('lastName', data.lastName);
       localStorage.setItem('bio', data.bio);
-      localStorage.setItem('interest', data.interests);
+      localStorage.setItem('interests', data.interests);
       localStorage.setItem('followers', data.followers);
       localStorage.setItem('following', data.following);
       localStorage.setItem('imageUrl', data.imageUrl);
