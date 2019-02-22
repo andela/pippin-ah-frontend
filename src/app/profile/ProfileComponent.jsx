@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import jwtDecode from 'jwt-decode';
 import './profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
 import constants from './duck/constants';
@@ -61,6 +62,9 @@ class ProfileComponent extends React.Component {
     const interests = localStorage.getItem('interests');
     const topArticles = localStorage.getItem('topArticles');
     const totalArticles = localStorage.getItem('totalArticles');
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    const mentor = decoded.isMentor;
     const { newProfileDetails } = updateStatus;
 
     let profileData;
@@ -136,9 +140,12 @@ class ProfileComponent extends React.Component {
                 Followers : &nbsp;{' '}
                 {profileData ? profileData.followers : followers} <br />
                 <br /> <br />
-                Mentor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-                {profileData ? profileData.isMentor : <h6>loading...</h6>}
-                {/* <i className="material-icons prefix">check_box</i> */}
+                Mentor :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {mentor === false ? (
+                  'False'
+                ) : (
+                  <i className="material-icons prefix">check</i>
+                )}
                 <br />
                 <br />
                 <br />
