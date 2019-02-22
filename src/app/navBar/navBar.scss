@@ -6,18 +6,22 @@ body {
   color: $primary-color;
 }
 
+.navbar-container {
+  margin-bottom: 50px;
+}
+
 nav {
   position: fixed;
   top: 0;
   z-index: 20;
 }
 
-.navbarbg {
+.navbar-bg {
   background-color: #880038;
   height: 50px;
 }
 
-.navbarbg a {
+.navbar-bg a {
   margin-top: -0.21em;
 }
 
