@@ -60,6 +60,12 @@ const doCreateArticle = articleDetails => dispatch => {
 };
 
 const doFetchArticle = slug => dispatch => {
+  dispatch(
+    setSingleFetchStatus({
+      status: constants.FETCHING_SINGLE,
+      data: {},
+    }),
+  );
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
   };
@@ -68,16 +74,16 @@ const doFetchArticle = slug => dispatch => {
     .then(({ data }) => {
       dispatch(
         setSingleFetchStatus({
-          status: constants.FETCHING_SINGLE,
+          status: constants.FETCH_SINGLE_SUCCESS,
           data,
         }),
       );
     })
-    .catch(({ response }) => {
+    .catch(error => {
       dispatch(
-        setCreateStatus({
-          status: constants.CREATE_ERROR,
-          data: response.data.error,
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_ERROR,
+          data: !error.status ? 'Network error ' : error.response.data.error,
         }),
       );
     });
