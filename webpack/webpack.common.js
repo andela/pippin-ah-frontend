@@ -67,8 +67,4 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
-  externals: {
-    React: 'react',
-    cloudinary: 'cloudinary-core',
-  },
 };
