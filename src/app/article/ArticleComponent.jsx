@@ -26,6 +26,9 @@ class ArticleComponent extends React.Component {
       singleFetchStatus: { data, status },
     } = this.props;
     let dateObject;
+    if (data) {
+      dateObject = formatDate(data.createdAt);
+    }
     if (status === constants.FETCHING_SINGLE) {
       return (
         <div className="center-in-screen">
@@ -48,9 +51,6 @@ class ArticleComponent extends React.Component {
           </div>
         </div>
       );
-    }
-    if (data) {
-      dateObject = formatDate(data.createdAt);
     }
     return (
       <Fragment>
@@ -81,9 +81,7 @@ class ArticleComponent extends React.Component {
                         />
                       ) : (
                         <div className="default-photo">
-                          {data.author && data.author.username
-                            ? data.author.username[0].toUpperCase()
-                            : 'U'}
+                          {data.author && data.author.username[0].toUpperCase()}
                         </div>
                       )}
                     </Fragment>
