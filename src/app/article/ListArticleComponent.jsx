@@ -90,6 +90,11 @@ const ListArticleComponent = ({
                     </span>
                     <p>{article.description}</p>
                     <div>
+                      <p>
+                        <span id="readTime">Read time: </span>
+                        {article.readTime}
+                        {article.readTime === 1 ? ' minute' : ' minutes'}
+                      </p>
                       <Link to={`/article/${article.slug}`}>
                         Click here to read
                       </Link>
