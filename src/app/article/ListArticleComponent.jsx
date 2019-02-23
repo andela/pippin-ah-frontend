@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
 import { Link } from 'react-router-dom';
@@ -9,6 +8,7 @@ import './ListArticle.scss';
 
 const category = getArticleCategory();
 
+/* istanbul ignore next */
 const methods = {
   componentDidMount({ fetchArticle, articleData, setCategory }) {
     if (!articleData) {
@@ -25,7 +25,6 @@ const methods = {
     setCategory,
   }) {
     const newCategory = getArticleCategory();
-    console.log('==================', articleData, newCategory);
     const storeData = articleData && articleData[newCategory];
     if (articleCategory !== newCategory && !storeData) {
       fetchArticle(newCategory);
