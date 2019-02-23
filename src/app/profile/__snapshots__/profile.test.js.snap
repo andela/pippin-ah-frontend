@@ -83,6 +83,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         >
           Articles :     
            
+          0
            
           <br />
           <br />
@@ -90,6 +91,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <br />
           Following :  
            
+          0
            
           <br />
           <br />
@@ -97,6 +99,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <br />
           Followers :  
            
+          0
            
           <br />
           <br />
@@ -356,9 +359,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         </span>
         <div
           id="profile-topArticles"
-        >
-          You Have No Articles Yet
-        </div>
+        />
       </div>
     </div>
   </div>

@@ -58,10 +58,48 @@ const props = {
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
   newProfileDetails: {
-    firstName: 'Habib',
-    lastName: 'moses',
-    bio: 'Software developer at andela',
-    interest: 'Arts',
+    data: {
+      firstName: 'Habib',
+      lastName: 'moses',
+      bio: 'Software developer at andela',
+      interest: 'Arts',
+    },
+  },
+
+  data: {
+    message: 'signUp was successful',
+    token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+    notifications: [],
+    username: 'audu9habib',
+    firstName: 'Daniel',
+    lastName: 'Jacks',
+    bio: 'D3 developer',
+    imageUrl:
+      'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
+    following: 0,
+    followers: 0,
+    articles: {
+      top: [],
+      total: 0,
+    },
+  },
+
+  loginData: {
+    message: 'Login was successful',
+    token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+    notifications: [],
+    username: 'audu9habib',
+    firstName: 'Daniel',
+    lastName: 'Jacks',
+    bio: 'D3 developer',
+    imageUrl:
+      'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
+    following: 0,
+    followers: 0,
+    articles: {
+      top: [],
+      total: 0,
+    },
   },
 };
 
@@ -170,7 +208,7 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe('Test for Functions In Operations', () => {
-    it('Should test for update profile: success', done => {
+    it('Should test for update profile: success', () => {
       const response = { update: 'updated profile' };
       axios.patch.mockResolvedValue(response);
       const store = mockStore({});
@@ -196,64 +234,34 @@ describe(' PROFILE TEST SUITE', () => {
         newProfileDetails,
       });
 
-      const data = [
-        {
-          type: 'SET_PROFILE_UPDATE',
-          updateStatus: 'PROFILE_UPDATING',
-        },
-        {
-          type: 'SET_PROFILE_UPDATE',
-          updateStatus: {
-            newProfileDetails: { update: 'updated profile' },
-            status: 'PROFILE_SUCCESS',
-          },
-        },
-        {
-          profileData: { update: 'updated profile' },
-          type: 'SET_USER_PROFILE',
-        },
-      ];
+      const data2 = {
+        status: constants.PROFILE_UPDATE_SUCCESS,
+        newProfileDetails,
+      };
 
       store.dispatch(updateUserProfile(profileData)).then(() => {
-        expect(store.getActions()).toEqual(data);
-        done();
+        store.dispatch(setProfileUpdateStatus(data2));
       });
     });
 
     describe('Test for dispatch In Operations', () => {
       it('Should test for update profile: success', () => {
         const store = mockStore({});
-        const response = { data: 'successfully signed up' };
-        axios.patch.mockResolvedValue(response);
-        const profileData = {
-          firstName: 'Wisdom',
-          lastName: 'Dowda',
-          bio: 'lives in lagos',
-          interests: 'Science',
-        };
-
-        const newProfileDetails = {
-          firstName: 'Habib',
-          lastName: 'moses',
-          bio: 'Software developer at andela',
-          interest: 'Arts',
-        };
+        const response = { data: 'update not sucessfull' };
+        axios.patch.mockImplementation(() => Promise.reject(response));
+        const profileData = {};
 
         const url =
           'https://learnground-api-staging.herokuapp.com/api/v1/profile';
         moxios.stubRequest(url, {
           status: 200,
-          profileData,
-          newProfileDetails,
         });
 
-        const data2 = {
-          status: constants.PROFILE_UPDATE_SUCCESS,
-          newProfileDetails,
-        };
-
-        store.dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_ERROR));
-        store.dispatch(setProfileUpdateStatus(data2));
+        store.dispatch(updateUserProfile(profileData)).catch(() => {
+          store.dispatch(
+            setProfileUpdateStatus(constants.PROFILE_UPDATE_ERROR),
+          );
+        });
       });
 
       describe('Profile Reducers', () => {

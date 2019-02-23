@@ -159,7 +159,7 @@ class ProfileComponent extends React.Component {
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
                 <span id="profile-bio">
-                  {mentor ? newProfileDetails.data.bio : bio}
+                  {newProfileDetails ? newProfileDetails.data.bio : bio}
                 </span>
               </div>
               <a
