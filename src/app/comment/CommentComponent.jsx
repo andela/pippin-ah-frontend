@@ -14,7 +14,9 @@ const CommentComponent = ({ commentDetails }) => {
                   alt="comment-author"
                 />
               ) : (
-                <i className="fas fa-user-circle" />
+                <div className="default-photo">
+                  {commentDetails.author.username[0].toUpperCase()}
+                </div>
               )}
             </Fragment>
           </div>
