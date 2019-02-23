@@ -325,14 +325,104 @@ describe('ARTICLE TEST SUITE', () => {
     });
 
     it('should dispatch an action with status CREATING when article is being created', () => {
-      const response = {
-        response: {
-          data: {
-            slug: 'new article 001',
+      const response = { data: { secure_url: undefined } };
+      axios.post.mockImplementation(() => Promise.resolve(response));
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
           },
         },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
+    });
+
+    it('should dispatch an action with type SET_CREATE_SUCCESS when article is created', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
       };
-      axios.post.mockImplementation(() => Promise.resolve(response));
+
+      const articleUploadResponse = {
+        data: { slug: 'created-article-001' },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.resolve(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].type).toEqual('SET_CREATE_STATUS');
+    });
+
+    it('should dispatch an action with status CREATE_ERROR if create fails', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        response: { data: { error: 'invalid parameters' } },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.reject(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
+    });
+
+    it('should dispatch an action with status CREATE_ERROR if create fails', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        response: { data: { error: 'invalid parameters' } },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.reject(articleUploadResponse);
+      });
       const component = wrapper.find(CreateArticleComponent).first();
       component.setState({
         uploadCoverUrl: 'http://uploadcoverurl',
@@ -426,7 +516,9 @@ describe('ARTICLE TEST SUITE', () => {
             },
             comments: [
               {
-                author: '',
+                author: {
+                  username: 'rajeman',
+                },
                 comment: {
                   timestamp: 'comment text',
                 },
@@ -450,7 +542,7 @@ describe('ARTICLE TEST SUITE', () => {
       );
     });
 
-    it('should render the article page with default values for unavailable fields', () => {
+    it('should render the article page with default values for undefined fields', () => {
       const component = wrapper.find('.article-header');
       expect(component.exists()).toBe(true);
     });
