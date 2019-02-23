@@ -82,6 +82,7 @@ describe('ListArticleContainer', () => {
   it('should dispatch action', () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).fetchArticle();
+    mapDispatchToProps(dispatch).setCategory();
     expect(typeof dispatch.mock.calls[0][0]).toEqual('function');
   });
 });
@@ -132,6 +133,13 @@ describe('fetchArticleReducers', () => {
     const state = fetchArticleReducer(undefined, action);
     expect(state.articleData).toEqual(action.articleData);
   });
+
+  it('should render the component', () => {
+    const fetchArticle = jest.fn();
+    const component = shallow(<ListArticleComponent {...{ fetchArticle }} />);
+    expect(component.exists()).toBe(true);
+    expect(component).toMatchSnapshot();
+  });
 });
 
 describe('Connected ListArticleComponent Component Dispatches Success', () => {
@@ -161,12 +169,12 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should render the connected component', () => {
     expect(wrapper.find(ListArticleComponent).length).toEqual(1);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
     const storeState = store.getState();
-    console.log('---++-->*<--++---', storeActions);
     expect(storeActions[0].type).toEqual('SET_FETCH_ARTICLE_STATE');
     expect(storeState.articleData).toEqual('Data');
   });
@@ -230,7 +238,6 @@ describe('Test for receiving article category', () => {
   });
   it('should get article category', () => {
     const result = getArticleCategory();
-    console.log('---result', result);
     expect(result).toEqual('Science');
   });
 });
@@ -242,24 +249,5 @@ describe('Test for not receiving article category', () => {
   it('should return empty string', () => {
     const result = getArticleCategory();
     expect(result).toEqual('');
-  });
-});
-
-describe('componentDidUpdate', () => {
-  const mock = jest.fn();
-  const props = {
-    fetchArticle: () => {},
-    articleData: { Arts: 'random stuff' },
-    articleCategory: 'Arts',
-    setCategory: mock,
-  };
-  it('sets category', () => {
-    const wrapper = shallow(<ListArticleContainer {...props} />);
-    wrapper.setProps({
-      articleData: { Arts: 'something else' },
-      articleCategory: 'Science',
-      setCategory: mock,
-    });
-    expect(wrapper.instance().props.setCategory).toBeCalled();
   });
 });
