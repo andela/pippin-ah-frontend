@@ -68,14 +68,14 @@ const doCreateArticle = articleDetails => dispatch => {
 
 const doFetchArticle = articleCategory => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
-  /* istanbul ignore next */
   return axios
-    .get(url)
+    .get(url, {
+      params: {
+        category: articleCategory,
+      },
+    })
     .then(({ data }) => {
-      const articleByCategory = data.articles.filter(
-        article => article.category === articleCategory,
-      );
-      dispatch(addArticleData({ [articleCategory]: articleByCategory }));
+      dispatch(addArticleData({ [articleCategory]: data.articles }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
     .catch(({ response }) => {
