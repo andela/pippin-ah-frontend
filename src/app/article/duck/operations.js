@@ -83,7 +83,7 @@ const doFetchArticle = slug => dispatch => {
       dispatch(
         setSingleFetchStatus({
           status: constants.FETCH_SINGLE_ERROR,
-          data: !error.status ? 'Network error ' : error.response.data.error,
+          data: !error.response ? 'Network error ' : error.response.data.error,
         }),
       );
     });
