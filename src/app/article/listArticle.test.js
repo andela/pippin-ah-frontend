@@ -156,7 +156,9 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   let wrapper;
   beforeEach(() => {
     const response = { data: 'fetchArticle successful' };
-    axios.get.mockResolvedValue(response);
+    axios.get.mockImplementation(() =>
+      Promise.resolve({ data: { ...response } }),
+    );
     const articleData = {
       Science: [{ title: 'first article' }],
     };
@@ -175,7 +177,8 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
     const storeState = store.getState();
-    expect(storeActions[0].type).toEqual('SET_FETCH_ARTICLE_STATE');
+    console.log('____+=++_+____', storeActions);
+    expect(storeActions[1].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
     expect(storeState.articleData).toEqual('Data');
   });
 });
@@ -193,7 +196,7 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     const response = {
       response: { data: { error: 'invalid credentials' } },
     };
-    axios.post.mockImplementation(() => Promise.reject(response));
+    axios.get.mockImplementation(() => Promise.reject(response));
     mount(
       <Provider store={store}>
         <ListArticleContainer />
@@ -219,7 +222,7 @@ describe('Loader Component', () => {
     const response = {
       response: { data: { error: 'failed to fetch' } },
     };
-    axios.post.mockImplementation(() => Promise.reject(response));
+    axios.get.mockImplementation(() => Promise.reject(response));
   });
 
   it('it should render the EllipsisLoaderComponent if making request', () => {
