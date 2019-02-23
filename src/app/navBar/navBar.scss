@@ -39,12 +39,6 @@ nav {
   position: relative !important;
 }
 
-@media screen and (max-width: 992px) {
-  .brand-logo {
-    margin-left: 125px !important;
-  }
-}
-
 .show {
   list-style: none;
   margin-left: 100px !important;
@@ -56,4 +50,10 @@ nav ul li {
 
 .categories {
   margin-left: 20%;
+}
+
+@media screen and (max-width: 992px) {
+  .brand-logo {
+    margin-left: 125px !important;
+  }
 }
