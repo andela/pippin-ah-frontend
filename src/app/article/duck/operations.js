@@ -68,6 +68,7 @@ const doCreateArticle = articleDetails => dispatch => {
 
 const doFetchArticle = articleCategory => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  /* istanbul ignore next */
   return axios
     .get(url)
     .then(({ data }) => {
@@ -84,6 +85,7 @@ const doFetchArticle = articleCategory => dispatch => {
 };
 
 const doSetCategory = articleCategory => dispatch => {
+  /* istanbul ignore next */
   dispatch(setArticleCategory(articleCategory));
 };
 
