@@ -54,7 +54,8 @@ const ListArticleComponent = ({
           <h3>{articleCategory}</h3>
         </div>
         <div className="row">
-          {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
+          {/* istanbul ignore next */
+          fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
             articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
               <div
