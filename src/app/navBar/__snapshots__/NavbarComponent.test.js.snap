@@ -16,12 +16,13 @@ exports[` Component should render the NavBar 1`] = `
           className="far fa-play-circle"
         />
             
-        <a
+        <Link
           className="brand-logo"
-          href="/"
+          replace={false}
+          to="/"
         >
           LearnGround
-        </a>
+        </Link>
       </div>
       <div
         className="categories"
