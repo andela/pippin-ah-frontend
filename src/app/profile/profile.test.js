@@ -17,11 +17,16 @@ import {
 import ProfileContainer from './ProfileContainer';
 import { mapDispatchToProps } from './ProfileContainer';
 
-const { setUserProfile, setPictureUploadStatus } = actions;
+const {
+  setUserProfile,
+  setPictureUploadStatus,
+  setProfileUpdateStatus,
+} = actions;
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 jest.mock('jwt-decode');
+jest.mock('axios');
 
 global.localStorage = {
   getItem: key => {
@@ -165,7 +170,9 @@ describe(' PROFILE TEST SUITE', () => {
   });
 
   describe('Test for Functions In Operations', () => {
-    it('Should test for update profile: success', () => {
+    it('Should test for update profile: success', done => {
+      const response = { update: 'updated profile' };
+      axios.patch.mockResolvedValue(response);
       const store = mockStore({});
       const profileData = {
         firstName: 'Wisdom',
@@ -192,76 +199,114 @@ describe(' PROFILE TEST SUITE', () => {
       const data = [
         {
           type: 'SET_PROFILE_UPDATE',
-
           updateStatus: 'PROFILE_UPDATING',
         },
         {
           type: 'SET_PROFILE_UPDATE',
-
-          updateStatus: 'PROFILE_SUCCESS',
-          newProfileDetails,
+          updateStatus: {
+            newProfileDetails: { update: 'updated profile' },
+            status: 'PROFILE_SUCCESS',
+          },
         },
         {
-          profileData: undefined,
+          profileData: { update: 'updated profile' },
           type: 'SET_USER_PROFILE',
         },
       ];
 
       store.dispatch(updateUserProfile(profileData)).then(() => {
-        expect(store.getActions()).resolves.toEqual(data);
+        expect(store.getActions()).toEqual(data);
+        done();
       });
     });
 
-    describe('Profile Reducers', () => {
-      it('should return an store data for SET_USER_PROFILE', () => {
-        const state = profileReducer(undefined, {
-          type: 'SET_USER_PROFILE',
-        });
-        const data = {
-          updateStatus: '',
-          uploadStatus: '',
-          viewData: undefined,
+    describe('Test for dispatch In Operations', () => {
+      it('Should test for update profile: success', () => {
+        const store = mockStore({});
+        const response = { data: 'successfully signed up' };
+        axios.patch.mockResolvedValue(response);
+        const profileData = {
+          firstName: 'Wisdom',
+          lastName: 'Dowda',
+          bio: 'lives in lagos',
+          interests: 'Science',
         };
-        expect(state).toEqual(data);
-      });
 
-      it('should return an  Array of object for SET_UPLOADING_STATUS', () => {
-        const data = {
-          updateStatus: '',
-          uploadStatus: undefined,
+        const newProfileDetails = {
+          firstName: 'Habib',
+          lastName: 'moses',
+          bio: 'Software developer at andela',
+          interest: 'Arts',
         };
-        const state = profileReducer(undefined, {
-          type: 'SET_UPLOADING_STATUS',
-        });
-        expect(state).toEqual(data);
-      });
 
-      it('should return an  Array of object for SET_PROFILE_UPDATE', () => {
-        const data = {
-          updateStatus: undefined,
-          uploadStatus: '',
+        const url =
+          'https://learnground-api-staging.herokuapp.com/api/v1/profile';
+        moxios.stubRequest(url, {
+          status: 200,
+          profileData,
+          newProfileDetails,
+        });
+
+        const data2 = {
+          status: constants.PROFILE_UPDATE_SUCCESS,
+          newProfileDetails,
         };
-        const state = profileReducer(undefined, {
-          type: 'SET_PROFILE_UPDATE',
-        });
-        expect(state).toEqual(data);
-      });
-    });
 
-    describe('Profile Actions', () => {
-      it('it should update the profile state', () => {
-        const action = setUserProfile(constants.SET_USER_PROFILE);
-        expect(action).toEqual({
-          type: types.SET_USER_PROFILE,
-          profileData: constants.SET_USER_PROFILE,
-        });
+        store.dispatch(setProfileUpdateStatus(constants.PROFILE_UPDATE_ERROR));
+        store.dispatch(setProfileUpdateStatus(data2));
       });
 
-      it('it should set update profile status', () => {
-        const action = setPictureUploadStatus(constants.UPDATE_SUCCESS);
-        expect(action).toEqual({
-          type: types.SET_UPLOADING_STATUS,
-          uploadStatus: constants.UPDATE_SUCCESS,
+      describe('Profile Reducers', () => {
+        it('should return an store data for SET_USER_PROFILE', () => {
+          const state = profileReducer(undefined, {
+            type: 'SET_USER_PROFILE',
+          });
+          const data = {
+            updateStatus: '',
+            uploadStatus: '',
+            viewData: undefined,
+          };
+          expect(state).toEqual(data);
+        });
+
+        it('should return an  Array of object for SET_UPLOADING_STATUS', () => {
+          const data = {
+            updateStatus: '',
+            uploadStatus: undefined,
+          };
+          const state = profileReducer(undefined, {
+            type: 'SET_UPLOADING_STATUS',
+          });
+          expect(state).toEqual(data);
+        });
+
+        it('should return an  Array of object for SET_PROFILE_UPDATE', () => {
+          const data = {
+            updateStatus: undefined,
+            uploadStatus: '',
+          };
+          const state = profileReducer(undefined, {
+            type: 'SET_PROFILE_UPDATE',
+          });
+          expect(state).toEqual(data);
+        });
+      });
+
+      describe('Profile Actions', () => {
+        it('it should update the profile state', () => {
+          const action = setUserProfile(constants.SET_USER_PROFILE);
+          expect(action).toEqual({
+            type: types.SET_USER_PROFILE,
+            profileData: constants.SET_USER_PROFILE,
+          });
+        });
+
+        it('it should set update profile status', () => {
+          const action = setPictureUploadStatus(constants.UPDATE_SUCCESS);
+          expect(action).toEqual({
+            type: types.SET_UPLOADING_STATUS,
+            uploadStatus: constants.UPDATE_SUCCESS,
+          });
         });
       });
     });
