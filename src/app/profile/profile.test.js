@@ -13,6 +13,7 @@ import {
   constants,
   profileReducer,
   updateUserProfile,
+  pictureUtils,
 } from './duck';
 import ProfileContainer from './ProfileContainer';
 import { mapDispatchToProps } from './ProfileContainer';
@@ -53,8 +54,8 @@ const props = {
     bio: 'Software developer at andela',
     interest: 'Arts',
   },
-  uploadStatus: {},
   updateStatus: {},
+  uploadStatus: {},
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
   newProfileDetails: {
@@ -205,6 +206,24 @@ describe(' PROFILE TEST SUITE', () => {
       instance.uploadPicture(event);
       const pictureForm = wrapper.find('form').at(2);
     });
+
+    it('should test for updating picture', () => {
+      const store = mockStore({});
+      const response = 'error';
+      axios.post.mockImplementation(() => Promise.reject(response));
+      const event = {
+        preventDefault: jest.fn(),
+
+        target: {
+          elements: {
+            name: 'profilepix',
+            files: [{ data: 'image', type: 'image/jpg' }],
+          },
+        },
+      };
+
+      store.dispatch(pictureUtils(event));
+    });
   });
 
   describe('Test for Functions In Operations', () => {
@@ -245,7 +264,7 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     describe('Test for dispatch In Operations', () => {
-      it('Should test for update profile: success', () => {
+      it('Should test for update profile: failure', () => {
         const store = mockStore({});
         const response = { data: 'update not sucessfull' };
         axios.patch.mockImplementation(() => Promise.reject(response));
