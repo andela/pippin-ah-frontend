@@ -9,7 +9,7 @@ import ArticleContainer from './ArticleContainer';
 import CreateArticleContainer from './CreateArticleContainer';
 import CreateArticleComponent from './CreateArticleComponent';
 import EditorComponent from './EditorComponent';
-import PreloaderComponent from '../loaders/PreloaderComponent';
+import { EllipsisLoaderComponent, PreloaderComponent } from '../loaders';
 import { actions, types, constants, createArticleReducer } from './duck';
 
 jest.mock('axios');
@@ -28,7 +28,7 @@ global.localStorage = {
 describe('ARTICLE TEST SUITE', () => {
   describe('Article Container', () => {
     it('should render the Article Page', () => {
-      const component = mount(<ArticleContainer />);
+      const component = shallow(<ArticleContainer />);
       expect(component.exists()).toBe(true);
       expect(component).toMatchSnapshot();
     });
@@ -175,7 +175,7 @@ describe('ARTICLE TEST SUITE', () => {
         );
         expect(
           component.containsMatchingElement(
-            <Redirect to="/articles/new-article" />,
+            <Redirect to="/article/new-article" />,
           ),
         ).toEqual(true);
       });
@@ -253,11 +253,9 @@ describe('ARTICLE TEST SUITE', () => {
       const state = createArticleReducer(undefined, {
         type: '@@INIT',
       });
-      expect(state).toEqual({
-        createStatus: {
-          status: '',
-          data: '',
-        },
+      expect(state.createStatus).toEqual({
+        status: '',
+        data: '',
       });
     });
 
@@ -268,6 +266,17 @@ describe('ARTICLE TEST SUITE', () => {
       };
       const state = createArticleReducer(undefined, action);
       expect(state.createStatus).toEqual(constants.CREATING);
+    });
+
+    it('should change the fetchSingleArticle state', () => {
+      const action = {
+        type: types.SET_SINGLE_FETCH_STATUS,
+        singleFetchStatus: {
+          status: constants.FETCHING_SINGLE,
+        },
+      };
+      const state = createArticleReducer(undefined, action);
+      expect(state.singleFetchStatus.status).toEqual(constants.FETCHING_SINGLE);
     });
   });
 
@@ -310,13 +319,7 @@ describe('ARTICLE TEST SUITE', () => {
     });
 
     it('should dispatch an action with status CREATING when article is being created', () => {
-      const response = {
-        response: {
-          data: {
-            slug: 'new article 001',
-          },
-        },
-      };
+      const response = { data: { secure_url: undefined } };
       axios.post.mockImplementation(() => Promise.resolve(response));
       const component = wrapper.find(CreateArticleComponent).first();
       component.setState({
@@ -334,6 +337,258 @@ describe('ARTICLE TEST SUITE', () => {
       });
       const dispatchedActions = store.getActions();
       expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
+    });
+
+    it('should dispatch an action with type SET_CREATE_SUCCESS when article is created', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        data: { slug: 'created-article-001' },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.resolve(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].type).toEqual('SET_CREATE_STATUS');
+    });
+
+    it('should dispatch an action with status CREATE_ERROR if create fails', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        response: { data: { error: 'invalid parameters' } },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.reject(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
+    });
+
+    it('should dispatch an action with status CREATE_ERROR if create fails', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        response: { data: { error: 'invalid parameters' } },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.reject(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].createStatus.status).toEqual('CREATING');
+    });
+  });
+
+  describe('Connected Article Component Renders Loader', () => {
+    const response = { data: '' };
+    axios.get.mockImplementation(() => Promise.resolve(response));
+    const initialState = {
+      createArticle: {
+        singleFetchStatus: {
+          status: constants.FETCHING_SINGLE,
+          data: '',
+        },
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(() => initialState);
+    let wrapper;
+    beforeEach(() => {
+      wrapper = mount(
+        <Provider store={store}>
+          <ArticleContainer
+            match={{ params: { slug: 'article-001-spicydicy' } }}
+          />
+        </Provider>,
+      );
+    });
+
+    it('should render the LoaderComponent when fetching article ', () => {
+      const component = wrapper.find(EllipsisLoaderComponent).first();
+      expect(component.exists()).toBe(true);
+    });
+  });
+
+  describe('Connected Article Component Renders Error Message', () => {
+    const initialState = {
+      createArticle: {
+        singleFetchStatus: {
+          status: constants.FETCH_SINGLE_ERROR,
+          data: 'error fetching article',
+        },
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(() => initialState);
+    let wrapper;
+    beforeEach(() => {
+      const error = { response: { data: { error: 'cannot fetch article' } } };
+      axios.get.mockImplementation(() => Promise.reject(error));
+      wrapper = mount(
+        <Provider store={store}>
+          <ArticleContainer
+            match={{ params: { slug: 'article-001-spicydicy' } }}
+          />
+        </Provider>,
+      );
+    });
+
+    it('should not render the article page if fetch is unsuccessful ', () => {
+      const component = wrapper.find('.article-header');
+      expect(component.exists()).toBe(false);
+    });
+  });
+
+  describe('Connected Article Component Renders Default Values for Fields Not Supplied', () => {
+    const response = { response: { message: 'successfully fetched articles' } };
+    axios.get.mockImplementation(() => Promise.resolve(response));
+    const initialState = {
+      createArticle: {
+        singleFetchStatus: {
+          status: constants.FETCH_SINGLE_SUCCESS,
+          data: {
+            createdAt: '2019-01-26 15:02:22.391+01',
+            author: {
+              username: 'spicy-dicy',
+            },
+            comments: [
+              {
+                author: {
+                  username: 'rajeman',
+                },
+                comment: {
+                  timestamp: 'comment text',
+                },
+                id: 'commentid',
+              },
+            ],
+          },
+        },
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(() => initialState);
+    let wrapper;
+    beforeEach(() => {
+      wrapper = mount(
+        <Provider store={store}>
+          <ArticleContainer
+            match={{ params: { slug: 'article-001-spicydicy' } }}
+          />
+        </Provider>,
+      );
+    });
+
+    it('should render the article page with default values for undefined fields', () => {
+      const component = wrapper.find('.article-header');
+      expect(component.exists()).toBe(true);
+    });
+  });
+
+  describe('Connected Article Component Renders Supplied Fields', () => {
+    const response = { response: { message: 'successfully fetched articles' } };
+    axios.get.mockImplementation(() => Promise.resolve(response));
+    const initialState = {
+      createArticle: {
+        singleFetchStatus: {
+          status: constants.FETCH_SINGLE_SUCCESS,
+          data: {
+            createdAt: '2019-01-26 15:02:22.391+01',
+            author: {
+              firstName: 'John',
+              lastName: 'Doe',
+              imageUrl: 'http://image.com',
+            },
+            comments: [
+              {
+                author: {
+                  lastName: 'Doe',
+                  firstName: 'John',
+                  imageUrl: 'Doe',
+                },
+                comment: {
+                  timestamp: 'comment text',
+                },
+                id: 'commentid',
+              },
+            ],
+          },
+        },
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(() => initialState);
+    let wrapper;
+    beforeEach(() => {
+      wrapper = mount(
+        <Provider store={store}>
+          <ArticleContainer
+            match={{ params: { slug: 'article-001-spicydicy' } }}
+          />
+        </Provider>,
+      );
+    });
+
+    it('should render the article page with supplied fields if fetch is successful ', () => {
+      const component = wrapper.find('.article-header');
+      expect(component.exists()).toBe(true);
     });
   });
 });

@@ -16,12 +16,13 @@ exports[` Component should render the NavBar 1`] = `
           className="far fa-play-circle"
         />
             
-        <a
+        <Link
           className="brand-logo"
-          href="/"
+          replace={false}
+          to="/"
         >
           LearnGround
-        </a>
+        </Link>
       </div>
       <div
         className="categories"
@@ -32,7 +33,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/science"
             >
               Science
             </Link>
@@ -40,7 +41,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/technology"
             >
               Technology
             </Link>
@@ -48,7 +49,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/engineering"
             >
               Engineering
             </Link>
@@ -56,7 +57,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/arts"
             >
               Arts
             </Link>
@@ -64,7 +65,7 @@ exports[` Component should render the NavBar 1`] = `
           <li>
             <Link
               replace={false}
-              to="/subject"
+              to="/articles/mathematics"
             >
               Mathematics
             </Link>
@@ -115,56 +116,44 @@ exports[` Component should render the NavBar 1`] = `
     id="mobile-demo"
   >
     <li>
-      <a
-        href="#!"
+      <Link
+        replace={false}
+        to="/articles/science"
       >
         Science
-      </a>
+      </Link>
     </li>
     <li>
-      <a
-        href="#!"
+      <Link
+        replace={false}
+        to="/articles/technology"
       >
         Technology
-      </a>
+      </Link>
     </li>
     <li>
-      <a
-        href="#!"
+      <Link
+        replace={false}
+        to="/articles/engineering"
       >
         Engineering
-      </a>
+      </Link>
     </li>
     <li>
-      <a
-        href="#!"
+      <Link
+        replace={false}
+        to="/articles/arts"
       >
         Arts
-      </a>
+      </Link>
     </li>
     <li>
-      <a
-        href="#!"
+      <Link
+        replace={false}
+        to="/articles/mathematics"
       >
         Mathematics
-      </a>
-    </li>
-    <li>
-      <a
-        href="#!"
-      >
-        SignIn
-      </a>
-    </li>
-    <li>
-      |
-    </li>
-    <li>
-      <a
-        href="#!"
-      >
-        SignUp
-      </a>
+      </Link>
     </li>
   </ul>
 </nav>
