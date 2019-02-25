@@ -177,7 +177,6 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
     const storeState = store.getState();
-    console.log('____+=++_+____', storeActions);
     expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
     expect(storeState.articleData).toEqual('Data');
   });
