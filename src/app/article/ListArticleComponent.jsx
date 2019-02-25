@@ -7,12 +7,13 @@ import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
 const category = getArticleCategory();
+const pageNumber = 1;
 
 /* istanbul ignore next */
 const methods = {
   componentDidMount({ fetchArticle, articleData, setCategory }) {
     if (!articleData) {
-      fetchArticle(category);
+      fetchArticle(category, pageNumber);
     }
     if (articleData && articleData[category]) {
       return setCategory(category);
@@ -27,7 +28,7 @@ const methods = {
     const newCategory = getArticleCategory();
     const storeData = articleData && articleData[newCategory];
     if (articleCategory !== newCategory && !storeData) {
-      fetchArticle(newCategory);
+      fetchArticle(newCategory, pageNumber);
     }
     return setCategory(newCategory);
   },
@@ -51,9 +52,10 @@ const ListArticleComponent = ({
   currentPage += 1;
   window.onscroll = () => {
     const { scrollHeight } = document.body;
+    console.log('_____', scrollHeight);
     const totalHeight = window.scrollY + window.innerHeight;
-
-    if (totalHeight >= scrollHeight) {
+    console.log('object :', totalHeight);
+    if (totalHeight >= scrollHeight - 600) {
       appendArticleData(
         articleCategory,
         currentPage,

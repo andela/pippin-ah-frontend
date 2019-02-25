@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { doFetchArticle, doSetCategory, doUpdateCategoryData } from './duck';
+import { doFetchArticles, doSetCategory, doUpdateCategoryData } from './duck';
 import ListArticleComponent from './ListArticleComponent';
 
 const mapStateToProps = ({
@@ -22,7 +22,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: articleCategory => dispatch(doFetchArticle(articleCategory)),
+    fetchArticle: (articleCategory, page) =>
+      dispatch(doFetchArticles(articleCategory, page)),
     setCategory: articleCategory => dispatch(doSetCategory(articleCategory)),
     appendArticleData: (articleCategory, page, currentData) =>
       dispatch(doUpdateCategoryData(articleCategory, page, currentData)),

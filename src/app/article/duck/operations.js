@@ -100,12 +100,14 @@ const doFetchArticle = slug => dispatch => {
     });
 };
 
-const doFetchArticles = articleCategory => dispatch => {
+const doFetchArticles = (articleCategory, page) => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   return axios
     .get(url, {
       params: {
         category: articleCategory,
+        limit: 12,
+        page,
       },
     })
     .then(({ data }) => {
@@ -141,8 +143,8 @@ const doUpdateCategoryData = (
       dispatch(setCurrentPage(data.page));
       dispatch(updateCategoryData({ [articleCategory]: appendedCategoryData }));
     })
-    .catch(({ data }) => {
-      console.log('----**->', data);
+    .catch(({ response }) => {
+      dispatch(setFetchArticleError(response.data.error));
     });
 };
 
