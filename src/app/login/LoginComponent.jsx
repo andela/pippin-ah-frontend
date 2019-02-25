@@ -17,40 +17,33 @@ export const LoginComponent = ({ loginUser, loginState }) => {
   }
   const loginButton = (
     <div id="button-div" className="row">
-      <button className="col s5" id="signin-button" type="submit">
+      <button id="signin-button" type="submit">
         SIGN IN
       </button>
-      <div id="alternateAuth" className="col s7">
-        <div className="row">
-          <p className="col s6" id="alternateText">
-            Or sign in with
-          </p>
-          <div className="col s5">
-            <div className="row">
-              <img
-                className="col s4"
-                id="auth-facebook-logo"
-                src={facebook}
-                alt="facebook logo"
-              />
-              <img
-                className="col s4"
-                id="auth-twitter-logo"
-                src={twitter}
-                alt="twitter logo"
-              />
-              <img
-                className="col s4"
-                id="auth-googleplus-logo"
-                src={googleplus}
-                alt="googleplus logo"
-              />
-            </div>
-          </div>
-        </div>
-        <div id="auth-forgot-password">
-          <Link to="/resetpassword">Forgot Password?</Link>
-        </div>
+      <p id="alternateText">Or sign in with</p>
+      <div className="row">
+        <img
+          className="col s4"
+          id="auth-facebook-logo"
+          src={facebook}
+          alt="facebook logo"
+        />
+        <img
+          className="col s4"
+          id="auth-twitter-logo"
+          src={twitter}
+          alt="twitter logo"
+        />
+        <img
+          className="col s4"
+          id="auth-googleplus-logo"
+          src={googleplus}
+          alt="googleplus logo"
+        />
+      </div>
+      <div id="auth-forgot-password">
+        <Link to="/resetpassword">Forgot Password? </Link> |
+        <Link to="/signup"> Create an Account</Link>
       </div>
     </div>
   );
@@ -60,12 +53,9 @@ export const LoginComponent = ({ loginUser, loginState }) => {
         <div className="signIn-div-wrapper" />
         <div className="signIn-container">
           <div className="signIn-wrapper row">
-            <div id="signin-form" className="col s7">
+            <div id="signin-form" className="col s12">
               <div className="signIn-text">
-                Sign <span className="signIn-blue">In</span>/
-                <Link to="/signup">
-                  <span className="signIn-grey"> Sign Up</span>
-                </Link>
+                Sign <span className="signIn-blue">In</span>
               </div>
               <form id="login" onSubmit={onFormSubmit}>
                 <input

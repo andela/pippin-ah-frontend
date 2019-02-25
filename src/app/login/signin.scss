@@ -10,7 +10,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  padding-top: 8%;
+  padding-top: 85px;
   color: black;
 }
 
@@ -30,7 +30,7 @@
   margin: 0 auto 12% auto;
   position: relative;
   padding: 1% 1%;
-  height: 75%;
+  height: 85%;
 }
 
 .signIn-wrapper {
@@ -42,46 +42,10 @@
   margin-top: 50px;
 }
 
-#signin-form-left {
-  height: 100%;
-  margin-left: 0;
-  background: url(https://images.pexels.com/photos/935756/pexels-photo-935756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position-x: -140px;
-  color: white;
-  text-align: center;
-}
-
-#signin-form-left .text-div {
-  position: absolute;
-  left: 14px;
-  right: 0;
-  bottom: 0;
-  top: 64px;
-  height: 94.3%;
-  width: 40.3%;
-  background: rgba(137, 0, 55, 0.466);
-}
-
-#signin-form-left ul {
-  text-align: left;
-  font-size: 1.5em;
-  margin-left: 30px;
-  margin-top: 95px;
-}
-
-#signin-form-left li {
-  margin-top: 20px;
-}
-
-#signin-form {
-  margin-right: -10%;
-}
-
 #login input {
-  width: 120%;
-  margin-left: -13%;
   margin-top: 30px;
+  width: 90%;
+  margin-left: 5%;
 }
 
 #login input:-webkit-autofill {
@@ -97,8 +61,8 @@
 .signIn-text {
   font-family: Rosario;
   font-size: 30px;
-  margin-left: 10%;
   color: #880038;
+  text-align: center;
   margin-top: 35px;
   margin-bottom: 45px;
 }
@@ -129,21 +93,23 @@
 }
 
 #button-div {
-  margin-top: 40px;
-  margin-left: 1px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
 }
 
 #signin-button,
 #signin-button:focus {
-  width: 90px;
+  width: 150px;
   height: 40px;
   border-radius: 25px;
   background: #03d6f5;
   color: white;
   cursor: pointer;
   box-shadow: none;
-  margin-left: -13.5%;
-  margin-top: 4px;
+  margin-top: 34px;
 }
 
 #signin-button:hover {
@@ -151,28 +117,16 @@
   box-shadow: none;
 }
 
-#alternateAuth {
-  width: 100%;
-  margin-top: -30px;
-  margin-left: 50px;
-}
-
 #alternateText {
-  margin-right: -20px;
-  margin-left: 12px;
-  margin-top: 1px;
   color: #686767;
+  text-align: center;
 }
 
 #auth-facebook-logo,
 #auth-twitter-logo,
 #auth-googleplus-logo {
-  transform: scale(1.6);
-}
-
-#auth-forgot-password {
-  margin-left: 50%;
-  margin-top: 30px;
+  width: 70px;
+  height: 70px;
 }
 
 #signin-form .ellipsis {
