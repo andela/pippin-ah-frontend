@@ -52,7 +52,7 @@ class CreateArticleComponent extends React.Component {
       window.scrollTo(0, 0);
       this.setState({ canScrollToTop: false });
     } else if (createStatus.status === constants.CREATE_SUCCESS) {
-      return <Redirect to={`/articles/${createStatus.data}`} />;
+      return <Redirect to={`/article/${createStatus.data}`} />;
     }
     return (
       <Fragment>

@@ -49,7 +49,9 @@
 }
 
 .right-sidebar-down {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .side-bookmark {
@@ -83,20 +85,24 @@
 }
 
 .main-cover .container {
-  border: 1px solid #03d6f5;
+  border: none;
   border-top: none;
   border-bottom: none;
   box-sizing: border-box;
   margin-left: 10%;
   margin-right: 10%;
-  width: 80%;
+  width: 100%;
   max-width: none;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 2fr 2fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr;
+  height: auto;
+  max-height: 100%;
+  grid-gap: 10px;
+  margin-top: 20px;
 }
 
 .description-box {
@@ -110,10 +116,12 @@
 .article-header {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding-left: 30px;
+  padding-top: 40px;
 }
 
 .article-title {
@@ -122,27 +130,25 @@
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  font-size: 36px;
-  text-align: center;
+  font-size: 37px;
+  text-align: left;
 }
 
-.article-description {
+.article-description .author-heading {
   font-family: Rosario;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 18px;
   text-align: center;
-  margin-top: -30px;
   color: #000;
 }
 
 .article-description p {
-  padding-left: 20%;
-  padding-right: 20%;
+  font-size: 22px;
+  text-align: left;
 }
 
-.author-description {
+.author-description .author-heading {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -151,21 +157,57 @@
 }
 
 .profile-photo-container {
-  width: 190px;
-  height: 190px;
+  width: 60px;
+  height: 60px;
   align-self: center;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   background-size: cover;
-  background-image: url('../../img/student.jpeg');
   background-repeat: no-repeat;
+  margin-top: -5px;
+}
+
+.author-description .default-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #512da8;
+  font: normal;
+  font-size: 35px;
+  padding-top: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.comment-owner .default-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgb(196, 196, 196);
+  font: normal;
+  font-size: 30px;
+  padding-top: 6px;
+  color: #fff;
+  text-align: center;
+  margin-top: -1px;
+  margin-left: -2px;
+}
+
+.author-info {
+  padding: 0;
+  text-align: left;
 }
 
 .author-info,
 .article-details,
 .article-likes {
-  margin: 10px;
+  margin: 5px;
+}
+
+.article-details {
+  display: flex;
+  margin-left: 10px;
 }
 
 .author-name {
@@ -174,8 +216,8 @@
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 20px;
-  text-align: center;
+  font-size: 16px;
+  text-align: left;
   color: rgba(0, 0, 0, 0.7);
   width: 50px;
   word-wrap: break-word;
@@ -188,7 +230,7 @@
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   color: rgba(0, 0, 0, 0.7);
   margin-left: 10px;
@@ -196,18 +238,17 @@
 
 .article-date,
 .article-read-time {
-  padding: 5px;
   font-family: Rosario;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 18px;
-  text-align: center;
+  font-size: 16px;
   color: rgba(0, 0, 0, 0.4);
 }
 
 .article-likes {
   display: flex;
+  margin-top: -5px;
 }
 
 .total-likes {
@@ -221,16 +262,17 @@
 
 .like-button {
   background-image: url('../../img/icon-like.svg');
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   background-repeat: no-repeat;
   margin-top: 5px;
   margin-left: 6px;
 }
 
 .description-text {
-  margin-top: auto;
-  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
 }
 
 .article-category {
@@ -245,9 +287,9 @@
 }
 
 .category-image {
-  background-image: url('../../img/science.jpeg');
-  height: 300px;
-  width: 233px;
+  height: auto;
+  width: auto;
+  max-width: 96%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -269,7 +311,14 @@
   text-indent: 5px;
   color: #000;
   padding: 20px;
-  margin-top: -20px;
+  margin-top: 20px;
+}
+
+.article-text img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
 }
 
 .comment-section {
@@ -288,8 +337,8 @@
 }
 
 .comment-box {
-  margin-top: 50px;
-  padding: 20px;
+  margin-top: 25px;
+  margin-left: 15px;
 }
 
 .header-wrapper {
@@ -309,20 +358,21 @@
 
 .owner-image {
   align-self: center;
-  height: 65px;
-  width: 65px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   background-size: cover;
-  background-image: url('../../img/student.jpeg');
+  margin-right: 3px;
 }
 
 .comment-header {
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  height: 40px;
+  height: auto;
+  min-height: 40px;
   background: rgba(196, 196, 196, 0.2);
 }
 
@@ -374,12 +424,15 @@
   font-weight: bold;
   line-height: normal;
   font-size: 16px;
-  text-align: center;
   color: #000;
+  text-align: center;
 }
 
 .comment-text {
   font-weight: normal;
+  text-align: start;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .add-comment-box {
@@ -390,8 +443,8 @@
   height: 200px;
   display: flex;
   flex-direction: column;
-  margin-left: 48px;
-  margin-right: 20px;
+  margin-left: 28px;
+  margin-right: 2px;
   border-bottom: none;
   margin-top: 30px;
 }
@@ -489,15 +542,40 @@ textarea::-webkit-input-placeholder {
   font-size: 16px;
 }
 
-@media screen and (max-width: 1000px) {
-  .category-image {
-    height: 220px;
-    width: 169px;
+.center-in-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    max-height: none;
   }
 
-  .profile-photo-container {
-    height: 150px;
-    width: 150px;
+  .article-category {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-top: 20px;
+  }
+
+  .article-content {
+    margin-top: 60px;
+  }
+
+  .article-header {
+    margin-top: 20px;
+  }
+
+  .article-description p {
+    padding-right: 10%;
   }
 }
 
@@ -525,55 +603,14 @@ textarea::-webkit-input-placeholder {
     margin-left: 0;
     margin-right: 0;
   }
-}
 
-@media screen and (max-width: 810px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+  .header-wrapper {
+    margin-left: 5px;
+    margin-right: 10px;
   }
 
-  .article-category {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-left: 0;
-  }
-
-  .category-image {
-    height: 240px;
-    width: 184px;
-  }
-}
-
-@media screen and (max-width: 544px) {
-  .profile-photo-container {
-    height: 100px;
-    width: 100px;
-  }
-
-  .description-text {
-    margin-top: 0;
-    margin-left: 10px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .profile-photo-container {
-    height: 140px;
-    width: 140px;
-  }
-
-  .author-description {
-    flex-wrap: wrap;
-  }
-
-  .article-category {
-    row-gap: -20px;
+  .add-comment-box {
+    margin-right: 10px;
+    margin-left: 30px;
   }
 }

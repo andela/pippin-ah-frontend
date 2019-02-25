@@ -4,7 +4,7 @@ import { loginReducer } from './app/login';
 import { profileReducer } from './app/profile';
 import { resetPasswordReducer } from './app/resetPassword';
 import { newPasswordReducer } from './app/newPassword';
-import { createArticleReducer } from './app/article';
+import { createArticleReducer, fetchArticleReducer } from './app/article';
 
 const rootReducer = combineReducers({
   signup: signupReducer,
@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordReducer,
   updatePassword: newPasswordReducer,
   createArticle: createArticleReducer,
+  fetchArticle: fetchArticleReducer,
 });
 
 export default rootReducer;
