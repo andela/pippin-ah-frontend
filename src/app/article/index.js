@@ -1,3 +1,4 @@
 export { default as Article } from './ArticleContainer';
 export { default as CreateArticle } from './CreateArticleContainer';
-export { default as createArticleReducer } from './duck/reducers';
+export { ListArticleContainer as ListArticle } from './ListArticleContainer';
+export { createArticleReducer, fetchArticleReducer } from './duck/reducers';

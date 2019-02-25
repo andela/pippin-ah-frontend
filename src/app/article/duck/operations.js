@@ -3,8 +3,16 @@ import actions from './actions';
 import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
 
-const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
-const { setCreateStatus } = actions;
+const apiUrl = process.env.API_URL;
+const url = `${apiUrl}articles`;
+const {
+  setCreateStatus,
+  setFetchArticleState,
+  setFetchArticleError,
+  setArticleCategory,
+  addArticleData,
+} = actions;
+
 const doCreateArticle = articleDetails => dispatch => {
   if (!articleDetails.uploadCoverUrl) {
     return dispatch(
@@ -59,4 +67,27 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-export default doCreateArticle;
+const doFetchArticle = articleCategory => dispatch => {
+  dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  return axios
+    .get(url, {
+      params: {
+        category: articleCategory,
+      },
+    })
+    .then(({ data }) => {
+      dispatch(addArticleData({ [articleCategory]: data.articles }));
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
+    })
+    .catch(({ response }) => {
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
+      dispatch(setFetchArticleError(response.data.error));
+    });
+};
+
+const doSetCategory = articleCategory => dispatch => {
+  /* istanbul ignore next */
+  dispatch(setArticleCategory(articleCategory));
+};
+
+export { doCreateArticle, doFetchArticle, doSetCategory };
