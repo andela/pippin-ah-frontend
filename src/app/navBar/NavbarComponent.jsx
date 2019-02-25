@@ -1,9 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './navBar.scss';
+import { actions as loginActions } from '../login/duck';
+import { actions as signupActions } from '../signup/duck';
 
-const NavbarComponent = () => {
+const { setLoginState } = loginActions;
+const { setSignupState } = signupActions;
+
+const NavbarComponent = ({ dispatch }) => {
   const isSignedIn = !!localStorage.getItem('token');
+  const signUserOut = () => {
+    localStorage.removeItem('token');
+    dispatch(setLoginState('LOGGED_OUT'));
+    dispatch(setSignupState('LOGGED_OUT'));
+  };
   return (
     <nav id="navbarbg">
       <div>
@@ -50,7 +61,7 @@ const NavbarComponent = () => {
                   <Link
                     to="/"
                     onClick={() => {
-                      localStorage.removeItem('token');
+                      signUserOut();
                     }}
                   >
                     Logout
@@ -79,12 +90,32 @@ const NavbarComponent = () => {
         <li>
           <Link to="/articles/arts">Arts</Link>
         </li>
+        <Link to="/articles/mathematics">Mathematics</Link>
         <li>
-          <Link to="/articles/mathematics">Mathematics</Link>
+          {isSignedIn ? (
+            <Link
+              to="/"
+              onClick={() => {
+                signUserOut();
+              }}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login">SignIn</Link>
+          )}
         </li>
+        <li>{!isSignedIn && <Link to="/signup">SignUp</Link>}</li>
       </ul>
     </nav>
   );
 };
 
-export default NavbarComponent;
+const mapStateToProps = ({
+  login: { loginState },
+  signup: { singupState },
+}) => {
+  return { loginState, singupState };
+};
+
+export default connect(mapStateToProps)(NavbarComponent);

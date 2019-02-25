@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import actions from './actions';
+import { actions as loginActions } from '../../login/duck';
 import constants from './constants';
 
 const { setSignupState, setSignupError } = actions;
-const signupUrl = 'https://learnground-api-staging.herokuapp.com/api/v1/users';
+const { setLoginState } = loginActions;
+const baseUrl = process.env.API_URL;
 const doSignUp = (email, username, password) => dispatch => {
   dispatch(setSignupState(constants.SIGNING_UP));
   dispatch(setSignupError(''));
   return axios
-    .post(signupUrl, {
+    .post(`${baseUrl}users`, {
       username,
       email,
       password,
@@ -17,6 +19,7 @@ const doSignUp = (email, username, password) => dispatch => {
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
       dispatch(setSignupState(constants.SIGNUP_SUCCESS));
+      dispatch(setLoginState(constants.LOGIN_SUCCESS));
     })
     .catch(({ response }) => {
       dispatch(setSignupState(constants.SIGNUP_ERROR));
