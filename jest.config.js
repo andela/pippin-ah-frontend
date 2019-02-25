@@ -1,6 +1,7 @@
 module.exports = {
   setupFiles: ['./src/testSetup.js'],
   transform: { '^.+\\.jsx?$': 'babel-jest' },
+  testURL: 'http://pippin-ah-frontend.herokuapp.com/articles/science',
   collectCoverageFrom: ['src/**/*.{js,jsx}'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   moduleNameMapper: {

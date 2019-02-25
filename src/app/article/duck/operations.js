@@ -3,8 +3,17 @@ import actions from './actions';
 import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
 
-const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
-const { setCreateStatus } = actions;
+const baseUrl = process.env.API_URL;
+const url = `${baseUrl}articles`;
+const {
+  setCreateStatus,
+  setFetchArticleState,
+  setFetchArticleError,
+  setArticleCategory,
+  addArticleData,
+  setSingleFetchStatus,
+} = actions;
+
 const doCreateArticle = articleDetails => dispatch => {
   if (!articleDetails.uploadCoverUrl) {
     return dispatch(
@@ -31,7 +40,7 @@ const doCreateArticle = articleDetails => dispatch => {
         headers: { Authorization: localStorage.getItem('token') },
       };
       return axios
-        .post(url, articleDetails, headers)
+        .post(`${baseUrl}articles`, articleDetails, headers)
         .then(({ data }) => {
           return dispatch(
             setCreateStatus({
@@ -59,4 +68,57 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-export default doCreateArticle;
+const doFetchArticle = slug => dispatch => {
+  dispatch(
+    setSingleFetchStatus({
+      status: constants.FETCHING_SINGLE,
+      data: {},
+    }),
+  );
+  const headers = {
+    headers: { Authorization: localStorage.getItem('token') },
+  };
+  return axios
+    .get(`${baseUrl}articles/${slug}`, headers)
+    .then(({ data }) => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_SUCCESS,
+          data,
+        }),
+      );
+    })
+    .catch(error => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_ERROR,
+          data: !error.response ? 'Network error ' : error.response.data.error,
+        }),
+      );
+    });
+};
+
+const doFetchArticles = articleCategory => dispatch => {
+  dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  return axios
+    .get(url, {
+      params: {
+        category: articleCategory,
+      },
+    })
+    .then(({ data }) => {
+      dispatch(addArticleData({ [articleCategory]: data.articles }));
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
+    })
+    .catch(({ response }) => {
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
+      dispatch(setFetchArticleError(response.data.error));
+    });
+};
+
+const doSetCategory = articleCategory => dispatch => {
+  /* istanbul ignore next */
+  dispatch(setArticleCategory(articleCategory));
+};
+
+export { doCreateArticle, doFetchArticle, doSetCategory, doFetchArticles };
