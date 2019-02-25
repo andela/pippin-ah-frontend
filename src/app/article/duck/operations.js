@@ -3,14 +3,15 @@ import actions from './actions';
 import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
 
-const apiUrl = process.env.API_URL;
-const url = `${apiUrl}articles`;
+const baseUrl = process.env.API_URL;
+const url = `${baseUrl}articles`;
 const {
   setCreateStatus,
   setFetchArticleState,
   setFetchArticleError,
   setArticleCategory,
   addArticleData,
+  setSingleFetchStatus,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -39,7 +40,7 @@ const doCreateArticle = articleDetails => dispatch => {
         headers: { Authorization: localStorage.getItem('token') },
       };
       return axios
-        .post(url, articleDetails, headers)
+        .post(`${baseUrl}articles`, articleDetails, headers)
         .then(({ data }) => {
           return dispatch(
             setCreateStatus({
@@ -67,7 +68,37 @@ const doCreateArticle = articleDetails => dispatch => {
     });
 };
 
-const doFetchArticle = articleCategory => dispatch => {
+const doFetchArticle = slug => dispatch => {
+  dispatch(
+    setSingleFetchStatus({
+      status: constants.FETCHING_SINGLE,
+      data: {},
+    }),
+  );
+  const headers = {
+    headers: { Authorization: localStorage.getItem('token') },
+  };
+  return axios
+    .get(`${baseUrl}articles/${slug}`, headers)
+    .then(({ data }) => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_SUCCESS,
+          data,
+        }),
+      );
+    })
+    .catch(error => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_ERROR,
+          data: !error.response ? 'Network error ' : error.response.data.error,
+        }),
+      );
+    });
+};
+
+const doFetchArticles = articleCategory => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   return axios
     .get(url, {
@@ -90,4 +121,4 @@ const doSetCategory = articleCategory => dispatch => {
   dispatch(setArticleCategory(articleCategory));
 };
 
-export { doCreateArticle, doFetchArticle, doSetCategory };
+export { doCreateArticle, doFetchArticle, doSetCategory, doFetchArticles };
