@@ -22,8 +22,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: (articleCategory, page) =>
-      dispatch(doFetchArticle(articleCategory, page)),
+    fetchArticle: articleCategory => dispatch(doFetchArticle(articleCategory)),
     setCategory: articleCategory => dispatch(doSetCategory(articleCategory)),
     appendArticleData: (articleCategory, page, currentData) =>
       dispatch(doUpdateCategoryData(articleCategory, page, currentData)),

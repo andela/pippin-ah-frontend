@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import actions from './actions';
 import constants from './constants';
+import { uploadImage } from '../../util/uploadToCloudinary';
 
-const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
+const baseUrl = process.env.API_URL;
+const url = `${baseUrl}articles`;
 const {
   setCreateStatus,
   setFetchArticleState,
@@ -12,41 +13,99 @@ const {
   setCurrentPage,
   addArticleData,
   updateCategoryData,
+  setSingleFetchStatus,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
+  if (!articleDetails.uploadCoverUrl) {
+    return dispatch(
+      setCreateStatus({
+        status: constants.CREATE_ERROR,
+        data: 'You must select a cover image',
+      }),
+    );
+  }
   dispatch(setCreateStatus({ status: constants.CREATING }));
-  const headers = {
-    headers: { Authorization: localStorage.getItem('token') },
-  };
-  return axios
-    .post(url, articleDetails, headers)
-    .then(({ data }) => {
-      dispatch(
-        setCreateStatus({
-          status: constants.CREATE_SUCCESS,
-          data: data.slug,
-        }),
-      );
+  const { uploadCoverUrl } = articleDetails;
+  uploadImage('article', uploadCoverUrl)
+    .then(imageLink => {
+      if (typeof imageLink !== 'string') {
+        return dispatch(
+          setCreateStatus({
+            status: constants.CREATE_ERROR,
+            data: 'error uploading cover image',
+          }),
+        );
+      }
+      articleDetails.coverImageUrl = imageLink;
+      const headers = {
+        headers: { Authorization: localStorage.getItem('token') },
+      };
+      return axios
+        .post(`${baseUrl}articles`, articleDetails, headers)
+        .then(({ data }) => {
+          return dispatch(
+            setCreateStatus({
+              status: constants.CREATE_SUCCESS,
+              data: data.slug,
+            }),
+          );
+        })
+        .catch(({ response }) => {
+          return dispatch(
+            setCreateStatus({
+              status: constants.CREATE_ERROR,
+              data: response.data.error,
+            }),
+          );
+        });
     })
-    .catch(({ response }) => {
-      dispatch(
+    .catch(() => {
+      return dispatch(
         setCreateStatus({
           status: constants.CREATE_ERROR,
-          data: response.data.error,
+          data: 'error uploading cover image',
         }),
       );
     });
 };
 
-const doFetchArticle = (articleCategory, page) => dispatch => {
+const doFetchArticle = slug => dispatch => {
+  dispatch(
+    setSingleFetchStatus({
+      status: constants.FETCHING_SINGLE,
+      data: {},
+    }),
+  );
+  const headers = {
+    headers: { Authorization: localStorage.getItem('token') },
+  };
+  return axios
+    .get(`${baseUrl}articles/${slug}`, headers)
+    .then(({ data }) => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_SUCCESS,
+          data,
+        }),
+      );
+    })
+    .catch(error => {
+      dispatch(
+        setSingleFetchStatus({
+          status: constants.FETCH_SINGLE_ERROR,
+          data: !error.response ? 'Network error ' : error.response.data.error,
+        }),
+      );
+    });
+};
+
+const doFetchArticles = articleCategory => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   return axios
     .get(url, {
       params: {
         category: articleCategory,
-        limit: 12,
-        page,
       },
     })
     .then(({ data }) => {
@@ -57,13 +116,11 @@ const doFetchArticle = (articleCategory, page) => dispatch => {
     .catch(({ response }) => {
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
       dispatch(setFetchArticleError(response.data.error));
-      toast.error(response.data.error, {
-        hideProgressBar: true,
-      });
     });
 };
 
 const doSetCategory = articleCategory => dispatch => {
+  /* istanbul ignore next */
   dispatch(setArticleCategory(articleCategory));
 };
 const doUpdateCategoryData = (
@@ -89,4 +146,10 @@ const doUpdateCategoryData = (
     });
 };
 
-export { doCreateArticle, doFetchArticle, doSetCategory, doUpdateCategoryData };
+export {
+  doCreateArticle,
+  doFetchArticle,
+  doSetCategory,
+  doUpdateCategoryData,
+  doFetchArticles,
+};

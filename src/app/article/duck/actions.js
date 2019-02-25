@@ -5,6 +5,11 @@ const setCreateStatus = createStatus => ({
   createStatus,
 });
 
+const setSingleFetchStatus = singleFetchStatus => ({
+  type: types.SET_SINGLE_FETCH_STATUS,
+  singleFetchStatus,
+});
+
 const setFetchArticleState = fetchArticleState => ({
   type: types.SET_FETCH_ARTICLE_STATE,
   fetchArticleState,
@@ -43,4 +48,5 @@ export default {
   updateCategoryData,
   setCurrentPage,
   setCreateStatus,
+  setSingleFetchStatus,
 };

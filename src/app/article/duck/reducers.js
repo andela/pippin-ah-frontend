@@ -5,6 +5,14 @@ const INITIAL_STATE = {
     status: '',
     data: '',
   },
+  singleFetchStatus: {
+    status: '',
+    data: '',
+    fetchArticleStatus: {
+      fetchArticleState: '',
+      errorMessage: '',
+    },
+  },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -13,6 +21,13 @@ const createArticleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         createStatus,
+      };
+    }
+    case types.SET_SINGLE_FETCH_STATUS: {
+      const { singleFetchStatus } = action;
+      return {
+        ...state,
+        singleFetchStatus,
       };
     }
     default:
