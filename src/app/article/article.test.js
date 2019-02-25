@@ -253,15 +253,9 @@ describe('ARTICLE TEST SUITE', () => {
       const state = createArticleReducer(undefined, {
         type: '@@INIT',
       });
-      expect(state).toEqual({
-        createStatus: {
-          status: '',
-          data: '',
-        },
-        singleFetchStatus: {
-          data: '',
-          status: '',
-        },
+      expect(state.createStatus).toEqual({
+        status: '',
+        data: '',
       });
     });
 

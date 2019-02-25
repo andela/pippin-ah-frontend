@@ -4,7 +4,16 @@ import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
 
 const baseUrl = process.env.API_URL;
-const { setCreateStatus, setSingleFetchStatus } = actions;
+const url = `${baseUrl}articles`;
+const {
+  setCreateStatus,
+  setFetchArticleState,
+  setFetchArticleError,
+  setArticleCategory,
+  addArticleData,
+  setSingleFetchStatus,
+} = actions;
+
 const doCreateArticle = articleDetails => dispatch => {
   if (!articleDetails.uploadCoverUrl) {
     return dispatch(
@@ -89,4 +98,27 @@ const doFetchArticle = slug => dispatch => {
     });
 };
 
-export { doCreateArticle, doFetchArticle };
+const doFetchArticles = articleCategory => dispatch => {
+  dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
+  return axios
+    .get(url, {
+      params: {
+        category: articleCategory,
+      },
+    })
+    .then(({ data }) => {
+      dispatch(addArticleData({ [articleCategory]: data.articles }));
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
+    })
+    .catch(({ response }) => {
+      dispatch(setFetchArticleState(constants.FETCH_ARTICLE_ERROR));
+      dispatch(setFetchArticleError(response.data.error));
+    });
+};
+
+const doSetCategory = articleCategory => dispatch => {
+  /* istanbul ignore next */
+  dispatch(setArticleCategory(articleCategory));
+};
+
+export { doCreateArticle, doFetchArticle, doSetCategory, doFetchArticles };

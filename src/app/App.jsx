@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './home';
 import { Signup } from './signup';
 import { Login } from './login';
-import { Article, CreateArticle } from './article';
+import { Article, CreateArticle, ListArticle } from './article';
 import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
-import { Subject } from './subject';
 import ProfileComponent from './profile';
 import { ResetPassword } from './resetPassword';
 import { NewPassword } from './newPassword';
@@ -22,6 +21,7 @@ const App = () => (
         <Route path="/login" component={Login} exact />
         <Route path="/subject" component={Subject} exact />
         <Route path="/article/:slug" component={Article} exact />
+        <Route path="/articles/:category" component={ListArticle} exact />
         <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/newpassword" component={NewPassword} exact />
         <Route path="/create-article" component={CreateArticle} exact />
