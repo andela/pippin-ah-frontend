@@ -2,12 +2,12 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import configureStore from 'redux-mock-store';
-import { Redirect } from 'react-router-dom';
+import { Redirect, MemoryRouter } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { LoginComponent as Login } from './LoginComponent';
 import { actions, constants, loginReducer, types } from './duck';
-import { RingLoaderComponent } from '../loaders';
+import { EllipsisLoaderComponent } from '../loaders';
 import {
   LoginContainer,
   mapDispatchToProps,
@@ -64,7 +64,7 @@ describe('Login Component', () => {
     );
   });
 
-  it('it should render the RingLoaderComponent if logging in', () => {
+  it('it should render the EllipsisLoaderComponent if logging in', () => {
     const props = {
       loginUser: () => {},
       loginState: 'LOGGING_IN',
@@ -72,7 +72,7 @@ describe('Login Component', () => {
       history: () => {},
     };
     const component = shallow(<Login {...props} />);
-    expect(component.contains(<RingLoaderComponent />)).toBe(true);
+    expect(component.contains(<EllipsisLoaderComponent />)).toBe(true);
   });
 });
 
@@ -168,7 +168,9 @@ describe('Connected Login Component Dispatches Login Success', () => {
     axios.post.mockResolvedValue(response);
     wrapper = mount(
       <Provider store={store}>
-        <LoginContainer />
+        <MemoryRouter>
+          <LoginContainer />
+        </MemoryRouter>
       </Provider>,
     );
     wrapper.find('form').simulate('submit', {
@@ -208,7 +210,9 @@ describe('Connected Login Component Dispatches Login Error', () => {
     axios.post.mockImplementation(() => Promise.reject(response));
     wrapper = mount(
       <Provider store={store}>
-        <LoginContainer />
+        <MemoryRouter>
+          <LoginContainer />
+        </MemoryRouter>
       </Provider>,
     );
     wrapper.find('form').simulate('submit', {

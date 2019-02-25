@@ -16,7 +16,7 @@ const NavbarComponent = ({ dispatch }) => {
     dispatch(setSignupState('LOGGED_OUT'));
   };
   return (
-    <nav className="navbarbg">
+    <nav id="navbarbg">
       <div>
         <div className="nav-wrapper" id="iconRight">
           <div className="Logo">
