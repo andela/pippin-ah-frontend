@@ -8,8 +8,6 @@ import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
 import ProfileContainer from './profile';
 import { Subject } from './subject';
-import ProfileComponent from './profile';
-
 import { ResetPassword } from './resetPassword';
 import { NewPassword } from './newPassword';
 
