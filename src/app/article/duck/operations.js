@@ -3,7 +3,8 @@ import actions from './actions';
 import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
 
-const url = 'https://learnground-api-staging.herokuapp.com/api/v1/articles';
+const apiUrl = process.env.API_URL;
+const url = `${apiUrl}articles`;
 const {
   setCreateStatus,
   setFetchArticleState,

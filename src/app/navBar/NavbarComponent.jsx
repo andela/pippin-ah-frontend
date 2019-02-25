@@ -68,27 +68,19 @@ const NavbarComponent = () => {
 
       <ul className="sidenav" id="mobile-demo">
         <li>
-          <a href="#!">Science</a>
+          <Link to="/articles/science">Science</Link>
         </li>
         <li>
-          <a href="#!">Technology</a>
+          <Link to="/articles/technology">Technology</Link>
         </li>
         <li>
-          <a href="#!">Engineering</a>
+          <Link to="/articles/engineering">Engineering</Link>
         </li>
         <li>
-          <a href="#!">Arts</a>
+          <Link to="/articles/arts">Arts</Link>
         </li>
         <li>
-          <a href="#!">Mathematics</a>
-        </li>
-        <li>
-          <a href="#!">SignIn</a>
-        </li>
-        <li>|</li>
-
-        <li>
-          <a href="#!">SignUp</a>
+          <Link to="/articles/mathematics">Mathematics</Link>
         </li>
       </ul>
     </nav>

@@ -50,9 +50,11 @@ const ListArticleComponent = ({
     <Fragment>
       <div id="liArticleContainer" className="container">
         {fetchArticleState === 'FETCHING_ARTICLE' && elipsisLoader}
-        <div className="col s12 center-align">
-          <h3>{articleCategory}</h3>
-        </div>
+        <>
+          <div className="col s12 center-align">
+            <h3>{articleCategory}</h3>
+          </div>
+        </>
         <div className="row">
           {/* istanbul ignore next */
           fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
