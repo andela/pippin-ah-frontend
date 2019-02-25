@@ -16,7 +16,7 @@ export const LoginComponent = ({ loginUser, loginState }) => {
     return <Redirect to="/" />;
   }
   const loginButton = (
-    <div id="button-div" className="row">
+    <>
       <button id="signin-button" type="submit">
         SIGN IN
       </button>
@@ -45,7 +45,7 @@ export const LoginComponent = ({ loginUser, loginState }) => {
         <Link to="/resetpassword">Forgot Password? </Link> |
         <Link to="/signup"> Create an Account</Link>
       </div>
-    </div>
+    </>
   );
   return (
     <Fragment>
@@ -72,10 +72,12 @@ export const LoginComponent = ({ loginUser, loginState }) => {
                   placeholder="Password"
                   required
                 />
-                {loginState !== constants.LOGGING_IN && loginButton}
-                {loginState === constants.LOGGING_IN && (
-                  <EllipsisLoaderComponent />
-                )}
+                <div id="button-div" className="row">
+                  {loginState !== constants.LOGGING_IN && loginButton}
+                  {loginState === constants.LOGGING_IN && (
+                    <EllipsisLoaderComponent />
+                  )}
+                </div>
               </form>
             </div>
           </div>

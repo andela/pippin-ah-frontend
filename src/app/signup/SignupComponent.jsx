@@ -24,7 +24,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
   }
 
   const signupbutton = (
-    <div id="button-div" className="row">
+    <>
       <button id="signup-button" type="submit">
         SIGN UP
       </button>
@@ -53,7 +53,7 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
         Already have an account?
         <Link to="/signin"> Sign In</Link>
       </div>
-    </div>
+    </>
   );
 
   return (
@@ -111,10 +111,12 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     }}
                     required
                   />
-                  {signupState !== constants.SIGNING_UP && signupbutton}
-                  {signupState === constants.SIGNING_UP && (
-                    <EllipsisLoaderComponent />
-                  )}
+                  <div id="button-div" className="row">
+                    {signupState !== constants.SIGNING_UP && signupbutton}
+                    {signupState === constants.SIGNING_UP && (
+                      <EllipsisLoaderComponent />
+                    )}
+                  </div>
                 </form>
               </div>
             </div>
