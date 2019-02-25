@@ -2,7 +2,7 @@
 
 exports[` Component should render the NavBar 1`] = `
 <nav
-  className="navbarbg"
+  id="navbarbg"
 >
   <div>
     <div
