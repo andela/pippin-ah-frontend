@@ -49,7 +49,9 @@
 }
 
 .right-sidebar-down {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .side-bookmark {
@@ -83,13 +85,13 @@
 }
 
 .main-cover .container {
-  border: 1px solid #03d6f5;
+  border: none;
   border-top: none;
   border-bottom: none;
   box-sizing: border-box;
   margin-left: 10%;
   margin-right: 10%;
-  width: 80%;
+  width: 100%;
   max-width: none;
 }
 
@@ -182,12 +184,14 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #512da8;
+  background: rgb(196, 196, 196);
   font: normal;
   font-size: 30px;
   padding-top: 6px;
   color: #fff;
   text-align: center;
+  margin-top: -1px;
+  margin-left: -2px;
 }
 
 .author-info {
@@ -333,8 +337,8 @@
 }
 
 .comment-box {
-  margin-top: 50px;
-  padding: 20px;
+  margin-top: 25px;
+  margin-left: 15px;
 }
 
 .header-wrapper {
@@ -439,8 +443,8 @@
   height: 200px;
   display: flex;
   flex-direction: column;
-  margin-left: 48px;
-  margin-right: 20px;
+  margin-left: 28px;
+  margin-right: 2px;
   border-bottom: none;
   margin-top: 30px;
 }
@@ -598,5 +602,15 @@ textarea::-webkit-input-placeholder {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .header-wrapper {
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+
+  .add-comment-box {
+    margin-right: 10px;
+    margin-left: 30px;
   }
 }

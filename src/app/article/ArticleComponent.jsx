@@ -171,24 +171,6 @@ class ArticleComponent extends React.Component {
               </div>
             </div>
           </div>
-          <div className="right-sidebar-cover">
-            <div className="right-sidebar">
-              <p className="more-articles">More Articles by</p>
-              <div className="sidebar-author">
-                {data &&
-                  (data.author.lastName
-                    ? `${data.author.firstName} ${data.author.lastName}`
-                    : data.author.username)}
-              </div>
-              <div className="sidebar-articles">
-                <p>Ethical Hacking Simplified</p>
-                <p>True Words of Wisdom</p>
-                <p>Understanding Politics</p>
-                <p>In the Mystery of Life</p>
-                <p>Communication Made Easy</p>
-              </div>
-            </div>
-          </div>
         </div>
       </Fragment>
     );
