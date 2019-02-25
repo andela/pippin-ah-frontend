@@ -54,6 +54,9 @@ const ListArticleComponent = ({
           <div className="col s12 center-align">
             <h3>{articleCategory}</h3>
           </div>
+          <div className="col s12 right-align write-article">
+            <Link to="/create-article">Write Article</Link>
+          </div>
         </>
         <div className="row">
           {/* istanbul ignore next */
