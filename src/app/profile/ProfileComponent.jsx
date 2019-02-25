@@ -85,6 +85,13 @@ class ProfileComponent extends React.Component {
       profileData = loginData;
     }
 
+    let profileUrl;
+    if (imageUrl && imageUrl !== 'null') {
+      profileUrl = imageUrl;
+    } else {
+      profileUrl = profilepicture;
+    }
+
     return (
       <div>
         <div className="container">
@@ -96,19 +103,20 @@ class ProfileComponent extends React.Component {
             <div className="card small">
               <div className="card-image">
                 <img
-                  src={newProfileUrl || imageUrl}
+                  src={
+                    !newProfileUrl || newProfileUrl === 'null'
+                      ? profileUrl
+                      : newProfileUrl
+                  }
                   alt="profilepicture"
                   className="activator"
                 />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
-                  {newProfileDetails
-                    ? newProfileDetails.data.firstName
-                    : firstName}{' '}
-                  {newProfileDetails
-                    ? newProfileDetails.data.lastName
-                    : lastName}
+                  {!firstName || firstName === 'null' ? '' : firstName}
+                  &nbsp;
+                  {!lastName || lastName === 'null' ? '' : lastName}
                   <i className="material-icons right">more_vert</i>
                 </span>
               </div>
@@ -117,12 +125,8 @@ class ProfileComponent extends React.Component {
                   You Are Viewing<i className="material-icons right">close</i>
                 </span>
                 <p>
-                  {newProfileDetails
-                    ? newProfileDetails.data.firstName
-                    : firstName}{' '}
-                  {newProfileDetails
-                    ? newProfileDetails.data.lastName
-                    : lastName}
+                  {!firstName || firstName === 'null' ? '' : firstName} &nbsp;
+                  {!lastName || lastName === 'null' ? '' : lastName}
                 </p>
               </div>
             </div>
@@ -135,10 +139,10 @@ class ProfileComponent extends React.Component {
                 <br />
                 <br /> <br />
                 Following : &nbsp;{' '}
-                {profileData ? profileData.following : following} <br />
+                {profileData ? profileData.following : following && 0} <br />
                 <br /> <br />
                 Followers : &nbsp;{' '}
-                {profileData ? profileData.followers : followers} <br />
+                {profileData ? profileData.followers : followers && 0} <br />
                 <br /> <br />
                 Mentor :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {mentor === false ? (
@@ -159,7 +163,7 @@ class ProfileComponent extends React.Component {
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
                 <span id="profile-bio">
-                  {newProfileDetails ? newProfileDetails.data.bio : bio}
+                  {!bio || bio === 'null' ? 'Biography' : bio}
                 </span>
               </div>
               <a
@@ -205,9 +209,7 @@ class ProfileComponent extends React.Component {
                                       id="img"
                                       onChange={this.displayImage}
                                     />
-                                    <span className="profile-btnalign">
-                                      change Photo
-                                    </span>
+                                    change img
                                   </div>
                                   <div id="profile-submitDiv">
                                     <button
@@ -253,7 +255,12 @@ class ProfileComponent extends React.Component {
                             type="text"
                             className="validate"
                             name="firstName"
-                            defaultValue={firstName || 'Enter first Name'}
+                            defaultValue={
+                              !firstName || firstName === 'null'
+                                ? 'first name'
+                                : firstName
+                            }
+                            placeholder="Boigraphy"
                           />
                         </div>
                         <div className="input-field col s12">
@@ -265,7 +272,11 @@ class ProfileComponent extends React.Component {
                             type="text"
                             className="validate"
                             name="lastName"
-                            defaultValue={lastName || 'Enter last Name'}
+                            defaultValue={
+                              !lastName || lastName === 'null'
+                                ? 'last name'
+                                : lastName
+                            }
                           />
                         </div>
                         <div className="input-field col s12">
@@ -274,11 +285,14 @@ class ProfileComponent extends React.Component {
                           </i>
                           <select
                             name="interest"
-                            defaultValue={interests}
+                            defaultValue={
+                              !interests || interests === 'null'
+                                ? 'Science'
+                                : interests
+                            }
                             className="input-field"
                             required
                           >
-                            <option>{interests}</option>
                             <option value="Mathematics">Mathematics</option>
                             <option value="Arts">Arts</option>
                             <option value="Science">Science</option>
@@ -294,7 +308,9 @@ class ProfileComponent extends React.Component {
                             id="textarea1"
                             className="materialize-textarea"
                             name="bio"
-                            defaultValue={bio || 'Biography'}
+                            defaultValue={
+                              !bio || bio === 'null' ? 'biograph' : bio
+                            }
                           />
                         </div>
                         <div className="profile-Eclipsloader2">

@@ -35,7 +35,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <img
             alt="profilepicture"
             className="activator"
-            src={null}
+            src={Object {}}
           />
         </div>
         <div
@@ -44,7 +44,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <span
             className="card-title activator grey-text text-darken-4"
           >
-             
+             
             <i
               className="material-icons right"
             >
@@ -66,7 +66,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
             </i>
           </span>
           <p>
-             
+              
           </p>
         </div>
       </div>
@@ -130,7 +130,9 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <br />
           <span
             id="profile-bio"
-          />
+          >
+            Biography
+          </span>
         </div>
         <a
           className="btn modal-trigger profile-btncolor"
@@ -186,11 +188,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                               onChange={[Function]}
                               type="file"
                             />
-                            <span
-                              className="profile-btnalign"
-                            >
-                              change Photo
-                            </span>
+                            change img
                           </div>
                           <div
                             id="profile-submitDiv"
@@ -228,9 +226,10 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <input
                       className="validate"
-                      defaultValue="Enter first Name"
+                      defaultValue="first name"
                       id="icon_prefix"
                       name="firstName"
+                      placeholder="Boigraphy"
                       type="text"
                     />
                   </div>
@@ -244,7 +243,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <input
                       className="validate"
-                      defaultValue="Enter last Name"
+                      defaultValue="last name"
                       id="icon_telephone"
                       name="lastName"
                       type="text"
@@ -260,11 +259,10 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <select
                       className="input-field"
-                      defaultValue={null}
+                      defaultValue="Science"
                       name="interest"
                       required={true}
                     >
-                      <option />
                       <option
                         value="Mathematics"
                       >
@@ -302,7 +300,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <textarea
                       className="materialize-textarea"
-                      defaultValue="Biography"
+                      defaultValue="biograph"
                       id="textarea1"
                       name="bio"
                     />

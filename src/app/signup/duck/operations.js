@@ -14,7 +14,7 @@ const doSignUp = (email, username, password) => dispatch => {
       email,
       password,
     })
-    .then(data => {
+    .then(({ data }) => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('firstName', data.firstName);
       localStorage.setItem('lastName', data.lastName);
