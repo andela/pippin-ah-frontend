@@ -5,7 +5,7 @@ import './navBar.scss';
 const NavbarComponent = () => {
   const isSignedIn = !!localStorage.getItem('token');
   return (
-    <nav className="navbarbg">
+    <nav id="navbarbg">
       <div>
         <div className="nav-wrapper" id="iconRight">
           <div className="Logo">
