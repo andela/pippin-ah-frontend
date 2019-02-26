@@ -8,10 +8,10 @@ const INITIAL_STATE = {
   singleFetchStatus: {
     status: '',
     data: '',
-    fetchArticleStatus: {
-      fetchArticleState: '',
-      errorMessage: '',
-    },
+  },
+  fetchArticleStatus: {
+    fetchArticleState: '',
+    errorMessage: '',
   },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {

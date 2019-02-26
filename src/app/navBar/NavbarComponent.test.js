@@ -1,5 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
+import { mount } from 'enzyme';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import NavbarComponent from './NavbarComponent';
 
 global.localStorage = {
@@ -15,22 +19,102 @@ global.localStorage = {
 };
 
 describe(' Component', () => {
-  it('should render the NavBar', () => {
-    const component = shallow(<NavbarComponent />);
-    expect(component.exists()).toBe(true);
-    expect(component).toMatchSnapshot();
+  it('should render the navbar component', () => {
+    localStorage.removeItem('token');
+    const initialState = {
+      signup: {
+        signupState: '',
+      },
+      login: {
+        loginState: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <NavbarComponent />
+        </MemoryRouter>
+      </Provider>,
+    );
+    expect(wrapper.exists()).toBe(true);
   });
 
   it('should render the logout button when user is logged in', () => {
     localStorage.setItem('token', 'sometoken');
-    const component = shallow(<NavbarComponent />);
-    const logoutButton = component.find('Link[onClick]').props();
+    const initialState = {
+      signup: {
+        signupState: '',
+      },
+      login: {
+        loginState: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <NavbarComponent />
+        </MemoryRouter>
+      </Provider>,
+    );
+    const logoutButton = wrapper
+      .find('Link[onClick]')
+      .at(0)
+      .props();
     expect(logoutButton.children).toEqual('Logout');
   });
 
-  it('should delete authorization token when user logs out', () => {
-    const component = shallow(<NavbarComponent />);
-    component.find('Link[onClick]').simulate('click');
+  it('should delete auth token when user clicks logout on main navbar', () => {
+    const initialState = {
+      signup: {
+        signupState: '',
+      },
+      login: {
+        loginState: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <NavbarComponent />
+        </MemoryRouter>
+      </Provider>,
+    );
+    wrapper
+      .find('Link[onClick]')
+      .at(0)
+      .simulate('click');
+    expect(localStorage.getItem('token')).toEqual(null);
+  });
+
+  it('should delete auth token when user clicks logout on side navbar', () => {
+    localStorage.setItem('token', 'sometoken');
+    const initialState = {
+      signup: {
+        signupState: '',
+      },
+      login: {
+        loginState: '',
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(initialState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <NavbarComponent />
+        </MemoryRouter>
+      </Provider>,
+    );
+    wrapper
+      .find('Link[onClick]')
+      .at(1)
+      .simulate('click');
     expect(localStorage.getItem('token')).toEqual(null);
   });
 });

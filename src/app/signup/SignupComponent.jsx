@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
-import { RingLoaderComponent } from '../loaders';
+import { Redirect, Link } from 'react-router-dom';
+import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
+import { facebook, twitter, googleplus } from '../../img';
 import './signup.scss';
 
 const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
@@ -22,49 +23,50 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
     return <Redirect to="/" />;
   }
 
+  const signupbutton = (
+    <>
+      <button id="signup-button" type="submit">
+        SIGN UP
+      </button>
+      <p id="alternateText">Or sign up with</p>
+      <div className="row">
+        <img
+          className="col s4"
+          id="auth-facebook-logo"
+          src={facebook}
+          alt="facebook logo"
+        />
+        <img
+          className="col s4"
+          id="auth-twitter-logo"
+          src={twitter}
+          alt="twitter logo"
+        />
+        <img
+          className="col s4"
+          id="auth-googleplus-logo"
+          src={googleplus}
+          alt="googleplus logo"
+        />
+      </div>
+      <div id="auth-forgot-password">
+        Already have an account?
+        <Link to="/signin"> Sign In</Link>
+      </div>
+    </>
+  );
+
   return (
     <Fragment>
-      <div className="relative-div">
+      <div className="relative-div-signup">
         <div className="signup-div-wrapper">
-          <div className="signup-divs">
-            <div className="close-button-div">
-              <p className="close-button close"> X </p>
-            </div>
-            <div className="signup-text">
-              Sign <span className="up">Up</span>
-            </div>
-            <div className="signup-wrapper">
-              <div className="social-media-icons">
-                <div className="btn-facebookk">
-                  <div className="facebook-icon-div">
-                    <i className="fab fa-facebook-f" />
-                  </div>
-                  <div className="fb-text-wrapper">
-                    <span className="social-text">Sign up with Facebook</span>
-                  </div>
+          <div className="signup-container">
+            <div className="signup-wrapper row">
+              <div id="signup-form" className="col s12">
+                <div className="signup-text">
+                  Sign <span className="signup-blue">Up</span>
                 </div>
-                <div className="btn-twitterr">
-                  <div className="twitter-icon-div">
-                    <i className="fab fa-twitter" />
-                  </div>
-                  <div className="twitter-text-wrapper">
-                    <span className="social-text">Sign up with Twitter</span>
-                  </div>
-                </div>
-                <div className="btn-googlee">
-                  <div className="google-icon-div">
-                    <i className="fab fa-google" />
-                  </div>
-                  <div className="google-text-wrapper">
-                    <span className="social-text">Sign up with Google</span>
-                  </div>
-                </div>
-              </div>
-              <form onSubmit={onFormSubmit}>
-                <div className="input-groups">
-                  <div className="form-icon-div">
-                    <i className="fas fa-envelope form-input-icons" />
-                  </div>
+                <form id="signup" onSubmit={onFormSubmit}>
                   <input
                     className={
                       !errorMessage.includes('Email') ? '' : 'input-error'
@@ -74,11 +76,6 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     placeholder="Email"
                     required
                   />
-                </div>
-                <div className="input-groups">
-                  <div className="form-icon-div">
-                    <i className="fas fa-user form-input-icons" />
-                  </div>
                   <input
                     className={
                       !errorMessage.includes('username') ? '' : 'input-error'
@@ -90,11 +87,6 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     title="Username must be at least 6 characters"
                     required
                   />
-                </div>
-                <div className="input-groups">
-                  <div className="form-icon-div">
-                    <i className="fas fa-key form-input-icons" />
-                  </div>
                   <input
                     className={
                       !errorMessage.includes('password') ? '' : 'input-error'
@@ -107,11 +99,6 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     title="Password must be at least 8 characters"
                     required
                   />
-                </div>
-                <div className="input-groups">
-                  <div className="form-icon-div">
-                    <i className="fas fa-key form-input-icons" />
-                  </div>
                   <input
                     className={
                       !errorMessage.includes('password') ? '' : 'input-error'
@@ -124,22 +111,14 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
                     }}
                     required
                   />
-                </div>
-                <div>
-                  <button className="btn-submit" type="submit">
-                    <span className="submit-text">SIGN UP</span>
-                  </button>
-                  <div className="sign-up-alternative-div">
-                    <p className="account">
-                      Have an account?
-                      <span className="sign-up-alternative-text"> Sign In</span>
-                    </p>
+                  <div id="button-div" className="row">
+                    {signupState !== constants.SIGNING_UP && signupbutton}
+                    {signupState === constants.SIGNING_UP && (
+                      <EllipsisLoaderComponent />
+                    )}
                   </div>
-                </div>
-              </form>
-            </div>
-            <div className="ring-loader">
-              {signupState === constants.SIGNING_UP && <RingLoaderComponent />}
+                </form>
+              </div>
             </div>
           </div>
         </div>
