@@ -54,18 +54,19 @@ const props = {
     bio: 'Software developer at andela',
     interest: 'Arts',
   },
-  updateStatus: {},
+  updateStatus: {
+    newProfileDetails: {
+      data: {
+        firstName: 'Habib',
+        lastName: 'moses',
+        bio: 'Software developer at andela',
+        interest: 'Arts',
+      },
+    },
+  },
   uploadStatus: {},
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
-  newProfileDetails: {
-    data: {
-      firstName: 'Habib',
-      lastName: 'moses',
-      bio: 'Software developer at andela',
-      interest: 'Arts',
-    },
-  },
 
   data: {
     message: 'signUp was successful',
