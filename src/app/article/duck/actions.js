@@ -30,6 +30,11 @@ const addArticleData = articleData => ({
   articleData,
 });
 
+const addNewlyCreatedArticle = newArticle => ({
+  type: types.ADD_NEWLY_CREATED_ARTICLE,
+  newArticle,
+});
+
 export default {
   setFetchArticleState,
   setFetchArticleError,
@@ -37,4 +42,5 @@ export default {
   addArticleData,
   setCreateStatus,
   setSingleFetchStatus,
+  addNewlyCreatedArticle,
 };
