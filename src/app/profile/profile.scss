@@ -2,6 +2,48 @@
   background-color: #5ed3f1;
 }
 
+#profile-image-size {
+  height: 100%;
+}
+
+#profile-image-card2 {
+  height: 110%;
+}
+
+#hideMe {
+  -webkit-animation: seconds 1s forwards;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-delay: 5s;
+  animation: seconds 1s forwards;
+  animation-iteration-count: 1;
+  animation-delay: 5s;
+  position: relative;
+}
+
+@-webkit-keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    left: -9999px;
+    position: absolute;
+  }
+}
+
+@keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    left: -9999px;
+    position: absolute;
+  }
+}
+
 .profile-Eclipsloader .ellipsis {
   height: 125px;
   size: 70px;
@@ -178,7 +220,7 @@ form {
 }
 
 @media only screen and (max-width: 500px) {
-  .card .card-image {
+  .profile.card .card-image {
     height: 500px;
   }
 

@@ -100,16 +100,18 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m1 l1" />
           <div className="col s12 m6 l3">
             <div className="card small">
-              <div className="card-image">
-                <img
-                  src={
-                    !newProfileUrl || newProfileUrl === 'null'
-                      ? profileUrl
-                      : newProfileUrl
-                  }
-                  alt="profilepicture"
-                  className="activator"
-                />
+              <div className="card-image profile.card .card-image">
+                <div id="profile-image-size">
+                  <img
+                    src={
+                      !newProfileUrl || newProfileUrl === 'null'
+                        ? profileUrl
+                        : newProfileUrl
+                    }
+                    alt="profilepicture"
+                    className="activator "
+                  />
+                </div>
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
@@ -179,10 +181,12 @@ class ProfileComponent extends React.Component {
                     <div className="col s12 m6 l4">
                       <div className="card small">
                         <div className="card-image profile-removespace">
-                          <img
-                            src={imageSelected || profilepicture}
-                            alt="profilepicture"
-                          />
+                          <div id="profile-image-card2">
+                            <img
+                              src={imageSelected || profilepicture}
+                              alt="profilepicture"
+                            />
+                          </div>
                         </div>
                         <div className="card-tabs">
                           <form onSubmit={this.uploadPicture}>
@@ -226,7 +230,10 @@ class ProfileComponent extends React.Component {
 
                             {uploadStatus.status ===
                               constants.UPDATE_SUCCESS && (
-                              <span className="profile-sucessMessage2">
+                              <span
+                                className="profile-sucessMessage2"
+                                id="hideMe"
+                              >
                                 Picture Uploaded Sucessfully.
                               </span>
                             )}
@@ -256,10 +263,10 @@ class ProfileComponent extends React.Component {
                             name="firstName"
                             defaultValue={
                               !firstName || firstName === 'null'
-                                ? 'first name'
+                                ? ''
                                 : firstName
                             }
-                            placeholder="Boigraphy"
+                            placeholder="first Name"
                           />
                         </div>
                         <div className="input-field col s12">
@@ -272,10 +279,9 @@ class ProfileComponent extends React.Component {
                             className="validate"
                             name="lastName"
                             defaultValue={
-                              !lastName || lastName === 'null'
-                                ? 'last name'
-                                : lastName
+                              !lastName || lastName === 'null' ? '' : lastName
                             }
+                            placeholder="lastt Name"
                           />
                         </div>
                         <div className="input-field col s12">
@@ -310,6 +316,7 @@ class ProfileComponent extends React.Component {
                             defaultValue={
                               !bio || bio === 'null' ? 'biograph' : bio
                             }
+                            placeholder="Biography"
                           />
                         </div>
                         <div className="profile-Eclipsloader2">
@@ -335,7 +342,7 @@ class ProfileComponent extends React.Component {
 
                         {updateStatus.status ===
                           constants.PROFILE_UPDATE_SUCCESS && (
-                          <span className="profile-sucessMessage3">
+                          <span className="profile-sucessMessage3" id="hideMe">
                             Profile Updated Sucessfully.
                           </span>
                         )}
