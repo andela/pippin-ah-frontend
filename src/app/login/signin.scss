@@ -1,6 +1,6 @@
 .relative-div-signIn {
   position: relative;
-  height: 83%;
+  height: 681px;
 }
 
 .signIn-div-wrapper {
@@ -10,7 +10,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  padding-top: 8%;
+  padding-top: 85px;
   color: black;
 }
 
@@ -26,80 +26,53 @@
 }
 
 .signIn-container {
-  background-color: white;
-  width: 50%;
+  width: 60%;
   margin: 0 auto 12% auto;
   position: relative;
   padding: 1% 1%;
-  height: 55%;
+  height: 85%;
 }
 
 .signIn-wrapper {
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   height: auto;
+  margin-top: 50px;
+}
+
+#login input {
+  margin-top: 30px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+#login input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
+}
+
+.sign-up-alternative-div-signIn {
+  font-size: 13px;
+  margin-top: -2%;
+  text-align: right;
 }
 
 .signIn-text {
   font-family: Rosario;
   font-size: 30px;
+  color: #880038;
   text-align: center;
-  color: #880038;
-  clear: both;
-  margin-bottom: 4%;
+  margin-top: 35px;
+  margin-bottom: 45px;
 }
 
-.close-button-div-signIn {
-  text-align: right;
-  margin-bottom: -5%;
-  padding-right: 2%;
-  font-size: 30px;
-  color: #880038;
-}
-
-.close-button-sign {
-  font-size: 18px;
-  margin-left: 90%;
-}
-
-.close {
-  color: #880038;
-}
-
-.close:hover {
-  cursor: pointer;
-}
-
-.social-media-icons-signIn {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0 1% 0 0;
-  border-right: 1px solid #eee;
-  margin-bottom: 6%;
-  width: 25%;
-  color: white;
-}
-
-.up {
+.signIn-blue {
   color: #03d6f5;
 }
 
-.form-icon-div-signIn {
-  text-align: center;
-  padding: 10px 15px 0 0;
-}
-
-.input-groups-signIn {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-}
-
-.form-input-icons-signIn {
-  color: #b3b3b3;
-  font-size: 25px;
+.signIn-grey {
+  color: #b8b8b8;
 }
 
 .input-error {
@@ -107,14 +80,6 @@
   border-bottom: 1px solid #f00 !important;
   margin-left: 15px;
   width: 80%;
-}
-
-form button {
-  background: #03d6f5;
-  text-align: center;
-  margin-top: 5%;
-  padding: 1% 0;
-  width: 92%;
 }
 
 .btn-submit-signIn {
@@ -127,196 +92,44 @@ form button {
   cursor: pointer;
 }
 
-form {
+#button-div {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 65%;
+  align-items: center;
+  padding-bottom: 30px;
 }
 
-.btn-facebookk,
-.btn-twitterr,
-.btn-googlee {
-  display: flex;
-}
-
-.fa-facebook-f {
+#signin-button,
+#signin-button:focus {
+  width: 150px;
+  height: 40px;
+  border-radius: 25px;
+  background: #03d6f5;
   color: white;
-  font-size: 25px;
-  margin-top: -3px;
+  cursor: pointer;
+  box-shadow: none;
+  margin-top: 34px;
 }
 
-.fa-twitter {
-  color: white;
-  font-size: 25px;
-  margin-top: -3px;
+#signin-button:hover {
+  background: #03d6f5;
+  box-shadow: none;
 }
 
-.fa-google {
-  font-size: 25px;
-  color: white;
-}
-
-.facebook-icon-div-signIn {
-  padding: 5px;
-  background-color: #3b5997;
-}
-
-.twitter-icon-div-signIn {
-  padding: 5px;
-  background-color: #50abf1;
-}
-
-.google-icon-div-signIn {
-  background-color: #880038;
-  padding: 5px;
-}
-
-.fb-text-wrapper-signIn,
-.twitter-text-wrapper-signIn,
-.google-text-wrapper-signIn {
-  width: 100%;
-  font-size: 12px;
+#alternateText {
+  color: #686767;
   text-align: center;
-  padding: 5% 2%;
-  height: auto;
 }
 
-.fb-text-wrapper-signIn {
-  background-color: #3b5997;
+#auth-facebook-logo,
+#auth-twitter-logo,
+#auth-googleplus-logo {
+  width: 70px;
+  height: 70px;
 }
 
-.google-text-wrapper-signIn {
-  background-color: #880038;
-}
-
-.twitter-text-wrapper-signIn {
-  background-color: #50abf1;
-}
-
-.social-text-signIn {
-  margin: auto 0 !important;
-}
-
-.sign-up-alternative-div-signIn {
-  font-size: 13px;
-  margin-top: -2%;
-  text-align: right;
-}
-
-.sign-up-alternative-text-signIn a {
-  color: red;
-}
-
-.ring-loader {
-  text-align: center;
-  margin-left: 200px;
-  margin-top: -40px;
-  transform: scale(0.7);
-}
-
-@media screen and (max-width: 991px) {
-  .signIn-div-wrapper {
-    padding-top: 18%;
-  }
-
-  .signIn-container {
-    width: 70%;
-    margin: 0 15% 9% auto;
-    padding: 0 1%;
-    height: 70%;
-  }
-
-  .signIn-wrapper {
-    margin: 10% auto 0 auto;
-  }
-
-  .social-media-icons-signIn {
-    padding: 0 2% auto auto;
-    width: 13%;
-  }
-
-  .facebook-icon-div-signIn {
-    padding: 7px;
-    background-color: #3b5997;
-  }
-
-  .twitter-icon-div-signIn {
-    padding-top: 9px;
-  }
-
-  .fb-text-wrapper-signIn,
-  .twitter-text-wrapper-signIn,
-  .google-text-wrapper-signIn {
-    display: none;
-  }
-
-  .signIn-text {
-    font-size: 25px;
-  }
-
-  .fa-google,
-  .fa-twitter,
-  .fa-facebook-f {
-    font-size: 15px;
-  }
-
-  .login {
-    width: 80%;
-  }
-
-  .form-input-icons-signIn {
-    font-size: 15px;
-    margin-top: 50%;
-  }
-
-  input {
-    font-size: 15px;
-  }
-
-  .btn-submit-signIn {
-    font-size: 16px;
-    width: 87%;
-    margin-left: 12%;
-  }
-
-  .sign-up-alternative-text-signIn {
-    color: black;
-    font-size: 11px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .signIn-container {
-    background-color: white;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .signIn-container {
-    width: 90%;
-    margin-left: 5%;
-  }
-}
-
-//  RESPONSIVE HEIGHT
-@media screen and (max-height: 650px) {
-  .signIn-container {
-    position: relative;
-    padding: 0 1%;
-    height: 70%;
-  }
-}
-
-@media screen and (max-height: 690px) {
-  .signIn-container {
-    height: 70%;
-  }
-
-  @media screen and (max-height: 550px) {
-    .signIn-container {
-      margin-top: -5%;
-      height: auto;
-    }
-  }
+#signin-form .ellipsis {
+  transform: scale(0.9);
+  margin-top: -20px;
 }

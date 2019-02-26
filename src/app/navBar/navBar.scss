@@ -1,21 +1,23 @@
 $font-stack: Helvetica, sans-serif;
 $primary-color: #333;
 
-body {
-  font: 100% $font-stack;
-  color: $primary-color;
+.navbar-container {
+  margin-bottom: 50px;
 }
 
 nav {
-  position: static;
+  position: fixed;
+  top: 0;
+  z-index: 20;
 }
 
-.navbarbg {
+#navbarbg {
+  position: relative;
   background-color: #880038;
   height: 50px;
 }
 
-.navbarbg a {
+#navbarbg a {
   margin-top: -0.21em;
 }
 
@@ -33,12 +35,6 @@ nav {
   position: relative !important;
 }
 
-@media screen and (max-width: 992px) {
-  .brand-logo {
-    margin-left: 125px !important;
-  }
-}
-
 .show {
   list-style: none;
   margin-left: 100px !important;
@@ -50,4 +46,10 @@ nav ul li {
 
 .categories {
   margin-left: 20%;
+}
+
+@media screen and (max-width: 992px) {
+  .brand-logo {
+    margin-left: 125px !important;
+  }
 }

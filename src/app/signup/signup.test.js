@@ -3,12 +3,12 @@ import { shallow, mount } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import SignupContainer from './SignupContainer';
 import SignupComponent from './SignupComponent';
 import { actions, types, constants, signupReducer } from './duck';
-import { RingLoaderComponent } from '../loaders';
+import { EllipsisLoaderComponent } from '../loaders';
 
 jest.mock('axios');
 
@@ -130,7 +130,7 @@ describe('SIGNUP TEST SUITE', () => {
       );
     });
 
-    it('it should render the RingLoaderComponent if signing up', () => {
+    it('it should render the EllipsisLoaderComponent if signing up', () => {
       const props = {
         signupUser: () => {},
         signupState: 'SIGNING_UP',
@@ -138,7 +138,7 @@ describe('SIGNUP TEST SUITE', () => {
         history: () => {},
       };
       const component = shallow(<SignupComponent {...props} />);
-      expect(component.contains(<RingLoaderComponent />)).toBe(true);
+      expect(component.contains(<EllipsisLoaderComponent />)).toBe(true);
     });
   });
 
@@ -157,7 +157,9 @@ describe('SIGNUP TEST SUITE', () => {
       axios.post.mockResolvedValue(response);
       wrapper = mount(
         <Provider store={store}>
-          <SignupContainer />
+          <MemoryRouter>
+            <SignupContainer />
+          </MemoryRouter>
         </Provider>,
       );
       wrapper.find('form').simulate('submit', {
@@ -199,7 +201,9 @@ describe('SIGNUP TEST SUITE', () => {
       axios.post.mockImplementation(() => Promise.reject(response));
       wrapper = mount(
         <Provider store={store}>
-          <SignupContainer />
+          <MemoryRouter>
+            <SignupContainer />
+          </MemoryRouter>
         </Provider>,
       );
       wrapper.find('form').simulate('submit', {
