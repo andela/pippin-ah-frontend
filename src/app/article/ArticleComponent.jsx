@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CommentComponent from '../comment';
 import { EllipsisLoaderComponent } from '../loaders';
 import { formatDate, constants } from './duck';
@@ -11,6 +13,11 @@ class ArticleComponent extends React.Component {
     this.state = {};
   }
 
+  static propTypes = {
+    fetchSingleArticle: PropTypes.func.isRequired,
+    bookmarkArticle: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
     const {
       fetchSingleArticle,
@@ -21,6 +28,11 @@ class ArticleComponent extends React.Component {
     fetchSingleArticle(slug);
   }
 
+  bookmarkArticle = data => {
+    const { bookmarkArticle } = this.props;
+    bookmarkArticle(data.slug, data);
+  };
+
   render() {
     const {
       singleFetchStatus: { data, status },
@@ -28,6 +40,7 @@ class ArticleComponent extends React.Component {
     let dateObject;
     if (data) {
       dateObject = formatDate(data.createdAt);
+      console.log('-----==-', data);
     }
     if (status === constants.FETCHING_SINGLE) {
       return (
@@ -57,7 +70,11 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              <div className="side-bookmark" />
+              <Link
+                to={`/article/${data.slug}`}
+                onClick={() => this.bookmarkArticle(data)}
+                className="side-bookmark"
+              />
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
@@ -131,7 +148,11 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              <div className="side-bookmark" />
+              <Link
+                to={`/article/${data.slug}`}
+                onClick="stuff"
+                className="side-bookmark"
+              />
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
