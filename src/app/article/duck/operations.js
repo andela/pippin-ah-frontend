@@ -111,7 +111,14 @@ const doFetchArticles = (articleCategory, page) => dispatch => {
       },
     })
     .then(({ data }) => {
-      dispatch(setCurrentPage(data.page));
+      dispatch(
+        setCurrentPage({
+          [articleCategory]: {
+            page,
+            nextPage: page + 1,
+          },
+        }),
+      );
       dispatch(addArticleData({ [articleCategory]: data.articles }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
@@ -122,9 +129,10 @@ const doFetchArticles = (articleCategory, page) => dispatch => {
 };
 
 const doSetCategory = articleCategory => dispatch => {
-  /* istanbul ignore next */
   dispatch(setArticleCategory(articleCategory));
 };
+
+/* istanbul ignore next */
 const doUpdateCategoryData = (
   articleCategory,
   page,
@@ -139,8 +147,25 @@ const doUpdateCategoryData = (
       },
     })
     .then(({ data }) => {
+      if (data.count === 0) {
+        return dispatch(
+          setCurrentPage({
+            [articleCategory]: {
+              page: page - 1,
+              nextPage: null,
+            },
+          }),
+        );
+      }
       const appendedCategoryData = currentData.concat(data.articles);
-      dispatch(setCurrentPage(data.page));
+      dispatch(
+        setCurrentPage({
+          [articleCategory]: {
+            page,
+            nextPage: page + 1,
+          },
+        }),
+      );
       dispatch(updateCategoryData({ [articleCategory]: appendedCategoryData }));
     })
     .catch(({ response }) => {

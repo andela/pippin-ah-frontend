@@ -42,6 +42,7 @@ const elipsisLoader = (
   </>
 );
 
+/* istanbul ignore next */
 const ListArticleComponent = ({
   fetchArticleState,
   articleData,
@@ -49,18 +50,17 @@ const ListArticleComponent = ({
   currentPage,
   appendArticleData,
 }) => {
-  currentPage += 1;
   window.onscroll = () => {
-    const { scrollHeight } = document.body;
-    console.log('_____', scrollHeight);
-    const totalHeight = window.scrollY + window.innerHeight;
-    console.log('object :', totalHeight);
-    if (totalHeight >= scrollHeight - 600) {
-      appendArticleData(
-        articleCategory,
-        currentPage,
-        articleData[articleCategory],
-      );
+    if (currentPage && currentPage[articleCategory].nextPage) {
+      const { scrollHeight } = document.body;
+      const totalHeight = window.scrollY + window.innerHeight;
+      if (totalHeight >= scrollHeight) {
+        appendArticleData(
+          articleCategory,
+          currentPage[articleCategory].nextPage,
+          articleData[articleCategory],
+        );
+      }
     }
   };
   return (
@@ -73,8 +73,7 @@ const ListArticleComponent = ({
           </div>
         </>
         <div className="row">
-          {/* istanbul ignore next */
-          fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
+          {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
             articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
               <div

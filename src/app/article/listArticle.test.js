@@ -6,6 +6,7 @@ import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
 import ListArticleComponent from './ListArticleComponent';
 import { actions, constants, fetchArticleReducer, types } from './duck';
+import doUpdateCategoryData from './duck/operations';
 import getArticleCategory from './util/getArticleCategory';
 import { EllipsisLoaderComponent } from '../loaders';
 import {
@@ -155,12 +156,16 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   const store = mockStore(initialState);
   let wrapper;
   beforeEach(() => {
-    const response = { data: 'fetchArticle successful' };
+    const response = {
+      message: 'fetchArticle successful',
+      articles: [1, 2, 3],
+      page: 1,
+    };
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: { ...response } }),
     );
     const articleData = {
-      Science: [{ title: 'first article' }],
+      Arts: [{ title: 'first article' }],
     };
     wrapper = mount(
       <Provider store={store}>
@@ -177,8 +182,8 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
     const storeState = store.getState();
-    expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
-    expect(storeState.articleData).toEqual('Data');
+    expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
+    expect(storeState.articleCategory).toEqual('Arts');
   });
 });
 
