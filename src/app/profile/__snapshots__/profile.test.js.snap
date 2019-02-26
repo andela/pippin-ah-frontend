@@ -30,13 +30,17 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         className="card small"
       >
         <div
-          className="card-image"
+          className="card-image profile.card .card-image"
         >
-          <img
-            alt="profilepicture"
-            className="activator"
-            src="https//imageurl"
-          />
+          <div
+            id="profile-image-size"
+          >
+            <img
+              alt="profilepicture"
+              className="activator "
+              src="https//imageurl"
+            />
+          </div>
         </div>
         <div
           className="card-content"
@@ -161,10 +165,14 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                   <div
                     className="card-image profile-removespace"
                   >
-                    <img
-                      alt="profilepicture"
-                      src={Object {}}
-                    />
+                    <div
+                      id="profile-image-card2"
+                    >
+                      <img
+                        alt="profilepicture"
+                        src={Object {}}
+                      />
+                    </div>
                   </div>
                   <div
                     className="card-tabs"
@@ -226,10 +234,10 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <input
                       className="validate"
-                      defaultValue="first name"
+                      defaultValue=""
                       id="icon_prefix"
                       name="firstName"
-                      placeholder="Boigraphy"
+                      placeholder="first Name"
                       type="text"
                     />
                   </div>
@@ -243,9 +251,10 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                     </i>
                     <input
                       className="validate"
-                      defaultValue="last name"
+                      defaultValue=""
                       id="icon_telephone"
                       name="lastName"
+                      placeholder="lastt Name"
                       type="text"
                     />
                   </div>
@@ -303,6 +312,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                       defaultValue="biograph"
                       id="textarea1"
                       name="bio"
+                      placeholder="Biography"
                     />
                   </div>
                   <div

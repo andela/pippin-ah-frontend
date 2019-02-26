@@ -3,7 +3,6 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import moxios from 'moxios';
 import jwtDecode from 'jwt-decode';
 import configureStore from 'redux-mock-store';
 import ProfileComponent from './ProfileComponent';
@@ -109,9 +108,6 @@ const props = {
 };
 
 describe(' PROFILE TEST SUITE', () => {
-  beforeEach(() => moxios.install(axios));
-  afterEach(() => moxios.uninstall(axios));
-
   describe(' Profile Component', () => {
     it('should render Profile container component', () => {
       const component = shallow(<ProfileContainer />);
@@ -316,14 +312,6 @@ describe(' PROFILE TEST SUITE', () => {
         interest: 'Arts',
       };
 
-      const url =
-        'https://learnground-api-staging.herokuapp.com/api/v1/profile';
-      moxios.stubRequest(url, {
-        status: 200,
-        profileData,
-        newProfileDetails,
-      });
-
       const data2 = {
         status: constants.PROFILE_UPDATE_SUCCESS,
         newProfileDetails,
@@ -340,12 +328,6 @@ describe(' PROFILE TEST SUITE', () => {
         const response = { data: 'update not sucessfull' };
         axios.patch.mockImplementation(() => Promise.reject(response));
         const profileData = {};
-
-        const url =
-          'https://learnground-api-staging.herokuapp.com/api/v1/profile';
-        moxios.stubRequest(url, {
-          status: 200,
-        });
 
         store.dispatch(updateUserProfile(profileData)).catch(() => {
           store.dispatch(
