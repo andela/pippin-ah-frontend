@@ -8,10 +8,17 @@ const INITIAL_STATE = {
   singleFetchStatus: {
     status: '',
     data: '',
-    fetchArticleStatus: {
-      fetchArticleState: '',
-      errorMessage: '',
-    },
+  },
+  fetchArticleStatus: {
+    fetchArticleState: '',
+    errorMessage: '',
+  },
+  articleData: {
+    Arts: [],
+    Mathematics: [],
+    Science: [],
+    Engineering: [],
+    Technology: [],
   },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
@@ -64,6 +71,21 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         articleData: { ...oldArticleData, ...articleData },
+      };
+    }
+    case types.ADD_NEWLY_CREATED_ARTICLE: {
+      const { newArticle } = action;
+      const currentArtcleData = state.articleData;
+      const newArticleCategory = newArticle.category;
+      const toAddArticle = {
+        [newArticleCategory]: [
+          ...currentArtcleData[newArticleCategory],
+          newArticle,
+        ],
+      };
+      return {
+        ...state,
+        articleData: { ...currentArtcleData, ...toAddArticle },
       };
     }
     default:
