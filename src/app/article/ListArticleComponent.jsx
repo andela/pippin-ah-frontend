@@ -5,18 +5,18 @@ import { constants } from './duck';
 import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
-/* istanbul ignore next */
 const getArticleCategory = location => {
   const currentCategory = location.pathname.split('/')[2];
   return currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
 };
+/* istanbul ignore next */
 const methods = {
   componentDidMount({ fetchArticle, articleData, setCategory, location }) {
     const category = getArticleCategory(location);
-    if (!articleData[category].length) {
+    if (articleData[category].length < 2) {
       fetchArticle(category);
     }
-    if (articleData && articleData[category].length) {
+    if (articleData && articleData[category]) {
       return setCategory(category);
     }
   },
@@ -28,7 +28,7 @@ const methods = {
     location,
   }) {
     const newCategory = getArticleCategory(location);
-    const storeData = articleData && articleData[newCategory].length;
+    const storeData = articleData && articleData[newCategory].length > 1;
     if (articleCategory !== newCategory && !storeData) {
       fetchArticle(newCategory);
     }
