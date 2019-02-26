@@ -12,6 +12,7 @@ const {
   setArticleCategory,
   addArticleData,
   setSingleFetchStatus,
+  addNewlyCreatedArticle,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -42,6 +43,11 @@ const doCreateArticle = articleDetails => dispatch => {
       return axios
         .post(`${baseUrl}articles`, articleDetails, headers)
         .then(({ data }) => {
+          dispatch(
+            addNewlyCreatedArticle({
+              articleDetails,
+            }),
+          );
           return dispatch(
             setCreateStatus({
               status: constants.CREATE_SUCCESS,
