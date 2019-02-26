@@ -47,6 +47,7 @@ const doCreateArticle = articleDetails => dispatch => {
           articleDetails.author = data.author.username;
           articleDetails.readTime = data.readTime;
           dispatch(addNewlyCreatedArticle(articleDetails));
+          dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
           return dispatch(
             setCreateStatus({
               status: constants.CREATE_SUCCESS,

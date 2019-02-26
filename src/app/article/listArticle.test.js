@@ -74,6 +74,7 @@ describe('ListArticleContainer', () => {
         fetchArticleState: '',
         errorMessage: '',
       },
+      location: { pathname: '' },
     };
     expect(mapStateToProps(initialState).fetchArticleState).toEqual('');
     expect(mapStateToProps(initialState).errorMessage).toEqual('');
@@ -131,40 +132,75 @@ describe('fetchArticleReducers', () => {
       articleData: { Arts: [1, 2, 3] },
     };
     const state = fetchArticleReducer(undefined, action);
-    expect(state.articleData).toEqual(action.articleData);
+    expect(state.articleData).toEqual({
+      Arts: [1, 2, 3],
+      Mathematics: [],
+      Science: [],
+      Engineering: [],
+      Technology: [],
+    });
+  });
+
+  it('it should add a newly created article', () => {
+    const action = {
+      type: types.ADD_NEWLY_CREATED_ARTICLE,
+      newArticle: { category: 'Arts' },
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.articleData).toEqual({
+      Arts: [{ category: 'Arts' }],
+      Mathematics: [],
+      Science: [],
+      Engineering: [],
+      Technology: [],
+    });
   });
 
   it('should render the component', () => {
     const fetchArticle = jest.fn();
-    const component = shallow(<ListArticleComponent {...{ fetchArticle }} />);
+    const setCategory = jest.fn();
+    const articleData = {
+      Science: [],
+    };
+    const location = { pathname: '/articles/Science' };
+    const component = shallow(
+      <ListArticleComponent
+        {...{ fetchArticle, location, articleData, setCategory }}
+      />,
+    );
     expect(component.exists()).toBe(true);
     expect(component).toMatchSnapshot();
   });
 });
 
 describe('Connected ListArticleComponent Component Dispatches Success', () => {
+  let wrapper;
   const initialState = {
     fetchArticle: {
       fetchArticleState: '',
       errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
-    articleData: 'Data',
     articleCategory: 'Arts',
+    location: { pathname: '/articles/arts' },
   };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
-  let wrapper;
   beforeEach(() => {
+    const location = { pathname: '/articles/arts' };
     const response = { data: 'fetchArticle successful' };
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: { ...response } }),
     );
-    const articleData = {
-      Science: [{ title: 'first article' }],
-    };
     wrapper = mount(
       <Provider store={store}>
-        <ListArticleContainer articleData={articleData} />
+        <ListArticleContainer location={location} />
       </Provider>,
     );
   });
@@ -175,10 +211,8 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   });
 
   it('it should dispatch fetchArticle action', () => {
-    const storeActions = store.getActions();
     const storeState = store.getState();
-    expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
-    expect(storeState.articleData).toEqual('Data');
+    expect(storeState.articleCategory).toEqual('Arts');
   });
 });
 
@@ -187,8 +221,17 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     fetchArticle: {
       fetchArticleState: '',
       errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
+    location: { pathname: '/articles/arts' },
   };
+  const location = { pathname: '/articles/arts' };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
   beforeEach(() => {
@@ -198,14 +241,14 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     axios.get.mockImplementation(() => Promise.reject(response));
     mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <ListArticleContainer location={location} />
       </Provider>,
     );
   });
 
   it('it should dispatch error action', () => {
     const storeActions = store.getActions();
-    expect(storeActions[1].fetchArticleState).toEqual('FETCH_ARTICLE_ERROR');
+    expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_ERROR');
   });
 });
 
@@ -213,8 +256,18 @@ describe('Loader Component', () => {
   const state = {
     fetchArticle: {
       fetchArticleState: 'FETCHING_ARTICLE',
+      errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
+    location: { pathname: '/articles/arts' },
   };
+  const location = { pathname: '/articles/arts' };
   const mockStore = configureStore([thunk]);
   const store = mockStore(state);
   beforeEach(() => {
@@ -227,7 +280,7 @@ describe('Loader Component', () => {
   it('it should render the EllipsisLoaderComponent if making request', () => {
     const component = mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <ListArticleContainer location={location} />
       </Provider>,
     );
     expect(component.contains(<EllipsisLoaderComponent />)).toEqual(true);
