@@ -370,6 +370,17 @@ describe(' PROFILE TEST SUITE', () => {
           });
           expect(state).toEqual(data);
         });
+
+        it('should return state', () => {
+          const data = {
+            updateStatus: '',
+            uploadStatus: '',
+          };
+          const state = profileReducer(undefined, {
+            type: 'SET_UNAVAILABLE_TYPE',
+          });
+          expect(state).toEqual(data);
+        });
       });
 
       describe('Profile Actions', () => {
