@@ -27,7 +27,6 @@ export class LoginComponent extends React.Component {
   };
 
   onFailed = error => {
-    console.log('It was a failed attempt');
     console.log(error);
   };
 
@@ -50,13 +49,6 @@ export class LoginComponent extends React.Component {
     return (
       <Fragment>
         <div className="relative-div-signIn">
-          <TwitterLogin
-            loginUrl="http://localhost:4000/api/v1/auth/twitter"
-            onFailure={this.onFailed}
-            onSuccess={this.onSuccess}
-            requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
-          />
-
           <div className="signIn-div-wrapper">
             <div className="signIn-container">
               <div className="close-button-div-signIn">
@@ -80,17 +72,12 @@ export class LoginComponent extends React.Component {
                     </div>
                   </div>
                   <div className="btn-twitterr">
-                    <div className="twitter-icon-div-signIn">
-                      <a href={twitterUrl}>
-                        {' '}
-                        <i className="fab fa-twitter" />{' '}
-                      </a>
-                    </div>
-                    <div className="twitter-text-wrapper-signIn">
-                      <span className="social-text-signIn">
-                        <a href={twitterUrl}> Sign in with Twitter </a>
-                      </span>
-                    </div>
+                    <TwitterLogin
+                      loginUrl="http://localhost:3000/api/v1/users/twitter"
+                      onFailure={this.onFailed}
+                      onSuccess={this.onSuccess}
+                      requestTokenUrl="http://localhost:3000/api/v1/users/twitter/reverse"
+                    />
                   </div>
                   <div className="btn-googlee">
                     <div className="google-icon-div-signIn">
