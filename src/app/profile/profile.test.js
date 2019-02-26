@@ -30,18 +30,6 @@ const mockStore = configureStore(middlewares);
 jest.mock('jwt-decode');
 jest.mock('axios');
 
-global.localStorage = {
-  getItem: key => {
-    return this.store[key] || null;
-  },
-  setItem: (key, value) => {
-    this.store[key] = value.toString();
-  },
-  removeItem(key) {
-    delete this.store[key];
-  },
-};
-
 const props = {
   viewData: {
     articles: {
@@ -50,10 +38,21 @@ const props = {
     },
   },
   profileData: {
+    message: 'Login was successful',
+    token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+    notifications: [],
+    username: 'audu9habib',
     firstName: 'Daniel',
     lastName: 'Jacks',
-    interests: 'Science',
     bio: 'D3 developer',
+    imageUrl:
+      'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
+    following: 0,
+    followers: 0,
+    articles: {
+      top: [],
+      total: 0,
+    },
   },
 
   updateStatus: {
