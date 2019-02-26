@@ -2,19 +2,21 @@ import React, { Fragment } from 'react';
 import lifecycle from 'react-pure-lifecycle';
 import { Link } from 'react-router-dom';
 import { constants } from './duck';
-import getArticleCategory from './util/getArticleCategory';
 import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
-const category = getArticleCategory();
-
 /* istanbul ignore next */
+const getArticleCategory = location => {
+  const currentCategory = location.pathname.split('/')[2];
+  return currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
+};
 const methods = {
-  componentDidMount({ fetchArticle, articleData, setCategory }) {
-    if (!articleData) {
+  componentDidMount({ fetchArticle, articleData, setCategory, location }) {
+    const category = getArticleCategory(location);
+    if (!articleData[category].length) {
       fetchArticle(category);
     }
-    if (articleData && articleData[category]) {
+    if (articleData && articleData[category].length) {
       return setCategory(category);
     }
   },
@@ -23,9 +25,10 @@ const methods = {
     articleData,
     fetchArticle,
     setCategory,
+    location,
   }) {
-    const newCategory = getArticleCategory();
-    const storeData = articleData && articleData[newCategory];
+    const newCategory = getArticleCategory(location);
+    const storeData = articleData && articleData[newCategory].length;
     if (articleCategory !== newCategory && !storeData) {
       fetchArticle(newCategory);
     }
