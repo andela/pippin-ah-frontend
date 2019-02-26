@@ -64,7 +64,9 @@ const props = {
       },
     },
   },
-  uploadStatus: {},
+  uploadStatus: {
+    newProfileUrl: 'https//imageurl',
+  },
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
 

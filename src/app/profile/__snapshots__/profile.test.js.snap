@@ -35,7 +35,7 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <img
             alt="profilepicture"
             className="activator"
-            src={Object {}}
+            src="https//imageurl"
           />
         </div>
         <div
