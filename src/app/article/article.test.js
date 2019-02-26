@@ -345,7 +345,7 @@ describe('ARTICLE TEST SUITE', () => {
       };
 
       const articleUploadResponse = {
-        data: { slug: 'created-article-001' },
+        data: { slug: 'created-article-001', author: '' },
       };
       axios.post.mockImplementation(url => {
         if (!url) {
