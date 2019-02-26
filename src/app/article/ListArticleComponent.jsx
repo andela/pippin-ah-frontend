@@ -54,7 +54,7 @@ const ListArticleComponent = ({
     if (currentPage && currentPage[articleCategory].nextPage) {
       const { scrollHeight } = document.body;
       const totalHeight = window.scrollY + window.innerHeight;
-      if (totalHeight >= scrollHeight) {
+      if (totalHeight >= scrollHeight - 500) {
         appendArticleData(
           articleCategory,
           currentPage[articleCategory].nextPage,
