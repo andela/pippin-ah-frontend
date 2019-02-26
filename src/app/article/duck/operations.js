@@ -43,11 +43,10 @@ const doCreateArticle = articleDetails => dispatch => {
       return axios
         .post(`${baseUrl}articles`, articleDetails, headers)
         .then(({ data }) => {
-          dispatch(
-            addNewlyCreatedArticle({
-              articleDetails,
-            }),
-          );
+          articleDetails.slug = data.slug;
+          articleDetails.author = data.author.username;
+          articleDetails.readTime = data.readTime;
+          dispatch(addNewlyCreatedArticle(articleDetails));
           return dispatch(
             setCreateStatus({
               status: constants.CREATE_SUCCESS,
