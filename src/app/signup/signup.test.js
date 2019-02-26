@@ -153,7 +153,7 @@ describe('SIGNUP TEST SUITE', () => {
     const store = mockStore(initialState);
     let wrapper;
     beforeEach(() => {
-      const response = { data: 'successfully signed up' };
+      const response = { data: { articles: {} } };
       axios.post.mockResolvedValue(response);
       wrapper = mount(
         <Provider store={store}>
