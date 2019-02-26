@@ -77,15 +77,15 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
       const { newArticle } = action;
       const currentArtcleData = state.articleData;
       const newArticleCategory = newArticle.category;
-      const toAddArticle = {
+      const articleToAdd = {
         [newArticleCategory]: [
-          ...currentArtcleData[newArticleCategory],
           newArticle,
+          ...currentArtcleData[newArticleCategory],
         ],
       };
       return {
         ...state,
-        articleData: { ...currentArtcleData, ...toAddArticle },
+        articleData: { ...currentArtcleData, ...articleToAdd },
       };
     }
     default:
