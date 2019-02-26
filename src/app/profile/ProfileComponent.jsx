@@ -68,8 +68,6 @@ class ProfileComponent extends React.Component {
     const { newProfileDetails } = updateStatus;
 
     let profileData;
-
-    console.log(this.props.updateStatus);
     if (newProfileDetails) {
       localStorage.setItem('firstName', newProfileDetails.data.firstName);
       localStorage.setItem('lastName', newProfileDetails.data.lastName);

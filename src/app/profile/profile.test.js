@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import thunk from 'redux-thunk';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import moxios from 'moxios';
 import jwtDecode from 'jwt-decode';
 import configureStore from 'redux-mock-store';
@@ -49,11 +50,12 @@ const props = {
     },
   },
   profileData: {
-    firstName: 'Habib',
-    lastName: 'moses',
-    bio: 'Software developer at andela',
-    interest: 'Arts',
+    firstName: 'Daniel',
+    lastName: 'Jacks',
+    interests: 'Science',
+    bio: 'D3 developer',
   },
+
   updateStatus: {
     newProfileDetails: {
       data: {
@@ -130,7 +132,74 @@ describe(' PROFILE TEST SUITE', () => {
     });
 
     it('should ensures mapDispatchToProps dispatches the specified actions', () => {
-      const component = shallow(<ProfileContainer {...props} />);
+      const initialState = {
+        profile: {
+          profleData: {
+            firstName: 'Habib',
+            lastName: 'moses',
+            bio: 'Software developer at andela',
+            interest: 'Arts',
+          },
+          uploadStatus: {
+            newProfileUrl: 'https//imageurl',
+          },
+          updateStatus: {
+            newProfileDetails: {
+              data: {
+                firstName: 'Habib',
+                lastName: 'moses',
+                bio: 'Software developer at andela',
+                interest: 'Arts',
+              },
+            },
+          },
+        },
+        signup: {
+          data: {
+            message: 'signUp was successful',
+            token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+            notifications: [],
+            username: 'audu9habib',
+            firstName: 'Daniel',
+            lastName: 'Jacks',
+            bio: 'D3 developer',
+            imageUrl:
+              'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
+            following: 0,
+            followers: 0,
+            articles: {
+              top: [],
+              total: 0,
+            },
+          },
+        },
+        login: {
+          loginData: {
+            message: 'Login was successful',
+            token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+            notifications: [],
+            username: 'audu9habib',
+            firstName: 'Daniel',
+            lastName: 'Jacks',
+            bio: 'D3 developer',
+            imageUrl:
+              'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
+            following: 0,
+            followers: 0,
+            articles: {
+              top: [],
+              total: 0,
+            },
+          },
+        },
+      };
+      const mock = configureStore([thunk]);
+      const store = mock(initialState);
+      const component = mount(
+        <Provider store={store}>
+          <ProfileContainer />
+        </Provider>,
+      );
       const dispatch = jest.fn();
 
       mapDispatchToProps(dispatch).updateUserProfile();
