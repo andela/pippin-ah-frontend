@@ -40,6 +40,16 @@ const updateCategoryData = appendedCategoryData => ({
   appendedCategoryData,
 });
 
+const setBookmarkArticleState = bookmarkArticleState => ({
+  type: types.SET_BOOKMARK_ARTICLE_STATE,
+  bookmarkArticleState,
+});
+
+const setBookmarkArticleError = errorMessage => ({
+  type: types.SET_BOOKMARK_ARTICLE_ERROR,
+  errorMessage,
+});
+
 export default {
   setFetchArticleState,
   setFetchArticleError,
@@ -49,4 +59,6 @@ export default {
   setCurrentPage,
   setCreateStatus,
   setSingleFetchStatus,
+  setBookmarkArticleState,
+  setBookmarkArticleError,
 };

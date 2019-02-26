@@ -14,6 +14,8 @@ const {
   addArticleData,
   updateCategoryData,
   setSingleFetchStatus,
+  setBookmarkArticleState,
+  setBookmarkArticleError,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -173,10 +175,30 @@ const doUpdateCategoryData = (
     });
 };
 
+const doBookmarkArticle = (slug, articleData) => dispatch => {
+  dispatch(setBookmarkArticleState(constants.BOOKMARKING_ARTICLE));
+  const headers = {
+    headers: { Authorization: localStorage.getItem('token') },
+  };
+  console.log(headers);
+  return axios
+    .post(`${url}/bookmarks/${slug}`, {}, headers)
+    .then(({ data }) => {
+      dispatch(addArticleData({ Bookmarks: articleData }));
+      dispatch(setBookmarkArticleState(constants.BOOKMARK_ARTICLE_SUCCESS));
+    })
+    .catch(({ response }) => {
+      console.log('--->>>', `${url}bookmarks/${slug}`);
+      dispatch(setBookmarkArticleState(constants.BOOKMARK_ARTICLE_ERROR));
+      dispatch(setBookmarkArticleError(response.data.error));
+    });
+};
+
 export {
   doCreateArticle,
   doFetchArticle,
   doSetCategory,
   doUpdateCategoryData,
   doFetchArticles,
+  doBookmarkArticle,
 };
