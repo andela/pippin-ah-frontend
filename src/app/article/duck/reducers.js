@@ -8,10 +8,10 @@ const INITIAL_STATE = {
   singleFetchStatus: {
     status: '',
     data: '',
-    fetchArticleStatus: {
-      fetchArticleState: '',
-      errorMessage: '',
-    },
+  },
+  fetchArticleStatus: {
+    fetchArticleState: '',
+    errorMessage: '',
   },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
@@ -63,7 +63,10 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
 
     case types.SET_CURRENT_PAGE: {
       const { currentPage } = action;
-      return { ...state, currentPage };
+      return {
+        ...state,
+        currentPage: { ...state.currentPage, ...currentPage },
+      };
     }
 
     case types.ADD_ARTICLE_DATA: {
