@@ -69,14 +69,6 @@ describe('ListArticle Component Action', () => {
     });
   });
 
-  it('it should update category data', () => {
-    const action = updateCategoryData({ Arts: 'New Data' });
-    expect(action).toEqual({
-      type: types.UPDATE_CATEGORY_DATA,
-      appendedCategoryData: { Arts: 'New Data' },
-    });
-  });
-
   it('it should add article data', () => {
     const action = addArticleData('Data');
     expect(action).toEqual({
@@ -206,7 +198,13 @@ describe('fetchArticleReducers', () => {
       appendedCategoryData: { Arts: 'New Data' },
     };
     const state = fetchArticleReducer(undefined, action);
-    expect(state.articleData).toEqual(action.appendedCategoryData);
+    expect(state.articleData).toEqual({
+      Arts: 'New Data',
+      Engineering: [],
+      Mathematics: [],
+      Science: [],
+      Technology: [],
+    });
   });
 
   it('should render the component', () => {
@@ -275,7 +273,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   it('it should dispatch fetchArticle action', () => {
     const storeState = store.getState();
     const storeActions = store.getActions();
-    expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
+    expect(storeActions[9].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
     expect(storeState.articleCategory).toEqual('Arts');
   });
 });
