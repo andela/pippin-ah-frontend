@@ -101,17 +101,16 @@ class ProfileComponent extends React.Component {
           <div className="col s12 m6 l3">
             <div className="card small">
               <div className="card-image profile.card .card-image">
-                <div id="profile-image-size">
-                  <img
-                    src={
-                      !newProfileUrl || newProfileUrl === 'null'
-                        ? profileUrl
-                        : newProfileUrl
-                    }
-                    alt="profilepicture"
-                    className="activator "
-                  />
-                </div>
+                <img
+                  id="profile-image-size"
+                  src={
+                    !newProfileUrl || newProfileUrl === 'null'
+                      ? profileUrl
+                      : newProfileUrl
+                  }
+                  alt="profilepicture"
+                  className="activator "
+                />
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
@@ -181,12 +180,11 @@ class ProfileComponent extends React.Component {
                     <div className="col s12 m6 l4">
                       <div className="card small">
                         <div className="card-image profile-removespace">
-                          <div id="profile-image-card2">
-                            <img
-                              src={imageSelected || profilepicture}
-                              alt="profilepicture"
-                            />
-                          </div>
+                          <img
+                            id="profile-image-card2"
+                            src={imageSelected || profilepicture}
+                            alt="profilepicture"
+                          />
                         </div>
                         <div className="card-tabs">
                           <form onSubmit={this.uploadPicture}>
