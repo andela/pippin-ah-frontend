@@ -16,7 +16,7 @@ exports[`Connected ListArticleComponent Component Dispatches Success it should r
   <Connect(PureLifecycle(ListArticleComponent))
     articleData={
       Object {
-        "Science": Array [
+        "Arts": Array [
           Object {
             "title": "first article",
           },
@@ -25,12 +25,14 @@ exports[`Connected ListArticleComponent Component Dispatches Success it should r
     }
   >
     <PureLifecycle(ListArticleComponent)
+      appendArticleData={[Function]}
       errorMessage=""
       fetchArticle={[Function]}
       fetchArticleState=""
       setCategory={[Function]}
     >
       <ListArticleComponent
+        appendArticleData={[Function]}
         errorMessage=""
         fetchArticle={[Function]}
         fetchArticleState=""
@@ -62,6 +64,7 @@ exports[`fetchArticleReducers should render the component 1`] = `
       "calls": Array [
         Array [
           "Science",
+          1,
         ],
       ],
       "results": Array [
