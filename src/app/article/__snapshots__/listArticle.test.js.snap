@@ -24,7 +24,7 @@ exports[`Connected ListArticleComponent Component Dispatches Success it should r
           "entries": Array [
             Object {
               "hash": "",
-              "key": "7hrg7f",
+              "key": "4px5u3",
               "pathname": "/",
               "search": "",
               "state": undefined,
@@ -38,7 +38,7 @@ exports[`Connected ListArticleComponent Component Dispatches Success it should r
           "listen": [Function],
           "location": Object {
             "hash": "",
-            "key": "7hrg7f",
+            "key": "4px5u3",
             "pathname": "/",
             "search": "",
             "state": undefined,
