@@ -230,14 +230,15 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should render the connected component', () => {
     expect(wrapper.find(ListArticleComponent).length).toEqual(1);
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
-    console.log('------//-/-_-//', storeActions);
     const storeState = store.getState();
     expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
+    expect(storeActions[0].type).toEqual('SET_FETCH_ARTICLE_STATE');
+    expect(storeActions[1].type).toEqual('SET_CURRENT_PAGE');
+    expect(storeActions[2].type).toEqual('ADD_ARTICLE_DATA');
     expect(storeState.articleCategory).toEqual('Arts');
   });
 });
