@@ -70,24 +70,6 @@ const props = {
   updateUserProfile: jest.fn(),
   pictureUtils: jest.fn(),
 
-  data: {
-    message: 'signUp was successful',
-    token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
-    notifications: [],
-    username: 'audu9habib',
-    firstName: 'Daniel',
-    lastName: 'Jacks',
-    bio: 'D3 developer',
-    imageUrl:
-      'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
-    following: 0,
-    followers: 0,
-    articles: {
-      top: [],
-      total: 0,
-    },
-  },
-
   loginData: {
     message: 'Login was successful',
     token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
@@ -291,6 +273,17 @@ describe(' PROFILE TEST SUITE', () => {
 
       store.dispatch(pictureUtils(event));
     });
+
+    it('should test for dispatch fail', () => {
+      const store = mockStore({});
+      const response = 'error';
+      const dispatch = jest.fn();
+
+      axios.post.mockImplementation(() => Promise.reject(response));
+      store.dispatch(
+        pictureUtils(setPictureUploadStatus(constants.UPDATE_ERROR)),
+      );
+    });
   });
 
   describe('Test for Functions In Operations', () => {
@@ -397,6 +390,14 @@ describe(' PROFILE TEST SUITE', () => {
           expect(action).toEqual({
             type: types.SET_UPLOADING_STATUS,
             uploadStatus: constants.UPDATE_SUCCESS,
+          });
+        });
+
+        it('it should test picture upload status', () => {
+          const action = setPictureUploadStatus(constants.UPDATE_ERROR);
+          expect(action).toEqual({
+            type: types.SET_UPLOADING_STATUS,
+            uploadStatus: constants.UPDATE_ERROR,
           });
         });
       });

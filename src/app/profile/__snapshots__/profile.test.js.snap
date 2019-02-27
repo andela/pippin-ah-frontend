@@ -32,15 +32,12 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
         <div
           className="card-image profile.card .card-image"
         >
-          <div
+          <img
+            alt="profilepicture"
+            className="activator "
             id="profile-image-size"
-          >
-            <img
-              alt="profilepicture"
-              className="activator "
-              src="https//imageurl"
-            />
-          </div>
+            src="https//imageurl"
+          />
         </div>
         <div
           className="card-content"
@@ -165,14 +162,11 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
                   <div
                     className="card-image profile-removespace"
                   >
-                    <div
+                    <img
+                      alt="profilepicture"
                       id="profile-image-card2"
-                    >
-                      <img
-                        alt="profilepicture"
-                        src={Object {}}
-                      />
-                    </div>
+                      src={Object {}}
+                    />
                   </div>
                   <div
                     className="card-tabs"
