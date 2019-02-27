@@ -371,6 +371,40 @@ describe('ARTICLE TEST SUITE', () => {
       expect(dispatchedActions[1].type).toEqual('SET_CREATE_STATUS');
     });
 
+    it('should dispatch an action with STATUS CREATE_ERROR when error occcurs while creating article', () => {
+      const imageUploadResponse = {
+        data: { secure_url: 'https://secure' },
+      };
+
+      const articleUploadResponse = {
+        data: { slug: 'created-article-001' },
+      };
+      axios.post.mockImplementation(url => {
+        if (!url) {
+          return Promise.resolve(imageUploadResponse);
+        }
+        return Promise.resolve(articleUploadResponse);
+      });
+      const component = wrapper.find(CreateArticleComponent).first();
+      component.setState({
+        uploadCoverUrl: 'http://uploadcoverurl',
+      });
+      component.find('form').simulate('submit', {
+        preventDefault: () => {},
+        target: {
+          elements: {
+            title: { value: 'title' },
+            description: { value: 'description' },
+            category: { value: 'category' },
+          },
+        },
+      });
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[2].createStatus.data).toEqual(
+        'error uploading cover image',
+      );
+    });
+
     it('should dispatch an action with status CREATE_ERROR if create fails', () => {
       const imageUploadResponse = {
         data: { secure_url: 'https://secure' },
@@ -493,6 +527,37 @@ describe('ARTICLE TEST SUITE', () => {
     it('should not render the article page if fetch is unsuccessful ', () => {
       const component = wrapper.find('.article-header');
       expect(component.exists()).toBe(false);
+    });
+  });
+
+  describe('Connected Article Component Renders Error Message', () => {
+    const initialState = {
+      createArticle: {
+        singleFetchStatus: {
+          status: constants.FETCH_SINGLE_ERROR,
+          data: 'error fetching article',
+        },
+      },
+    };
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(() => initialState);
+    beforeEach(() => {
+      const error = {};
+      axios.get.mockImplementation(() => Promise.reject(error));
+      mount(
+        <Provider store={store}>
+          <ArticleContainer
+            match={{ params: { slug: 'article-001-spicydicy' } }}
+          />
+        </Provider>,
+      );
+    });
+
+    it('should dispatch action with data NETWORK_ERROR if error has no response object', () => {
+      const dispatchedActions = store.getActions();
+      expect(dispatchedActions[1].singleFetchStatus.data).toEqual(
+        'Network error ',
+      );
     });
   });
 
