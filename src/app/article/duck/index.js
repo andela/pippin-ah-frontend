@@ -5,6 +5,7 @@ export {
   doUpdateCategoryData,
   doFetchArticles,
   doBookmarkArticle,
+  doRemoveBookmark,
 } from './operations';
 export { createArticleReducer, fetchArticleReducer } from './reducers';
 export { default as constants } from './constants';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ArticleComponent from './ArticleComponent';
-import { doFetchArticle, doBookmarkArticle } from './duck';
+import { doFetchArticle, doBookmarkArticle, doRemoveBookmark } from './duck';
 
 const mapStateToProps = ({ createArticle: { singleFetchStatus } }) => {
   return { singleFetchStatus };
@@ -8,8 +8,8 @@ const mapStateToProps = ({ createArticle: { singleFetchStatus } }) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSingleArticle: slug => dispatch(doFetchArticle(slug)),
-    bookmarkArticle: (slug, articleData) =>
-      dispatch(doBookmarkArticle(slug, articleData)),
+    bookmarkArticle: slug => dispatch(doBookmarkArticle(slug)),
+    removeBookmark: slug => dispatch(doRemoveBookmark(slug)),
   };
 };
 
