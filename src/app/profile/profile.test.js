@@ -277,7 +277,6 @@ describe(' PROFILE TEST SUITE', () => {
     it('should test for dispatch fail', () => {
       const store = mockStore({});
       const response = 'error';
-      const dispatch = jest.fn();
 
       axios.post.mockImplementation(() => Promise.reject(response));
       store.dispatch(
