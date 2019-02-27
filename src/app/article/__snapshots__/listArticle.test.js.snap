@@ -13,47 +13,106 @@ exports[`Connected ListArticleComponent Component Dispatches Success it should r
     }
   }
 >
-  <Connect(PureLifecycle(ListArticleComponent))
-    articleData={
-      Object {
-        "Arts": Array [
-          Object {
-            "title": "first article",
+  <MemoryRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "canGo": [Function],
+          "createHref": [Function],
+          "entries": Array [
+            Object {
+              "hash": "",
+              "key": "npr9cu",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+          ],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "index": 0,
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "key": "npr9cu",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
           },
-        ],
+          "push": [Function],
+          "replace": [Function],
+        }
       }
-    }
-  >
-    <PureLifecycle(ListArticleComponent)
-      appendArticleData={[Function]}
-      errorMessage=""
-      fetchArticle={[Function]}
-      fetchArticleState=""
-      setCategory={[Function]}
     >
-      <ListArticleComponent
-        appendArticleData={[Function]}
-        errorMessage=""
-        fetchArticle={[Function]}
-        fetchArticleState=""
-        setCategory={[Function]}
+      <Connect(PureLifecycle(ListArticleComponent))
+        articleData={
+          Object {
+            "Arts": Array [
+              Object {
+                "title": "first article",
+              },
+            ],
+          }
+        }
       >
-        <div
-          className="container"
-          id="liArticleContainer"
+        <PureLifecycle(ListArticleComponent)
+          appendArticleData={[Function]}
+          errorMessage=""
+          fetchArticle={[Function]}
+          fetchArticleState=""
+          setCategory={[Function]}
         >
-          <div
-            className="col s12 center-align"
+          <ListArticleComponent
+            appendArticleData={[Function]}
+            errorMessage=""
+            fetchArticle={[Function]}
+            fetchArticleState=""
+            setCategory={[Function]}
           >
-            <h3 />
-          </div>
-          <div
-            className="row"
-          />
-        </div>
-      </ListArticleComponent>
-    </PureLifecycle(ListArticleComponent)>
-  </Connect(PureLifecycle(ListArticleComponent))>
+            <div
+              className="container"
+              id="liArticleContainer"
+            >
+              <div
+                className="col s12 center-align"
+              >
+                <h3 />
+              </div>
+              <div
+                className="fixed-action-btn"
+              >
+                <Link
+                  className="btn-floating btn-large"
+                  replace={false}
+                  to="/create-article"
+                >
+                  <a
+                    className="btn-floating btn-large"
+                    href="/create-article"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="large material-icons"
+                      id="write"
+                    >
+                      mode_edit
+                    </i>
+                  </a>
+                </Link>
+              </div>
+              <div
+                className="row"
+              />
+            </div>
+          </ListArticleComponent>
+        </PureLifecycle(ListArticleComponent)>
+      </Connect(PureLifecycle(ListArticleComponent))>
+    </Router>
+  </MemoryRouter>
 </Provider>
 `;
 

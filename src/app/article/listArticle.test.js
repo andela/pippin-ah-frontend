@@ -1,6 +1,7 @@
 import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -220,7 +221,9 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
     };
     wrapper = mount(
       <Provider store={store}>
-        <ListArticleContainer articleData={articleData} />
+        <MemoryRouter>
+          <ListArticleContainer articleData={articleData} />
+        </MemoryRouter>
       </Provider>,
     );
   });
@@ -232,6 +235,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
+    console.log('------//-/-_-//', storeActions);
     const storeState = store.getState();
     expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
     expect(storeState.articleCategory).toEqual('Arts');
@@ -254,7 +258,9 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     axios.get.mockImplementation(() => Promise.reject(response));
     mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <MemoryRouter>
+          <ListArticleContainer articleData={initialState} />
+        </MemoryRouter>
       </Provider>,
     );
   });
@@ -283,7 +289,9 @@ describe('Loader Component', () => {
   it('it should render the EllipsisLoaderComponent if making request', () => {
     const component = mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <MemoryRouter>
+          <ListArticleContainer articleData={state} />
+        </MemoryRouter>
       </Provider>,
     );
     expect(component.contains(<EllipsisLoaderComponent />)).toEqual(true);
