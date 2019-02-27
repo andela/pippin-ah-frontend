@@ -11,6 +11,7 @@ class ArticleComponent extends React.Component {
   static propTypes = {
     fetchSingleArticle: PropTypes.func.isRequired,
     bookmarkArticle: PropTypes.func.isRequired,
+    removeBookmark: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -28,9 +29,14 @@ class ArticleComponent extends React.Component {
     fetchSingleArticle(slug);
   }
 
-  bookmarkArticle = data => {
+  bookmarkArticle = slug => {
     const { bookmarkArticle } = this.props;
-    bookmarkArticle(data.slug, data);
+    bookmarkArticle(slug);
+  };
+
+  removeBookmark = slug => {
+    const { removeBookmark } = this.props;
+    removeBookmark(slug);
   };
 
   render() {
@@ -70,20 +76,24 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              <button
-                id="bookmarkBtn"
-                type="button"
-                onClick={() => this.bookmarkArticle(data)}
-              >
-                <i className="material-icons">bookmark_border</i>
-              </button>
-              <button
-                id="bookmarkBtn"
-                type="button"
-                onClick={() => this.bookmarkArticle(data)}
-              >
-                <i className="material-icons">bookmark</i>
-              </button>
+              {data.isBookmarked && (
+                <button
+                  id="bookmarkBtn"
+                  type="button"
+                  onClick={() => this.removeBookmark(data.slug)}
+                >
+                  <i className="material-icons">bookmark</i>
+                </button>
+              )}
+              {!data.isBookmarked && (
+                <button
+                  id="bookmarkBtn"
+                  type="button"
+                  onClick={() => this.bookmarkArticle(data.slug)}
+                >
+                  <i className="material-icons">bookmark_border</i>
+                </button>
+              )}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
