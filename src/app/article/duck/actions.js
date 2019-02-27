@@ -25,6 +25,11 @@ const setArticleCategory = articleCategory => ({
   articleCategory,
 });
 
+const setCurrentPage = currentPage => ({
+  type: types.SET_CURRENT_PAGE,
+  currentPage,
+});
+
 const addArticleData = articleData => ({
   type: types.ADD_ARTICLE_DATA,
   articleData,
@@ -34,12 +39,18 @@ const addNewlyCreatedArticle = newArticle => ({
   type: types.ADD_NEWLY_CREATED_ARTICLE,
   newArticle,
 });
+const updateCategoryData = appendedCategoryData => ({
+  type: types.UPDATE_CATEGORY_DATA,
+  appendedCategoryData,
+});
 
 export default {
   setFetchArticleState,
   setFetchArticleError,
   setArticleCategory,
   addArticleData,
+  updateCategoryData,
+  setCurrentPage,
   setCreateStatus,
   setSingleFetchStatus,
   addNewlyCreatedArticle,
