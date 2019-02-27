@@ -51,7 +51,11 @@ const ListArticleComponent = ({
   appendArticleData,
 }) => {
   window.onscroll = () => {
-    if (currentPage && currentPage[articleCategory].nextPage) {
+    if (
+      currentPage &&
+      currentPage[articleCategory].nextPage &&
+      articleCategory !== 'Bookmarks'
+    ) {
       const { scrollHeight } = document.body;
       const totalHeight = window.scrollY + window.innerHeight;
       if (totalHeight >= scrollHeight - 500) {
