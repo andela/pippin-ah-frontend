@@ -8,15 +8,15 @@ import './article.scss';
 
 /* eslint-disable react/prefer-stateless-function */
 class ArticleComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   static propTypes = {
     fetchSingleArticle: PropTypes.func.isRequired,
     bookmarkArticle: PropTypes.func.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   componentDidMount() {
     const {
@@ -40,7 +40,7 @@ class ArticleComponent extends React.Component {
     let dateObject;
     if (data) {
       dateObject = formatDate(data.createdAt);
-      console.log('-----==-', data);
+      console.log('-----=-->', data);
     }
     if (status === constants.FETCHING_SINGLE) {
       return (
@@ -70,11 +70,20 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              <Link
-                to={`/article/${data.slug}`}
+              <button
+                id="bookmarkBtn"
+                type="button"
                 onClick={() => this.bookmarkArticle(data)}
-                className="side-bookmark"
-              />
+              >
+                <i className="material-icons">bookmark_border</i>
+              </button>
+              <button
+                id="bookmarkBtn"
+                type="button"
+                onClick={() => this.bookmarkArticle(data)}
+              >
+                <i className="material-icons">bookmark</i>
+              </button>
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
