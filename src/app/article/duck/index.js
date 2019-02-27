@@ -2,6 +2,7 @@ export {
   doCreateArticle,
   doFetchArticle,
   doSetCategory,
+  doUpdateCategoryData,
   doFetchArticles,
 } from './operations';
 export { createArticleReducer, fetchArticleReducer } from './reducers';

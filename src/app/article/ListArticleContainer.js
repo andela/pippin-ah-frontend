@@ -1,24 +1,35 @@
 import { connect } from 'react-redux';
-import { doFetchArticles, doSetCategory } from './duck';
+import { doFetchArticles, doSetCategory, doUpdateCategoryData } from './duck';
 import ListArticleComponent from './ListArticleComponent';
 
 const mapStateToProps = ({
   fetchArticle: {
     fetchArticleState,
     articleCategory,
+    currentPage,
     articleData,
     errorMessage,
   },
 }) => {
-  return { fetchArticleState, articleCategory, articleData, errorMessage };
+  return {
+    fetchArticleState,
+    articleCategory,
+    articleData,
+    currentPage,
+    errorMessage,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: articleCategory => dispatch(doFetchArticles(articleCategory)),
+    fetchArticle: (articleCategory, page) =>
+      dispatch(doFetchArticles(articleCategory, page)),
     setCategory: articleCategory => dispatch(doSetCategory(articleCategory)),
+    appendArticleData: (articleCategory, page, currentData) =>
+      dispatch(doUpdateCategoryData(articleCategory, page, currentData)),
   };
 };
+
 const ListArticleContainer = connect(
   mapStateToProps,
   mapDispatchToProps,

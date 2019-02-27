@@ -1,6 +1,7 @@
 import React from 'react';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -19,11 +20,13 @@ jest.mock('axios');
 const {
   setFetchArticleState,
   setFetchArticleError,
+  setCurrentPage,
+  updateCategoryData,
   setArticleCategory,
   addArticleData,
 } = actions;
 
-describe('ListArticleComponentAction', () => {
+describe('ListArticle Component Action', () => {
   it('it should set fetchArticle state', () => {
     const action = setFetchArticleState(constants.FETCHING_ARTICLE);
     expect(action).toEqual({
@@ -45,6 +48,32 @@ describe('ListArticleComponentAction', () => {
     expect(action).toEqual({
       type: types.SET_ARTICLE_CATEGORY,
       articleCategory: 'Arts',
+    });
+  });
+
+  it('it should set current page', () => {
+    const action = setCurrentPage({
+      Arts: {
+        page: 2,
+        nextPage: 3,
+      },
+    });
+    expect(action).toEqual({
+      type: types.SET_CURRENT_PAGE,
+      currentPage: {
+        Arts: {
+          page: 2,
+          nextPage: 3,
+        },
+      },
+    });
+  });
+
+  it('it should update category data', () => {
+    const action = updateCategoryData({ Arts: 'New Data' });
+    expect(action).toEqual({
+      type: types.UPDATE_CATEGORY_DATA,
+      appendedCategoryData: { Arts: 'New Data' },
     });
   });
 
@@ -83,6 +112,7 @@ describe('ListArticleContainer', () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).fetchArticle();
     mapDispatchToProps(dispatch).setCategory();
+    mapDispatchToProps(dispatch).appendArticleData();
     expect(typeof dispatch.mock.calls[0][0]).toEqual('function');
   });
 });
@@ -116,13 +146,27 @@ describe('fetchArticleReducers', () => {
     expect(state.errorMessage).toEqual(action.errorMessage);
   });
 
-  it('it should change the fetch article error message', () => {
+  it('it should set the article category', () => {
     const action = {
       type: types.SET_ARTICLE_CATEGORY,
       articleCategory: 'Arts',
     };
     const state = fetchArticleReducer(undefined, action);
     expect(state.articleCategory).toEqual(action.articleCategory);
+  });
+
+  it('it should set the current page', () => {
+    const action = {
+      type: types.SET_CURRENT_PAGE,
+      currentPage: {
+        Arts: {
+          page: 2,
+          nextPage: 3,
+        },
+      },
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.currentPage).toEqual(action.currentPage);
   });
 
   it('it should add article data', () => {
@@ -132,6 +176,15 @@ describe('fetchArticleReducers', () => {
     };
     const state = fetchArticleReducer(undefined, action);
     expect(state.articleData).toEqual(action.articleData);
+  });
+
+  it('it should update category data', () => {
+    const action = {
+      type: types.UPDATE_CATEGORY_DATA,
+      appendedCategoryData: { Arts: 'New Data' },
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.articleData).toEqual(action.appendedCategoryData);
   });
 
   it('should render the component', () => {
@@ -155,16 +208,22 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
   const store = mockStore(initialState);
   let wrapper;
   beforeEach(() => {
-    const response = { data: 'fetchArticle successful' };
+    const response = {
+      message: 'fetchArticle successful',
+      articles: [1, 2, 3],
+      page: 1,
+    };
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: { ...response } }),
     );
     const articleData = {
-      Science: [{ title: 'first article' }],
+      Arts: [{ title: 'first article' }],
     };
     wrapper = mount(
       <Provider store={store}>
-        <ListArticleContainer articleData={articleData} />
+        <MemoryRouter>
+          <ListArticleContainer articleData={articleData} />
+        </MemoryRouter>
       </Provider>,
     );
   });
@@ -176,9 +235,10 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should dispatch fetchArticle action', () => {
     const storeActions = store.getActions();
+    console.log('------//-/-_-//', storeActions);
     const storeState = store.getState();
-    expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
-    expect(storeState.articleData).toEqual('Data');
+    expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
+    expect(storeState.articleCategory).toEqual('Arts');
   });
 });
 
@@ -198,7 +258,9 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     axios.get.mockImplementation(() => Promise.reject(response));
     mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <MemoryRouter>
+          <ListArticleContainer articleData={initialState} />
+        </MemoryRouter>
       </Provider>,
     );
   });
@@ -227,7 +289,9 @@ describe('Loader Component', () => {
   it('it should render the EllipsisLoaderComponent if making request', () => {
     const component = mount(
       <Provider store={store}>
-        <ListArticleContainer />
+        <MemoryRouter>
+          <ListArticleContainer articleData={state} />
+        </MemoryRouter>
       </Provider>,
     );
     expect(component.contains(<EllipsisLoaderComponent />)).toEqual(true);

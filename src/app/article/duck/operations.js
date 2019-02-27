@@ -10,7 +10,9 @@ const {
   setFetchArticleState,
   setFetchArticleError,
   setArticleCategory,
+  setCurrentPage,
   addArticleData,
+  updateCategoryData,
   setSingleFetchStatus,
 } = actions;
 
@@ -98,15 +100,25 @@ const doFetchArticle = slug => dispatch => {
     });
 };
 
-const doFetchArticles = articleCategory => dispatch => {
+const doFetchArticles = (articleCategory, page) => dispatch => {
   dispatch(setFetchArticleState(constants.FETCHING_ARTICLE));
   return axios
     .get(url, {
       params: {
         category: articleCategory,
+        limit: 12,
+        page,
       },
     })
     .then(({ data }) => {
+      dispatch(
+        setCurrentPage({
+          [articleCategory]: {
+            page,
+            nextPage: page + 1,
+          },
+        }),
+      );
       dispatch(addArticleData({ [articleCategory]: data.articles }));
       dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
     })
@@ -117,8 +129,54 @@ const doFetchArticles = articleCategory => dispatch => {
 };
 
 const doSetCategory = articleCategory => dispatch => {
-  /* istanbul ignore next */
   dispatch(setArticleCategory(articleCategory));
 };
 
-export { doCreateArticle, doFetchArticle, doSetCategory, doFetchArticles };
+/* istanbul ignore next */
+const doUpdateCategoryData = (
+  articleCategory,
+  page,
+  currentData,
+) => dispatch => {
+  return axios
+    .get(url, {
+      params: {
+        category: articleCategory,
+        limit: 12,
+        page,
+      },
+    })
+    .then(({ data }) => {
+      if (data.count === 0) {
+        return dispatch(
+          setCurrentPage({
+            [articleCategory]: {
+              page: page - 1,
+              nextPage: null,
+            },
+          }),
+        );
+      }
+      const appendedCategoryData = currentData.concat(data.articles);
+      dispatch(
+        setCurrentPage({
+          [articleCategory]: {
+            page,
+            nextPage: page + 1,
+          },
+        }),
+      );
+      dispatch(updateCategoryData({ [articleCategory]: appendedCategoryData }));
+    })
+    .catch(({ response }) => {
+      dispatch(setFetchArticleError(response.data.error));
+    });
+};
+
+export {
+  doCreateArticle,
+  doFetchArticle,
+  doSetCategory,
+  doUpdateCategoryData,
+  doFetchArticles,
+};

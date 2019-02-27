@@ -7,12 +7,13 @@ import { EllipsisLoaderComponent } from '../loaders';
 import './ListArticle.scss';
 
 const category = getArticleCategory();
+const pageNumber = 1;
 
 /* istanbul ignore next */
 const methods = {
   componentDidMount({ fetchArticle, articleData, setCategory }) {
     if (!articleData) {
-      fetchArticle(category);
+      fetchArticle(category, pageNumber);
     }
     if (articleData && articleData[category]) {
       return setCategory(category);
@@ -27,7 +28,7 @@ const methods = {
     const newCategory = getArticleCategory();
     const storeData = articleData && articleData[newCategory];
     if (articleCategory !== newCategory && !storeData) {
-      fetchArticle(newCategory);
+      fetchArticle(newCategory, pageNumber);
     }
     return setCategory(newCategory);
   },
@@ -41,11 +42,27 @@ const elipsisLoader = (
   </>
 );
 
+/* istanbul ignore next */
 const ListArticleComponent = ({
   fetchArticleState,
   articleData,
   articleCategory,
+  currentPage,
+  appendArticleData,
 }) => {
+  window.onscroll = () => {
+    if (currentPage && currentPage[articleCategory].nextPage) {
+      const { scrollHeight } = document.body;
+      const totalHeight = window.scrollY + window.innerHeight;
+      if (totalHeight >= scrollHeight - 500) {
+        appendArticleData(
+          articleCategory,
+          currentPage[articleCategory].nextPage,
+          articleData[articleCategory],
+        );
+      }
+    }
+  };
   return (
     <Fragment>
       <div id="liArticleContainer" className="container">
@@ -54,10 +71,16 @@ const ListArticleComponent = ({
           <div className="col s12 center-align">
             <h3>{articleCategory}</h3>
           </div>
+          <div className="fixed-action-btn">
+            <Link to="/create-article" className="btn-floating btn-large">
+              <i id="write" className="large material-icons">
+                mode_edit
+              </i>
+            </Link>
+          </div>
         </>
         <div className="row">
-          {/* istanbul ignore next */
-          fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
+          {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
             articleData[articleCategory] &&
             articleData[articleCategory].map(article => (
               <div
