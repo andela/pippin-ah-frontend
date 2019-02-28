@@ -6,7 +6,7 @@ import { resetPasswordReducer } from './app/resetPassword';
 import { newPasswordReducer } from './app/newPassword';
 import { createArticleReducer, fetchArticleReducer } from './app/article';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   signup: signupReducer,
   login: loginReducer,
   profile: profileReducer,
@@ -15,5 +15,16 @@ const rootReducer = combineReducers({
   createArticle: createArticleReducer,
   fetchArticle: fetchArticleReducer,
 });
+
+const rootReducer = (state, action) => {
+  if (
+    action.loginState === 'LOGGED_OUT' ||
+    action.signupState === 'LOGGED_OUT'
+  ) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
 
 export default rootReducer;

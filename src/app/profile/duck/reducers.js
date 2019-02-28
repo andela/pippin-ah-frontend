@@ -11,6 +11,7 @@ const profileReducer = (state = defaultState, action) => {
       const { profileData } = action;
       return {
         ...state,
+        ...state.login,
         profileData,
       };
     }

@@ -2,6 +2,19 @@
   background-color: #5ed3f1;
 }
 
+.select-dropdown {
+  display: block;
+  width: 85%;
+  border: none;
+  margin-left: 55px;
+}
+
+.select-field {
+  display: flex;
+  width: 100%;
+  margin-left: 9px;
+}
+
 #profile-image-size {
   height: 100%;
 }
@@ -13,10 +26,10 @@
 #hideMe {
   -webkit-animation: seconds 1s forwards;
   -webkit-animation-iteration-count: 1;
-  -webkit-animation-delay: 5s;
+  -webkit-animation-delay: 1s;
   animation: seconds 1s forwards;
   animation-iteration-count: 1;
-  animation-delay: 5s;
+  animation-delay: 1s;
   position: relative;
 }
 
@@ -162,10 +175,6 @@ form,
 
 .profile-color-ions {
   color: #880038;
-}
-
-.modal .modal-content {
-  margin: 10% auto;
 }
 
 form {

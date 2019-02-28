@@ -1,10 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import { Modal, Button } from 'react-materialize';
 import jwtDecode from 'jwt-decode';
 import './profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
-import constants from './duck/constants';
-import { EllipsisLoaderComponent } from '../loaders';
+import { ProfileEdit } from './ProfileEdit';
 
 class ProfileComponent extends React.Component {
   state = {
@@ -19,7 +19,6 @@ class ProfileComponent extends React.Component {
     const lastName = event.target.elements.lastName.value.trim();
     const interest = event.target.elements.interest.value.trim();
     const bio = event.target.elements.bio.value.trim();
-
     updateUserProfile(firstName, lastName, interest, bio);
   };
 
@@ -50,46 +49,21 @@ class ProfileComponent extends React.Component {
   };
 
   render() {
-    const { uploadStatus, updateStatus, data, loginData } = this.props;
+    const {
+      uploadStatus,
+      updateStatus,
+      data,
+      loginData,
+      profileData,
+    } = this.props;
     const { imageSelected } = this.state;
     const { newProfileUrl } = uploadStatus;
-    const firstName = localStorage.getItem('firstName');
-    const lastName = localStorage.getItem('lastName');
-    const bio = localStorage.getItem('bio');
-    const imageUrl = localStorage.getItem('imageUrl');
-    const followers = localStorage.getItem('followers');
-    const following = localStorage.getItem('following');
-    const interests = localStorage.getItem('interests');
-    const topArticles = localStorage.getItem('topArticles');
-    const totalArticles = localStorage.getItem('totalArticles');
     const token = localStorage.getItem('token');
-    const decoded = jwtDecode(token);
-    const mentor = decoded.isMentor;
-    const { newProfileDetails } = updateStatus;
-
-    let profileData;
-    if (newProfileDetails) {
-      localStorage.setItem('firstName', newProfileDetails.data.firstName);
-      localStorage.setItem('lastName', newProfileDetails.data.lastName);
-      localStorage.setItem('bio', newProfileDetails.data.bio);
-      localStorage.setItem('interests', newProfileDetails.data.interests);
-    }
-    if (newProfileUrl) {
-      localStorage.setItem('imageUrl', newProfileUrl);
-    }
-
-    if (data) {
-      profileData = data;
-    } else {
-      profileData = loginData;
-    }
-
-    let profileUrl;
-    if (imageUrl && imageUrl !== 'null') {
-      profileUrl = imageUrl;
-    } else {
-      profileUrl = profilepicture;
-    }
+    const mentor = jwtDecode(token).isMentor;
+    const returnedData = data || loginData;
+    const profileUrl = returnedData.imageUrl
+      ? returnedData.imageUrl
+      : profilepicture;
 
     return (
       <div>
@@ -114,19 +88,29 @@ class ProfileComponent extends React.Component {
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
-                  {!firstName || firstName === 'null' ? '' : firstName}
+                  {!profileData || profileData === 'null'
+                    ? returnedData.firstName || ''
+                    : profileData.data.firstName}
                   &nbsp;
-                  {!lastName || lastName === 'null' ? '' : lastName}
+                  {!profileData || profileData === 'null'
+                    ? returnedData.lastName || ''
+                    : profileData.data.lastName}
                   <i className="material-icons right">more_vert</i>
                 </span>
               </div>
               <div className="card-reveal">
                 <span className="card-title grey-text text-darken-4">
-                  You Are Viewing<i className="material-icons right">close</i>
+                  You Are Viewing
+                  <i className="material-icons right">close</i>
                 </span>
                 <p>
-                  {!firstName || firstName === 'null' ? '' : firstName} &nbsp;
-                  {!lastName || lastName === 'null' ? '' : lastName}
+                  {!profileData || profileData === 'null'
+                    ? returnedData.firstName || ''
+                    : profileData.data.firstName}
+                  &nbsp;
+                  {!profileData || profileData === 'null'
+                    ? returnedData.lastName || ''
+                    : profileData.data.lastName}
                 </p>
               </div>
             </div>
@@ -135,14 +119,23 @@ class ProfileComponent extends React.Component {
             <div className="card small z-depth-0">
               <div className="card-content">
                 Articles : &nbsp;&nbsp; &nbsp;{' '}
-                {profileData ? profileData.articles.total : totalArticles}{' '}
+                {!returnedData.articles.total ||
+                returnedData.articles.total === 'null'
+                  ? 0
+                  : returnedData.articles.total}
                 <br />
                 <br /> <br />
                 Following : &nbsp;{' '}
-                {profileData ? profileData.following : following && 0} <br />
+                {!returnedData.following || returnedData.following === 'null'
+                  ? 0
+                  : returnedData.following}{' '}
+                <br />
                 <br /> <br />
                 Followers : &nbsp;{' '}
-                {profileData ? profileData.followers : followers && 0} <br />
+                {!returnedData.followers || returnedData.followers === 'null'
+                  ? 0
+                  : returnedData.followers}{' '}
+                <br />
                 <br /> <br />
                 Mentor :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {mentor === false ? (
@@ -163,199 +156,28 @@ class ProfileComponent extends React.Component {
                 <span className="profile-headlines">BIOGRAPHY</span>
                 <br />
                 <span id="profile-bio">
-                  {!bio || bio === 'null' ? 'Biography' : bio}
+                  {!profileData || profileData === 'null'
+                    ? returnedData.bio || 'Biography'
+                    : profileData.data.bio}
                 </span>
               </div>
-              <a
-                className="btn modal-trigger profile-btncolor"
-                href="#modal1"
-                id="profile-shift"
+              <Modal
+                trigger={
+                  <Button className="profile-btncolor">UPDATE PROFILE</Button>
+                }
               >
-                Update Profile
-              </a>
-
-              <div id="modal1" className="modal modal-fixed-footer">
-                <div className="modal-content" id="cardpad">
-                  <div className="row">
-                    <div className="col s12 m6 l4">
-                      <div className="card small">
-                        <div className="card-image profile-removespace">
-                          <img
-                            id="profile-image-card2"
-                            src={imageSelected || profilepicture}
-                            alt="profilepicture"
-                          />
-                        </div>
-                        <div className="card-tabs">
-                          <form onSubmit={this.uploadPicture}>
-                            <div className="file-field input-field">
-                              {uploadStatus.status ===
-                                constants.PICTURE_UPDATING && (
-                                <div className="profile-Eclipsloader">
-                                  <EllipsisLoaderComponent />
-                                </div>
-                              )}
-
-                              {(uploadStatus.status === undefined ||
-                                uploadStatus.status ===
-                                  constants.UPDATE_SUCCESS) && (
-                                <div className="profile-button-container">
-                                  <div
-                                    className="btn profile-btncolor"
-                                    id="profile-buttondiv"
-                                  >
-                                    <input
-                                      type="file"
-                                      name="profilepix"
-                                      id="img"
-                                      onChange={this.displayImage}
-                                    />
-                                    change img
-                                  </div>
-                                  <div id="profile-submitDiv">
-                                    <button
-                                      type="submit"
-                                      className="btn profile-btncolor"
-                                      id=""
-                                      onClick={this.uploadPicture}
-                                    >
-                                      Upload photo
-                                    </button>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            {uploadStatus.status ===
-                              constants.UPDATE_SUCCESS && (
-                              <span
-                                className="profile-sucessMessage2"
-                                id="hideMe"
-                              >
-                                Picture Uploaded Sucessfully.
-                              </span>
-                            )}
-                            {uploadStatus.status === constants.UPDATE_ERROR && (
-                              <span className="profile-centralize">
-                                An Error Occured
-                              </span>
-                            )}
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                    <form
-                      onSubmit={this.handleSubmit}
-                      className="col s12 m6 l8"
-                      id="profile-update_profile"
-                    >
-                      <div className="row">
-                        <div className="input-field col s12">
-                          <i className="material-icons prefix profile-color-ions">
-                            account_circle
-                          </i>
-                          <input
-                            id="icon_prefix"
-                            type="text"
-                            className="validate"
-                            name="firstName"
-                            defaultValue={
-                              !firstName || firstName === 'null'
-                                ? ''
-                                : firstName
-                            }
-                            placeholder="first Name"
-                          />
-                        </div>
-                        <div className="input-field col s12">
-                          <i className="material-icons prefix profile-color-ions">
-                            account_circle
-                          </i>
-                          <input
-                            id="icon_telephone"
-                            type="text"
-                            className="validate"
-                            name="lastName"
-                            defaultValue={
-                              !lastName || lastName === 'null' ? '' : lastName
-                            }
-                            placeholder="lastt Name"
-                          />
-                        </div>
-                        <div className="input-field col s12">
-                          <i className="material-icons prefix profile-color-ions">
-                            favorite
-                          </i>
-                          <select
-                            name="interest"
-                            defaultValue={
-                              !interests || interests === 'null'
-                                ? 'Science'
-                                : interests
-                            }
-                            className="input-field"
-                            required
-                          >
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Arts">Arts</option>
-                            <option value="Science">Science</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Technology">Technology</option>
-                          </select>
-                        </div>
-                        <div className="input-field col s12">
-                          <i className="material-icons prefix profile-color-ions">
-                            mode_edit
-                          </i>
-                          <textarea
-                            id="textarea1"
-                            className="materialize-textarea"
-                            name="bio"
-                            defaultValue={
-                              !bio || bio === 'null' ? 'biograph' : bio
-                            }
-                            placeholder="Biography"
-                          />
-                        </div>
-                        <div className="profile-Eclipsloader2">
-                          {updateStatus === constants.PROFILE_UPDATING && (
-                            <EllipsisLoaderComponent />
-                          )}
-                        </div>
-                        {(updateStatus === '' ||
-                          updateStatus.status ===
-                            constants.PROFILE_UPDATE_SUCCESS) && (
-                          <div id="learnground">
-                            <button
-                              className="btn profile-btncolor"
-                              type="submit"
-                              name="action"
-                              id="profile-shiftupdate"
-                            >
-                              Update
-                              <i className="material-icons right">send</i>
-                            </button>
-                          </div>
-                        )}
-
-                        {updateStatus.status ===
-                          constants.PROFILE_UPDATE_SUCCESS && (
-                          <span className="profile-sucessMessage3" id="hideMe">
-                            Profile Updated Sucessfully.
-                          </span>
-                        )}
-
-                        {updateStatus.status ===
-                          constants.PROFILE_UPDATE_ERROR && (
-                          <span className="profile-centralize">
-                            An error Ocuured while updating....
-                          </span>
-                        )}
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+                <ProfileEdit
+                  imageSelected={imageSelected}
+                  profilepicture={profilepicture}
+                  uploadPicture={this.uploadPicture}
+                  uploadStatus={uploadStatus}
+                  displayImage={this.displayImage}
+                  handleSubmit={this.handleSubmit}
+                  profileData={profileData}
+                  returnedData={returnedData}
+                  updateStatus={updateStatus}
+                />
+              </Modal>
             </div>
           </div>
           <div col s12 m6 l1 />
@@ -379,8 +201,8 @@ class ProfileComponent extends React.Component {
                 TOP FIVE ARTICLES
               </span>
               <div id="profile-topArticles">
-                {profileData
-                  ? profileData.articles.top.map(articles => {
+                {returnedData.articles.top
+                  ? returnedData.articles.top.map(articles => {
                       return (
                         <p key={articles}>
                           <a href="#!">{articles.title}</a>

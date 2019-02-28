@@ -45,7 +45,9 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <span
             className="card-title activator grey-text text-darken-4"
           >
+            Daniel
              
+            Jacks
             <i
               className="material-icons right"
             >
@@ -67,7 +69,9 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
             </i>
           </span>
           <p>
-              
+            Daniel
+             
+            Jacks
           </p>
         </div>
       </div>
@@ -85,7 +89,6 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           Articles :     
            
           0
-           
           <br />
           <br />
            
@@ -132,191 +135,91 @@ exports[` PROFILE TEST SUITE  Profile Component should render Profile dumb compo
           <span
             id="profile-bio"
           >
-            Biography
+            D3 developer
           </span>
         </div>
-        <a
-          className="btn modal-trigger profile-btncolor"
-          href="#modal1"
-          id="profile-shift"
-        >
-          Update Profile
-        </a>
-        <div
-          className="modal modal-fixed-footer"
-          id="modal1"
-        >
-          <div
-            className="modal-content"
-            id="cardpad"
-          >
-            <div
-              className="row"
+        <Modal
+          actions={
+            Array [
+              <Button
+                flat={true}
+                modal="close"
+                node="button"
+                waves="light"
+              >
+                Close
+              </Button>,
+            ]
+          }
+          bottomSheet={false}
+          fixedFooter={false}
+          modalOptions={Object {}}
+          trigger={
+            <Button
+              className="profile-btncolor"
+              node="button"
             >
-              <div
-                className="col s12 m6 l4"
-              >
-                <div
-                  className="card small"
-                >
-                  <div
-                    className="card-image profile-removespace"
-                  >
-                    <img
-                      alt="profilepicture"
-                      id="profile-image-card2"
-                      src={Object {}}
-                    />
-                  </div>
-                  <div
-                    className="card-tabs"
-                  >
-                    <form
-                      onSubmit={[Function]}
-                    >
-                      <div
-                        className="file-field input-field"
-                      >
-                        <div
-                          className="profile-button-container"
-                        >
-                          <div
-                            className="btn profile-btncolor"
-                            id="profile-buttondiv"
-                          >
-                            <input
-                              id="img"
-                              name="profilepix"
-                              onChange={[Function]}
-                              type="file"
-                            />
-                            change img
-                          </div>
-                          <div
-                            id="profile-submitDiv"
-                          >
-                            <button
-                              className="btn profile-btncolor"
-                              id=""
-                              onClick={[Function]}
-                              type="submit"
-                            >
-                              Upload photo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <form
-                className="col s12 m6 l8"
-                id="profile-update_profile"
-                onSubmit={[Function]}
-              >
-                <div
-                  className="row"
-                >
-                  <div
-                    className="input-field col s12"
-                  >
-                    <i
-                      className="material-icons prefix profile-color-ions"
-                    >
-                      account_circle
-                    </i>
-                    <input
-                      className="validate"
-                      defaultValue=""
-                      id="icon_prefix"
-                      name="firstName"
-                      placeholder="first Name"
-                      type="text"
-                    />
-                  </div>
-                  <div
-                    className="input-field col s12"
-                  >
-                    <i
-                      className="material-icons prefix profile-color-ions"
-                    >
-                      account_circle
-                    </i>
-                    <input
-                      className="validate"
-                      defaultValue=""
-                      id="icon_telephone"
-                      name="lastName"
-                      placeholder="lastt Name"
-                      type="text"
-                    />
-                  </div>
-                  <div
-                    className="input-field col s12"
-                  >
-                    <i
-                      className="material-icons prefix profile-color-ions"
-                    >
-                      favorite
-                    </i>
-                    <select
-                      className="input-field"
-                      defaultValue="Science"
-                      name="interest"
-                      required={true}
-                    >
-                      <option
-                        value="Mathematics"
-                      >
-                        Mathematics
-                      </option>
-                      <option
-                        value="Arts"
-                      >
-                        Arts
-                      </option>
-                      <option
-                        value="Science"
-                      >
-                        Science
-                      </option>
-                      <option
-                        value="Engineering"
-                      >
-                        Engineering
-                      </option>
-                      <option
-                        value="Technology"
-                      >
-                        Technology
-                      </option>
-                    </select>
-                  </div>
-                  <div
-                    className="input-field col s12"
-                  >
-                    <i
-                      className="material-icons prefix profile-color-ions"
-                    >
-                      mode_edit
-                    </i>
-                    <textarea
-                      className="materialize-textarea"
-                      defaultValue="biograph"
-                      id="textarea1"
-                      name="bio"
-                      placeholder="Biography"
-                    />
-                  </div>
-                  <div
-                    className="profile-Eclipsloader2"
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+              UPDATE PROFILE
+            </Button>
+          }
+        >
+          <ProfileEdit
+            displayImage={[Function]}
+            handleSubmit={[Function]}
+            imageSelected=""
+            profileData={
+              Object {
+                "data": Object {
+                  "bio": "D3 developer",
+                  "firstName": "Daniel",
+                  "imageUrl": "https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg",
+                  "lastName": "Jacks",
+                  "message": "Login was successful",
+                  "notifications": Array [],
+                  "token": "ImlhdCI6M._DqYpAJGxzDePz6uI",
+                  "username": "audu9habib",
+                },
+              }
+            }
+            profilepicture={Object {}}
+            returnedData={
+              Object {
+                "articles": Object {
+                  "top": Array [],
+                  "total": 0,
+                },
+                "bio": "D3 developer",
+                "firstName": "Daniel",
+                "followers": 0,
+                "following": 0,
+                "imageUrl": "https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg",
+                "lastName": "Jacks",
+                "message": "Login was successful",
+                "notifications": Array [],
+                "token": "ImlhdCI6M._DqYpAJGxzDePz6uI",
+                "username": "audu9habib",
+              }
+            }
+            updateStatus={
+              Object {
+                "newProfileDetails": Object {
+                  "data": Object {
+                    "bio": "Software developer at andela",
+                    "firstName": "Habib",
+                    "interest": "Arts",
+                    "lastName": "moses",
+                  },
+                },
+              }
+            }
+            uploadPicture={[Function]}
+            uploadStatus={
+              Object {
+                "newProfileUrl": "https//imageurl",
+              }
+            }
+          />
+        </Modal>
       </div>
     </div>
     <div

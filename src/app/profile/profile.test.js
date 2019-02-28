@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import configureStore from 'redux-mock-store';
 import ProfileComponent from './ProfileComponent';
+import ProfileEdit from './ProfileEdit';
 
 import {
   actions,
@@ -37,20 +38,16 @@ const props = {
     },
   },
   profileData: {
-    message: 'Login was successful',
-    token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
-    notifications: [],
-    username: 'audu9habib',
-    firstName: 'Daniel',
-    lastName: 'Jacks',
-    bio: 'D3 developer',
-    imageUrl:
-      'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
-    following: 0,
-    followers: 0,
-    articles: {
-      top: [],
-      total: 0,
+    data: {
+      message: 'Login was successful',
+      token: 'ImlhdCI6M._DqYpAJGxzDePz6uI',
+      notifications: [],
+      username: 'audu9habib',
+      firstName: 'Daniel',
+      lastName: 'Jacks',
+      bio: 'D3 developer',
+      imageUrl:
+        'https://res.cloudinary.com/hba821/image/upload/v1550833205/xawy05cllyblxlh0ihja.jpg',
     },
   },
 
@@ -183,8 +180,8 @@ describe(' PROFILE TEST SUITE', () => {
       mapDispatchToProps(dispatch).pictureUtils();
     });
 
-    it('should handle form submit', () => {
-      const wrapper = shallow(<ProfileComponent {...props} />);
+    it('should handle form submit in ProfileEdit Component', () => {
+      const wrapper = shallow(<ProfileEdit {...props} />);
       const event = {
         preventDefault: jest.fn(),
         target: {
@@ -207,6 +204,31 @@ describe(' PROFILE TEST SUITE', () => {
 
       const profileForm = wrapper.find('form').at(1);
       profileForm.simulate('submit', event);
+    });
+
+    it('should handle form submit in ProfileComponent', () => {
+      const wrapper = shallow(<ProfileComponent {...props} />);
+      const event = {
+        preventDefault: jest.fn(),
+        target: {
+          elements: {
+            lastName: {
+              value: 'Audu',
+            },
+            firstName: {
+              value: 'Habib',
+            },
+            interest: {
+              value: 'Science',
+            },
+            bio: {
+              value: 'I am a boy, I think',
+            },
+          },
+        },
+      };
+      const instance = wrapper.instance();
+      instance.handleSubmit(event);
     });
 
     it('should display selected image', () => {
