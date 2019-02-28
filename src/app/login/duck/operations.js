@@ -3,7 +3,7 @@ import actions from './actions';
 import constants from './constants';
 
 const { setLoginState, setLoginError } = actions;
-const baseUrl = 'http://localhost:3000/api/v1';
+const baseUrl = process.env.API_URL;
 // const baseUrl = 'http://learnground-api-staging.herokuapp.com/api/v1';
 const url = `${baseUrl}/users/login`;
 
