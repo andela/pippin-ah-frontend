@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { doLogin } from './duck';
+import { doLogin, updateLoginState } from './duck';
 import { LoginComponent as component } from './LoginComponent';
 
 const mapStateToProps = ({ login: { loginState, errorMessage } }) => {
@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loginUser: (usernameOrEmail, password) =>
       dispatch(doLogin(usernameOrEmail, password)),
+    updateLogin: state => dispatch(updateLoginState(state)),
   };
 };
 const LoginContainer = connect(

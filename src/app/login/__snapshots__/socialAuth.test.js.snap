@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SOCIAL AUTH TEST SUITE SocialAuth Component should render the Social Auth Page 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`SOCIAL AUTH TEST SUITE SocialAuth Component should render the Social Auth Page with facebook sign in 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(SocialAuth)
+    authLogin={[Function]}
+    dispatch={[Function]}
+  >
+    <SocialAuth
+      authLogin={[Function]}
+      dispatch={[Function]}
+      errorMessage=""
+      loginState=""
+    >
+      <div
+        className="centerDiv"
+      >
+        <div>
+          <RingLoaderComponent>
+            <div
+              className="lds-ring"
+            >
+              <div />
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          </RingLoaderComponent>
+          <p>
+            Logging in...
+          </p>
+        </div>
+      </div>
+      <div />
+    </SocialAuth>
+  </Connect(SocialAuth)>
+</Provider>
+`;
+
+exports[`SOCIAL AUTH TEST SUITE SocialAuth Component should render the Social Auth Page with google sing in 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(SocialAuth)
+    authLogin={[Function]}
+    dispatch={[Function]}
+  >
+    <SocialAuth
+      authLogin={[Function]}
+      dispatch={[Function]}
+      errorMessage=""
+      loginState=""
+    >
+      <div
+        className="centerDiv"
+      >
+        <div>
+          <RingLoaderComponent>
+            <div
+              className="lds-ring"
+            >
+              <div />
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          </RingLoaderComponent>
+          <p>
+            Logging in...
+          </p>
+        </div>
+      </div>
+      <div />
+    </SocialAuth>
+  </Connect(SocialAuth)>
+</Provider>
+`;
+
+exports[`SOCIAL AUTH TEST SUITE SocialAuth Component should throw exception when authentication fails 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(SocialAuth)
+    authLogin={[Function]}
+    dispatch={[Function]}
+  >
+    <SocialAuth
+      authLogin={[Function]}
+      dispatch={[Function]}
+      errorMessage=""
+      loginState=""
+    >
+      <div
+        className="centerDiv"
+      >
+        <div>
+          <RingLoaderComponent>
+            <div
+              className="lds-ring"
+            >
+              <div />
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          </RingLoaderComponent>
+          <p>
+            Logging in...
+          </p>
+        </div>
+      </div>
+      <div />
+    </SocialAuth>
+  </Connect(SocialAuth)>
+</Provider>
+`;
