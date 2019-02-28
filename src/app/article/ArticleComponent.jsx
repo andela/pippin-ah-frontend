@@ -29,20 +29,58 @@ class ArticleComponent extends React.Component {
     fetchSingleArticle(slug);
   }
 
-  bookmarkArticle = slug => {
-    const { bookmarkArticle } = this.props;
-    bookmarkArticle(slug);
-  };
+  bookmarkButton = () => {
+    const doBookmarkArticle = slug => {
+      const { bookmarkArticle } = this.props;
+      bookmarkArticle(slug);
+    };
 
-  removeBookmark = slug => {
-    const { removeBookmark } = this.props;
-    removeBookmark(slug);
+    const doRemoveBookmark = slug => {
+      const { removeBookmark } = this.props;
+      removeBookmark(slug);
+    };
+
+    const {
+      singleFetchStatus: { data },
+      bookmarkArticleState,
+    } = this.props;
+    console.log('-----**-=-**-', bookmarkArticleState);
+    if (
+      data.isBookmarked ||
+      bookmarkArticleState === constants.BOOKMARKING_ARTICLE ||
+      bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS
+    ) {
+      return (
+        <>
+          <button
+            id="bookmarkBtn"
+            type="button"
+            onClick={() => doRemoveBookmark(data.slug)}
+          >
+            <i className="material-icons">bookmark</i>
+          </button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <button
+          id="bookmarkBtn"
+          type="button"
+          onClick={() => doBookmarkArticle(data.slug)}
+        >
+          <i className="material-icons">bookmark_border</i>
+        </button>
+      </>
+    );
   };
 
   render() {
     const {
       singleFetchStatus: { data, status },
     } = this.props;
+
     let dateObject;
     if (data) {
       dateObject = formatDate(data.createdAt);
@@ -76,24 +114,7 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              {data.isBookmarked && (
-                <button
-                  id="bookmarkBtn"
-                  type="button"
-                  onClick={() => this.removeBookmark(data.slug)}
-                >
-                  <i className="material-icons">bookmark</i>
-                </button>
-              )}
-              {!data.isBookmarked && (
-                <button
-                  id="bookmarkBtn"
-                  type="button"
-                  onClick={() => this.bookmarkArticle(data.slug)}
-                >
-                  <i className="material-icons">bookmark_border</i>
-                </button>
-              )}
+              {this.bookmarkButton()}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
@@ -167,11 +188,11 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              <Link
+              {/* <Link
                 to={`/article/${data.slug}`}
                 onClick="stuff"
                 className="side-bookmark"
-              />
+              /> */}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
