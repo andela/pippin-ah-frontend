@@ -75,6 +75,13 @@ const ListArticleComponent = ({
           <div className="col s12 center-align">
             <h3>{articleCategory}</h3>
           </div>
+          <div className="fixed-action-btn">
+            <Link to="/create-article" className="btn-floating btn-large">
+              <i id="write" className="large material-icons">
+                mode_edit
+              </i>
+            </Link>
+          </div>
         </>
         <div className="row">
           {fetchArticleState === constants.FETCH_ARTICLE_SUCCESS &&
