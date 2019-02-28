@@ -51,9 +51,16 @@ const NavbarComponent = ({ dispatch }) => {
             <ul>
               <li>
                 {isSignedIn && (
-                  <Link to="/profile">
-                    <i className="material-icons">account_circle</i>
-                  </Link>
+                  <>
+                    <li>
+                      <Link to="/profile">
+                        <i className="material-icons">account_circle</i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/articles/bookmarks">Bookmarks</Link>
+                    </li>
+                  </>
                 )}
               </li>
               <li>
@@ -90,7 +97,12 @@ const NavbarComponent = ({ dispatch }) => {
         <li>
           <Link to="/articles/arts">Arts</Link>
         </li>
-        <Link to="/articles/mathematics">Mathematics</Link>
+        <li>
+          <Link to="/articles/mathematics">Mathematics</Link>
+        </li>
+        <li>
+          <Link to="/articles/bookmarks">Bookmarks</Link>
+        </li>
         <li>
           {isSignedIn ? (
             <Link
