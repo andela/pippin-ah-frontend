@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 import actions from './actions';
 import constants from './constants';
 import { uploadImage } from '../../util/uploadToCloudinary';
@@ -202,7 +203,7 @@ const doUpdateCategoryData = (
     });
 };
 
-const doBookmarkArticle = slug => dispatch => {
+const doBookmarkArticle = (slug, currentData) => dispatch => {
   dispatch(setBookmarkArticleState(constants.BOOKMARKING_ARTICLE));
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
@@ -211,17 +212,17 @@ const doBookmarkArticle = slug => dispatch => {
   return axios
     .post(`${url}/bookmarks/${slug}`, {}, headers)
     .then(({ data }) => {
+      currentData.unshift(data.article);
       dispatch(setBookmarkArticleState(constants.BOOKMARK_ARTICLE_SUCCESS));
-      doFetchArticles('Bookmarks', 1);
+      dispatch(updateCategoryData({ Bookmarks: currentData }));
     })
     .catch(({ response }) => {
-      console.log('--->>>', `${url}bookmarks/${slug}`);
       dispatch(setBookmarkArticleState(constants.BOOKMARK_ARTICLE_ERROR));
       dispatch(setBookmarkArticleError(response.data.error));
     });
 };
 
-const doRemoveBookmark = slug => dispatch => {
+const doRemoveBookmark = (slug, currentData) => dispatch => {
   dispatch(setBookmarkArticleState(constants.REMOVING_BOOKMARK));
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
@@ -230,7 +231,11 @@ const doRemoveBookmark = slug => dispatch => {
     .delete(`${url}/bookmarks/${slug}`, headers)
     .then(({ data }) => {
       dispatch(setBookmarkArticleState(constants.REMOVE_BOOKMARK_SUCCESS));
-      doFetchArticles('Bookmarks', 1);
+      const newData = _.filter(
+        currentData.Bookmarks,
+        article => article.slug !== slug,
+      );
+      dispatch(updateCategoryData({ Bookmarks: newData }));
     })
     .catch(({ response }) => {
       dispatch(setBookmarkArticleState(constants.REMOVE_BOOKMARK_ERROR));

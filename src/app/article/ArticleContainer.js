@@ -5,14 +5,17 @@ import { doFetchArticle, doBookmarkArticle, doRemoveBookmark } from './duck';
 const mapStateToProps = ({
   createArticle: { singleFetchStatus },
   bookmarkArticle: { bookmarkArticleState },
+  fetchArticle: { articleData },
 }) => {
-  return { singleFetchStatus, bookmarkArticleState };
+  return { singleFetchStatus, bookmarkArticleState, articleData };
 };
 const mapDispatchToProps = dispatch => {
   return {
     fetchSingleArticle: slug => dispatch(doFetchArticle(slug)),
-    bookmarkArticle: slug => dispatch(doBookmarkArticle(slug)),
-    removeBookmark: slug => dispatch(doRemoveBookmark(slug)),
+    bookmarkArticle: (slug, currentData) =>
+      dispatch(doBookmarkArticle(slug, currentData)),
+    removeBookmark: (slug, currentData) =>
+      dispatch(doRemoveBookmark(slug, currentData)),
   };
 };
 

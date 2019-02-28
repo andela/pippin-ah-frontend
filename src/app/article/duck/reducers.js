@@ -23,6 +23,7 @@ const INITIAL_STATE = {
     Science: [],
     Engineering: [],
     Technology: [],
+    Bookmarks: [],
   },
 };
 
