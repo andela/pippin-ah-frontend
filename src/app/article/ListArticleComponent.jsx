@@ -112,7 +112,7 @@ const ListArticleComponent = ({
                     >
                       {article.title}
                     </span>
-                    <strong>by: {article.author}</strong>
+                    {article.author && <strong>by: {article.author}</strong>}
                     <div id="liAuthorNameXz">
                       <Link to={`/article/${article.slug}`}>Read more</Link>
                     </div>
