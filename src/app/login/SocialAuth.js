@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { socialMediaLogin } from './duck/operations';
 import constants from './duck/constants';
-
+import { RingLoaderComponent } from '../loaders';
 /* eslint-disable react/prefer-stateless-function */
 class SocialAuth extends React.Component {
   constructor(props) {
@@ -12,23 +12,43 @@ class SocialAuth extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    console.log(window.location);
-    dispatch(socialMediaLogin(window.location.search));
+    this.props.authLogin(window.location.search);
   }
 
   render() {
     const { loginState } = this.props;
 
-    console.log('This is the login state :', loginState);
     return (
-      <div>{loginState === constants.LOGIN_SUCCESS && <Redirect to="/" />}</div>
+      <>
+        <div className="centerDiv">
+          {loginState !== constants.LOGIN_SUCCESS && (
+            <div>
+              <RingLoaderComponent />
+              <p>Logging in...</p>
+            </div>
+          )}
+        </div>
+        <div>
+          {loginState === constants.LOGIN_SUCCESS && <Redirect to="/" />}
+        </div>
+      </>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authLogin: params => {
+      dispatch(socialMediaLogin(params));
+    },
+  };
+};
 
 const mapStateToProps = ({ login: { loginState, errorMessage } }) => {
   return { loginState, errorMessage };
 };
 
-export default connect(mapStateToProps)(SocialAuth);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SocialAuth);

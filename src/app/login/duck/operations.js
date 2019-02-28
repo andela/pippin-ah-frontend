@@ -26,23 +26,26 @@ export const doLogin = (usernameOrEmail, password) => dispatch => {
     });
 };
 
+export const updateLoginState = state => dispatch => {
+  if (state === 'success') {
+    dispatch(setLoginState(constants.LOGIN_SUCCESS));
+  }
+};
+
 export const socialMediaLogin = params => dispatch => {
-  // const socialMediaCode = params.charAt(6);
   const paramToUse = params.split('&');
   let socialMediaType;
   if (paramToUse[0] === '?facebook') {
     socialMediaType = 'facebook';
   } else if (paramToUse[0] === '?google') {
     socialMediaType = 'google';
-  } else {
-    socialMediaType = 'twitter';
   }
 
-  const reidirectUrl = `http://localhost:3000/api/v1/users/${socialMediaType}/redirect?${
+  const redirectUrl = `http://localhost:3000/api/v1/users/${socialMediaType}/redirect?${
     paramToUse[1]
   }`;
   return axios
-    .get(reidirectUrl)
+    .get(redirectUrl)
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
       dispatch(setLoginState(constants.LOGIN_SUCCESS));

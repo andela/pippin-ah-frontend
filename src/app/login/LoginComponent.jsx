@@ -5,24 +5,15 @@ import { EllipsisLoaderComponent } from '../loaders';
 import { RingLoaderComponent } from '../loaders';
 import { constants } from './duck';
 import { facebook, twitter, googleplus } from '../../img';
-import { googleUrl } from './duck/operations';
-import { googleUrl, twitterUrl, facebookUrl } from './duck/operations';
+import { googleUrl, facebookUrl } from './duck/operations';
 import './signin.scss';
 
 export class LoginComponent extends React.Component {
-  constructor() {
-    super();
-
-    this.state = { isAuthenticated: false, user: null, token: '' };
-  }
-
   onSuccess = response => {
-    const token = response.headers.get('x-auth-token');
-    console.log('It was a success', response);
-    response.json().then(user => {
-      if (token) {
-        this.setState({ isAuthenticated: true, user, token });
-      }
+    response.json().then(response => {
+      localStorage.setItem('token', response.token);
+      const { updateLogin } = this.props;
+      updateLogin('success');
     });
   };
 
@@ -30,12 +21,9 @@ export class LoginComponent extends React.Component {
     console.log(error);
   };
 
-  logout = () => {
-    this.setState({ isAuthenticated: false, token: '', user: null });
-  };
-
   render() {
-    const { loginUser, loginState, googleLogin } = this.props;
+    const { loginUser, loginState } = this.props;
+
     const onFormSubmit = e => {
       e.preventDefault();
       const usernameOrEmail = e.target.elements.usernameOrEmail.value.trim();
@@ -62,7 +50,7 @@ export class LoginComponent extends React.Component {
                   <div className="btn-facebookk">
                     <div className="facebook-icon-div-signIn">
                       <a href={facebookUrl}>
-                        <i className="fab fa-facebook-f" />
+                        <i className="fab fa-facebook-f" id="facebookBtn" />
                       </a>
                     </div>
                     <div className="fb-text-wrapper-signIn">
