@@ -4,11 +4,11 @@ import constants from './constants';
 
 const { setLoginState, setLoginError } = actions;
 const baseUrl = process.env.API_URL;
-const url = `${baseUrl}/users/login`;
+const url = `${baseUrl}users/login`;
 
-export const googleUrl = `${baseUrl}/users/google`;
-export const twitterUrl = `${baseUrl}/users/twitter`;
-export const facebookUrl = `${baseUrl}/users/facebook`;
+export const googleUrl = `${baseUrl}users/google`;
+export const twitterUrl = `${baseUrl}users/twitter`;
+export const facebookUrl = `${baseUrl}users/facebook`;
 
 export const doLogin = (usernameOrEmail, password) => dispatch => {
   dispatch(setLoginState(constants.LOGGING_IN));
@@ -40,7 +40,7 @@ export const socialMediaLogin = params => dispatch => {
     socialMediaType = 'google';
   }
 
-  const redirectUrl = `${baseUrl}/users/${socialMediaType}/redirect?${
+  const redirectUrl = `${baseUrl}users/${socialMediaType}/redirect?${
     paramToUse[1]
   }`;
   return axios
