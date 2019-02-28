@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CommentComponent from '../comment';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -117,7 +116,6 @@ class ArticleComponent extends React.Component {
     }
     return (
       <Fragment>
-        <Link to="/articles/bookmarks">Bookmarks</Link>
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
