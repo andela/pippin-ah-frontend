@@ -31,8 +31,9 @@ class ArticleComponent extends React.Component {
 
   bookmarkButton = () => {
     const doBookmarkArticle = slug => {
-      const { bookmarkArticle } = this.props;
+      const { bookmarkArticle, fetchAllBookmarks } = this.props;
       bookmarkArticle(slug);
+      fetchAllBookmarks();
     };
 
     const doRemoveBookmark = slug => {
@@ -46,7 +47,7 @@ class ArticleComponent extends React.Component {
     } = this.props;
     console.log('-----**-=-**-', bookmarkArticleState);
     if (
-      data.isBookmarked ||
+      bookmarkArticleState === constants.BOOKMARKED ||
       bookmarkArticleState === constants.BOOKMARKING_ARTICLE ||
       bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS
     ) {
@@ -62,18 +63,23 @@ class ArticleComponent extends React.Component {
         </>
       );
     }
-
-    return (
-      <>
-        <button
-          id="bookmarkBtn"
-          type="button"
-          onClick={() => doBookmarkArticle(data.slug)}
-        >
-          <i className="material-icons">bookmark_border</i>
-        </button>
-      </>
-    );
+    if (
+      bookmarkArticleState === constants.NOT_BOOKMARKED ||
+      bookmarkArticleState === constants.REMOVING_BOOKMARK ||
+      bookmarkArticleState === constants.REMOVE_BOOKMARK_SUCCESS
+    ) {
+      return (
+        <>
+          <button
+            id="bookmarkBtn"
+            type="button"
+            onClick={() => doBookmarkArticle(data.slug)}
+          >
+            <i className="material-icons">bookmark_border</i>
+          </button>
+        </>
+      );
+    }
   };
 
   render() {
@@ -111,6 +117,7 @@ class ArticleComponent extends React.Component {
     }
     return (
       <Fragment>
+        <Link to="/articles/bookmarks">Bookmarks</Link>
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
