@@ -16,6 +16,7 @@ const {
   setSingleFetchStatus,
   setBookmarkArticleState,
   setBookmarkArticleError,
+  addNewlyCreatedArticle,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -46,6 +47,11 @@ const doCreateArticle = articleDetails => dispatch => {
       return axios
         .post(`${baseUrl}articles`, articleDetails, headers)
         .then(({ data }) => {
+          articleDetails.slug = data.slug;
+          articleDetails.author = data.author.username;
+          articleDetails.readTime = data.readTime;
+          dispatch(addNewlyCreatedArticle(articleDetails));
+          dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
           return dispatch(
             setCreateStatus({
               status: constants.CREATE_SUCCESS,
