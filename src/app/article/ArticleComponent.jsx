@@ -31,25 +31,24 @@ class ArticleComponent extends React.Component {
 
   bookmarkButton = () => {
     const doBookmarkArticle = slug => {
-      const { bookmarkArticle, fetchAllBookmarks } = this.props;
-      bookmarkArticle(slug);
-      fetchAllBookmarks();
+      const { bookmarkArticle, articleData } = this.props;
+      bookmarkArticle(slug, articleData.Bookmarks);
     };
 
     const doRemoveBookmark = slug => {
-      const { removeBookmark } = this.props;
-      removeBookmark(slug);
+      const { removeBookmark, articleData } = this.props;
+      removeBookmark(slug, articleData);
     };
 
     const {
       singleFetchStatus: { data },
       bookmarkArticleState,
     } = this.props;
-    console.log('-----**-=-**-', bookmarkArticleState);
     if (
       bookmarkArticleState === constants.BOOKMARKED ||
       bookmarkArticleState === constants.BOOKMARKING_ARTICLE ||
-      bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS
+      bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS ||
+      bookmarkArticleState === constants.REMOVE_BOOKMARK_ERROR
     ) {
       return (
         <>
@@ -66,7 +65,8 @@ class ArticleComponent extends React.Component {
     if (
       bookmarkArticleState === constants.NOT_BOOKMARKED ||
       bookmarkArticleState === constants.REMOVING_BOOKMARK ||
-      bookmarkArticleState === constants.REMOVE_BOOKMARK_SUCCESS
+      bookmarkArticleState === constants.REMOVE_BOOKMARK_SUCCESS ||
+      bookmarkArticleState === constants.BOOKMARK_ARTICLE_ERROR
     ) {
       return (
         <>
