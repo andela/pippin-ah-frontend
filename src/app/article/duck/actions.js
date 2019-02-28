@@ -50,11 +50,6 @@ const setBookmarkArticleError = errorMessage => ({
   errorMessage,
 });
 
-const setRemoveBookmarkState = removeBookmarkState => ({
-  type: types.SET_REMOVE_BOOKMARK_STATE,
-  removeBookmarkState,
-});
-
 const setRemoveBookmarkError = errorMessage => ({
   type: types.SET_REMOVE_BOOKMARK_ERROR,
   errorMessage,
@@ -71,6 +66,5 @@ export default {
   setSingleFetchStatus,
   setBookmarkArticleState,
   setBookmarkArticleError,
-  setRemoveBookmarkState,
   setRemoveBookmarkError,
 };

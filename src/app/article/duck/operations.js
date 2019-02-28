@@ -16,8 +16,6 @@ const {
   setSingleFetchStatus,
   setBookmarkArticleState,
   setBookmarkArticleError,
-  setRemoveBookmarkState,
-  setRemoveBookmarkError,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -111,9 +109,9 @@ const doFetchArticles = (articleCategory, page) => dispatch => {
       headers: { Authorization: localStorage.getItem('token') },
     };
     return axios
-      .get(`${url}/bookmarks`, {}, headers)
+      .get(`${url}/bookmarks`, headers)
       .then(({ data }) => {
-        dispatch(addArticleData({ [articleCategory]: data.articles }));
+        dispatch(addArticleData({ [articleCategory]: data.bookmarks }));
         dispatch(setFetchArticleState(constants.FETCH_ARTICLE_SUCCESS));
       })
       .catch(({ response }) => {
@@ -212,19 +210,19 @@ const doBookmarkArticle = slug => dispatch => {
 };
 
 const doRemoveBookmark = slug => dispatch => {
-  dispatch(setRemoveBookmarkState(constants.REMOVING_BOOKMARK));
+  dispatch(setBookmarkArticleState(constants.REMOVING_BOOKMARK));
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
   };
   return axios
-    .delete(`${url}/bookmarks/${slug}`, {}, headers)
+    .delete(`${url}/bookmarks/${slug}`, headers)
     .then(({ data }) => {
-      dispatch(setRemoveBookmarkState(constants.REMOVE_BOOKMARK_SUCCESS));
+      dispatch(setBookmarkArticleState(constants.REMOVE_BOOKMARK_SUCCESS));
       doFetchArticles('Bookmarks', 1);
     })
     .catch(({ response }) => {
-      dispatch(setRemoveBookmarkState(constants.REMOVE_BOOKMARK_ERROR));
-      dispatch(setRemoveBookmarkError(response.data.error));
+      dispatch(setBookmarkArticleState(constants.REMOVE_BOOKMARK_ERROR));
+      dispatch(setBookmarkArticleState(response.data.error));
     });
 };
 

@@ -2,8 +2,11 @@ import { connect } from 'react-redux';
 import ArticleComponent from './ArticleComponent';
 import { doFetchArticle, doBookmarkArticle, doRemoveBookmark } from './duck';
 
-const mapStateToProps = ({ createArticle: { singleFetchStatus } }) => {
-  return { singleFetchStatus };
+const mapStateToProps = ({
+  createArticle: { singleFetchStatus },
+  bookmarkArticle: { bookmarkArticleState },
+}) => {
+  return { singleFetchStatus, bookmarkArticleState };
 };
 const mapDispatchToProps = dispatch => {
   return {
