@@ -4,7 +4,6 @@ import constants from './constants';
 
 const { setLoginState, setLoginError } = actions;
 const baseUrl = process.env.API_URL;
-// const baseUrl = 'http://learnground-api-staging.herokuapp.com/api/v1';
 const url = `${baseUrl}/users/login`;
 
 export const googleUrl = `${baseUrl}/users/google`;
@@ -41,7 +40,7 @@ export const socialMediaLogin = params => dispatch => {
     socialMediaType = 'google';
   }
 
-  const redirectUrl = `http://localhost:3000/api/v1/users/${socialMediaType}/redirect?${
+  const redirectUrl = `${baseUrl}/users/${socialMediaType}/redirect?${
     paramToUse[1]
   }`;
   return axios
