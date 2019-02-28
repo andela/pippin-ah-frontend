@@ -91,6 +91,12 @@ const doFetchArticle = slug => dispatch => {
           data,
         }),
       );
+      if (data.isBookmarked) {
+        dispatch(setBookmarkArticleState(constants.BOOKMARKED));
+      }
+      if (!data.isBookmarked) {
+        dispatch(setBookmarkArticleState(constants.NOT_BOOKMARKED));
+      }
     })
     .catch(error => {
       dispatch(
