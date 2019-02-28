@@ -121,8 +121,15 @@ export const ProfileEdit = ({
                 <i className="material-icons prefix profile-color-ions">
                   favorite
                 </i>
-                <select name="interest" className="select-dropdown">
-                  <option value="Mathematic">Mathematic</option>
+                <select name="interests" className="select-dropdown">
+                  <option selected="selected">
+                    {!profileData || profileData === 'null'
+                      ? 'Choose Interests'
+                      : profileData.data.interests[
+                          profileData.data.interests.length - 1
+                        ]}
+                  </option>
+                  <option value="Mathematic">Mathematics</option>
                   <option value="Technology">Technology</option>
                   <option value="Science">Science</option>
                   <option value="Technology">Engineering</option>

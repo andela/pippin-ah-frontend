@@ -17,9 +17,9 @@ class ProfileComponent extends React.Component {
     event.preventDefault();
     const firstName = event.target.elements.firstName.value.trim();
     const lastName = event.target.elements.lastName.value.trim();
-    const interest = event.target.elements.interest.value.trim();
+    const interests = event.target.elements.interests.value.trim();
     const bio = event.target.elements.bio.value.trim();
-    updateUserProfile(firstName, lastName, interest, bio);
+    updateUserProfile(firstName, lastName, interests, bio);
   };
 
   uploadPicture = event => {
