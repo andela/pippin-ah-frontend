@@ -10,12 +10,20 @@ import thunk from 'redux-thunk';
 import '../node_modules/materialize-css/dist/js/materialize.min';
 import App from './app/App';
 import rootReducer from './reducers';
+import { loadState, saveState } from './localStorage';
+
+const persistedState = loadState();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
+  persistedState,
   /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)),
 );
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 ReactDOM.render(
   <Provider store={store}>
