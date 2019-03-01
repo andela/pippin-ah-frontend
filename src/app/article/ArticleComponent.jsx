@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CommentComponent from '../comment';
+import HighlightCommentComponent from './HighlightCommentComponent';
 import { EllipsisLoaderComponent } from '../loaders';
 import { formatDate, constants } from './duck';
 import './article.scss';
 
+let that;
 /* eslint-disable react/prefer-stateless-function */
 class ArticleComponent extends React.Component {
   static propTypes = {
@@ -15,7 +17,26 @@ class ArticleComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    that = this;
+    this.state = {
+      selectedText: '',
+      highlightMenuStyle: {
+        left: 0,
+        top: 0,
+        display: 'none',
+      },
+      hightlightCommentBoxStyle: {
+        display: 'none',
+      },
+      displayedHighlight: {
+        author: '',
+        comment: '',
+        style: {
+          display: 'none',
+        },
+      },
+    };
+    this.shouldInitiateHighlights = true;
   }
 
   componentDidMount() {
@@ -26,6 +47,131 @@ class ArticleComponent extends React.Component {
       },
     } = this.props;
     fetchSingleArticle(slug);
+  }
+
+  componentDidUpdate() {
+    if (this.shouldInitiateHighlights) {
+      this.addCurrentHighlights();
+    }
+  }
+
+  onSelectionMouseUp() {
+    this.novalue = 0;
+    if (window.getSelection().toString()) {
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      const clonedSelection = range.cloneContents();
+      const div = document.createElement('div');
+      div.appendChild(clonedSelection);
+      const selectedText = div.innerHTML;
+      const { highlightMenuStyle } = this.state;
+      this.setState({
+        selectedText,
+        highlightMenuStyle: {
+          ...highlightMenuStyle,
+          display: 'flex',
+        },
+      });
+    }
+  }
+
+  onSelectionMouseDown(e) {
+    this.setState({
+      highlightMenuStyle: {
+        left: `${e.pageX + 5}px`,
+        top: `${e.pageY - 55}px`,
+        display: 'none',
+      },
+      hightlightCommentBoxStyle: {
+        left: `${e.pageX + 5}px`,
+        top: `${e.pageY - 55}px`,
+        display: 'none',
+      },
+    });
+  }
+
+  handleHighlightClick() {
+    const { hightlightCommentBoxStyle } = this.state;
+    this.setState({
+      hightlightCommentBoxStyle: {
+        ...hightlightCommentBoxStyle,
+        display: 'flex',
+      },
+      highlightMenuStyle: {
+        display: 'none',
+      },
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  addHighlightComment(e) {
+    e.preventDefault();
+    const { selectedText } = that.state;
+    const comment = e.target.elements.comment.value.trim();
+    const {
+      uploadHighlightedText,
+      match: {
+        params: { slug },
+      },
+    } = that.props;
+    uploadHighlightedText({
+      highlightedText: selectedText,
+      startIndex: '10',
+      stopIndex: '21',
+      comment,
+      slug,
+    });
+    that.setState({
+      hightlightCommentBoxStyle: {
+        display: 'none',
+      },
+      shouldProcessHighlight: true,
+    });
+  }
+
+  addCurrentHighlights() {
+    const {
+      singleFetchStatus: {
+        data: { highlights },
+      },
+    } = this.props;
+    if (highlights) {
+      highlights.forEach(highlight => {
+        const highlightNode = document.getElementById(highlight.id);
+        if (highlightNode) {
+          highlightNode.addEventListener('mouseenter', e => {
+            const { displayedHighlight } = this.state;
+            if (displayedHighlight.style.display === 'none') {
+              return this.setState({
+                displayedHighlight: {
+                  ...highlight,
+                  style: {
+                    ...displayedHighlight.style,
+                    top: `${e.pageY}px`,
+                    left: `${e.pageX}px`,
+                    display: 'flex',
+                  },
+                },
+              });
+            }
+          });
+          highlightNode.addEventListener('mouseleave', () => {
+            const { displayedHighlight } = this.state;
+            if (displayedHighlight.style.display !== 'none') {
+              return this.setState({
+                displayedHighlight: {
+                  ...highlight,
+                  style: {
+                    ...displayedHighlight.style,
+                    display: 'none',
+                  },
+                },
+              });
+            }
+          });
+        }
+      });
+    }
   }
 
   bookmarkButton = (removeBookmarkId, bookmarkId) => {
@@ -75,13 +221,53 @@ class ArticleComponent extends React.Component {
   };
 
   render() {
+    let data;
     const {
-      singleFetchStatus: { data, status },
+      singleFetchStatus: { status },
+      highlightUploadStatus,
+      loginData,
+      signupData,
     } = this.props;
+    const newData = highlightUploadStatus.data;
+    const newArticleData = this.props.singleFetchStatus.data;
+    const {
+      highlightMenuStyle,
+      hightlightCommentBoxStyle,
+      updatedData,
+      displayedHighlight,
+    } = this.state;
 
     let dateObject;
+    if (newArticleData.author) {
+      data = { ...newArticleData };
+    }
+
     if (data) {
+      if (
+        newData &&
+        highlightUploadStatus.status === constants.HIGHLIGHT_UPLOAD_SUCCESS
+      ) {
+        data.highlights.push({
+          id: newData.id,
+          highlightedText: newData.highlightedText,
+          comment: newData.comment,
+          author: {
+            username: (loginData || signupData).username,
+          },
+        });
+        highlightUploadStatus.status = '';
+      }
       dateObject = formatDate(data.createdAt);
+      if (data.highlights) {
+        data.highlights.forEach(highlight => {
+          data.body = data.body.replace(
+            highlight.highlightedText,
+            `<span style="background: rgb(218, 233, 10)" id="${highlight.id}">${
+              highlight.highlightedText
+            }</span>`,
+          );
+        });
+      }
     }
     if (status === constants.FETCHING_SINGLE) {
       return (
@@ -105,6 +291,9 @@ class ArticleComponent extends React.Component {
           </div>
         </div>
       );
+    }
+    if (status !== constants.FETCH_SINGLE_SUCCESS) {
+      return <div />;
     }
     return (
       <Fragment>
@@ -179,9 +368,41 @@ class ArticleComponent extends React.Component {
               </div>
             </div>
             <div className="article-content">
+              <div className="tools" style={highlightMenuStyle}>
+                <i
+                  className="fas fa-comment"
+                  onClick={() => {
+                    this.handleHighlightClick();
+                  }}
+                />
+              </div>
+              <form
+                className="highlight-comment-box"
+                style={hightlightCommentBoxStyle}
+                onSubmit={this.addHighlightComment}
+              >
+                <div className="highlight-comment-header">Write note</div>
+                <textarea
+                  placeholder="write your thoughts"
+                  name="comment"
+                  required
+                />
+                <button type="submit" className="highlight-comment-reply">
+                  Post
+                </button>
+              </form>
+              <HighlightCommentComponent {...displayedHighlight} />
               <div
                 className="article-text"
-                dangerouslySetInnerHTML={{ __html: data.body }}
+                id="article-text"
+                dangerouslySetInnerHTML={{ __html: updatedData || data.body }}
+                onMouseDown={e => {
+                  this.onSelectionMouseDown(e);
+                }}
+                onMouseUp={() => {
+                  this.onSelectionMouseUp();
+                }}
+                onMouseEnter={e => {}}
               />
             </div>
             <div className="left-sidebar-down">

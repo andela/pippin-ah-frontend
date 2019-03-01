@@ -44,6 +44,11 @@ const updateCategoryData = appendedCategoryData => ({
   appendedCategoryData,
 });
 
+const setHighlightUploadStatus = highlightUploadStatus => ({
+  type: types.SET_HIGHLIGHT_UPLOAD_STATUS,
+  highlightUploadStatus,
+});
+
 const setBookmarkArticleState = bookmarkArticleState => ({
   type: types.SET_BOOKMARK_ARTICLE_STATE,
   bookmarkArticleState,
@@ -68,6 +73,7 @@ export default {
   setCurrentPage,
   setCreateStatus,
   setSingleFetchStatus,
+  setHighlightUploadStatus,
   setBookmarkArticleState,
   setBookmarkArticleError,
   setRemoveBookmarkError,
