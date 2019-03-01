@@ -59,29 +59,23 @@ class ArticleComponent extends React.Component {
     }
     return (
       <Fragment>
-        <ReactShare
-          url={`${url}/{data.slug}`} // required
-          title={data.title}
-          facebook // true or false. Optional prop
-          facebookClass="iconStyle" // className to Style share button. Optional prop
-          googlePlus // true or false. Optional prop
-          googlePlusClass="iconStyle" // Optional prop
-          twitter // true or false. Optional prop
-          twitterClass="iconStyle" // Optional prop
-          email // true or false.Optional prop
-          emailClass="iconStyle" // Optional prop
-          whatsapp // true or false. Optional prop
-          whatsappClass="iconStyle" // Optional prop
-          iconSize={32} // Icon size  //Optional prop
-          addClass="className" // add className to style the whole div. Optional but better of added for alignment.
-        />
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              <div className="side-bookmark" />
-              <div className="side-like" />
-              <div className="side-facebook" />
-              <div className="side-twitter" />
+              <ReactShare
+                url={url + data.slug}
+                title={data.title}
+                facebook
+                facebookClass="share-icon"
+                twitter
+                twitterClass="share-icon"
+                email
+                emailClass="share-icon"
+                whatsapp
+                whatsappClass="share-icon"
+                iconSize={32}
+                addClass="social-share-buttons"
+              />
             </div>
           </div>
           <div className="container">

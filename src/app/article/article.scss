@@ -13,6 +13,7 @@
   width: 10%;
   position: fixed;
   height: 70%;
+  top: 20%;
 }
 
 .left-sidebar {
@@ -82,6 +83,11 @@
 .side-like,
 .side-facebook {
   margin-bottom: 42px;
+}
+
+.share-icon {
+  margin-bottom: 15px;
+  transform: scale(1.2);
 }
 
 .main-cover .container {
