@@ -121,19 +121,12 @@ export const ProfileEdit = ({
                 <i className="material-icons prefix profile-color-ions">
                   favorite
                 </i>
-                <select name="interests" className="select-dropdown">
-                  <option selected="selected">
-                    {!profileData || profileData === 'null'
-                      ? 'Choose Interests'
-                      : profileData.data.interests[
-                          profileData.data.interests.length - 1
-                        ]}
-                  </option>
-                  <option value="Mathematics">Mathematics</option>
+                <select name="interest" className="select-dropdown">
+                  <option value="Mathematic">Mathematic</option>
                   <option value="Technology">Technology</option>
                   <option value="Science">Science</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Arts">Arts</option>
+                  <option value="Technology">Engineering</option>
+                  <option value="Science">Arts</option>
                 </select>
               </div>
               <div className="input-field col s12">
