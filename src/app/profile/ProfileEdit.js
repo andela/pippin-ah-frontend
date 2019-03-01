@@ -132,8 +132,8 @@ export const ProfileEdit = ({
                   <option value="Mathematics">Mathematics</option>
                   <option value="Technology">Technology</option>
                   <option value="Science">Science</option>
-                  <option value="Technology">Engineering</option>
-                  <option value="Science">Arts</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Arts">Arts</option>
                 </select>
               </div>
               <div className="input-field col s12">
