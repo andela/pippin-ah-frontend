@@ -61,24 +61,17 @@ class ArticleComponent extends React.Component {
         </>
       );
     }
-    if (
-      bookmarkArticleState === constants.NOT_BOOKMARKED ||
-      bookmarkArticleState === constants.REMOVING_BOOKMARK ||
-      bookmarkArticleState === constants.REMOVE_BOOKMARK_SUCCESS ||
-      bookmarkArticleState === constants.BOOKMARK_ARTICLE_ERROR
-    ) {
-      return (
-        <>
-          <button
-            id={bookmarkId}
-            type="button"
-            onClick={() => doBookmarkArticle(data.slug)}
-          >
-            <i className="material-icons">bookmark_border</i>
-          </button>
-        </>
-      );
-    }
+    return (
+      <>
+        <button
+          id={bookmarkId}
+          type="button"
+          onClick={() => doBookmarkArticle(data.slug)}
+        >
+          <i className="material-icons">bookmark_border</i>
+        </button>
+      </>
+    );
   };
 
   render() {
