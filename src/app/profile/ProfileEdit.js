@@ -129,7 +129,7 @@ export const ProfileEdit = ({
                           profileData.data.interests.length - 1
                         ]}
                   </option>
-                  <option value="Mathematic">Mathematics</option>
+                  <option value="Mathematics">Mathematics</option>
                   <option value="Technology">Technology</option>
                   <option value="Science">Science</option>
                   <option value="Technology">Engineering</option>
