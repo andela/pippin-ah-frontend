@@ -55,7 +55,9 @@
 }
 
 #bookmarkBtn,
-#removeBookmarkBtn {
+#m-bookmarkBtn,
+#removeBookmarkBtn,
+#m-removeBookmarkBtn {
   width: 16px;
   height: 34px;
   margin-left: -9px;
@@ -67,7 +69,9 @@
 }
 
 #bookmarkBtn:focus,
-#removeBookmarkBtn:focus {
+#m-bookmarkBtn:focus,
+#removeBookmarkBtn:focus,
+#m-removeBookmarkBtn {
   background-color: white;
 }
 

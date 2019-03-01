@@ -28,7 +28,7 @@ class ArticleComponent extends React.Component {
     fetchSingleArticle(slug);
   }
 
-  bookmarkButton = () => {
+  bookmarkButton = (removeBookmarkId, bookmarkId) => {
     const doBookmarkArticle = slug => {
       const { bookmarkArticle, articleData } = this.props;
       bookmarkArticle(slug, articleData.Bookmarks);
@@ -52,7 +52,7 @@ class ArticleComponent extends React.Component {
       return (
         <>
           <button
-            id="removeBookmarkBtn"
+            id={removeBookmarkId}
             type="button"
             onClick={() => doRemoveBookmark(data.slug)}
           >
@@ -70,7 +70,7 @@ class ArticleComponent extends React.Component {
       return (
         <>
           <button
-            id="bookmarkBtn"
+            id={bookmarkId}
             type="button"
             onClick={() => doBookmarkArticle(data.slug)}
           >
@@ -118,7 +118,7 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              {this.bookmarkButton()}
+              {this.bookmarkButton('removeBookmarkBtn', 'bookmarkBtn')}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
@@ -192,7 +192,7 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              {this.bookmarkButton()}
+              {this.bookmarkButton('m-removeBookmarkBtn', 'm-bookmarkBtn')}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
