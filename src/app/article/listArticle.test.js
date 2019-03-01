@@ -267,6 +267,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should render the connected component', () => {
     expect(wrapper.find(ListArticleComponent).length).toEqual(1);
+    expect(wrapper.exists()).toBe(true);
   });
 
   it('it should dispatch fetchArticle action', () => {

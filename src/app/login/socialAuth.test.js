@@ -112,20 +112,4 @@ describe('SOCIAL AUTH TEST SUITE', () => {
       expect(component).toMatchSnapshot();
     });
   });
-
-  describe('React Twitter button', () => {
-    it('should render the react twitter button', () => {
-      const wrapper = mount(<Login />);
-      const component = wrapper.find(TwitterLogin).first();
-      expect(component.exists()).toBe(true);
-    });
-  });
-
-  describe('React Twitter button', () => {
-    it('should render the react twitter button', () => {
-      const wrapper = mount(<Login />);
-      const component = wrapper.find(TwitterLogin).first();
-      expect(component.exists()).toBe(true);
-    });
-  });
 });

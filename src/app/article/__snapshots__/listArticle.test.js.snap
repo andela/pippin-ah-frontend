@@ -2,11 +2,6 @@
 
 exports[`fetchArticleReducers should render the component 1`] = `
 <ListArticleComponent
-  articleData={
-    Object {
-      "Science": Array [],
-    }
-  }
   fetchArticle={
     [MockFunction] {
       "calls": Array [
