@@ -45,12 +45,12 @@ export const LoginComponent = ({ loginUser, loginState, updateLoginState }) => {
         <div className="col s4">
           <TwitterLogin
             className="twitterComponentButton"
-            loginUrl="http://localhost:3000/api/v1/users/twitter"
+            loginUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter"
             onFailure={onFailed}
             onSuccess={onSuccess}
             text=""
             id="twitterComponentButton"
-            requestTokenUrl="http://localhost:3000/api/v1/users/twitter/reverse"
+            requestTokenUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter/reverse"
           />
         </div>
 
