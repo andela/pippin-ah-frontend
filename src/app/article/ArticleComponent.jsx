@@ -52,7 +52,7 @@ class ArticleComponent extends React.Component {
       return (
         <>
           <button
-            id="bookmarkBtn"
+            id="removeBookmarkBtn"
             type="button"
             onClick={() => doRemoveBookmark(data.slug)}
           >
@@ -89,7 +89,6 @@ class ArticleComponent extends React.Component {
     let dateObject;
     if (data) {
       dateObject = formatDate(data.createdAt);
-      console.log('-----=-->', data);
     }
     if (status === constants.FETCHING_SINGLE) {
       return (
