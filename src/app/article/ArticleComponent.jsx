@@ -1,16 +1,21 @@
 import React, { Fragment } from 'react';
 import ReactShare from 'react-share-simplified';
+import PropTypes from 'prop-types';
 import CommentComponent from '../comment';
 import { EllipsisLoaderComponent } from '../loaders';
 import { formatDate, constants } from './duck';
 import './article.scss';
 
 const url = process.env.FRONTEND_URL;
-console.log('api=---=---=---', process.env.API_URL);
-console.log('frontend=---=---=---', process.env.FRONTEND_URL);
 
 /* eslint-disable react/prefer-stateless-function */
 class ArticleComponent extends React.Component {
+  static propTypes = {
+    fetchSingleArticle: PropTypes.func.isRequired,
+    bookmarkArticle: PropTypes.func.isRequired,
+    removeBookmark: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,10 +31,57 @@ class ArticleComponent extends React.Component {
     fetchSingleArticle(slug);
   }
 
+  bookmarkButton = (removeBookmarkId, bookmarkId) => {
+    const doBookmarkArticle = slug => {
+      const { bookmarkArticle, articleData } = this.props;
+      bookmarkArticle(slug, articleData.Bookmarks);
+    };
+
+    const doRemoveBookmark = slug => {
+      const { removeBookmark, articleData } = this.props;
+      removeBookmark(slug, articleData);
+    };
+
+    const {
+      singleFetchStatus: { data },
+      bookmarkArticleState,
+    } = this.props;
+    if (
+      bookmarkArticleState === constants.BOOKMARKED ||
+      bookmarkArticleState === constants.BOOKMARKING_ARTICLE ||
+      bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS ||
+      bookmarkArticleState === constants.REMOVE_BOOKMARK_ERROR
+    ) {
+      return (
+        <>
+          <button
+            id={removeBookmarkId}
+            type="button"
+            onClick={() => doRemoveBookmark(data.slug)}
+          >
+            <i className="material-icons">bookmark</i>
+          </button>
+        </>
+      );
+    }
+    return (
+      <>
+        <button
+          id={bookmarkId}
+          type="button"
+          onClick={() => doBookmarkArticle(data.slug)}
+        >
+          <i className="material-icons">bookmark_border</i>
+        </button>
+      </>
+    );
+  };
+
   render() {
     const {
       singleFetchStatus: { data, status },
     } = this.props;
+
     let dateObject;
     if (data) {
       dateObject = formatDate(data.createdAt);
@@ -76,6 +128,10 @@ class ArticleComponent extends React.Component {
                 iconSize={32}
                 addClass="social-share-buttons"
               />
+              {this.bookmarkButton('removeBookmarkBtn', 'bookmarkBtn')}
+              <div className="side-like" />
+              <div className="side-facebook" />
+              <div className="side-twitter" />
             </div>
           </div>
           <div className="container">
@@ -146,7 +202,7 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              <div className="side-bookmark" />
+              {this.bookmarkButton('m-removeBookmarkBtn', 'm-bookmarkBtn')}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />

@@ -50,13 +50,20 @@ const NavbarComponent = ({ dispatch }) => {
           </div>
           <div className="hide-on-med-and-down show">
             <ul>
-              <li>
+              <>
                 {isSignedIn && (
-                  <Link to="/profile">
-                    <i className="material-icons">account_circle</i>
-                  </Link>
+                  <>
+                    <li>
+                      <Link to="/profile">
+                        <i className="material-icons">account_circle</i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/articles/bookmarks">Bookmarks</Link>
+                    </li>
+                  </>
                 )}
-              </li>
+              </>
               <li>
                 {isSignedIn ? (
                   <Link
@@ -91,7 +98,12 @@ const NavbarComponent = ({ dispatch }) => {
         <li>
           <Link to="/articles/arts">Arts</Link>
         </li>
-        <Link to="/articles/mathematics">Mathematics</Link>
+        <li>
+          <Link to="/articles/mathematics">Mathematics</Link>
+        </li>
+        <li>
+          <Link to="/articles/bookmarks">Bookmarks</Link>
+        </li>
         <li>
           {isSignedIn ? (
             <Link

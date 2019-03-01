@@ -288,6 +288,12 @@ describe('ARTICLE TEST SUITE', () => {
           data: '',
         },
       },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
+      },
     };
     const mockStore = configureStore([thunk]);
     const store = mockStore(() => initialState);
@@ -480,6 +486,12 @@ describe('ARTICLE TEST SUITE', () => {
           data: '',
         },
       },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
+      },
     };
     const mockStore = configureStore([thunk]);
     const store = mockStore(() => initialState);
@@ -507,6 +519,12 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCH_SINGLE_ERROR,
           data: 'error fetching article',
         },
+      },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
       },
     };
     const mockStore = configureStore([thunk]);
@@ -537,6 +555,12 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCH_SINGLE_ERROR,
           data: 'error fetching article',
         },
+      },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
       },
     };
     const mockStore = configureStore([thunk]);
@@ -587,6 +611,12 @@ describe('ARTICLE TEST SUITE', () => {
           },
         },
       },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
+      },
     };
     const mockStore = configureStore([thunk]);
     const store = mockStore(() => initialState);
@@ -636,6 +666,12 @@ describe('ARTICLE TEST SUITE', () => {
             ],
           },
         },
+      },
+      bookmarkArticle: {
+        bookmarkArticleState: '',
+      },
+      fetchArticle: {
+        articleData: [],
       },
     };
     const mockStore = configureStore([thunk]);
