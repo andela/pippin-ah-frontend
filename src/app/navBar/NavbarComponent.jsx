@@ -49,7 +49,7 @@ const NavbarComponent = ({ dispatch }) => {
           </div>
           <div className="hide-on-med-and-down show">
             <ul>
-              <li>
+              <>
                 {isSignedIn && (
                   <>
                     <li>
@@ -62,7 +62,7 @@ const NavbarComponent = ({ dispatch }) => {
                     </li>
                   </>
                 )}
-              </li>
+              </>
               <li>
                 {isSignedIn ? (
                   <Link
