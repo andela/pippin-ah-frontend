@@ -40,6 +40,11 @@ const updateCategoryData = appendedCategoryData => ({
   appendedCategoryData,
 });
 
+const setHighlightUploadStatus = highlightUploadStatus => ({
+  type: types.SET_HIGHLIGHT_UPLOAD_STATUS,
+  highlightUploadStatus,
+});
+
 export default {
   setFetchArticleState,
   setFetchArticleError,
@@ -49,4 +54,5 @@ export default {
   setCurrentPage,
   setCreateStatus,
   setSingleFetchStatus,
+  setHighlightUploadStatus,
 };

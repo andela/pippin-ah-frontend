@@ -13,6 +13,10 @@ const INITIAL_STATE = {
     fetchArticleState: '',
     errorMessage: '',
   },
+  highlightUploadStatus: {
+    status: '',
+    data: '',
+  },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -30,6 +34,15 @@ const createArticleReducer = (state = INITIAL_STATE, action) => {
         singleFetchStatus,
       };
     }
+
+    case types.SET_HIGHLIGHT_UPLOAD_STATUS: {
+      const { highlightUploadStatus } = action;
+      return {
+        ...state,
+        highlightUploadStatus,
+      };
+    }
+
     default:
       return state;
   }

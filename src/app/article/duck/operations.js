@@ -14,6 +14,7 @@ const {
   addArticleData,
   updateCategoryData,
   setSingleFetchStatus,
+  setHighlightUploadStatus,
 } = actions;
 
 const doCreateArticle = articleDetails => dispatch => {
@@ -173,10 +174,37 @@ const doUpdateCategoryData = (
     });
 };
 
+const doUploadHighlight = highlightDetails => dispatch => {
+  dispatch(setHighlightUploadStatus({ status: constants.HIGHLIGHT_UPLOADING }));
+  const { slug, ...detailsWithoutSlug } = highlightDetails;
+  const headers = {
+    headers: { Authorization: localStorage.getItem('token') },
+  };
+  return axios
+    .post(`${baseUrl}articles/${slug}/highlights`, detailsWithoutSlug, headers)
+    .then(({ data }) => {
+      return dispatch(
+        setHighlightUploadStatus({
+          status: constants.HIGHLIGHT_UPLOAD_SUCCESS,
+          data,
+        }),
+      );
+    })
+    .catch(({ response }) => {
+      return dispatch(
+        setHighlightUploadStatus({
+          status: constants.HIGHLIGHT_UPLOAD_FAILED,
+          data: response.data.error,
+        }),
+      );
+    });
+};
+
 export {
   doCreateArticle,
   doFetchArticle,
   doSetCategory,
   doUpdateCategoryData,
   doFetchArticles,
+  doUploadHighlight,
 };
