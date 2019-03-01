@@ -11,9 +11,10 @@ const { setSignupState } = signupActions;
 const NavbarComponent = ({ dispatch }) => {
   const isSignedIn = !!localStorage.getItem('token');
   const signUserOut = () => {
-    localStorage.removeItem('token');
     dispatch(setLoginState('LOGGED_OUT'));
     dispatch(setSignupState('LOGGED_OUT'));
+    localStorage.removeItem('state');
+    localStorage.removeItem('token');
   };
   return (
     <nav id="navbarbg">

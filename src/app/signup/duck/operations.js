@@ -18,7 +18,7 @@ const doSignUp = (email, username, password) => dispatch => {
     })
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
-      dispatch(setSignupState(constants.SIGNUP_SUCCESS));
+      dispatch(setSignupState(constants.SIGNUP_SUCCESS, data));
       dispatch(setLoginState(constants.LOGIN_SUCCESS));
     })
     .catch(({ response }) => {

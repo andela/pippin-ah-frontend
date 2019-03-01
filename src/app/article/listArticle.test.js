@@ -69,14 +69,6 @@ describe('ListArticle Component Action', () => {
     });
   });
 
-  it('it should update category data', () => {
-    const action = updateCategoryData({ Arts: 'New Data' });
-    expect(action).toEqual({
-      type: types.UPDATE_CATEGORY_DATA,
-      appendedCategoryData: { Arts: 'New Data' },
-    });
-  });
-
   it('it should add article data', () => {
     const action = addArticleData('Data');
     expect(action).toEqual({
@@ -103,6 +95,7 @@ describe('ListArticleContainer', () => {
         fetchArticleState: '',
         errorMessage: '',
       },
+      location: { pathname: '' },
     };
     expect(mapStateToProps(initialState).fetchArticleState).toEqual('');
     expect(mapStateToProps(initialState).errorMessage).toEqual('');
@@ -175,7 +168,28 @@ describe('fetchArticleReducers', () => {
       articleData: { Arts: [1, 2, 3] },
     };
     const state = fetchArticleReducer(undefined, action);
-    expect(state.articleData).toEqual(action.articleData);
+    expect(state.articleData).toEqual({
+      Arts: [1, 2, 3],
+      Mathematics: [],
+      Science: [],
+      Engineering: [],
+      Technology: [],
+    });
+  });
+
+  it('it should add a newly created article', () => {
+    const action = {
+      type: types.ADD_NEWLY_CREATED_ARTICLE,
+      newArticle: { category: 'Arts' },
+    };
+    const state = fetchArticleReducer(undefined, action);
+    expect(state.articleData).toEqual({
+      Arts: [{ category: 'Arts' }],
+      Mathematics: [],
+      Science: [],
+      Engineering: [],
+      Technology: [],
+    });
   });
 
   it('it should update category data', () => {
@@ -184,34 +198,57 @@ describe('fetchArticleReducers', () => {
       appendedCategoryData: { Arts: 'New Data' },
     };
     const state = fetchArticleReducer(undefined, action);
-    expect(state.articleData).toEqual(action.appendedCategoryData);
+    expect(state.articleData).toEqual({
+      Arts: 'New Data',
+      Engineering: [],
+      Mathematics: [],
+      Science: [],
+      Technology: [],
+    });
   });
 
   it('should render the component', () => {
     const fetchArticle = jest.fn();
-    const component = shallow(<ListArticleComponent {...{ fetchArticle }} />);
+    const setCategory = jest.fn();
+    const articleData = {
+      Science: [],
+    };
+    const location = { pathname: '/articles/Science' };
+    const component = shallow(
+      <ListArticleComponent
+        {...{ fetchArticle, location, articleData, setCategory }}
+      />,
+    );
     expect(component.exists()).toBe(true);
     expect(component).toMatchSnapshot();
   });
 });
 
 describe('Connected ListArticleComponent Component Dispatches Success', () => {
+  let wrapper;
   const initialState = {
     fetchArticle: {
       fetchArticleState: '',
       errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
-    articleData: 'Data',
     articleCategory: 'Arts',
+    location: { pathname: '/articles/arts' },
   };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
-  let wrapper;
   beforeEach(() => {
+    const location = { pathname: '/articles/arts' };
     const response = {
-      message: 'fetchArticle successful',
-      articles: [1, 2, 3],
+      data: 'fetchArticle successful',
       page: 1,
+      articles: [1, 2, 3],
     };
     axios.get.mockImplementation(() =>
       Promise.resolve({ data: { ...response } }),
@@ -222,7 +259,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
     wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <ListArticleContainer articleData={articleData} />
+          <ListArticleContainer articleData={articleData} location={location} />
         </MemoryRouter>
       </Provider>,
     );
@@ -230,14 +267,12 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
 
   it('it should render the connected component', () => {
     expect(wrapper.find(ListArticleComponent).length).toEqual(1);
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('it should dispatch fetchArticle action', () => {
-    const storeActions = store.getActions();
-    console.log('------//-/-_-//', storeActions);
     const storeState = store.getState();
-    expect(storeActions[3].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
+    const storeActions = store.getActions();
+    expect(storeActions[9].fetchArticleState).toEqual('FETCH_ARTICLE_SUCCESS');
     expect(storeState.articleCategory).toEqual('Arts');
   });
 });
@@ -247,8 +282,17 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     fetchArticle: {
       fetchArticleState: '',
       errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
+    location: { pathname: '/articles/arts' },
   };
+  const location = { pathname: '/articles/arts' };
   const mockStore = configureStore([thunk]);
   const store = mockStore(initialState);
   beforeEach(() => {
@@ -259,7 +303,10 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
     mount(
       <Provider store={store}>
         <MemoryRouter>
-          <ListArticleContainer articleData={initialState} />
+          <ListArticleContainer
+            location={location}
+            articleData={initialState}
+          />
         </MemoryRouter>
       </Provider>,
     );
@@ -267,7 +314,7 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
 
   it('it should dispatch error action', () => {
     const storeActions = store.getActions();
-    expect(storeActions[1].fetchArticleState).toEqual('FETCH_ARTICLE_ERROR');
+    expect(storeActions[2].fetchArticleState).toEqual('FETCH_ARTICLE_ERROR');
   });
 });
 
@@ -275,8 +322,18 @@ describe('Loader Component', () => {
   const state = {
     fetchArticle: {
       fetchArticleState: 'FETCHING_ARTICLE',
+      errorMessage: '',
+      articleData: {
+        Arts: [],
+        Mathematics: [],
+        Science: [],
+        Engineering: [],
+        Technology: [],
+      },
     },
+    location: { pathname: '/articles/arts' },
   };
+  const location = { pathname: '/articles/arts' };
   const mockStore = configureStore([thunk]);
   const store = mockStore(state);
   beforeEach(() => {
@@ -290,7 +347,7 @@ describe('Loader Component', () => {
     const component = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <ListArticleContainer articleData={state} />
+          <ListArticleContainer articleData={state} location={location} />
         </MemoryRouter>
       </Provider>,
     );

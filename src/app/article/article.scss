@@ -175,7 +175,7 @@
   background: #512da8;
   font: normal;
   font-size: 35px;
-  padding-top: 10px;
+  padding-top: 3px;
   color: #fff;
   text-align: center;
 }
@@ -187,7 +187,6 @@
   background: rgb(196, 196, 196);
   font: normal;
   font-size: 30px;
-  padding-top: 6px;
   color: #fff;
   text-align: center;
   margin-top: -1px;
@@ -289,6 +288,7 @@
 .category-image {
   height: auto;
   width: auto;
+  max-height: 500px;
   max-width: 96%;
   background-repeat: no-repeat;
   background-size: cover;

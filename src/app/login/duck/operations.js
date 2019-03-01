@@ -13,7 +13,7 @@ const doLogin = (usernameOrEmail, password) => dispatch => {
     .post(url, { usernameOrEmail, password })
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
-      dispatch(setLoginState(constants.LOGIN_SUCCESS));
+      dispatch(setLoginState(constants.LOGIN_SUCCESS, data));
     })
     .catch(({ response }) => {
       dispatch(setLoginState(constants.LOGIN_ERROR));

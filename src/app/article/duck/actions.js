@@ -35,6 +35,10 @@ const addArticleData = articleData => ({
   articleData,
 });
 
+const addNewlyCreatedArticle = newArticle => ({
+  type: types.ADD_NEWLY_CREATED_ARTICLE,
+  newArticle,
+});
 const updateCategoryData = appendedCategoryData => ({
   type: types.UPDATE_CATEGORY_DATA,
   appendedCategoryData,
@@ -55,4 +59,5 @@ export default {
   setCreateStatus,
   setSingleFetchStatus,
   setHighlightUploadStatus,
+  addNewlyCreatedArticle,
 };

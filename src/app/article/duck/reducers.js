@@ -17,6 +17,13 @@ const INITIAL_STATE = {
     status: '',
     data: '',
   },
+  articleData: {
+    Arts: [],
+    Mathematics: [],
+    Science: [],
+    Engineering: [],
+    Technology: [],
+  },
 };
 const createArticleReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -88,6 +95,21 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         articleData: { ...oldArticleData, ...articleData },
+      };
+    }
+    case types.ADD_NEWLY_CREATED_ARTICLE: {
+      const { newArticle } = action;
+      const currentArtcleData = state.articleData;
+      const newArticleCategory = newArticle.category;
+      const articleToAdd = {
+        [newArticleCategory]: [
+          newArticle,
+          ...currentArtcleData[newArticleCategory],
+        ],
+      };
+      return {
+        ...state,
+        articleData: { ...currentArtcleData, ...articleToAdd },
       };
     }
 

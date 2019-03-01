@@ -7,10 +7,11 @@ const INITIAL_STATE = {
 const signupReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.SET_SIGNUP_STATE: {
-      const { signupState } = action;
+      const { signupState, data } = action;
       return {
         ...state,
         signupState,
+        data,
       };
     }
     case types.SET_SIGNUP_ERROR: {
