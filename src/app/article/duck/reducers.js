@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   highlightUploadStatus: {
     status: '',
     data: '',
+  },
   bookmarkArticleStatus: {
     bookmarkArticleState: '',
     errorMessage: '',
