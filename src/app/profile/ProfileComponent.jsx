@@ -1,10 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { Modal, Button } from 'react-materialize';
+import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import './profile.scss';
 import profilepicture from '../../img/avatar.jpeg';
 import { ProfileEdit } from './ProfileEdit';
+
+const url = process.env.API_URL;
 
 class ProfileComponent extends React.Component {
   state = {
@@ -64,7 +67,7 @@ class ProfileComponent extends React.Component {
     const profileUrl = returnedData.imageUrl
       ? returnedData.imageUrl
       : profilepicture;
-
+    console.log('===-====0--=', returnedData);
     return (
       <div>
         <div className="container">
@@ -205,7 +208,9 @@ class ProfileComponent extends React.Component {
                   ? returnedData.articles.top.map(articles => {
                       return (
                         <p key={articles}>
-                          <a href="#!">{articles.title}</a>
+                          <Link to={`/article/${articles.slug}`}>
+                            {articles.title}
+                          </Link>
                         </p>
                       );
                     })
