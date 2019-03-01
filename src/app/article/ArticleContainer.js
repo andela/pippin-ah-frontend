@@ -4,8 +4,11 @@ import { doFetchArticle, doUploadHighlight } from './duck';
 
 const mapStateToProps = ({
   createArticle: { singleFetchStatus, highlightUploadStatus },
+  login: { loginData },
+  signup: { data },
 }) => {
-  return { singleFetchStatus, highlightUploadStatus };
+  const signupData = data;
+  return { singleFetchStatus, highlightUploadStatus, loginData, signupData };
 };
 const mapDispatchToProps = dispatch => {
   return {

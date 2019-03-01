@@ -172,6 +172,8 @@ class ArticleComponent extends React.Component {
     const {
       singleFetchStatus: { status },
       highlightUploadStatus,
+      loginData,
+      signupData,
     } = this.props;
     const newData = highlightUploadStatus.data;
     const newArticleData = this.props.singleFetchStatus.data;
@@ -196,7 +198,7 @@ class ArticleComponent extends React.Component {
           highlightedText: newData.highlightedText,
           comment: newData.comment,
           author: {
-            username: 'Anonymous',
+            username: (loginData || signupData).username,
           },
         });
         highlightUploadStatus.status = '';
