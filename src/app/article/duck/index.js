@@ -4,6 +4,7 @@ export {
   doSetCategory,
   doUpdateCategoryData,
   doFetchArticles,
+  doUploadHighlight,
   doBookmarkArticle,
   doRemoveBookmark,
 } from './operations';

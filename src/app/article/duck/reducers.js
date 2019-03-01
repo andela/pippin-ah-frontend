@@ -13,6 +13,10 @@ const INITIAL_STATE = {
     fetchArticleState: '',
     errorMessage: '',
   },
+  highlightUploadStatus: {
+    status: '',
+    data: '',
+  },
   bookmarkArticleStatus: {
     bookmarkArticleState: '',
     errorMessage: '',
@@ -43,6 +47,15 @@ const createArticleReducer = (state = INITIAL_STATE, action) => {
         singleFetchStatus,
       };
     }
+
+    case types.SET_HIGHLIGHT_UPLOAD_STATUS: {
+      const { highlightUploadStatus } = action;
+      return {
+        ...state,
+        highlightUploadStatus,
+      };
+    }
+
     default:
       return state;
   }
