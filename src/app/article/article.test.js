@@ -479,6 +479,16 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCHING_SINGLE,
           data: '',
         },
+        highlightUploadStatus: {
+          status: constants.HIGHLIGHT_UPLOAD_SUCCESS,
+          data: {},
+        },
+      },
+      login: {
+        loginData: { username: 'habib' },
+      },
+      signup: {
+        data: { username: 'habib' },
       },
     };
     const mockStore = configureStore([thunk]);
@@ -507,6 +517,16 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCH_SINGLE_ERROR,
           data: 'error fetching article',
         },
+        highlightUploadStatus: {
+          status: constants.HIGHLIGHT_UPLOAD_SUCCESS,
+          data: {},
+        },
+      },
+      login: {
+        loginData: { username: 'habib' },
+      },
+      signup: {
+        data: { username: 'habib' },
       },
     };
     const mockStore = configureStore([thunk]);
@@ -537,6 +557,16 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCH_SINGLE_ERROR,
           data: 'error fetching article',
         },
+        highlightUploadStatus: {
+          status: constants.HIGHLIGHT_UPLOAD_SUCCESS,
+          data: {},
+        },
+      },
+      login: {
+        loginData: { username: 'habib' },
+      },
+      signup: {
+        data: { username: 'habib' },
       },
     };
     const mockStore = configureStore([thunk]);
@@ -570,6 +600,7 @@ describe('ARTICLE TEST SUITE', () => {
           status: constants.FETCH_SINGLE_SUCCESS,
           data: {
             createdAt: '2019-01-26 15:02:22.391+01',
+            highlights: [{ id: 'someid' }],
             author: {
               username: 'spicy-dicy',
             },
@@ -586,6 +617,18 @@ describe('ARTICLE TEST SUITE', () => {
             ],
           },
         },
+        highlightUploadStatus: {
+          status: constants.HIGHLIGHT_UPLOAD_SUCCESS,
+          data: {
+            highlights: [{ id: 'someid' }],
+          },
+        },
+      },
+      login: {
+        loginData: { username: 'habib' },
+      },
+      signup: {
+        data: { username: 'habib' },
       },
     };
     const mockStore = configureStore([thunk]);

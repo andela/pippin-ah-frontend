@@ -169,6 +169,7 @@ class ArticleComponent extends React.Component {
 
   render() {
     let data;
+    console.log('-++++++++++++++++++', this.props);
     const {
       singleFetchStatus: { status },
       highlightUploadStatus,
