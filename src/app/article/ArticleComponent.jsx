@@ -192,11 +192,7 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              {/* <Link
-                to={`/article/${data.slug}`}
-                onClick="stuff"
-                className="side-bookmark"
-              /> */}
+              {this.bookmarkButton()}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
