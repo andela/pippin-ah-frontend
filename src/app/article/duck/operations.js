@@ -208,7 +208,6 @@ const doBookmarkArticle = (slug, currentData) => dispatch => {
   const headers = {
     headers: { Authorization: localStorage.getItem('token') },
   };
-  console.log(headers);
   return axios
     .post(`${url}/bookmarks/${slug}`, {}, headers)
     .then(({ data }) => {
