@@ -21,7 +21,6 @@ const {
   setFetchArticleState,
   setFetchArticleError,
   setCurrentPage,
-  updateCategoryData,
   setArticleCategory,
   addArticleData,
 } = actions;
@@ -174,6 +173,7 @@ describe('fetchArticleReducers', () => {
       Science: [],
       Engineering: [],
       Technology: [],
+      Bookmarks: [],
     });
   });
 
@@ -189,6 +189,7 @@ describe('fetchArticleReducers', () => {
       Science: [],
       Engineering: [],
       Technology: [],
+      Bookmarks: [],
     });
   });
 
@@ -204,6 +205,7 @@ describe('fetchArticleReducers', () => {
       Mathematics: [],
       Science: [],
       Technology: [],
+      Bookmarks: [],
     });
   });
 
@@ -236,6 +238,7 @@ describe('Connected ListArticleComponent Component Dispatches Success', () => {
         Science: [],
         Engineering: [],
         Technology: [],
+        Bookmarks: [],
       },
     },
     articleCategory: 'Arts',
@@ -288,6 +291,7 @@ describe('Connected ListArticleComponent Dispatches fetchArticle Error', () => {
         Science: [],
         Engineering: [],
         Technology: [],
+        Bookmarks: [],
       },
     },
     location: { pathname: '/articles/arts' },
@@ -329,6 +333,7 @@ describe('Loader Component', () => {
         Science: [],
         Engineering: [],
         Technology: [],
+        Bookmarks: [],
       },
     },
     location: { pathname: '/articles/arts' },
