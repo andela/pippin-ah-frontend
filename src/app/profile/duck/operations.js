@@ -40,7 +40,7 @@ const updateProfileUrl = `${process.env.API_URL}profile`;
 export const updateUserProfile = (
   firstName,
   lastName,
-  interest,
+  interests,
   bio,
 ) => dispatch => {
   const token = localStorage.getItem('token');
@@ -56,7 +56,7 @@ export const updateUserProfile = (
       {
         firstName,
         lastName,
-        interest,
+        interests,
         bio,
       },
       defaultOptions,
