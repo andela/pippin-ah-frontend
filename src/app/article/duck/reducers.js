@@ -13,14 +13,20 @@ const INITIAL_STATE = {
     fetchArticleState: '',
     errorMessage: '',
   },
+  bookmarkArticleStatus: {
+    bookmarkArticleState: '',
+    errorMessage: '',
+  },
   articleData: {
     Arts: [],
     Mathematics: [],
     Science: [],
     Engineering: [],
     Technology: [],
+    Bookmarks: [],
   },
 };
+
 const createArticleReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.SET_CREATE_STATUS: {
@@ -114,4 +120,25 @@ const fetchArticleReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export { createArticleReducer, fetchArticleReducer };
+const bookmarkArticleReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case types.SET_BOOKMARK_ARTICLE_STATE: {
+      const { bookmarkArticleState } = action;
+      return {
+        ...state,
+        bookmarkArticleState,
+      };
+    }
+    case types.SET_BOOKMARK_ARTICLE_ERROR: {
+      const { errorMessage } = action;
+      return {
+        ...state,
+        errorMessage,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export { createArticleReducer, fetchArticleReducer, bookmarkArticleReducer };

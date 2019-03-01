@@ -54,6 +54,27 @@
   justify-content: center;
 }
 
+#bookmarkBtn,
+#m-bookmarkBtn,
+#removeBookmarkBtn,
+#m-removeBookmarkBtn {
+  width: 16px;
+  height: 34px;
+  margin-left: -9px;
+  margin-bottom: 10px;
+  border: none;
+  cursor: pointer;
+  color: #04d5f5;
+  background: white;
+}
+
+#bookmarkBtn:focus,
+#m-bookmarkBtn:focus,
+#removeBookmarkBtn:focus,
+#m-removeBookmarkBtn {
+  background-color: white;
+}
+
 .side-bookmark {
   background-image: url('../../img/side-bookmark.svg');
   width: 13px;

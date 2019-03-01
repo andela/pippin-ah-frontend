@@ -4,8 +4,14 @@ export {
   doSetCategory,
   doUpdateCategoryData,
   doFetchArticles,
+  doBookmarkArticle,
+  doRemoveBookmark,
 } from './operations';
-export { createArticleReducer, fetchArticleReducer } from './reducers';
+export {
+  createArticleReducer,
+  fetchArticleReducer,
+  bookmarkArticleReducer,
+} from './reducers';
 export { default as constants } from './constants';
 export { default as types } from './types';
 export { default as actions } from './actions';
