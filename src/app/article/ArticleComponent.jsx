@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import CommentComponent from '../comment';
 import HighlightCommentComponent from './HighlightCommentComponent';
 import { EllipsisLoaderComponent } from '../loaders';
@@ -8,6 +9,12 @@ import './article.scss';
 let that;
 /* eslint-disable react/prefer-stateless-function */
 class ArticleComponent extends React.Component {
+  static propTypes = {
+    fetchSingleArticle: PropTypes.func.isRequired,
+    bookmarkArticle: PropTypes.func.isRequired,
+    removeBookmark: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     that = this;
@@ -167,9 +174,54 @@ class ArticleComponent extends React.Component {
     }
   }
 
+  bookmarkButton = (removeBookmarkId, bookmarkId) => {
+    const doBookmarkArticle = slug => {
+      const { bookmarkArticle, articleData } = this.props;
+      bookmarkArticle(slug, articleData.Bookmarks);
+    };
+
+    const doRemoveBookmark = slug => {
+      const { removeBookmark, articleData } = this.props;
+      removeBookmark(slug, articleData);
+    };
+
+    const {
+      singleFetchStatus: { data },
+      bookmarkArticleState,
+    } = this.props;
+    if (
+      bookmarkArticleState === constants.BOOKMARKED ||
+      bookmarkArticleState === constants.BOOKMARKING_ARTICLE ||
+      bookmarkArticleState === constants.BOOKMARK_ARTICLE_SUCCESS ||
+      bookmarkArticleState === constants.REMOVE_BOOKMARK_ERROR
+    ) {
+      return (
+        <>
+          <button
+            id={removeBookmarkId}
+            type="button"
+            onClick={() => doRemoveBookmark(data.slug)}
+          >
+            <i className="material-icons">bookmark</i>
+          </button>
+        </>
+      );
+    }
+    return (
+      <>
+        <button
+          id={bookmarkId}
+          type="button"
+          onClick={() => doBookmarkArticle(data.slug)}
+        >
+          <i className="material-icons">bookmark_border</i>
+        </button>
+      </>
+    );
+  };
+
   render() {
     let data;
-    console.log('-++++++++++++++++++', this.props);
     const {
       singleFetchStatus: { status },
       highlightUploadStatus,
@@ -184,6 +236,7 @@ class ArticleComponent extends React.Component {
       updatedData,
       displayedHighlight,
     } = this.state;
+
     let dateObject;
     if (newArticleData.author) {
       data = { ...newArticleData };
@@ -247,7 +300,7 @@ class ArticleComponent extends React.Component {
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">
-              <div className="side-bookmark" />
+              {this.bookmarkButton('removeBookmarkBtn', 'bookmarkBtn')}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
@@ -353,7 +406,7 @@ class ArticleComponent extends React.Component {
               />
             </div>
             <div className="left-sidebar-down">
-              <div className="side-bookmark" />
+              {this.bookmarkButton('m-removeBookmarkBtn', 'm-bookmarkBtn')}
               <div className="side-like" />
               <div className="side-facebook" />
               <div className="side-twitter" />
