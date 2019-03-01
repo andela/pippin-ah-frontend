@@ -7,12 +7,10 @@ import { facebook, googleplus } from '../../img';
 import { googleUrl, facebookUrl } from './duck/operations';
 import './signin.scss';
 
-export const LoginComponent = ({ loginUser, loginState }) => {
+export const LoginComponent = ({ loginUser, loginState, updateLoginState }) => {
   const onSuccess = response => {
-    response.json().then(res => {
-      localStorage.setItem('token', res.token);
-      const { updateLogin } = this.props;
-      updateLogin('success');
+    response.json().then(data => {
+      updateLoginState(constants.LOGIN_SUCCESS, data);
     });
   };
 
@@ -47,12 +45,12 @@ export const LoginComponent = ({ loginUser, loginState }) => {
         <div className="col s4">
           <TwitterLogin
             className="twitterComponentButton"
-            loginUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter"
+            loginUrl="http://localhost:3000/api/v1/users/twitter"
             onFailure={onFailed}
             onSuccess={onSuccess}
             text=""
             id="twitterComponentButton"
-            requestTokenUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter/reverse"
+            requestTokenUrl="http://localhost:3000/api/v1/users/twitter/reverse"
           />
         </div>
 

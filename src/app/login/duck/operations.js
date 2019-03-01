@@ -25,9 +25,10 @@ export const doLogin = (usernameOrEmail, password) => dispatch => {
     });
 };
 
-export const updateLoginState = state => dispatch => {
-  if (state === 'success') {
-    dispatch(setLoginState(constants.LOGIN_SUCCESS));
+export const updateLoginState = (state, data) => dispatch => {
+  if (state === constants.LOGIN_SUCCESS) {
+    localStorage.setItem('token', data.token);
+    dispatch(setLoginState(constants.LOGIN_SUCCESS, data));
   }
 };
 
@@ -47,7 +48,7 @@ export const socialMediaLogin = params => dispatch => {
     .get(redirectUrl)
     .then(({ data }) => {
       localStorage.setItem('token', data.token);
-      dispatch(setLoginState(constants.LOGIN_SUCCESS));
+      dispatch(setLoginState(constants.LOGIN_SUCCESS, data));
     })
     .catch(error => {
       console.log('An error occured: ', error);

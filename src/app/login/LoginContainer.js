@@ -11,6 +11,7 @@ const mapDispatchToProps = dispatch => {
     loginUser: (usernameOrEmail, password) =>
       dispatch(doLogin(usernameOrEmail, password)),
     updateLogin: state => dispatch(updateLoginState(state)),
+    updateLoginState: (state, data) => dispatch(updateLoginState(state, data)),
   };
 };
 const LoginContainer = connect(
