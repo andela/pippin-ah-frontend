@@ -113,6 +113,7 @@ class ArticleComponent extends React.Component {
       <Fragment>
         <div className="main-cover">
           <div className="left-sidebar-cover">
+            {this.bookmarkButton('removeBookmarkBtn', 'bookmarkBtn')}
             <div className="left-sidebar">
               <ReactShare
                 url={url + data.slug}
@@ -128,10 +129,6 @@ class ArticleComponent extends React.Component {
                 iconSize={32}
                 addClass="social-share-buttons"
               />
-              {this.bookmarkButton('removeBookmarkBtn', 'bookmarkBtn')}
-              <div className="side-like" />
-              <div className="side-facebook" />
-              <div className="side-twitter" />
             </div>
           </div>
           <div className="container">
