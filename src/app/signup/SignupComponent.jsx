@@ -1,11 +1,25 @@
 import React, { Fragment } from 'react';
+import TwitterLogin from 'react-twitter-auth';
 import { Redirect, Link } from 'react-router-dom';
 import { EllipsisLoaderComponent } from '../loaders';
 import { constants } from './duck';
-import { facebook, twitter, googleplus } from '../../img';
+import { facebook, googleplus } from '../../img';
+import { googleUrl, facebookUrl } from '../login/duck/operations';
 import './signup.scss';
 
 const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
+  const onSuccess = response => {
+    response.json().then(res => {
+      localStorage.setItem('token', res.token);
+      const { updateLogin } = this.props;
+      updateLogin('success');
+    });
+  };
+
+  const onFailed = error => {
+    console.log(error);
+  };
+
   const onFormSubmit = e => {
     e.preventDefault();
     const userEmail = e.target.elements.email.value.trim();
@@ -30,24 +44,33 @@ const SignupComponent = ({ signupUser, signupState, errorMessage }) => {
       </button>
       <p id="alternateText">Or sign up with</p>
       <div className="row">
-        <img
-          className="col s4"
-          id="auth-facebook-logo"
-          src={facebook}
-          alt="facebook logo"
-        />
-        <img
-          className="col s4"
-          id="auth-twitter-logo"
-          src={twitter}
-          alt="twitter logo"
-        />
-        <img
-          className="col s4"
-          id="auth-googleplus-logo"
-          src={googleplus}
-          alt="googleplus logo"
-        />
+        <a href={facebookUrl}>
+          <img
+            className="col s4"
+            id="auth-facebook-logo"
+            src={facebook}
+            alt="facebook logo"
+          />
+        </a>
+        <div className="col s4">
+          <TwitterLogin
+            className="twitterComponentButton"
+            loginUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter"
+            onFailure={onFailed}
+            onSuccess={onSuccess}
+            text=""
+            id="twitterComponentButton"
+            requestTokenUrl="https://learnground-api-staging.herokuapp.com/api/v1/users/twitter/reverse"
+          />
+        </div>
+        <a href={googleUrl}>
+          <img
+            className="col s4"
+            id="auth-googleplus-logo"
+            src={googleplus}
+            alt="googleplus logo"
+          />
+        </a>
       </div>
       <div id="auth-forgot-password">
         Already have an account?
