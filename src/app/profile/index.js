@@ -1,1 +1,2 @@
-export { default } from './ProfileComponent';
+export { default } from './ProfileContainer';
+export { profileReducer } from './duck';

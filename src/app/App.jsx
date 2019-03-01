@@ -6,7 +6,7 @@ import { Login } from './login';
 import { Article, CreateArticle, ListArticle } from './article';
 import Footer from './footer';
 import Navbar from './navBar/NavbarComponent';
-import ProfileComponent from './profile';
+import ProfileContainer from './profile';
 import { ResetPassword } from './resetPassword';
 import { NewPassword } from './newPassword';
 
@@ -17,7 +17,7 @@ const App = () => (
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/signup" component={Signup} exact />
-        <Route path="/profile" component={ProfileComponent} exact />
+        <Route path="/profile" component={ProfileContainer} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/article/:slug" component={Article} exact />
         <Route path="/articles/:category" component={ListArticle} exact />

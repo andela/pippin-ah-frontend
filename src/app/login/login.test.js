@@ -164,7 +164,7 @@ describe('Connected Login Component Dispatches Login Success', () => {
   const store = mockStore(initialState);
   let wrapper;
   beforeEach(() => {
-    const response = { data: 'Login successful' };
+    const response = { data: { articles: {} } };
     axios.post.mockResolvedValue(response);
     wrapper = mount(
       <Provider store={store}>
