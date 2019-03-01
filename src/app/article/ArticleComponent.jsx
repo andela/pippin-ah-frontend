@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react';
+import ReactShare from 'react-share-simplified';
 import CommentComponent from '../comment';
 import { EllipsisLoaderComponent } from '../loaders';
 import { formatDate, constants } from './duck';
 import './article.scss';
+
+const url = process.env.FRONTEND_URL;
+console.log('api=---=---=---', process.env.API_URL);
+console.log('frontend=---=---=---', process.env.FRONTEND_URL);
 
 /* eslint-disable react/prefer-stateless-function */
 class ArticleComponent extends React.Component {
@@ -54,6 +59,22 @@ class ArticleComponent extends React.Component {
     }
     return (
       <Fragment>
+        <ReactShare
+          url={`${url}/{data.slug}`} // required
+          title={data.title}
+          facebook // true or false. Optional prop
+          facebookClass="iconStyle" // className to Style share button. Optional prop
+          googlePlus // true or false. Optional prop
+          googlePlusClass="iconStyle" // Optional prop
+          twitter // true or false. Optional prop
+          twitterClass="iconStyle" // Optional prop
+          email // true or false.Optional prop
+          emailClass="iconStyle" // Optional prop
+          whatsapp // true or false. Optional prop
+          whatsappClass="iconStyle" // Optional prop
+          iconSize={32} // Icon size  //Optional prop
+          addClass="className" // add className to style the whole div. Optional but better of added for alignment.
+        />
         <div className="main-cover">
           <div className="left-sidebar-cover">
             <div className="left-sidebar">

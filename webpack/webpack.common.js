@@ -47,7 +47,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['CLOUDINARY_URL', 'API_URL']),
+    new webpack.EnvironmentPlugin([
+      'CLOUDINARY_URL',
+      'API_URL',
+      'FRONTEND_URL',
+    ]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
